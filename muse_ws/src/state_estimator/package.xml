@@ -4,11 +4,11 @@
   <version>0.0.1</version>
   <description>The state_estimator package</description>
 
-  <maintainer email="geoff.fink@iit.it">Geoff Fink</maintainer>
+  <maintainer email="ylenia.nistico@iit.it">Geoff Fink</maintainer>
 
   <license>TODO</license>
 
-  <author email="geoff.fink@iit.it">Geoff Fink</author>
+  <author email="ylenia.nistico@iit.it">Geoff Fink</author>
 
   <buildtool_depend>catkin</buildtool_depend>
   <depend>dynamic_reconfigure</depend>
