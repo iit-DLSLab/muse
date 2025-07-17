@@ -37,7 +37,7 @@ To install the `muse` package, follow these steps:
 
 1. Clone this repository and build the Docker image:
     ```sh
-    git clone git@github.com:iit-DLSLab/MUSE.git
+    git clone https://github.com/iit-DLSLab/muse.git
     cd muse
     docker build -t muse-docker .
     ```
@@ -54,7 +54,7 @@ To install the `muse` package, follow these steps:
    ```sh
    roslaunch state_estimator state_estimator.launch
    ```
-If you need to read the data from a rosbag, you need to mount the folder where you store your rosbags, to make it visible inside the image, and then, you can attach a docker image in another terminal, for example:
+If you need to read the data from a rosbag, you need to mount the folder where you store your rosbags (`your_path_to_rosbags`), to make it visible inside the image, and then, you can attach a docker image in another terminal, for example:
 ```sh
 docker run -it --rm --name muse \
   --net=host \
@@ -81,7 +81,7 @@ rosrun plotjuggler plotjuggler
 ``` sh
 std::vector<std::string> feet_frame_names = {"LF_FOOT", "RF_FOOT", "LH_FOOT", "RH_FOOT"};   // Update with your actual link names
 ```
-
+For real-world experiments, we recommend using this very nice [MPC](https://github.com/iit-DLSLab/Quadruped-PyMPC) to control your robot!
 ## :scroll: TODO list
 - [ ] Extend the code to include exteroception
 - [x] Dockerization
@@ -100,10 +100,10 @@ If you like this work and would like to cite it (thanks):
   journal={IEEE Robotics and Automation Letters}, 
   title={MUSE: A Real-Time Multi-Sensor State Estimator for Quadruped Robots}, 
   year={2025},
-  volume={},
-  number={},
-  pages={1-8},
-  keywords={Robots;Sensors;Robot sensing systems;Legged locomotion;Odometry;Cameras;Laser radar;Robot vision systems;Robot kinematics;Quadrupedal robots;state estimation;localization;sensor fusion;quadruped robots},
+  volume={10},
+  number={5},
+  pages={4620-4627},
+  keywords={Robots;Sensors;Robot sensing systems;Legged locomotion;Odometry;Cameras;Laser radar;Robot vision systems;Robot kinematics;Quadrupedal robots;State estimation;localization;sensor fusion;quadruped robots},
   doi={10.1109/LRA.2025.3553047}}
 ```
 This repo is maintained by [Ylenia Nisticò](https://github.com/ylenianistico)
