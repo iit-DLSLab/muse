@@ -151,7 +151,7 @@ ExactTimePolicy;
 
 			// input u = w_R_b*f_b - gravity
 			Eigen::Vector3d gravity; gravity << 0.0, 0.0, -9.81;
-			Eigen::Vector3d u = w_R_wb*f_b + gravity;
+			Eigen::Vector3d u = w_R_b*f_b + gravity;
 			// prediction
 			sensor_fusion_->predict(time_,u);
 
