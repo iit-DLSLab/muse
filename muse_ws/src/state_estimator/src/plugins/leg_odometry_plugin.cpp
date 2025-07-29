@@ -16,6 +16,8 @@
 #include "state_estimator_msgs/JointStateWithAcceleration.h" 
 #include "state_estimator_msgs/ContactDetection.h"
 #include "state_estimator_msgs/attitude.h"
+
+#include <sensor_msgs/JointState.h>
 #include <sensor_msgs/Imu.h>
 #include <geometry_msgs/WrenchStamped.h>
 
@@ -24,13 +26,17 @@
 #include <message_filters/sync_policies/approximate_time.h>
 #include <message_filters/sync_policies/exact_time.h>
 
+#include <unordered_map>
+
+
 namespace state_estimator_plugins
 {
 
 typedef message_filters::sync_policies::ApproximateTime
 <
 	sensor_msgs::Imu,
-	state_estimator_msgs::JointStateWithAcceleration,
+	// state_estimator_msgs::JointStateWithAcceleration,
+    sensor_msgs::JointState,
     state_estimator_msgs::ContactDetection,
     state_estimator_msgs::attitude
 > 
@@ -39,7 +45,8 @@ ApproximateTimePolicy;
 typedef message_filters::sync_policies::ExactTime
 <
 	sensor_msgs::Imu,
-	state_estimator_msgs::JointStateWithAcceleration,
+	// state_estimator_msgs::JointStateWithAcceleration,
+    sensor_msgs::JointState,
     state_estimator_msgs::ContactDetection,
     state_estimator_msgs::attitude
 > 
@@ -126,7 +133,8 @@ ExactTimePolicy;
             
             // Set up subscribers using the loaded topic names
             imu_sub_ = new message_filters::Subscriber<sensor_msgs::Imu>(nh_, imu_topic, 250);
-            joint_state_sub_ = new message_filters::Subscriber<state_estimator_msgs::JointStateWithAcceleration>(nh_, joint_states_topic, 250);
+            // joint_state_sub_ = new message_filters::Subscriber<state_estimator_msgs::JointStateWithAcceleration>(nh_, joint_states_topic, 250);
+            joint_state_sub_ = new message_filters::Subscriber<sensor_msgs::JointState>(nh_, joint_states_topic, 250);
             contact_sub_ = new message_filters::Subscriber<state_estimator_msgs::ContactDetection>(nh_, contact_topic, 250);
             attitude_sub = new message_filters::Subscriber<state_estimator_msgs::attitude>(nh_, attitude_topic, 250);
 
@@ -147,11 +155,14 @@ ExactTimePolicy;
 		void callback
 		(
 			const sensor_msgs::Imu::ConstPtr& imu,
-			const state_estimator_msgs::JointStateWithAcceleration::ConstPtr& js,
+			// const state_estimator_msgs::JointStateWithAcceleration::ConstPtr& js,
+            const sensor_msgs::JointState::ConstPtr& js,
             const state_estimator_msgs::ContactDetection::ConstPtr& contact,
             const state_estimator_msgs::attitude::ConstPtr& attitude
 		)
 		{
+            std::cout << "LegOdometryPlugin callback called" << std::endl;
+
 			// Robot joint states
             // Fill q and v from joint state
             Eigen::VectorXd q(model_.nq);
@@ -162,12 +173,32 @@ ExactTimePolicy;
             	return;
             }
 
-            for (size_t i = 0; i < model_.nq; ++i)
-            	q[i] = js->position[i];
+            // Build map from joint name to position/velocity
+            std::unordered_map<std::string, double> joint_pos_map, joint_vel_map;
+            for (size_t i = 0; i < js->name.size(); ++i)
+            {
+                joint_pos_map[js->name[i]] = js->position[i];
+                if (i < js->velocity.size())
+                    joint_vel_map[js->name[i]] = js->velocity[i];
+            }
 
-            for (size_t i = 0; i < model_.nv; ++i)
-            	v[i] = js->velocity[i];
-            
+            // Fill q and v in model's joint order (skip index 0 — "universe")
+            for (pinocchio::JointIndex i = 1; i < model_.njoints; ++i)
+            {
+                const std::string& joint_name = model_.names[i];
+
+                if (joint_pos_map.count(joint_name))
+                    q[i - 1] = joint_pos_map[joint_name];
+                else
+                    q[i - 1] = 0.0;  // fallback
+
+                if (joint_vel_map.count(joint_name))
+                    v[i - 1] = joint_vel_map[joint_name];
+                else
+                    v[i - 1] = 0.0;
+            }
+
+           
 			omega << imu->angular_velocity.x, imu->angular_velocity.y, imu->angular_velocity.z;
             stance_lf = contact->stance_lf;
             stance_rf = contact->stance_rf;
@@ -235,7 +266,8 @@ ExactTimePolicy;
 	private:
 	
 		message_filters::Subscriber<sensor_msgs::Imu> *imu_sub_;
-		message_filters::Subscriber<state_estimator_msgs::JointStateWithAcceleration> *joint_state_sub_;
+		// message_filters::Subscriber<state_estimator_msgs::JointStateWithAcceleration> *joint_state_sub_;
+        message_filters::Subscriber<sensor_msgs::JointState> *joint_state_sub_;
         message_filters::Subscriber<state_estimator_msgs::ContactDetection> *contact_sub_;
         message_filters::Subscriber<state_estimator_msgs::attitude> *attitude_sub;
 		message_filters::Synchronizer<MySyncPolicy> *sync_;
