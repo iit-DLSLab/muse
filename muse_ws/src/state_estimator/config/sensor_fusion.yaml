@@ -1,6 +1,6 @@
 sensor_fusion_plugin:
   plugin: "SensorFusionPlugin"
-  imu_topic: "/sensors/imu"
+  imu_topic: "/trunk_imu" # Unitree: "/trunk_imu" #ANYmal: "/sensors/imu"
   attitude_topic: "/state_estimator/attitude"
   leg_odometry_topic: "/state_estimator/leg_odometry"
   pub_topic: "sensor_fusion"

@@ -1,7 +1,7 @@
 attitude_estimation_plugin:
   plugin: "AttitudeEstimationPlugin"
   # Subscriber and Publisher topic names
-  imu_topic: "/sensors/imu"
+  imu_topic: "/trunk_imu" # Unitree: "/trunk_imu" # ANYmal: "/sensors/imu"
   pub_topic: "attitude"
 
   # Attitude Estimation Parameters
@@ -9,9 +9,9 @@ attitude_estimation_plugin:
   ki: 0.02
 
   # Rotation Matrix from IMU frame to Base frame
-  base_R_imu: [-1.0, 0.0, 0.0,
+  base_R_imu: [1.0, 0.0, 0.0,
                0.0, 1.0, 0.0,
-               0.0, 0.0, -1.0]
+               0.0, 0.0, 1.0]
   # Fake-North Vector in Navigation Frame: it needs to be a constant vector
   north_vector: [0.577, 0.577, 0.577]
 
