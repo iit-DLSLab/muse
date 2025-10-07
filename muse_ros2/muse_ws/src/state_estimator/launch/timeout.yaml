@@ -1,0 +1,8 @@
+state_estimator:
+  ros__parameters:
+    timeout_plugin:
+      master:
+        name: "Master"
+        type: "Master"
+        topic: "Master"
+        timeout: 1.0

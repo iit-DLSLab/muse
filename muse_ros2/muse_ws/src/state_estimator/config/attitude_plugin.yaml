@@ -1,0 +1,30 @@
+state_estimator:
+  ros__parameters:
+    attitude_estimation_plugin.plugin: "AttitudeEstimationPlugin"
+    attitude_estimation_plugin.imu_topic: "/sensors/imu"
+    attitude_estimation_plugin.pub_topic: "attitude"
+    attitude_estimation_plugin.kp: 10.0
+    attitude_estimation_plugin.ki: 0.02
+    attitude_estimation_plugin.base_R_imu: [-1.0, 0.0, 0.0,
+                                            0.0, 1.0, 0.0,
+                                            0.0, 0.0, -1.0]
+    attitude_estimation_plugin.north_vector: [0.577, 0.577, 0.577]
+    attitude_estimation_plugin.gravity_vector: [0.0, 0.0, 9.81]
+    attitude_estimation_plugin.P: [1.0e-6, 0.0, 0.0, 0.0, 0.0, 0.0,
+                                   0.0, 1.0e-6, 0.0, 0.0, 0.0, 0.0,
+                                   0.0, 0.0, 1.0e-6, 0.0, 0.0, 0.0,
+                                   0.0, 0.0, 0.0, 1.0e-6, 0.0, 0.0,
+                                   0.0, 0.0, 0.0, 0.0, 1.0e-6, 0.0,
+                                   0.0, 0.0, 0.0, 0.0, 0.0, 1.0e-6]
+    attitude_estimation_plugin.Q: [1.0e-6, 0.0, 0.0, 0.0, 0.0, 0.0,
+                                   0.0, 1.0e-6, 0.0, 0.0, 0.0, 0.0,
+                                   0.0, 0.0, 1.0e-6, 0.0, 0.0, 0.0,
+                                   0.0, 0.0, 0.0, 1.0e-8, 0.0, 0.0,
+                                   0.0, 0.0, 0.0, 0.0, 1.0e-8, 0.0,
+                                   0.0, 0.0, 0.0, 0.0, 0.0, 1.0e-8]
+    attitude_estimation_plugin.R: [4.0e-2, 0.0, 0.0, 0.0, 0.0, 0.0,
+                                   0.0, 4.0e-2, 0.0, 0.0, 0.0, 0.0,
+                                   0.0, 0.0, 4.0e-2, 0.0, 0.0, 0.0,
+                                   0.0, 0.0, 0.0, 16.0, 0.0, 0.0,
+                                   0.0, 0.0, 0.0, 0.0, 16.0, 0.0,
+                                   0.0, 0.0, 0.0, 0.0, 0.0, 16.0]

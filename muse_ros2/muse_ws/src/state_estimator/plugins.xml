@@ -1,0 +1,7 @@
+<library path="lib/libstate_estimator_plugins">
+  <class name="state_estimator_plugins/SamplePlugin"
+         type="state_estimator_plugins::SamplePlugin"
+         base_class_type="state_estimator_plugins::PluginBase">
+    <description>A sample estimator plugin</description>
+  </class>
+</library>
