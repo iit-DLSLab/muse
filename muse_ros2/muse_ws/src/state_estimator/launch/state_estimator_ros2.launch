@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Launch arguments -->
+  <arg name="pluginlist_yaml" default="$(find-pkg-share state_estimator)/launch/pluginlist.yaml" 
+       description="Path to pluginlist YAML file" />
+  <arg name="timeoutlist_yaml" default="$(find-pkg-share state_estimator)/launch/timeout.yaml" 
+       description="Path to timeout YAML file" />
+
+  <!-- State estimator node -->
+  <node pkg="state_estimator" 
+        exec="state_estimator_node" 
+        name="state_estimator" 
+        output="screen"
+        respawn="false">
+    
+    <!-- Load parameter files -->
+    <rosparam file="$(var pluginlist_yaml)" command="load" />
+    <rosparam file="$(var timeoutlist_yaml)" command="load" />
+    <rosparam file="$(find-pkg-share state_estimator)/config/attitude_plugin.yaml" command="load" />
+    <rosparam file="$(find-pkg-share state_estimator)/config/contact_plugin.yaml" command="load" />
+    <rosparam file="$(find-pkg-share state_estimator)/config/leg_odometry.yaml" command="load" />
+    <rosparam file="$(find-pkg-share state_estimator)/config/sensor_fusion.yaml" command="load" />
+    
+    <!-- Set use_sim_time parameter -->
+    <param name="use_sim_time" value="true" />
+  </node>
+</launch>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- State estimator node -->
+  <node pkg="state_estimator" 
+        exec="state_estimator_node" 
+        name="state_estimator" 
+        output="screen"
+        respawn="false">
+    
+    <!-- Core parameters that the node actually declares and uses -->
+    <param name="use_sim_time" value="true" />
+    
+    <!-- Plugin configuration - using inline parameter values -->
+    <rosparam param="plugins">[]</rosparam>
+    <rosparam param="plugin_blacklist">[]</rosparam>
+    <rosparam param="plugin_whitelist">
+      - AttitudeEstimation
+      - ContactDetection  
+      - LegOdometry
+      - SensorFusion
+    </rosparam>
+  </node>
+</launch>

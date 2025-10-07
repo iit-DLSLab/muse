@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Minimal state estimator node - just starts the node with basic parameters -->
+  <node pkg="state_estimator" 
+        exec="state_estimator_node" 
+        name="state_estimator" 
+        output="screen"
+        respawn="false">
+    
+    <!-- Only essential parameters -->
+    <param name="use_sim_time" value="true" />
+  </node>
+</launch>

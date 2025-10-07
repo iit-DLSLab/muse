@@ -1,0 +1,18 @@
+Valve1:
+   command:
+     port: B
+     sign: Vneg
+   actuator_force:
+      port: B
+      sign: Fpos
+Valve2:
+  command:
+    port: A
+    sign: Vneg
+  actuator_force:
+    port: A
+    sign: Fneg
+PID:
+  p: 0.1
+  i: 0.2
+  d: 0.3
