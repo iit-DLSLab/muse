@@ -36,9 +36,9 @@ template<typename T> class LegDataMap {
 	    LegDataMap& operator=(const LegDataMap& rhs);
 	    LegDataMap& operator=(const T& defaultValue);
 	    T& operator[](LegID index);
-	    T& operator[](int index) throw(std::runtime_error);
+	    T& operator[](int index);
 	    const T& operator[](LegID index) const;
-	    const T& operator[](int index) const throw(std::runtime_error);
+	    const T& operator[](int index) const noexcept(false);
 	private:
 	    void copydata(const LegDataMap& rhs);
 	    void assignAll(const T& value);
@@ -77,7 +77,7 @@ T& LegDataMap<T>::operator[](LegID hip) {
 }
 
 template<typename T> inline
-T& LegDataMap<T>::operator[](int index) throw(std::runtime_error) {
+T& LegDataMap<T>::operator[](int index) {
     if(index<0 || index>_LEGS_COUNT) {
         throw(std::runtime_error("Leg index out of bounds"));
     }
@@ -90,7 +90,7 @@ const T& LegDataMap<T>::operator[](LegID hip) const {
 }
 
 template<typename T> inline
-const T& LegDataMap<T>::operator[](int index) const throw(std::runtime_error) {
+const T& LegDataMap<T>::operator[](int index) const noexcept(false) {
     if(index<0 || index>_LEGS_COUNT) {
         throw(std::runtime_error("Leg index out of bounds"));
     }
