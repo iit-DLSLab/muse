@@ -28,8 +28,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 ENV LIBGL_ALWAYS_SOFTWARE=1
-    
-    
+
 # create and initialize a catkin workspace
 WORKDIR /home/dev_ws
 RUN mkdir -p catkin_ws/src
@@ -61,3 +60,23 @@ ENV XDG_RUNTIME_DIR=/tmp/runtime-root
 # default to bash
 CMD ["bash"]
 
+# Gazebo
+RUN apt-get update && apt-get install -y \
+    gazebo11 libgazebo11-dev \
+    ros-noetic-gazebo-ros-* \
+    && rm -rf /var/lib/apt/lists/*
+
+
+## ROS Control
+RUN apt-get update && apt-get install -y \
+  ros-noetic-controller-interface \
+  ros-noetic-ros-control \
+  ros-noetic-ros-controllers \
+  ros-noetic-gazebo-ros-pkgs \
+  ros-noetic-gazebo-ros-control \
+  ros-noetic-joint-state-controller \
+  ros-noetic-effort-controllers \
+  ros-noetic-joint-trajectory-controller \
+  ros-noetic-robot-state-publisher \
+  ros-noetic-xacro \
+  ros-noetic-joint-state-publisher
