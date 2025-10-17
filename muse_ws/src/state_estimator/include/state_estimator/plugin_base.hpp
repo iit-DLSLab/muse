@@ -1,6 +1,6 @@
 // include/state_estimator/plugin_base.hpp
 #pragma once
-#include <ros/ros.h>
+#include <rclcpp/rclcpp.hpp>
 #include <memory>
 
 namespace state_estimator_plugins {
@@ -8,7 +8,7 @@ namespace state_estimator_plugins {
 class PluginBase {
 public:
   virtual ~PluginBase() = default;
-  virtual void initialize(ros::NodeHandle& nh, std::shared_ptr<void> robot) = 0;
+  virtual void initialize(rclcpp::Node::SharedPtr node, std::shared_ptr<void> robot) = 0;
   virtual void pause() = 0;
   virtual void shutdown() = 0;
   virtual std::string getName() = 0;
