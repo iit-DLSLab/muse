@@ -10,14 +10,12 @@
 
   <author email="ylenia.nistico@iit.it">Geoff Fink</author>
 
-  <buildtool_depend>catkin</buildtool_depend>
-  <depend>dynamic_reconfigure</depend>
-  <depend>roscpp</depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclcpp</depend>
   <depend>sensor_msgs</depend>
   <depend>tf2_ros</depend>
   <depend>pluginlib</depend>
   <depend>iit_commons</depend>
-  <depend>message_generation</depend>
   <depend>state_estimator_msgs</depend>
   <build_depend>pinocchio</build_depend>
   <exec_depend>pinocchio</exec_depend>
