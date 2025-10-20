@@ -5,10 +5,10 @@
 #include <message_filters/time_synchronizer.h>
 #include <message_filters/sync_policies/approximate_time.h>
 
-#include <sensor_msgs/Imu.h>                        	// read acceleration from imu
-#include "state_estimator_msgs/LegOdometry.h"      	    // read base velocity from leg odometry
-#include "state_estimator_msgs/attitude.h"          	// read orientation from attitude estimation
-#include <nav_msgs/Odometry.h>							// read position from lidar odometry
+#include <sensor_msgs/msg/imu.hpp>                        	// read acceleration from imu
+#include "state_estimator_msgs/msg/leg_odometry.hpp"      	    // read base velocity from leg odometry
+#include "state_estimator_msgs/msg/attitude.hpp"          	// read orientation from attitude estimation
+#include <nav_msgs/msg/odometry.hpp>							// read position from lidar odometry
 
 #include <iit/commons/geometry/rotations.h>
 
@@ -17,17 +17,17 @@ namespace state_estimator_plugins
 
 typedef message_filters::sync_policies::ApproximateTime
 <
-	sensor_msgs::Imu,
-	state_estimator_msgs::attitude,
-	state_estimator_msgs::LegOdometry 
+	sensor_msgs::msg::Imu,
+	state_estimator_msgs::msg::Attitude,
+	state_estimator_msgs::msg::LegOdometry 
 > 
 ApproximateTimePolicy;
 
 typedef message_filters::sync_policies::ExactTime
 <
-	sensor_msgs::Imu,
-	state_estimator_msgs::attitude,
-	state_estimator_msgs::LegOdometry
+	sensor_msgs::msg::Imu,
+	state_estimator_msgs::msg::Attitude,
+	state_estimator_msgs::msg::LegOdometry
 > 
 ExactTimePolicy;
 
@@ -96,14 +96,14 @@ ExactTimePolicy;
         	nh_.param<std::string>("sensor_fusion_plugin/leg_odometry_topic", leg_odom_topic, "/state_estimator/leg_odometry");
         	nh_.param<std::string>("sensor_fusion_plugin/pub_topic", pub_topic, "sensor_fusion");
 
-        	imu_sub_ = new message_filters::Subscriber<sensor_msgs::Imu>(nh_, imu_topic, 250);
-        	attitude_sub_ = new message_filters::Subscriber<state_estimator_msgs::attitude>(nh_, attitude_topic, 250);
-        	leg_odom_sub_ = new message_filters::Subscriber<state_estimator_msgs::LegOdometry>(nh_, leg_odom_topic, 250);
+        	imu_sub_ = new message_filters::Subscriber<sensor_msgs::msg::Imu>(nh_, imu_topic, 250);
+        	attitude_sub_ = new message_filters::Subscriber<state_estimator_msgs::msg::Attitude>(nh_, attitude_topic, 250);
+        	leg_odom_sub_ = new message_filters::Subscriber<state_estimator_msgs::msg::LegOdometry>(nh_, leg_odom_topic, 250);
 
         	sync_ = new message_filters::Synchronizer<MySyncPolicy>(MySyncPolicy(100), *imu_sub_, *attitude_sub_, *leg_odom_sub_);
         	sync_->registerCallback(boost::bind(&SensorFusionPlugin::callback_proprioception, this, _1, _2, _3));
 
-        	pub_ = new ros::Publisher(nh_.advertise<nav_msgs::Odometry>(pub_topic, 250));
+        	pub_ = new ros::Publisher(nh_.advertise<nav_msgs::msg::Odometry>(pub_topic, 250));
 
         	ROS_INFO("SensorFusionPlugin initialized");
 		}
@@ -115,9 +115,9 @@ ExactTimePolicy;
 
 		void callback_proprioception
 		(
-			const sensor_msgs::Imu::ConstPtr& imu,
-			const state_estimator_msgs::attitude::ConstPtr& attitude,
-			const state_estimator_msgs::LegOdometry::ConstPtr& leg_odom		
+			const sensor_msgs::msg::Imu::ConstPtr& imu,
+			const state_estimator_msgs::msg::Attitude::ConstPtr& attitude,
+			const state_estimator_msgs::msg::LegOdometry::ConstPtr& leg_odom		
 		)
 		{
 			// Reading imu
@@ -200,9 +200,9 @@ ExactTimePolicy;
     	Eigen::Matrix<double,6,6> Q;
     	Eigen::Matrix<double,3,3> R;
 
-		message_filters::Subscriber<sensor_msgs::Imu> *imu_sub_;
-		message_filters::Subscriber<state_estimator_msgs::attitude> *attitude_sub_;
-		message_filters::Subscriber<state_estimator_msgs::LegOdometry> *leg_odom_sub_;
+		message_filters::Subscriber<sensor_msgs::msg::Imu> *imu_sub_;
+		message_filters::Subscriber<state_estimator_msgs::msg::attitude> *attitude_sub_;
+		message_filters::Subscriber<state_estimator_msgs::msg::LegOdometry> *leg_odom_sub_;
 	
 		message_filters::Synchronizer<MySyncPolicy> *sync_;
 
