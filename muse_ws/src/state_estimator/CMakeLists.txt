@@ -18,8 +18,10 @@ find_package(state_estimator_msgs REQUIRED)
 find_package(iit_commons REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(rosbag2_transport REQUIRED)
+find_package(message_filters REQUIRED)
 
 include_directories(include
   ${EIGEN3_INCLUDE_DIRS})
@@ -40,14 +42,18 @@ ament_export_include_directories(
 )
 
 #define plugins
-add_library(attitude_estimation_plugin src/plugins/attitude_estimation_plugin.cpp)
+add_library(attitude_estimation_plugin src/plugins/attitude_estimation_plugin.cpp
+ src/plugins/contact_detection_plugin.cpp
+ src/plugins/leg_odometry_plugin.cpp)
 target_include_directories(attitude_estimation_plugin PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
+  ${message_filters_INCLUDE_DIRS}
   ${state_estimator_msgs_INCLUDE_DIRS}
   ${iit_commons_INCLUDE_DIRS}
   ${sensor_msgs_INCLUDE_DIRS}
   ${nav_msgs_INCLUDE_DIRS}
+  ${geometry_msgs_INCLUDE_DIRS}
   ${rclcpp_INCLUDE_DIRS}
   ${rosbag2_transport_INCLUDE_DIRS}
   ${pluginlib_INCLUDE_DIRS}
@@ -57,11 +63,11 @@ target_link_libraries(attitude_estimation_plugin PUBLIC
   ${state_estimator_msgs_TARGETS}
   ${sensor_msgs_TARGETS}
   ${nav_msgs_TARGETS}
-  ${pluginlib_LIBRARIES}
+  ${geometry_msgs_TARGETS}
+  message_filters::message_filters
   pluginlib::pluginlib
-  iit_commons
-  ${iit_commons_LIBRARIES}
   rclcpp::rclcpp
+  ${iit_commons_LIBRARIES}
 )
 
 #copy dependencies to install dir
