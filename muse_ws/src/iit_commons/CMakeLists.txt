@@ -45,7 +45,7 @@ if(${BUILD_DOC})
     endif (DOXYGEN_FOUND)
 endif()
 
-set(LIB_NAME iitcommons)
+set(LIB_NAME iit_commons)
 
 set(SOURCES src/hydraulics.cpp 
             src/fbl/four_bar_linkage.cpp
@@ -72,8 +72,11 @@ install(
     PATTERN ".svn" EXCLUDE
 )
 
-install(TARGETS iitcommons
-    DESTINATION lib/${PROJECT_NAME}
+install(TARGETS iit_commons
+    EXPORT export_${PROJECT_NAME}
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin
 )
 
 
@@ -101,5 +104,8 @@ if (CATKIN_ENABLE_TESTING)
 
 endif()
 
-ament_package(
-)
+ament_export_include_directories(include)
+ament_export_libraries(iit_commons)
+ament_export_dependencies(rclcpp std_msgs)
+
+ament_package()

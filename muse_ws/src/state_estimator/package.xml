@@ -16,9 +16,12 @@
   <depend>tf2_ros</depend>
   <depend>pluginlib</depend>
   <depend>iit_commons</depend>
+  <depend>rosbag2_transport</depend>
   <depend>state_estimator_msgs</depend>
   <build_depend>pinocchio</build_depend>
   <exec_depend>pinocchio</exec_depend>
+
+
 
   <export>
     <state_estimator plugin="${prefix}/state_estimator_plugins.xml" />
