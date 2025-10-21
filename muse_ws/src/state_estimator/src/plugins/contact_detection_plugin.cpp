@@ -50,13 +50,12 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<Wrench, Wrench
 
 		// QoS profile for sensor data
 		auto sensor_qos = rclcpp::SensorDataQoS();
-		auto rmw_qos = sensor_qos.get_rmw_qos_profile();
 
 		// Set up subscribers (ROS 2 message_filters requires node interfaces and rmw_qos_profile)
-		wrench_lf_sub_ = std::make_shared<message_filters::Subscriber<Wrench>>(node, lf_topic, rmw_qos);
-		wrench_rf_sub_ = std::make_shared<message_filters::Subscriber<Wrench>>(node, rf_topic, rmw_qos);
-		wrench_lh_sub_ = std::make_shared<message_filters::Subscriber<Wrench>>(node, lh_topic, rmw_qos);
-		wrench_rh_sub_ = std::make_shared<message_filters::Subscriber<Wrench>>(node, rh_topic, rmw_qos);
+		wrench_lf_sub_ = std::make_shared<message_filters::Subscriber<Wrench>>(node, lf_topic, sensor_qos);
+		wrench_rf_sub_ = std::make_shared<message_filters::Subscriber<Wrench>>(node, rf_topic, sensor_qos);
+		wrench_lh_sub_ = std::make_shared<message_filters::Subscriber<Wrench>>(node, lh_topic, sensor_qos);
+		wrench_rh_sub_ = std::make_shared<message_filters::Subscriber<Wrench>>(node, rh_topic, sensor_qos);
 
 		// Synchronizer
 		sync_ = std::make_shared<message_filters::Synchronizer<MySyncPolicy>>(MySyncPolicy(250), *wrench_lf_sub_, *wrench_rf_sub_, *wrench_lh_sub_, *wrench_rh_sub_);

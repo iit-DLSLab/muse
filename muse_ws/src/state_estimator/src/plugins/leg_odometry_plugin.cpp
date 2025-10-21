@@ -135,12 +135,11 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
 
             // Subscribers with SensorDataQoS
             auto sensor_qos = rclcpp::SensorDataQoS();
-            auto rmw_qos = sensor_qos.get_rmw_qos_profile();
 
-            imu_sub_ = std::make_shared<message_filters::Subscriber<ImuMsg>>(node, imu_topic, rmw_qos);
-            joint_state_sub_ = std::make_shared<message_filters::Subscriber<JointStateMsg>>(node, joint_states_topic, rmw_qos);
-            contact_sub_ = std::make_shared<message_filters::Subscriber<ContactMsg>>(node, contact_topic, rmw_qos);
-            attitude_sub_ = std::make_shared<message_filters::Subscriber<AttitudeMsg>>(node, attitude_topic, rmw_qos);
+            imu_sub_ = std::make_shared<message_filters::Subscriber<ImuMsg>>(node, imu_topic, sensor_qos);
+            joint_state_sub_ = std::make_shared<message_filters::Subscriber<JointStateMsg>>(node, joint_states_topic, sensor_qos);
+            contact_sub_ = std::make_shared<message_filters::Subscriber<ContactMsg>>(node, contact_topic, sensor_qos);
+            attitude_sub_ = std::make_shared<message_filters::Subscriber<AttitudeMsg>>(node, attitude_topic, sensor_qos);
 
             sync_ = std::make_shared<message_filters::Synchronizer<MySyncPolicy>>(MySyncPolicy(100), *imu_sub_, *joint_state_sub_, *contact_sub_, *attitude_sub_);
             sync_->registerCallback(std::bind(&LegOdometryPlugin::callback, this,
