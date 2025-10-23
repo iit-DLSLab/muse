@@ -81,8 +81,8 @@ install(TARGETS iit_commons
 
 
 if (CATKIN_ENABLE_TESTING)
-	find_package(catkin REQUIRED COMPONENTS rostest)
-	include_directories(include ${catkin_INCLUDE_DIRS})
+	#find_package(catkin REQUIRED COMPONENTS rostest)
+	#include_directories(include ${catkin_INCLUDE_DIRS})
 
 	catkin_add_gtest(vm-test src/control/testVirtualModel.cpp)
 	target_link_libraries(vm-test ${LIB_NAME} ${catkin_LIBRARIES} pthread)

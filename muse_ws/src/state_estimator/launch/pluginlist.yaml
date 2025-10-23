@@ -1,4 +1,4 @@
 /**:
   ros__parameters:
-    plugin_whitelist: ["attitude_plugin", "contact_plugin", "leg_odometry_plugin"]
+    plugin_whitelist: ["AttitudeEstimation", "ContactDetection", "ContactDataPackagingPlugin", "LegOdometry", "SensorFusion"]
     plugin_blacklist: [""]

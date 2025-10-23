@@ -38,16 +38,22 @@ install(
   DESTINATION include
 )
 
+install(FILES
+  state_estimator_plugins.xml
+  state_estimator_tools.xml
+  DESTINATION share/${PROJECT_NAME}
+)
+
 ament_export_include_directories(
   include
 )
 
 #define plugins
-add_library(attitude_estimation_plugin src/plugins/attitude_estimation_plugin.cpp
+add_library(state_estimator_plugins SHARED src/plugins/attitude_estimation_plugin.cpp
  src/plugins/contact_detection_plugin.cpp
  src/plugins/leg_odometry_plugin.cpp
  src/plugins/contact_data_packaging_plugin.cpp)
-target_include_directories(attitude_estimation_plugin PUBLIC
+target_include_directories(state_estimator_plugins PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
   ${message_filters_INCLUDE_DIRS}
@@ -61,7 +67,7 @@ target_include_directories(attitude_estimation_plugin PUBLIC
   ${pluginlib_INCLUDE_DIRS}
 )
 
-target_link_libraries(attitude_estimation_plugin PUBLIC
+target_link_libraries(state_estimator_plugins PUBLIC
   ${state_estimator_msgs_TARGETS}
   ${sensor_msgs_TARGETS}
   ${nav_msgs_TARGETS}
@@ -72,9 +78,11 @@ target_link_libraries(attitude_estimation_plugin PUBLIC
   ${iit_commons_LIBRARIES}
 )
 
+pluginlib_export_plugin_description_file(state_estimator state_estimator_plugins.xml)
+
 #copy dependencies to install dir
 install(
-  TARGETS attitude_estimation_plugin
+  TARGETS state_estimator_plugins
   EXPORT export_${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
@@ -90,4 +98,12 @@ install(DIRECTORY
   config
   DESTINATION share/${PROJECT_NAME}/
 )
+
+ament_export_libraries(
+  state_estimator_plugins
+)
+ament_export_targets(
+  export_${PROJECT_NAME}
+)
+
 ament_package()
