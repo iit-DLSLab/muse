@@ -8,6 +8,10 @@
         <description>A plugin to detect foot contacts</description>
     </class>
 
+    <class name="ContactDataPackagingPlugin" type="state_estimator_plugins::ContactDataPackagingPlugin" base_class_type="state_estimator_plugins::PluginBase"> 
+        <description>A plugin to collect foot contact sensor data and aggregate them into our message type</description>
+    </class>
+
     <class name="LegOdometry" type="state_estimator_plugins::LegOdometryPlugin" base_class_type="state_estimator_plugins::PluginBase">
 	<description>A plugin to calculate leg odometry</description>
     </class>

@@ -45,7 +45,8 @@ ament_export_include_directories(
 #define plugins
 add_library(attitude_estimation_plugin src/plugins/attitude_estimation_plugin.cpp
  src/plugins/contact_detection_plugin.cpp
- src/plugins/leg_odometry_plugin.cpp)
+ src/plugins/leg_odometry_plugin.cpp
+ src/plugins/contact_data_packaging_plugin.cpp)
 target_include_directories(attitude_estimation_plugin PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
