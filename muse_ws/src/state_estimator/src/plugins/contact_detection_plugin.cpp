@@ -103,7 +103,8 @@ namespace state_estimator_plugins
 				stance_rh = false;
 
 			// publishing
-			msg_.header.stamp = this->node_->get_clock()->now();
+			msg_.header.stamp = wrench_lf->header.stamp;
+			msg_.header.frame_id = wrench_lf->header.frame_id;
 
 			msg_.stance_lf = stance_lf;
 			msg_.stance_rf = stance_rf;

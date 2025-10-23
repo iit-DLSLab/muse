@@ -33,10 +33,10 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<boolean_msg, b
             if(!node) { throw std::runtime_error("ContactDataPackagingPlugin: node_ is null"); }
 
             //ROS2 Parameters
-			const std::string lf_topic = node->declare_parameter<std::string>("contact_data_packaging_plugin.contact_lf_topic", "/contact_lf");
-			const std::string rf_topic = node->declare_parameter<std::string>("contact_data_packaging_plugin.contact_rf_topic", "/contact_rf");
-			const std::string lh_topic = node->declare_parameter<std::string>("contact_data_packaging_plugin.contact_lh_topic", "/contact_lh");
-			const std::string rh_topic = node->declare_parameter<std::string>("contact_data_packaging_plugin.contact_rh_topic", "/contact_rh");
+			const std::string lf_topic = node->declare_parameter<std::string>("contact_data_packaging_plugin.contact_lf_topic", "/contact_FL");
+			const std::string rf_topic = node->declare_parameter<std::string>("contact_data_packaging_plugin.contact_rf_topic", "/contact_FR");
+			const std::string lh_topic = node->declare_parameter<std::string>("contact_data_packaging_plugin.contact_lh_topic", "/contact_RL");
+			const std::string rh_topic = node->declare_parameter<std::string>("contact_data_packaging_plugin.contact_rh_topic", "/contact_RR");
             const std::string pub_topic = node->declare_parameter<std::string>("contact_data_packaging_plugin.pub_topic", "contact_detection");
 
             RCLCPP_INFO(node->get_logger(), "ContactDataPackaginPlugin loaded");
@@ -76,7 +76,8 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<boolean_msg, b
 		{
 
 			// publishing
-			msg_.header.stamp = this->node_->get_clock()->now();
+			msg_.header.stamp = node_->get_clock()->now();
+			msg_.header.frame_id = "base_link";
 
             //simply set the contact state, aggregating the incoming 4 seperate sensor topics into 1 message
 			msg_.stance_lf = contact_lf->data;

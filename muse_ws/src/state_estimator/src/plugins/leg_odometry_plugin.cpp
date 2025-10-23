@@ -220,6 +220,14 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
 
             for (size_t i = 0; i < feet_frame_names.size(); ++i) {
                 const auto& foot_name = feet_frame_names[i];
+                
+                // Check if frame exists in the model
+                if (!model_.existFrame(foot_name)) {
+                    RCLCPP_ERROR_THROTTLE(this->node_->get_logger(), *this->node_->get_clock(), 5000,
+                                         "Frame '%s' does not exist in the URDF model!", foot_name.c_str());
+                    return;
+                }
+                
                 std::size_t frame_id = model_.getFrameId(foot_name);
             
                 // Get spatial velocity in LOCAL_WORLD_ALIGNED frame
