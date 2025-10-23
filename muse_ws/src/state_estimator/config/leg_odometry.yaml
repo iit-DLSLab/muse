@@ -1,10 +1,11 @@
 leg_odometry_plugin:
-  plugin: "LegOdometryPlugin"
-  # urdf_path: "$(find state_estimator)/urdfs/anymal.urdf"
-  urdf_path: "$(find state_estimator)/urdfs/go1.urdf"
-  
-  imu_topic: "/trunk_imu" # Unitree: "/trunk_imu" # ANYmal: "/sensors/imu"
-  joint_states_topic: "/go1_gazebo/joint_states" # Unitree (Go1): "/go1_gazebo/joint_states" # ANYmal: "/state_estimator/joint_states"
-  contact_topic: "/state_estimator/contact_detection"
-  attitude_topic: "/state_estimator/attitude"
-  pub_topic: "leg_odometry"
+  ros__parameters:
+    plugin: "LegOdometryPlugin"
+    # urdf_path: "$(find state_estimator)/urdfs/anymal.urdf"
+    urdf_path: "$(find state_estimator)/urdfs/go1.urdf"
+    
+    imu_topic: "/imu" # Unitree: "/trunk_imu" # ANYmal: "/sensors/imu"
+    joint_states_topic: "/go1_gazebo/joint_states" # Unitree (Go1): "/go1_gazebo/joint_states" # ANYmal: "/state_estimator/joint_states"
+    contact_topic: "/state_estimator/contact_detection"
+    attitude_topic: "/state_estimator/attitude"
+    pub_topic: "leg_odometry"

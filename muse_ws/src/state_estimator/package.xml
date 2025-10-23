@@ -26,6 +26,7 @@
   <export>
     <state_estimator plugin="${prefix}/state_estimator_plugins.xml" />
     <state_estimator plugin="${prefix}/state_estimator_tools.xml" />  
+    <build_type>ament_cmake</build_type>
 </export>
   
 

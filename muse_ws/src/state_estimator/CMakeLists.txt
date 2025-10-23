@@ -26,8 +26,9 @@ find_package(message_filters REQUIRED)
 include_directories(include
   ${EIGEN3_INCLUDE_DIRS})
 
-add_executable(talker src/state_estimator_node.cpp)
-ament_target_dependencies(talker rclcpp std_msgs pluginlib)
+
+add_executable(state_estimator_node src/state_estimator_node.cpp)
+ament_target_dependencies(state_estimator_node rclcpp std_msgs pluginlib)
 
 # PLugins
 
@@ -80,7 +81,12 @@ install(
 )
 
 install(TARGETS
-  talker
+  state_estimator_node
   DESTINATION lib/${PROJECT_NAME})
 
+install(DIRECTORY
+  launch
+  config
+  DESTINATION share/${PROJECT_NAME}/
+)
 ament_package()

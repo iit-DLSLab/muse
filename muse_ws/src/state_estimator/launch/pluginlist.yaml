@@ -1,2 +1,4 @@
-plugin_whitelist: []
-plugin_blacklist: []
+/**:
+  ros__parameters:
+    plugin_whitelist: ["attitude_plugin", "contact_plugin", "leg_odometry_plugin"]
+    plugin_blacklist: [""]
