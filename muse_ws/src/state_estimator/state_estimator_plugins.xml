@@ -20,5 +20,9 @@
         <description>A plugin to fuse the estimated attitude and the leg odometry</description>
     </class>
 
+    <class type="state_estimator_plugins::JointStateDownsamplerPlugin" base_class_type="state_estimator_plugins::PluginBase">
+        <description>Downsamples JointState messages to a configurable rate</description>
+    </class>
+
 
 </library>

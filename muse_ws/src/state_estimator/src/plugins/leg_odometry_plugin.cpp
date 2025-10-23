@@ -115,23 +115,13 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
 
             // Topics
             std::string imu_topic = node->declare_parameter<std::string>(
-                "leg_odometry_plugin.imu_topic", "/sensors/imu");
+                "leg_odometry_plugin.imu_topic", "/imu");
             std::string joint_states_topic = node->declare_parameter<std::string>(
                 "leg_odometry_plugin.joint_states_topic", "/state_estimator/joint_states");
             std::string contact_topic = node->declare_parameter<std::string>(
                 "leg_odometry_plugin.contact_topic", "/state_estimator/contact_detection");
             std::string attitude_topic = node->declare_parameter<std::string>(
                 "leg_odometry_plugin.attitude_topic", "/state_estimator/attitude");
-
-            // Legacy ROS 1-style names (optional support)
-            const std::string imu_topic_legacy = node->declare_parameter<std::string>("leg_odometry_plugin/imu_topic", "");
-            const std::string js_topic_legacy  = node->declare_parameter<std::string>("leg_odometry_plugin/joint_states_topic", "");
-            const std::string contact_topic_legacy = node->declare_parameter<std::string>("leg_odometry_plugin/contact_topic", "");
-            const std::string attitude_topic_legacy = node->declare_parameter<std::string>("leg_odometry_plugin/attitude_topic", "");
-            if (!imu_topic_legacy.empty()) imu_topic = imu_topic_legacy;
-            if (!js_topic_legacy.empty()) joint_states_topic = js_topic_legacy;
-            if (!contact_topic_legacy.empty()) contact_topic = contact_topic_legacy;
-            if (!attitude_topic_legacy.empty()) attitude_topic = attitude_topic_legacy;
 
             // Subscribers with SensorDataQoS
             auto sensor_qos = rclcpp::SensorDataQoS();

@@ -47,6 +47,9 @@ def generate_launch_description():
     sensor_fusion_config = os.path.join(
         pkg_dir, 'config', 'sensor_fusion.yaml'
     )
+    joint_state_downsampler_config = os.path.join(
+        pkg_dir, 'config', 'joint_state_downsampler_plugin.yaml'
+    )
     
     # Function to launch the node with conditional config
     def launch_node(context, *args, **kwargs):
@@ -73,8 +76,8 @@ def generate_launch_description():
                 attitude_config,
                 contact_config,
                 leg_odometry_config,
-                sensor_fusion_config
-
+                sensor_fusion_config,
+                joint_state_downsampler_config
             ],
             respawn=False
         )
