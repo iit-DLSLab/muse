@@ -22,6 +22,7 @@ find_package(geometry_msgs REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(rosbag2_transport REQUIRED)
 find_package(message_filters REQUIRED)
+find_package(pinocchio REQUIRED)
 
 include_directories(include
   ${EIGEN3_INCLUDE_DIRS})
@@ -36,6 +37,11 @@ ament_target_dependencies(state_estimator_node rclcpp std_msgs pluginlib)
 install(
   DIRECTORY include/
   DESTINATION include
+)
+
+#install urdfs
+install(DIRECTORY urdfs/
+  DESTINATION share/${PROJECT_NAME}/urdfs
 )
 
 install(FILES
@@ -77,6 +83,7 @@ target_link_libraries(state_estimator_plugins PUBLIC
   pluginlib::pluginlib
   rclcpp::rclcpp
   ${iit_commons_LIBRARIES}
+  pinocchio::pinocchio
 )
 
 pluginlib_export_plugin_description_file(state_estimator state_estimator_plugins.xml)

@@ -36,7 +36,11 @@ namespace state_estimator_plugins
 	public:
 		SensorFusionPlugin() = default;
 
-		~SensorFusionPlugin() override = default;
+		~SensorFusionPlugin() override {
+		    if (sensor_fusion_ != nullptr) {
+		        delete sensor_fusion_;
+		    }
+		}
 
 		std::string getName() override { return std::string("SensorFusion"); }
 		std::string getDescription() override { return std::string("Sensor Fusion Plugin"); }
@@ -45,7 +49,8 @@ namespace state_estimator_plugins
 		{
 			t0 = 0.0;
 			xhat_estimated << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
-
+			omega.setZero(); 
+			v_b.setZero();   
 			// Load config parameters (ROS 2 parameter API)
 			auto nh = this->node_;
 

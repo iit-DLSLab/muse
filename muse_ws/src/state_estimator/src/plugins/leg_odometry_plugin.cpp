@@ -105,7 +105,7 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
 
             // base_R_imu from attitude plugin params
             std::vector<double> base_R_imu_vec = node->declare_parameter<std::vector<double>>( 
-                "attitude_estimation_plugin.base_R_imu", std::vector<double>());
+                "leg_odometry_plugin.base_R_imu", std::vector<double>());
             if (base_R_imu_vec.size() == 9) {
                 base_R_imu_ = Eigen::Map<const Eigen::Matrix<double,3,3,Eigen::RowMajor>>(base_R_imu_vec.data());
             } else {

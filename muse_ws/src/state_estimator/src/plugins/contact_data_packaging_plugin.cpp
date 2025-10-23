@@ -50,6 +50,9 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<boolean_msg, b
 			contact_lh_sub_ = std::make_shared<message_filters::Subscriber<boolean_msg>>(node, lh_topic, sensor_qos);
 			contact_rh_sub_ = std::make_shared<message_filters::Subscriber<boolean_msg>>(node, rh_topic, sensor_qos);
 
+			// Publisher
+			pub_ = node->create_publisher<state_estimator_msgs::msg::ContactDetection>(pub_topic, sensor_qos);
+
             // Synchronizer
 			sync_ = std::make_shared<message_filters::Synchronizer<MySyncPolicy>>(MySyncPolicy(250), *contact_lf_sub_, *contact_rf_sub_, *contact_lh_sub_, *contact_rh_sub_);
 			sync_->registerCallback(std::bind(&ContactDataPackagingPlugin::callback, this,
