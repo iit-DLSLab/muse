@@ -52,7 +52,8 @@ ament_export_include_directories(
 add_library(state_estimator_plugins SHARED src/plugins/attitude_estimation_plugin.cpp
  src/plugins/contact_detection_plugin.cpp
  src/plugins/leg_odometry_plugin.cpp
- src/plugins/contact_data_packaging_plugin.cpp)
+ src/plugins/contact_data_packaging_plugin.cpp
+ src/plugins/sensor_fusion_plugin.cpp)
 target_include_directories(state_estimator_plugins PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>

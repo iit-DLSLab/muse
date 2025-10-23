@@ -74,6 +74,7 @@ def generate_launch_description():
                 contact_config,
                 leg_odometry_config,
                 sensor_fusion_config
+
             ],
             respawn=False
         )
