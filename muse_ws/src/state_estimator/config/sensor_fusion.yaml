@@ -1,26 +1,90 @@
-sensor_fusion_plugin:
-  ros__parameters:
-    plugin: "SensorFusionPlugin"
-    imu_topic: "/imu" # Unitree: "/trunk_imu" #ANYmal: "/sensors/imu"
-    attitude_topic: "/state_estimator/attitude"
-    leg_odometry_topic: "/state_estimator/leg_odometry"
-    pub_topic: "sensor_fusion"
+/**:
+     ros__parameters:
+          sensor_fusion_plugin:
+               plugin: "SensorFusionPlugin"
+               imu_topic: "/imu" # Unitree: "/trunk_imu" #ANYmal: "/sensors/imu"
+               attitude_topic: "/state_estimator/attitude"
+               leg_odometry_topic: "/state_estimator/leg_odometry"
+               pub_topic: "sensor_fusion"
 
-    P: [1.0e-3, 0.0, 0.0, 0.0, 0.0, 0.0,
-         0.0, 1.0e-3, 0.0, 0.0, 0.0, 0.0,
-         0.0, 0.0, 1.0e-3, 0.0, 0.0, 0.0,
-         0.0, 0.0, 0.0, 1.0e-4, 0.0, 0.0,
-         0.0, 0.0, 0.0, 0.0, 1.0e-4, 0.0,
-         0.0, 0.0, 0.0, 0.0, 0.0, 1.0e-4]
+               P:
+                    [
+                         1.0e-3,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         1.0e-3,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         1.0e-3,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         1.0e-4,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         1.0e-4,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         1.0e-4,
+                    ]
 
-    Q: [1.0e-9, 0.0, 0.0, 0.0, 0.0, 0.0,
-         0.0, 1.0e-9, 0.0, 0.0, 0.0, 0.0,
-         0.0, 0.0, 1.0e-9, 0.0, 0.0, 0.0,
-         0.0, 0.0, 0.0, 1.0e-9, 0.0, 0.0,
-         0.0, 0.0, 0.0, 0.0, 1.0e-9, 0.0,
-         0.0, 0.0, 0.0, 0.0, 0.0, 1.0e-9]
+               Q:
+                    [
+                         1.0e-9,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         1.0e-9,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         1.0e-9,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         1.0e-9,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         1.0e-9,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         0.0,
+                         1.0e-9,
+                    ]
 
-    R: [1.0e-11, 0.0, 0.0,
-        0.0, 1.0e-11, 0.0,
-        0.0, 0.0, 1.0e-11]
-
+               R: [1.0e-11, 0.0, 0.0, 0.0, 1.0e-11, 0.0, 0.0, 0.0, 1.0e-11]
