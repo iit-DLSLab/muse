@@ -34,30 +34,9 @@ namespace state_estimator_plugins
 	class SensorFusionPlugin : public PluginBase
 	{
 	public:
-		SensorFusionPlugin() : sensor_fusion_(nullptr),
-							   imu_sub_(nullptr),
-							   attitude_sub_(nullptr),
-							   leg_odom_sub_(nullptr),
-							   pub_(nullptr),
-							   sync_(nullptr)
-		{
-		}
+		SensorFusionPlugin() = default;
 
-		~SensorFusionPlugin()
-		{
-			if (sensor_fusion_ != nullptr)
-				delete (sensor_fusion_);
-			if (imu_sub_ != nullptr)
-				delete (imu_sub_);
-			if (attitude_sub_ != nullptr)
-				delete (attitude_sub_);
-			if (leg_odom_sub_ != nullptr)
-				delete (leg_odom_sub_);
-			if (pub_ != nullptr)
-				delete (pub_);
-			if (sync_ != nullptr)
-				delete (sync_);
-		}
+		~SensorFusionPlugin() override = default;
 
 		std::string getName() override { return std::string("SensorFusion"); }
 		std::string getDescription() override { return std::string("Sensor Fusion Plugin"); }
@@ -91,13 +70,13 @@ namespace state_estimator_plugins
 
 			sensor_fusion_ = new state_estimator::KFSensorFusion(t0, xhat_estimated, P, Q, R, false, false);
 
-			nh->declare_parameter("sensor_fusion_plugin.base_R_imu", std::vector<double>(9, 0.0));
-			std::vector<double> base_R_imu_vec = nh->get_parameter("sensor_fusion_plugin.base_R_imu").as_double_array();
-
+			const std::vector<double> base_R_imu_vec = nh->declare_parameter("sensor_fusion_plugin.base_R_imu", std::vector<double>(9, 0.0));
 			if (base_R_imu_vec.size() == 9)
 			{
 				base_R_imu_ = Eigen::Map<const Eigen::Matrix<double, 3, 3, Eigen::RowMajor>>(base_R_imu_vec.data());
-				RCLCPP_INFO(nh->get_logger(),"Loaded base_R_imu:\n" << base_R_imu_);
+				std::stringstream ss;
+				ss << base_R_imu_;
+				RCLCPP_INFO(nh->get_logger(), "Loaded base_R_imu:\n%s", ss.str().c_str());
 			}
 			else
 			{
@@ -107,7 +86,7 @@ namespace state_estimator_plugins
 
 			//Declare parameters
 			const std::string imu_topic = nh->declare_parameter<std::string>("sensor_fusion_plugin.imu_topic", "/sensors/imu");
-			const std::string attitude_topic = nh->declare_parameter<std::string>("sensor_fusion_plugin.attitude_topic", "/sensors/imu");
+			const std::string attitude_topic = nh->declare_parameter<std::string>("sensor_fusion_plugin.attitude_topic", "/state_estimator/attitude");
 			const std::string leg_odom_topic = nh->declare_parameter<std::string>("sensor_fusion_plugin.leg_odometry_topic", "/sensors/leg_odometry");
 			const std::string pub_topic = nh->declare_parameter<std::string>("sensor_fusion_plugin.pub_topic", "/sensors/odometry");
 
