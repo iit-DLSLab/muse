@@ -113,6 +113,39 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
                 base_R_imu_.setIdentity();
             }
 
+            // Feet frame names (vector<string>)
+            // Prefer dot-style key; accept legacy slash-style fallback. Warn when not set and use defaults.
+            auto frames_param = node->declare_parameter<std::vector<std::string>>(
+                "leg_odometry_plugin.feet_frame_names", std::vector<std::string>{}
+            );
+            auto frames_legacy = node->declare_parameter<std::vector<std::string>>(
+                "leg_odometry_plugin/feet_frame_names", std::vector<std::string>{}
+            );
+            if (!frames_legacy.empty() && frames_param.empty()) {
+                RCLCPP_WARN(node->get_logger(),
+                    "Using legacy param 'leg_odometry_plugin/feet_frame_names'; prefer 'leg_odometry_plugin.feet_frame_names'");
+                frames_param = frames_legacy;
+            }
+            // Validate size (expect 4 names for quadruped); if invalid, fall back to default
+            if (!frames_param.empty() && frames_param.size() != 4) {
+                RCLCPP_WARN(node->get_logger(),
+                    "Parameter 'leg_odometry_plugin.feet_frame_names' must contain exactly 4 frame names; got %zu. Using default.",
+                    frames_param.size());
+                frames_param.clear();
+            }
+            if (frames_param.empty()) {
+                RCLCPP_WARN(node->get_logger(),
+                    "Parameter 'leg_odometry_plugin.feet_frame_names' not set; using default: [%s, %s, %s, %s]",
+                    feet_frame_names_[0].c_str(), feet_frame_names_[1].c_str(),
+                    feet_frame_names_[2].c_str(), feet_frame_names_[3].c_str());
+            } else {
+                feet_frame_names_ = frames_param;
+                RCLCPP_INFO(node->get_logger(),
+                    "Using feet_frame_names: [%s, %s, %s, %s]",
+                    feet_frame_names_[0].c_str(), feet_frame_names_[1].c_str(),
+                    feet_frame_names_[2].c_str(), feet_frame_names_[3].c_str());
+            }
+
             // Topics
             std::string imu_topic = node->declare_parameter<std::string>(
                 "leg_odometry_plugin.imu_topic", "/imu");
@@ -218,8 +251,8 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
             pinocchio::updateFramePlacements(model_, data_);
             std::vector<Eigen::Vector3d> foot_vels;
 
-            for (size_t i = 0; i < feet_frame_names.size(); ++i) {
-                const auto& foot_name = feet_frame_names[i];
+            for (size_t i = 0; i < feet_frame_names_.size(); ++i) {
+                const auto& foot_name = feet_frame_names_[i];
                 
                 // Check if frame exists in the model
                 if (!model_.existFrame(foot_name)) {
@@ -291,8 +324,8 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
 
         pinocchio::Model model_;
         pinocchio::Data data_;
-        std::vector<std::string> feet_frame_names = {"LF_FOOT", "RF_FOOT", "LH_FOOT", "RH_FOOT"};   // Update with your actual link names
-        // std::vector<std::string> feet_frame_names = {"FL_foot", "FR_foot", "RL_foot", "RR_foot"};   // Aliengo robot
+    // Default foot frame names (can be overridden via parameters)
+    std::vector<std::string> feet_frame_names_ = {"FL_foot", "FR_foot", "RL_foot", "RR_foot"};   // Aliengo robot
 
         bool model_loaded_{false};
 
