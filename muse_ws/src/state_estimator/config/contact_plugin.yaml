@@ -1,13 +1,15 @@
-contact_detection_plugin:
-  plugin: "ContactDetectionPlugin"
-  # Subscriber and Publisher topic names
-  # LF: Left Front leg, RF: Right Front leg, LH: Left Hind leg, RH: Right Hind leg
-  wrench_lf_topic: "/visual/FL_foot_contact/the_force" # Unitree: "/visual/FL_foot_contact/the_force" # ANYmal "/state_estimator/contact_force_lf_foot"
-  wrench_rf_topic: "/visual/FR_foot_contact/the_force" # Unitree: "/visual/FR_foot_contact/the_force" # ANYmal "/state_estimator/contact_force_rf_foot"
-  wrench_lh_topic: "/visual/RL_foot_contact/the_force" # Unitree: "/visual/RL_foot_contact/the_force" # ANYmal "/state_estimator/contact_force_lh_foot"
-  wrench_rh_topic: "/visual/RR_foot_contact/the_force" # Unitree: "/visual/RR_foot_contact/the_force" # ANYmal "/state_estimator/contact_force_rh_foot"
+/**:
+  ros__parameters:
+    contact_detection_plugin:
+      plugin: "ContactDetectionPlugin"
+      # Subscriber and Publisher topic names
+      # LF: Left Front leg, RF: Right Front leg, LH: Left Hind leg, RH: Right Hind leg
+      wrench_lf_topic: "/visual/FL_foot_contact/the_force" # Unitree: "/visual/FL_foot_contact/the_force" # ANYmal "/state_estimator/contact_force_lf_foot"
+      wrench_rf_topic: "/visual/FR_foot_contact/the_force" # Unitree: "/visual/FR_foot_contact/the_force" # ANYmal "/state_estimator/contact_force_rf_foot"
+      wrench_lh_topic: "/visual/RL_foot_contact/the_force" # Unitree: "/visual/RL_foot_contact/the_force" # ANYmal "/state_estimator/contact_force_lh_foot"
+      wrench_rh_topic: "/visual/RR_foot_contact/the_force" # Unitree: "/visual/RR_foot_contact/the_force" # ANYmal "/state_estimator/contact_force_rh_foot"
 
-  pub_topic: "contact_detection"
+      pub_topic: "contact_detection"
 
-  # thresholds for contact detection
-  grf_threshold: 30.0
+      # thresholds for contact detection
+      grf_threshold: 30.0

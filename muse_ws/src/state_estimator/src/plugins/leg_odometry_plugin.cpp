@@ -1,3 +1,4 @@
+// Pinocchio
 #include <pinocchio/parsers/urdf.hpp>
 #include <pinocchio/multibody/data.hpp>
 #include <pinocchio/multibody/fcl.hpp>
@@ -6,25 +7,29 @@
 #include <pinocchio/algorithm/jacobian.hpp>
 #include <pinocchio/algorithm/frames.hpp>
 
-#include <iit/commons/geometry/rotations.h>
+#include "iit/commons/geometry/rotations.h"
 
+
+// Core
 #include "state_estimator/plugin.hpp"
-#include <ros/ros.h>
-#include <ros/package.h>
+#include <rclcpp/rclcpp.hpp>
+#include <ament_index_cpp/get_package_share_directory.hpp>
 
-#include "state_estimator_msgs/LegOdometry.h"
-#include "state_estimator_msgs/JointStateWithAcceleration.h" 
-#include "state_estimator_msgs/ContactDetection.h"
-#include "state_estimator_msgs/attitude.h"
+#include "state_estimator_msgs/msg/leg_odometry.hpp"
+#include "state_estimator_msgs/msg/joint_state_with_acceleration.hpp" 
+#include "state_estimator_msgs/msg/contact_detection.hpp"
+#include "state_estimator_msgs/msg/attitude.hpp"
 
-#include <sensor_msgs/JointState.h>
-#include <sensor_msgs/Imu.h>
-#include <geometry_msgs/WrenchStamped.h>
+// ROS 2 messages
+#include <sensor_msgs/msg/joint_state.hpp>
+#include <sensor_msgs/msg/imu.hpp>
+#include <geometry_msgs/msg/wrench_stamped.hpp>
 
-#include <message_filters/time_synchronizer.h>
-#include <message_filters/subscriber.h>
-#include <message_filters/sync_policies/approximate_time.h>
-#include <message_filters/sync_policies/exact_time.h>
+// ROS 2 message_filters
+#include <message_filters/time_synchronizer.hpp>
+#include <message_filters/subscriber.hpp>
+#include <message_filters/sync_policies/approximate_time.hpp>
+#include <message_filters/sync_policies/exact_time.hpp>
 
 #include <unordered_map>
 
@@ -32,25 +37,13 @@
 namespace state_estimator_plugins
 {
 
-typedef message_filters::sync_policies::ApproximateTime
-<
-	sensor_msgs::Imu,
-	// state_estimator_msgs::JointStateWithAcceleration,
-    sensor_msgs::JointState,
-    state_estimator_msgs::ContactDetection,
-    state_estimator_msgs::attitude
-> 
-ApproximateTimePolicy;
+using ImuMsg = sensor_msgs::msg::Imu;
+using JointStateMsg = sensor_msgs::msg::JointState;
+using ContactMsg = state_estimator_msgs::msg::ContactDetection;
+using AttitudeMsg = state_estimator_msgs::msg::Attitude;
 
-typedef message_filters::sync_policies::ExactTime
-<
-	sensor_msgs::Imu,
-	// state_estimator_msgs::JointStateWithAcceleration,
-    sensor_msgs::JointState,
-    state_estimator_msgs::ContactDetection,
-    state_estimator_msgs::attitude
-> 
-ExactTimePolicy;
+using ApproximateTimePolicy = message_filters::sync_policies::ApproximateTime<ImuMsg, JointStateMsg, ContactMsg, AttitudeMsg>;
+using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointStateMsg, ContactMsg, AttitudeMsg>;
 
 #define MySyncPolicy ApproximateTimePolicy
 
@@ -58,91 +51,136 @@ ExactTimePolicy;
 	class LegOdometryPlugin : public PluginBase
 	{
 	public:
-		LegOdometryPlugin(): 
-			imu_sub_(nullptr), 
-			joint_state_sub_(nullptr), 
-            contact_sub_(nullptr),
-            attitude_sub(nullptr),
-			pub_(nullptr), 
-			sync_(nullptr) 
-		{ } 
-	
-		~LegOdometryPlugin() 
-		{
-			// if (lo_!=nullptr) delete(lo_);
-			if (imu_sub_!=nullptr) delete(imu_sub_);
-			if (joint_state_sub_!=nullptr) delete(joint_state_sub_);
-            if (contact_sub_!=nullptr) delete(contact_sub_);
-            if (attitude_sub!=nullptr) delete(attitude_sub);
-			if (pub_!=nullptr) delete(pub_);
-			if (sync_!=nullptr) delete(sync_);
-		}
+        LegOdometryPlugin() = default;
+
+        ~LegOdometryPlugin() override = default;
 
 		std::string getName() override { return std::string("LegOdometry"); }
 		std::string getDescription() override { return std::string("Leg Odometry Plugin"); }
 
 		void initialize_() override {
 
-            std::string urdf_path_param;
-            nh_.param("leg_odometry_plugin/urdf_path", urdf_path_param, std::string(""));
+            auto node = this->node_;
+            if (!node) {
+                throw std::runtime_error("LegOdometryPlugin: node_ is null");
+            }
+
+            // URDF path param (ROS 2 style). Accept legacy name as fallback.
+            std::string urdf_path_param = node->declare_parameter<std::string>(
+                "leg_odometry_plugin.urdf_path", "");
+            const std::string legacy_urdf = node->declare_parameter<std::string>(
+                "leg_odometry_plugin/urdf_path", "");
+            if (!legacy_urdf.empty()) {
+                RCLCPP_WARN(node->get_logger(),
+                    "Using legacy param 'leg_odometry_plugin/urdf_path'; prefer 'leg_odometry_plugin.urdf_path'");
+                urdf_path_param = legacy_urdf;
+            }
 
             if (urdf_path_param.empty()) {
-                ROS_ERROR("URDF path is not set in parameter server.");
+                RCLCPP_ERROR(node->get_logger(), "URDF path is not set.");
                 return;
             }
 
-            // Resolve $(find ...) manually if present
+            // Resolve $(find <pkg>)/path using ament_index
             std::string resolved_path = urdf_path_param;
-            std::string find_token = "$(find ";
+            const std::string find_token = "$(find ";
             if (resolved_path.find(find_token) != std::string::npos) {
-                size_t start = resolved_path.find(find_token) + find_token.length();
-                size_t end = resolved_path.find(")", start);
-                std::string package_name = resolved_path.substr(start, end - start);
-                std::string package_path = ros::package::getPath(package_name);
-                resolved_path.replace(resolved_path.find(find_token), end - resolved_path.find(find_token) + 1, package_path);
+                const size_t start = resolved_path.find(find_token) + find_token.length();
+                const size_t end = resolved_path.find(')', start);
+                const std::string package_name = resolved_path.substr(start, end - start);
+                const std::string pkg_share = ament_index_cpp::get_package_share_directory(package_name);
+                // Replace "$(find pkg)" with pkg_share
+                resolved_path.replace(resolved_path.find(find_token), end - resolved_path.find(find_token) + 1, pkg_share);
             }
 
-            ROS_INFO_STREAM("Loading URDF from: " << resolved_path);
+            RCLCPP_INFO(node->get_logger(), "Loading URDF from: %s", resolved_path.c_str());
 
             try {
                 pinocchio::urdf::buildModel(resolved_path, model_);
                 data_ = pinocchio::Data(model_);
-                ROS_INFO("URDF loaded into Pinocchio model successfully.");
+                RCLCPP_INFO(node->get_logger(), "URDF loaded into Pinocchio model successfully.");
             } catch (const std::exception& e) {
-                ROS_ERROR_STREAM("Failed to load URDF: " << e.what());
+                RCLCPP_ERROR(node->get_logger(), "Failed to load URDF: %s", e.what());
             }
 
-            std::vector<double> base_R_imu_vec;
-            nh_.param("attitude_estimation_plugin/base_R_imu", base_R_imu_vec, std::vector<double>(9, 0.0));
-
+            // base_R_imu from attitude plugin params
+            std::vector<double> base_R_imu_vec = node->declare_parameter<std::vector<double>>( 
+                "leg_odometry_plugin.base_R_imu", std::vector<double>());
             if (base_R_imu_vec.size() == 9) {
-                base_R_imu_ = Eigen::Map<const Eigen::Matrix<double, 3, 3, Eigen::RowMajor>>(base_R_imu_vec.data());
-                // ROS_INFO_STREAM("Loaded base_R_imu:\n" << base_R_imu_);
+                base_R_imu_ = Eigen::Map<const Eigen::Matrix<double,3,3,Eigen::RowMajor>>(base_R_imu_vec.data());
             } else {
-                ROS_WARN("base_R_imu is not the correct size (should be 9). Using identity.");
-                base_R_imu_ = Eigen::Matrix3d::Identity();
+                RCLCPP_WARN(node->get_logger(), "base_R_imu size != 9; using identity");
+                base_R_imu_.setIdentity();
             }
 
-            std::string imu_topic, joint_states_topic, contact_topic, attitude_topic, pub_topic;
-            
-            // Get topic names from the parameter server
-            nh_.param("leg_odometry_plugin/imu_topic", imu_topic, std::string("/sensors/imu"));
-            nh_.param("leg_odometry_plugin/joint_states_topic", joint_states_topic, std::string("/state_estimator/joint_states"));
-            nh_.param("leg_odometry_plugin/contact_topic", contact_topic, std::string("/state_estimator/contact_detection"));
-            nh_.param("leg_odometry_plugin/attitude_topic", attitude_topic, std::string("/state_estimator/attitude"));
-            
-            // Set up subscribers using the loaded topic names
-            imu_sub_ = new message_filters::Subscriber<sensor_msgs::Imu>(nh_, imu_topic, 250);
-            // joint_state_sub_ = new message_filters::Subscriber<state_estimator_msgs::JointStateWithAcceleration>(nh_, joint_states_topic, 250);
-            joint_state_sub_ = new message_filters::Subscriber<sensor_msgs::JointState>(nh_, joint_states_topic, 250);
-            contact_sub_ = new message_filters::Subscriber<state_estimator_msgs::ContactDetection>(nh_, contact_topic, 250);
-            attitude_sub = new message_filters::Subscriber<state_estimator_msgs::attitude>(nh_, attitude_topic, 250);
+            // Feet frame names (vector<string>)
+            // Prefer dot-style key; accept legacy slash-style fallback. Warn when not set and use defaults.
+            auto frames_param = node->declare_parameter<std::vector<std::string>>(
+                "leg_odometry_plugin.feet_frame_names", std::vector<std::string>{}
+            );
+            auto frames_legacy = node->declare_parameter<std::vector<std::string>>(
+                "leg_odometry_plugin/feet_frame_names", std::vector<std::string>{}
+            );
+            if (!frames_legacy.empty() && frames_param.empty()) {
+                RCLCPP_WARN(node->get_logger(),
+                    "Using legacy param 'leg_odometry_plugin/feet_frame_names'; prefer 'leg_odometry_plugin.feet_frame_names'");
+                frames_param = frames_legacy;
+            }
+            // Validate size (expect 4 names for quadruped); if invalid, fall back to default
+            if (!frames_param.empty() && frames_param.size() != 4) {
+                RCLCPP_WARN(node->get_logger(),
+                    "Parameter 'leg_odometry_plugin.feet_frame_names' must contain exactly 4 frame names; got %zu. Using default.",
+                    frames_param.size());
+                frames_param.clear();
+            }
+            if (frames_param.empty()) {
+                RCLCPP_WARN(node->get_logger(),
+                    "Parameter 'leg_odometry_plugin.feet_frame_names' not set; using default: [%s, %s, %s, %s]",
+                    feet_frame_names_[0].c_str(), feet_frame_names_[1].c_str(),
+                    feet_frame_names_[2].c_str(), feet_frame_names_[3].c_str());
+            } else {
+                feet_frame_names_ = frames_param;
+                RCLCPP_INFO(node->get_logger(),
+                    "Using feet_frame_names: [%s, %s, %s, %s]",
+                    feet_frame_names_[0].c_str(), feet_frame_names_[1].c_str(),
+                    feet_frame_names_[2].c_str(), feet_frame_names_[3].c_str());
+            }
 
-			sync_ = new message_filters::Synchronizer<MySyncPolicy>(MySyncPolicy(100),*imu_sub_,*joint_state_sub_,*contact_sub_,*attitude_sub); 
-  			sync_->registerCallback(boost::bind(&LegOdometryPlugin::callback, this, _1, _2, _3,_4));
+            // Topics
+            std::string imu_topic = node->declare_parameter<std::string>(
+                "leg_odometry_plugin.imu_topic", "/imu");
+            std::string joint_states_topic = node->declare_parameter<std::string>(
+                "leg_odometry_plugin.joint_states_topic", "/state_estimator/joint_states");
+            std::string contact_topic = node->declare_parameter<std::string>(
+                "leg_odometry_plugin.contact_topic", "/state_estimator/contact_detection");
+            std::string attitude_topic = node->declare_parameter<std::string>(
+                "leg_odometry_plugin.attitude_topic", "/state_estimator/attitude");
 
-            nh_.param("leg_odometry_plugin/pub_topic", pub_topic, std::string("/state_estimator/leg_odometry"));
-            pub_ = new ros::Publisher(nh_.advertise<state_estimator_msgs::LegOdometry>(pub_topic, 250));
+            // Subscribers with SensorDataQoS
+            auto sensor_qos = rclcpp::SensorDataQoS();
+
+            imu_sub_ = std::make_shared<message_filters::Subscriber<ImuMsg>>(node, imu_topic, sensor_qos);
+            joint_state_sub_ = std::make_shared<message_filters::Subscriber<JointStateMsg>>(node, joint_states_topic, sensor_qos);
+            contact_sub_ = std::make_shared<message_filters::Subscriber<ContactMsg>>(node, contact_topic, sensor_qos);
+            attitude_sub_ = std::make_shared<message_filters::Subscriber<AttitudeMsg>>(node, attitude_topic, sensor_qos);
+
+            sync_ = std::make_shared<message_filters::Synchronizer<MySyncPolicy>>(MySyncPolicy(100), *imu_sub_, *joint_state_sub_, *contact_sub_, *attitude_sub_);
+            sync_->registerCallback(std::bind(&LegOdometryPlugin::callback, this,
+                                              std::placeholders::_1,
+                                              std::placeholders::_2,
+                                              std::placeholders::_3,
+                                              std::placeholders::_4));
+
+            std::string pub_topic = node->declare_parameter<std::string>(
+                "leg_odometry_plugin.pub_topic", "/state_estimator/leg_odometry");
+            // Legacy
+            const std::string pub_topic_legacy = node->declare_parameter<std::string>("leg_odometry_plugin/pub_topic", "");
+            if (!pub_topic_legacy.empty()) {
+                RCLCPP_WARN(node->get_logger(),
+                  "Using legacy parameter 'leg_odometry_plugin/pub_topic'; prefer 'leg_odometry_plugin.pub_topic'");
+                pub_topic = pub_topic_legacy;
+            }
+            pub_ = node->create_publisher<state_estimator_msgs::msg::LegOdometry>(pub_topic, rclcpp::QoS(10));
 
 		}
 
@@ -152,14 +190,13 @@ ExactTimePolicy;
 		void resume_() override { }
 		void reset_() override { }
 
-		void callback
-		(
-			const sensor_msgs::Imu::ConstPtr& imu,
-			// const state_estimator_msgs::JointStateWithAcceleration::ConstPtr& js,
-            const sensor_msgs::JointState::ConstPtr& js,
-            const state_estimator_msgs::ContactDetection::ConstPtr& contact,
-            const state_estimator_msgs::attitude::ConstPtr& attitude
-		)
+        void callback
+        (
+            const ImuMsg::ConstSharedPtr imu,
+            const JointStateMsg::ConstSharedPtr js,
+            const ContactMsg::ConstSharedPtr contact,
+            const AttitudeMsg::ConstSharedPtr attitude
+        )
 		{
             std::cout << "LegOdometryPlugin callback called" << std::endl;
 
@@ -168,9 +205,11 @@ ExactTimePolicy;
             Eigen::VectorXd q(model_.nq);
             Eigen::VectorXd v(model_.nv);
 
-            if (js->position.size() != model_.nq || js->velocity.size() != model_.nv) {
-            	ROS_WARN_THROTTLE(1.0, "Mismatch in joint state size");
-            	return;
+            if (js->position.size() != static_cast<size_t>(model_.nq) || js->velocity.size() != static_cast<size_t>(model_.nv)) {
+                RCLCPP_WARN_THROTTLE(this->node_->get_logger(), *this->node_->get_clock(), 1000,
+                                     "Mismatch in joint state size (pos=%zu vs nq=%d, vel=%zu vs nv=%d)",
+                                     js->position.size(), model_.nq, js->velocity.size(), model_.nv);
+                return;
             }
 
             // Build map from joint name to position/velocity
@@ -212,8 +251,16 @@ ExactTimePolicy;
             pinocchio::updateFramePlacements(model_, data_);
             std::vector<Eigen::Vector3d> foot_vels;
 
-            for (size_t i = 0; i < feet_frame_names.size(); ++i) {
-                const auto& foot_name = feet_frame_names[i];
+            for (size_t i = 0; i < feet_frame_names_.size(); ++i) {
+                const auto& foot_name = feet_frame_names_[i];
+                
+                // Check if frame exists in the model
+                if (!model_.existFrame(foot_name)) {
+                    RCLCPP_ERROR_THROTTLE(this->node_->get_logger(), *this->node_->get_clock(), 5000,
+                                         "Frame '%s' does not exist in the URDF model!", foot_name.c_str());
+                    return;
+                }
+                
                 std::size_t frame_id = model_.getFrameId(foot_name);
             
                 // Get spatial velocity in LOCAL_WORLD_ALIGNED frame
@@ -248,7 +295,7 @@ ExactTimePolicy;
             base_velocity = w_R_b*base_velocity;
 
             // publishing	
-			msg_.header.stamp = ros::Time::now();
+            msg_.header.stamp = this->node_->get_clock()->now();
 
 			for (int j=0;j<3;j++) {
 				msg_.lin_vel_lf[j] = lin_leg_lf.data()[j];
@@ -263,23 +310,22 @@ ExactTimePolicy;
 		} // end callback
 
 
-	private:
-	
-		message_filters::Subscriber<sensor_msgs::Imu> *imu_sub_;
-		// message_filters::Subscriber<state_estimator_msgs::JointStateWithAcceleration> *joint_state_sub_;
-        message_filters::Subscriber<sensor_msgs::JointState> *joint_state_sub_;
-        message_filters::Subscriber<state_estimator_msgs::ContactDetection> *contact_sub_;
-        message_filters::Subscriber<state_estimator_msgs::attitude> *attitude_sub;
-		message_filters::Synchronizer<MySyncPolicy> *sync_;
+    private:
+    
+    std::shared_ptr<message_filters::Subscriber<ImuMsg>> imu_sub_;
+    std::shared_ptr<message_filters::Subscriber<JointStateMsg>> joint_state_sub_;
+    std::shared_ptr<message_filters::Subscriber<ContactMsg>> contact_sub_;
+    std::shared_ptr<message_filters::Subscriber<AttitudeMsg>> attitude_sub_;
+    std::shared_ptr<message_filters::Synchronizer<MySyncPolicy>> sync_;
 
-		ros::Publisher *pub_;
+        rclcpp::Publisher<state_estimator_msgs::msg::LegOdometry>::SharedPtr pub_;
 
-		state_estimator_msgs::LegOdometry msg_;
+        state_estimator_msgs::msg::LegOdometry msg_;
 
         pinocchio::Model model_;
         pinocchio::Data data_;
-        std::vector<std::string> feet_frame_names = {"LF_FOOT", "RF_FOOT", "LH_FOOT", "RH_FOOT"};   // Update with your actual link names
-        // std::vector<std::string> feet_frame_names = {"FL_foot", "FR_foot", "RL_foot", "RR_foot"};   // Aliengo robot
+    // Default foot frame names (can be overridden via parameters)
+    std::vector<std::string> feet_frame_names_ = {"FL_foot", "FR_foot", "RL_foot", "RR_foot"};   // Aliengo robot
 
         bool model_loaded_{false};
 
@@ -295,5 +341,5 @@ ExactTimePolicy;
 
 } //end namespace state_estimator_plugins
 
-#include <pluginlib/class_list_macros.h>
+#include <pluginlib/class_list_macros.hpp>
 PLUGINLIB_EXPORT_CLASS(state_estimator_plugins::LegOdometryPlugin, state_estimator_plugins::PluginBase)

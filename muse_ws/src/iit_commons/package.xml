@@ -6,7 +6,7 @@
   </description>
   <maintainer email="gennaro.raiola@iit.it">Gennaro Raiola</maintainer>
   <license>BSD</license>
-  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
   <test_depend>rostest</test_depend>
 

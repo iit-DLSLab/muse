@@ -1,41 +1,43 @@
-attitude_estimation_plugin:
-  plugin: "AttitudeEstimationPlugin"
-  # Subscriber and Publisher topic names
-  imu_topic: "/trunk_imu" # Unitree: "/trunk_imu" # ANYmal: "/sensors/imu"
-  pub_topic: "attitude"
+/**:
+    ros__parameters:
+        attitude_estimation_plugin:
+                plugin: "AttitudeEstimationPlugin"
+                # Subscriber and Publisher topic names
+                imu_topic: "/imu" # Unitree: "/trunk_imu" # ANYmal: "/sensors/imu"
+                pub_topic: "/state_estimator/attitude"
 
-  # Attitude Estimation Parameters
-  kp: 10.0
-  ki: 0.02
+                # Attitude Estimation Parameters
+                kp: 10.0
+                ki: 0.02
 
-  # Rotation Matrix from IMU frame to Base frame
-  base_R_imu: [1.0, 0.0, 0.0,
-               0.0, 1.0, 0.0,
-               0.0, 0.0, 1.0]
-  # Fake-North Vector in Navigation Frame: it needs to be a constant vector
-  north_vector: [0.577, 0.577, 0.577]
+                # Rotation Matrix from IMU frame to Base frame
+                base_R_imu: [1.0, 0.0, 0.0,
+                                         0.0, 1.0, 0.0,
+                                         0.0, 0.0, 1.0]
+                # Fake-North Vector in Navigation Frame: it needs to be a constant vector
+                north_vector: [0.577, 0.577, 0.577]
 
-  # Gravity Vector in Navigation Frame
-  gravity_vector: [0.0, 0.0, 9.81]
+                # Gravity Vector in Navigation Frame
+                gravity_vector: [0.0, 0.0, 9.81]
 
-  # XKF Covariance Matrices
-  P: [1.0e-6, 0.0, 0.0, 0.0, 0.0, 0.0,
-      0.0, 1.0e-6, 0.0, 0.0, 0.0, 0.0,
-      0.0, 0.0, 1.0e-6, 0.0, 0.0, 0.0,
-      0.0, 0.0, 0.0, 1.0e-6, 0.0, 0.0,
-      0.0, 0.0, 0.0, 0.0, 1.0e-6, 0.0,
-      0.0, 0.0, 0.0, 0.0, 0.0, 1.0e-6]
+                # XKF Covariance Matrices
+                P: [1.0e-6, 0.0, 0.0, 0.0, 0.0, 0.0,
+                        0.0, 1.0e-6, 0.0, 0.0, 0.0, 0.0,
+                        0.0, 0.0, 1.0e-6, 0.0, 0.0, 0.0,
+                        0.0, 0.0, 0.0, 1.0e-6, 0.0, 0.0,
+                        0.0, 0.0, 0.0, 0.0, 1.0e-6, 0.0,
+                        0.0, 0.0, 0.0, 0.0, 0.0, 1.0e-6]
 
-  Q: [1.0e-6, 0.0, 0.0, 0.0, 0.0, 0.0,
-      0.0, 1.0e-6, 0.0, 0.0, 0.0, 0.0,
-      0.0, 0.0, 1.0e-6, 0.0, 0.0, 0.0,
-      0.0, 0.0, 0.0, 1.0e-8, 0.0, 0.0,
-      0.0, 0.0, 0.0, 0.0, 1.0e-8, 0.0,
-      0.0, 0.0, 0.0, 0.0, 0.0, 1.0e-8]
+                Q: [1.0e-6, 0.0, 0.0, 0.0, 0.0, 0.0,
+                        0.0, 1.0e-6, 0.0, 0.0, 0.0, 0.0,
+                        0.0, 0.0, 1.0e-6, 0.0, 0.0, 0.0,
+                        0.0, 0.0, 0.0, 1.0e-8, 0.0, 0.0,
+                        0.0, 0.0, 0.0, 0.0, 1.0e-8, 0.0,
+                        0.0, 0.0, 0.0, 0.0, 0.0, 1.0e-8]
 
-  R: [4.0e-2, 0.0, 0.0, 0.0, 0.0, 0.0,
-      0.0, 4.0e-2, 0.0, 0.0, 0.0, 0.0,
-      0.0, 0.0, 4.0e-2, 0.0, 0.0, 0.0,
-      0.0, 0.0, 0.0, 16.0, 0.0, 0.0,
-      0.0, 0.0, 0.0, 0.0, 16.0, 0.0,
-      0.0, 0.0, 0.0, 0.0, 0.0, 16.0] 
+                R: [4.0e-2, 0.0, 0.0, 0.0, 0.0, 0.0,
+                        0.0, 4.0e-2, 0.0, 0.0, 0.0, 0.0,
+                        0.0, 0.0, 4.0e-2, 0.0, 0.0, 0.0,
+                        0.0, 0.0, 0.0, 16.0, 0.0, 0.0,
+                        0.0, 0.0, 0.0, 0.0, 16.0, 0.0,
+                        0.0, 0.0, 0.0, 0.0, 0.0, 16.0]

@@ -1,158 +1,118 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5)
 project(state_estimator)
 
-add_compile_options(-std=c++11)
+# Default to C++14
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
 
-find_package(catkin REQUIRED
-  roscpp
-  sensor_msgs
-  geometry_msgs
-  nav_msgs
-  dynamic_reconfigure
-  pluginlib
-  message_filters
-  message_generation
-  state_estimator_msgs
-  std_msgs
-  rosconsole
-  iit_commons
-  )
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
-find_package(Boost REQUIRED COMPONENTS system program_options)
-
-find_package(Eigen3 REQUIRED NO_MODULE)
-
-find_package(PkgConfig REQUIRED)
-
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(pluginlib REQUIRED)
+find_package(state_estimator_msgs REQUIRED)
+find_package(iit_commons REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(Eigen3 REQUIRED)
+find_package(rosbag2_transport REQUIRED)
+find_package(message_filters REQUIRED)
 find_package(pinocchio REQUIRED)
 
-
-################################################
-## Declare ROS messages, services and actions ##
-################################################
-
-## Generate messages in the 'msg' folder
- add_message_files(
-   FILES
-    # RollPitch.msg
-    # RollPitchStamped.msg
- )
-
-## Generate added messages and services with any dependencies listed here
- generate_messages(
-   DEPENDENCIES
-   std_msgs
-   sensor_msgs
-   nav_msgs
-   state_estimator
-   state_estimator_msgs
- )
-
-################################################
-## Declare ROS dynamic reconfigure parameters ##
-################################################
-
-## To declare and build dynamic reconfigure parameters within this
-## package, follow these steps:
-## * In the file package.xml:
-##   * add a build_depend and a exec_depend tag for "dynamic_reconfigure"
-## * In this file (CMakeLists.txt):
-##   * add "dynamic_reconfigure" to
-##     find_package(catkin REQUIRED COMPONENTS ...)
-##   * uncomment the "generate_dynamic_reconfigure_options" section below
-##     and list every .cfg file to be processed
-
-## Generate dynamic reconfigure parameters in the 'cfg' folder
-#  generate_dynamic_reconfigure_options(
-#     #  cfg/HeadBaseTransform.cfg
-# #   cfg/DynReconf1.cfg
-# #   cfg/DynReconf2.cfg
-#  )
+include_directories(include
+  ${EIGEN3_INCLUDE_DIRS})
 
 
-###################################
-## catkin specific configuration ##
-###################################
-catkin_package(
-  INCLUDE_DIRS
-    include
-    ${BOOST_INCLUDE_DIRS}
-    ${Eigen_INCLUDE_DIRS}
-  LIBRARIES ${PROJECT_NAME}_commons ${PROJECT_NAME}_plugins ${PROJECT_NAME}_models 
-  CATKIN_DEPENDS pluginlib state_estimator_msgs roscpp iit_commons
-)
+add_executable(state_estimator_node src/state_estimator_node.cpp)
+ament_target_dependencies(state_estimator_node rclcpp std_msgs pluginlib)
 
-###########
-## Build ##
-###########
+# PLugins
 
-## Specify additional locations of header files
-## Your package locations should be listed before other locations
-include_directories(
-  include
-  /usr/include/eigen3  
-  ${catkin_INCLUDE_DIRS}
-  ${Eigen_INCLUDE_DIRS}
-)
-
-include_directories(${PINOCCHIO_INCLUDE_DIRS})
-
-
-## Declare a C++ library
-add_library(${PROJECT_NAME}_plugins
-    src/plugins/attitude_estimation_plugin.cpp
-    src/plugins/contact_detection_plugin.cpp
-    src/plugins/leg_odometry_plugin.cpp
-    src/plugins/sensor_fusion_plugin.cpp
-    # src/Models/sensor_fusion.cpp 
-)
-
-## Declare a C++ executable
-## With catkin_make all packages are built within a single CMake context
-## The recommended prefix ensures that target names across packages don't collide
-
-add_executable(${PROJECT_NAME}_node src/state_estimator.cpp src/state_estimator_node.cpp)
-
-## Rename C++ executable without prefix
-set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
-
-## Add cmake target dependencies of the executable
-## same as for the library above
-message("${${PROJECT_NAME}_EXPORTED_TARGETS}")
-  add_dependencies(${PROJECT_NAME}_node ${PROJECT_NAME}_generate_messages_cpp ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
-
-target_link_libraries(state_estimator_node
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(${PROJECT_NAME}_plugins
-  ${catkin_LIBRARIES}  # <-- this includes message_filters now
-  ${PINOCCHIO_LIBRARIES}
-)
-
-## Mark other files for installation (e.g. launch and bag files, etc.)
-install(FILES
-  ${PROJECT_NAME}_plugins.xml #${PROJECT_NAME}_tools.xml
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
- 
+#install headers
 install(
-  DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-  FILES_MATCHING PATTERN "*.hpp"
+  DIRECTORY include/
+  DESTINATION include
 )
 
-install(DIRECTORY launch/
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
-  PATTERN ".svn" EXCLUDE)
+#install urdfs
+install(DIRECTORY urdfs/
+  DESTINATION share/${PROJECT_NAME}/urdfs
+)
 
+install(FILES
+  state_estimator_plugins.xml
+  state_estimator_tools.xml
+  DESTINATION share/${PROJECT_NAME}
+)
 
-if (CATKIN_ENABLE_TESTING)
-    find_package(rostest REQUIRED)
+ament_export_include_directories(
+  include
+)
 
-    include_directories( include
-      ${catkin_INCLUDE_DIRS}
-      ${Eigen_INCLUDE_DIRS}
-    )
+#define plugins
+add_library(state_estimator_plugins SHARED src/plugins/attitude_estimation_plugin.cpp
+ src/plugins/contact_detection_plugin.cpp
+ src/plugins/leg_odometry_plugin.cpp
+ src/plugins/contact_data_packaging_plugin.cpp
+ src/plugins/sensor_fusion_plugin.cpp
+ src/plugins/joint_state_downsampler_plugin.cpp)
+target_include_directories(state_estimator_plugins PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+  ${message_filters_INCLUDE_DIRS}
+  ${state_estimator_msgs_INCLUDE_DIRS}
+  ${iit_commons_INCLUDE_DIRS}
+  ${sensor_msgs_INCLUDE_DIRS}
+  ${nav_msgs_INCLUDE_DIRS}
+  ${geometry_msgs_INCLUDE_DIRS}
+  ${rclcpp_INCLUDE_DIRS}
+  ${rosbag2_transport_INCLUDE_DIRS}
+  ${pluginlib_INCLUDE_DIRS}
+)
 
-endif()
+target_link_libraries(state_estimator_plugins PUBLIC
+  ${state_estimator_msgs_TARGETS}
+  ${sensor_msgs_TARGETS}
+  ${nav_msgs_TARGETS}
+  ${geometry_msgs_TARGETS}
+  message_filters::message_filters
+  pluginlib::pluginlib
+  rclcpp::rclcpp
+  ${iit_commons_LIBRARIES}
+  pinocchio::pinocchio
+)
+
+pluginlib_export_plugin_description_file(state_estimator state_estimator_plugins.xml)
+
+#copy dependencies to install dir
+install(
+  TARGETS state_estimator_plugins
+  EXPORT export_${PROJECT_NAME}
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
+)
+
+install(TARGETS
+  state_estimator_node
+  DESTINATION lib/${PROJECT_NAME})
+
+install(DIRECTORY
+  launch
+  config
+  DESTINATION share/${PROJECT_NAME}/
+)
+
+ament_export_libraries(
+  state_estimator_plugins
+)
+ament_export_targets(
+  export_${PROJECT_NAME}
+)
+
+ament_package()

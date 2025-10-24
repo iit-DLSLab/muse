@@ -2,7 +2,7 @@
 #define LIB_HPP
 
 #include <Eigen/Dense>
-#include <ros/ros.h>
+#include <rclcpp/rclcpp.hpp>
 
 namespace state_estimator {
 
@@ -133,9 +133,10 @@ namespace state_estimator {
 
 	
 	
+#if 0 // ROS 1 time helpers disabled during ROS 2 migration
 	inline uint64_t ros_time_to_nanoseconds(ros::Time t) { return ((uint64_t)t.sec)*1000000000+(uint64_t)t.nsec; }
-
 	inline uint64_t ros_time_to_nanoseconds(ros::WallTime t) { return ((uint64_t)t.sec)*1000000000+(uint64_t)t.nsec; }
+#endif
 
 	inline std::string ns2str(uint64_t t)  {
 

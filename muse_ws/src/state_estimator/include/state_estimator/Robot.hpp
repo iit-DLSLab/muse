@@ -22,7 +22,7 @@ public:
 
 	virtual void Hello() = 0;
 
-	Robot(Robot&& that) { }
+	//Robot(Robot&& that) { }
 
 	Robot(Robot const &) = delete;
 	Robot& operator=(const Robot &) = delete;

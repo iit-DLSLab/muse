@@ -1,1 +1,4 @@
 .vscode/
+muse_ws/build/
+muse_ws/install/
+muse_ws/log/

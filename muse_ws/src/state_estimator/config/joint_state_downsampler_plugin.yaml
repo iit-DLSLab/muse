@@ -1,0 +1,6 @@
+/**:
+  ros__parameters:
+    joint_state_downsampler:
+      input_topic: joint_states
+      output_topic: /state_estimator/joint_states_downsampled
+      frequency: 4

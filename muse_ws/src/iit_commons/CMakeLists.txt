@@ -1,11 +1,23 @@
 # Project configuration
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.5)
+
 project(iit_commons)
+
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 17)
+endif()
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+
 
 find_package(PkgConfig)
 pkg_check_modules(EIGEN3 eigen3 REQUIRED)
 
-find_package(catkin QUIET)
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
@@ -33,14 +45,7 @@ if(${BUILD_DOC})
     endif (DOXYGEN_FOUND)
 endif()
 
-set(LIB_NAME iitcommons)
-
-catkin_package(
-   INCLUDE_DIRS include
-   CATKIN_DEPENDS
-   LIBRARIES ${LIB_NAME}
-   DEPENDS
-)
+set(LIB_NAME iit_commons)
 
 set(SOURCES src/hydraulics.cpp 
             src/fbl/four_bar_linkage.cpp
@@ -61,21 +66,23 @@ include(yaml_config.cmake)
 # The Euler-angles transforms
 include(euler_angles.cmake)
 
-install(DIRECTORY include/
-  DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}
-  PATTERN ".svn" EXCLUDE
+install(
+    DIRECTORY include/
+    DESTINATION include
+    PATTERN ".svn" EXCLUDE
 )
 
-install(TARGETS ${LIB_NAME}
-        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-        RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+install(TARGETS iit_commons
+    EXPORT export_${PROJECT_NAME}
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin
 )
 
 
 if (CATKIN_ENABLE_TESTING)
-	find_package(catkin REQUIRED COMPONENTS rostest)
-	include_directories(include ${catkin_INCLUDE_DIRS})
+	#find_package(catkin REQUIRED COMPONENTS rostest)
+	#include_directories(include ${catkin_INCLUDE_DIRS})
 
 	catkin_add_gtest(vm-test src/control/testVirtualModel.cpp)
 	target_link_libraries(vm-test ${LIB_NAME} ${catkin_LIBRARIES} pthread)
@@ -97,3 +104,8 @@ if (CATKIN_ENABLE_TESTING)
 
 endif()
 
+ament_export_include_directories(include)
+ament_export_libraries(iit_commons)
+ament_export_dependencies(rclcpp std_msgs)
+
+ament_package()

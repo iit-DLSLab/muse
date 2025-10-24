@@ -1,19 +1,27 @@
-<library path="lib/libstate_estimator_plugins">
+<library path="state_estimator_plugins">
 
-    <class name="AttitudeEstimation" type="state_estimator_plugins::AttitudeEstimationPlugin" base_class_type="state_estimator_plugins::PluginBase">
+    <class type="state_estimator_plugins::AttitudeEstimationPlugin" base_class_type="state_estimator_plugins::PluginBase">
         <description>A plugin to estimate the attitude</description>
     </class>
 
-    <class name="ContactDetection" type="state_estimator_plugins::ContactDetectionPlugin" base_class_type="state_estimator_plugins::PluginBase">
+    <class type="state_estimator_plugins::ContactDetectionPlugin" base_class_type="state_estimator_plugins::PluginBase">
         <description>A plugin to detect foot contacts</description>
     </class>
 
-    <class name="LegOdometry" type="state_estimator_plugins::LegOdometryPlugin" base_class_type="state_estimator_plugins::PluginBase">
+    <class type="state_estimator_plugins::ContactDataPackagingPlugin" base_class_type="state_estimator_plugins::PluginBase"> 
+        <description>A plugin to collect foot contact sensor data and aggregate them into our message type</description>
+    </class>
+
+    <class type="state_estimator_plugins::LegOdometryPlugin" base_class_type="state_estimator_plugins::PluginBase">
 	<description>A plugin to calculate leg odometry</description>
     </class>
 
-    <class name="SensorFusion" type="state_estimator_plugins::SensorFusionPlugin" base_class_type="state_estimator_plugins::PluginBase">
+    <class type="state_estimator_plugins::SensorFusionPlugin" base_class_type="state_estimator_plugins::PluginBase">
         <description>A plugin to fuse the estimated attitude and the leg odometry</description>
+    </class>
+
+    <class type="state_estimator_plugins::JointStateDownsamplerPlugin" base_class_type="state_estimator_plugins::PluginBase">
+        <description>Downsamples JointState messages to a configurable rate</description>
     </class>
 
 

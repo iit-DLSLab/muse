@@ -1,0 +1,12 @@
+/**:
+  ros__parameters:
+    contact_data_packaging_plugin:
+      plugin: "ContactDataPackagingPlugin"
+      # Subscriber and Publisher topic names
+      # LF: Left Front leg, RF: Right Front leg, LH: Left Hind leg, RH: Right Hind leg
+      contact_lf_topic: "/contact/FL" # Unitree: "/visual/FL_foot_contact/the_force" # ANYmal "/state_estimator/contact_force_lf_foot"
+      contact_rf_topic: "/contact/FR" # Unitree: "/visual/FR_foot_contact/the_force" # ANYmal "/state_estimator/contact_force_rf_foot"
+      contact_lh_topic: "/contact/RL" # Unitree: "/visual/RL_foot_contact/the_force" # ANYmal "/state_estimator/contact_force_lh_foot"
+      contact_rh_topic: "/contact/RR" # Unitree: "/visual/RR_foot_contact/the_force" # ANYmal "/state_estimator/contact_force_rh_foot"
+    
+      pub_topic: "/state_estimator/contact_detection"

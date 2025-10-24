@@ -4,8 +4,10 @@
 # Timeout is double in s
 # Order must be name,type,topic,timeout
 # 
-timeout_plugin:
-  - name: Master
-    type: Master
-    topic: Master
-    timeout: 1.0
+/**:
+  ros__parameters:
+    timeout_plugin:
+      - name: Master
+        type: Master
+        topic: Master
+        timeout: "1.0"
