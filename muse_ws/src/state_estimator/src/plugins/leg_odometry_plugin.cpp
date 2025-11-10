@@ -198,7 +198,6 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
             const AttitudeMsg::ConstSharedPtr attitude
         )
 		{
-            std::cout << "LegOdometryPlugin callback called" << std::endl;
 
 			// Robot joint states
             // Fill q and v from joint state

@@ -15,11 +15,11 @@ The `muse` package provides a ROS node and utilities for estimating the state of
 This first version of the code provides a proprioceptive state estimator for quadruped robots. The necessary inputs are 
 - **imu measurements**
 - **joint states**
-- **force exerted on the feet**
+- **force exerted on the feet OR foot contact sensor data (std_msgs::msg::Bool type)**
 
     
 Additional code to fuse exteroceptive measurements will be available soon!
-TODO list at the end of the page
+
 </h2>
 
 
@@ -85,7 +85,7 @@ For real-world experiments, we recommend using this very nice [MPC](https://gith
 ## :scroll: TODO list
 - [ ] Extend the code to include exteroception
 - [x] Dockerization
-- [ ] Support for ROS2
+- [x] Support for ROS2
 
 ## :hugs: Contributing
 
