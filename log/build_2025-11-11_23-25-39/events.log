@@ -1,0 +1,914 @@
+[0.000000] (-) TimerEvent: {}
+[0.000405] (iit_commons) JobQueued: {'identifier': 'iit_commons', 'dependencies': OrderedDict()}
+[0.000614] (state_estimator_msgs) JobQueued: {'identifier': 'state_estimator_msgs', 'dependencies': OrderedDict()}
+[0.000659] (state_estimator) JobQueued: {'identifier': 'state_estimator', 'dependencies': OrderedDict({'iit_commons': '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons', 'state_estimator_msgs': '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs'})}
+[0.000678] (iit_commons) JobStarted: {'identifier': 'iit_commons'}
+[0.005864] (state_estimator_msgs) JobStarted: {'identifier': 'state_estimator_msgs'}
+[0.011958] (iit_commons) JobProgress: {'identifier': 'iit_commons', 'progress': 'cmake'}
+[0.012962] (iit_commons) JobProgress: {'identifier': 'iit_commons', 'progress': 'build'}
+[0.013713] (iit_commons) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons', '--', '-j12', '-l12'], 'cwd': '/home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons', 'env': OrderedDict({'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'ISAACSIM_PYTHON_EXE': '/home/jonas/.local/share/ov/pkg/isaac-sim-4.2.0/python.sh', 'PYTHON_BASIC_REPL': '1', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'GZ_SIM_RESOURCE_PATH': '/opt/ros/rolling/share', 'USER': 'jonas', 'GZ_CONFIG_PATH': '/opt/ros/rolling/opt/gz_sim_vendor/share/gz:/opt/ros/rolling/opt/gz_gui_vendor/share/gz:/opt/ros/rolling/opt/gz_transport_vendor/share/gz:/opt/ros/rolling/opt/sdformat_vendor/share/gz:/opt/ros/rolling/opt/gz_rendering_vendor/share/gz:/opt/ros/rolling/opt/gz_plugin_vendor/share/gz:/opt/ros/rolling/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/rolling/opt/gz_msgs_vendor/share/gz:/opt/ros/rolling/opt/gz_common_vendor/share/gz', 'XDG_SESSION_TYPE': 'x11', 'GIT_ASKPASS': '/usr/share/code/resources/app/extensions/git/dist/askpass.sh', 'ISAACSIM_PATH': '/home/jonas/.local/share/ov/pkg/isaac-sim-4.2.0', 'CLUTTER_DISABLE_MIPMAPPED_TEXT': '1', 'SHLVL': '1', 'LD_LIBRARY_PATH': 'HOME/.mujoco/mujoco210/bin:/home/jonas/Documents/Kamaro/Quadruped-PyMPC-Luna/quadruped_pympc/acados/lib', 'ACADOS_SOURCE_DIR': '/home/jonas/Documents/Kamaro/Quadruped-PyMPC-Luna/quadruped_pympc/acados', 'HOME': '/home/jonas', 'CHROME_DESKTOP': 'code.desktop', 'TERM_PROGRAM_VERSION': '1.105.1', 'DESKTOP_SESSION': 'ubuntu', 'GIO_LAUNCHED_DESKTOP_FILE': '/usr/share/applications/code.desktop', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'VSCODE_GIT_ASKPASS_MAIN': '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js', 'VSCODE_GIT_ASKPASS_NODE': '/usr/share/code/code', 'MANAGERPID': '783195', 'PYDEVD_DISABLE_FILE_VALIDATION': '1', 'SYSTEMD_EXEC_PID': '783645', 'BUNDLED_DEBUGPY_PATH': '/home/jonas/.vscode/extensions/ms-python.debugpy-2025.14.1-linux-x64/bundled/libs/debugpy', 'VSCODE_PYTHON_AUTOACTIVATE_GUARD': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '788399', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'ROS_DISTRO': 'rolling', 'LOGNAME': 'jonas', 'JOURNAL_STREAM': '9:4285037', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@x11.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'jonas', 'TERM': 'xterm-256color', 'COPPELIASIM_ROOT_DIR': '/home/jonas/Programs/CoppeliaSim', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'WINDOWPATH': '2', 'PATH': '/home/jonas/miniconda3/bin:/home/jonas/.local/bin:/opt/ros/rolling/opt/gz_msgs_vendor/bin:/opt/ros/rolling/opt/gz_tools_vendor/bin:/opt/ros/rolling/opt/gz_ogre_next_vendor/bin:/opt/ros/rolling/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/jonas/.vscode/extensions/ms-python.debugpy-2025.14.1-linux-x64/bundled/scripts/noConfigScripts:/home/jonas/.config/Code/User/globalStorage/github.copilot-chat/debugCommand:/home/jonas/.local/bin', 'SESSION_MANAGER': 'local/jonas-MS-7B86:@/tmp/.ICE-unix/783611,unix/jonas-MS-7B86:/tmp/.ICE-unix/783611', 'INVOCATION_ID': 'f7402b6b975d4b7494dc5e8383796c3f', 'XDG_MENU_PREFIX': 'gnome-', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'x11', 'DISPLAY': ':1', 'VSCODE_DEBUGPY_ADAPTER_ENDPOINTS': '/home/jonas/.vscode/extensions/ms-python.debugpy-2025.14.1-linux-x64/.noConfigDebugAdapterEndpoints/endpoint-362bcc0598cc4ffd.txt', 'LD_PRELOAD': ':/usr/lib/x86_64-linux-gnu/libGLEW.so:/usr/lib/x86_64-linux-gnu/libGLEW.so', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'Unity', 'PYTHONSTARTUP': '/home/jonas/.config/Code/User/workspaceStorage/49463d16e51cac3ae658ad28c550dff5/ms-python.python/pythonrc.py', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/gdm/Xauthority', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'VSCODE_GIT_IPC_HANDLE': '/run/user/1000/vscode-git-df17cfa46a.sock', 'TERM_PROGRAM': 'vscode', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/opt/ros/rolling', 'ORIGINAL_XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'GPG_AGENT_INFO': '/run/user/1000/gnupg/S.gpg-agent:0:1', 'GJS_DEBUG_OUTPUT': 'stderr', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/home/jonas/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/rolling/opt/gz_sim_vendor/lib/python:/opt/ros/rolling/opt/gz_transport_vendor/lib/python:/opt/ros/rolling/opt/gz_msgs_vendor/lib/python:/opt/ros/rolling/opt/gz_math_vendor/lib/python:/opt/ros/rolling/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'CMAKE_PREFIX_PATH': '/opt/ros/rolling/opt/gz_sim_vendor:/opt/ros/rolling/opt/gz_sensors_vendor:/opt/ros/rolling/opt/gz_gui_vendor:/opt/ros/rolling/opt/gz_transport_vendor:/opt/ros/rolling/opt/gz_physics_vendor:/opt/ros/rolling/opt/sdformat_vendor:/opt/ros/rolling/opt/gz_rendering_vendor:/opt/ros/rolling/opt/gz_plugin_vendor:/opt/ros/rolling/opt/gz_fuel_tools_vendor:/opt/ros/rolling/opt/gz_msgs_vendor:/opt/ros/rolling/opt/gz_common_vendor:/opt/ros/rolling/opt/gz_math_vendor:/opt/ros/rolling/opt/gz_utils_vendor:/opt/ros/rolling/opt/gz_tools_vendor:/opt/ros/rolling/opt/gz_ogre_next_vendor:/opt/ros/rolling/opt/gz_dartsim_vendor:/opt/ros/rolling/opt/gz_cmake_vendor'}), 'shell': False}
+[0.018966] (state_estimator_msgs) JobProgress: {'identifier': 'state_estimator_msgs', 'progress': 'cmake'}
+[0.019442] (state_estimator_msgs) JobProgress: {'identifier': 'state_estimator_msgs', 'progress': 'build'}
+[0.019628] (state_estimator_msgs) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs', '--', '-j12', '-l12'], 'cwd': '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs', 'env': OrderedDict({'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'ISAACSIM_PYTHON_EXE': '/home/jonas/.local/share/ov/pkg/isaac-sim-4.2.0/python.sh', 'PYTHON_BASIC_REPL': '1', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'GZ_SIM_RESOURCE_PATH': '/opt/ros/rolling/share', 'USER': 'jonas', 'GZ_CONFIG_PATH': '/opt/ros/rolling/opt/gz_sim_vendor/share/gz:/opt/ros/rolling/opt/gz_gui_vendor/share/gz:/opt/ros/rolling/opt/gz_transport_vendor/share/gz:/opt/ros/rolling/opt/sdformat_vendor/share/gz:/opt/ros/rolling/opt/gz_rendering_vendor/share/gz:/opt/ros/rolling/opt/gz_plugin_vendor/share/gz:/opt/ros/rolling/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/rolling/opt/gz_msgs_vendor/share/gz:/opt/ros/rolling/opt/gz_common_vendor/share/gz', 'XDG_SESSION_TYPE': 'x11', 'GIT_ASKPASS': '/usr/share/code/resources/app/extensions/git/dist/askpass.sh', 'ISAACSIM_PATH': '/home/jonas/.local/share/ov/pkg/isaac-sim-4.2.0', 'CLUTTER_DISABLE_MIPMAPPED_TEXT': '1', 'SHLVL': '1', 'LD_LIBRARY_PATH': 'HOME/.mujoco/mujoco210/bin:/home/jonas/Documents/Kamaro/Quadruped-PyMPC-Luna/quadruped_pympc/acados/lib', 'ACADOS_SOURCE_DIR': '/home/jonas/Documents/Kamaro/Quadruped-PyMPC-Luna/quadruped_pympc/acados', 'HOME': '/home/jonas', 'CHROME_DESKTOP': 'code.desktop', 'TERM_PROGRAM_VERSION': '1.105.1', 'DESKTOP_SESSION': 'ubuntu', 'GIO_LAUNCHED_DESKTOP_FILE': '/usr/share/applications/code.desktop', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'VSCODE_GIT_ASKPASS_MAIN': '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js', 'VSCODE_GIT_ASKPASS_NODE': '/usr/share/code/code', 'MANAGERPID': '783195', 'PYDEVD_DISABLE_FILE_VALIDATION': '1', 'SYSTEMD_EXEC_PID': '783645', 'BUNDLED_DEBUGPY_PATH': '/home/jonas/.vscode/extensions/ms-python.debugpy-2025.14.1-linux-x64/bundled/libs/debugpy', 'VSCODE_PYTHON_AUTOACTIVATE_GUARD': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '788399', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'ROS_DISTRO': 'rolling', 'LOGNAME': 'jonas', 'JOURNAL_STREAM': '9:4285037', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@x11.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'jonas', 'TERM': 'xterm-256color', 'COPPELIASIM_ROOT_DIR': '/home/jonas/Programs/CoppeliaSim', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'WINDOWPATH': '2', 'PATH': '/home/jonas/miniconda3/bin:/home/jonas/.local/bin:/opt/ros/rolling/opt/gz_msgs_vendor/bin:/opt/ros/rolling/opt/gz_tools_vendor/bin:/opt/ros/rolling/opt/gz_ogre_next_vendor/bin:/opt/ros/rolling/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/jonas/.vscode/extensions/ms-python.debugpy-2025.14.1-linux-x64/bundled/scripts/noConfigScripts:/home/jonas/.config/Code/User/globalStorage/github.copilot-chat/debugCommand:/home/jonas/.local/bin', 'SESSION_MANAGER': 'local/jonas-MS-7B86:@/tmp/.ICE-unix/783611,unix/jonas-MS-7B86:/tmp/.ICE-unix/783611', 'INVOCATION_ID': 'f7402b6b975d4b7494dc5e8383796c3f', 'XDG_MENU_PREFIX': 'gnome-', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'x11', 'DISPLAY': ':1', 'VSCODE_DEBUGPY_ADAPTER_ENDPOINTS': '/home/jonas/.vscode/extensions/ms-python.debugpy-2025.14.1-linux-x64/.noConfigDebugAdapterEndpoints/endpoint-362bcc0598cc4ffd.txt', 'LD_PRELOAD': ':/usr/lib/x86_64-linux-gnu/libGLEW.so:/usr/lib/x86_64-linux-gnu/libGLEW.so', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'Unity', 'PYTHONSTARTUP': '/home/jonas/.config/Code/User/workspaceStorage/49463d16e51cac3ae658ad28c550dff5/ms-python.python/pythonrc.py', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/gdm/Xauthority', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'VSCODE_GIT_IPC_HANDLE': '/run/user/1000/vscode-git-df17cfa46a.sock', 'TERM_PROGRAM': 'vscode', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/opt/ros/rolling', 'ORIGINAL_XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'GPG_AGENT_INFO': '/run/user/1000/gnupg/S.gpg-agent:0:1', 'GJS_DEBUG_OUTPUT': 'stderr', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/home/jonas/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/rolling/opt/gz_sim_vendor/lib/python:/opt/ros/rolling/opt/gz_transport_vendor/lib/python:/opt/ros/rolling/opt/gz_msgs_vendor/lib/python:/opt/ros/rolling/opt/gz_math_vendor/lib/python:/opt/ros/rolling/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'CMAKE_PREFIX_PATH': '/opt/ros/rolling/opt/gz_sim_vendor:/opt/ros/rolling/opt/gz_sensors_vendor:/opt/ros/rolling/opt/gz_gui_vendor:/opt/ros/rolling/opt/gz_transport_vendor:/opt/ros/rolling/opt/gz_physics_vendor:/opt/ros/rolling/opt/sdformat_vendor:/opt/ros/rolling/opt/gz_rendering_vendor:/opt/ros/rolling/opt/gz_plugin_vendor:/opt/ros/rolling/opt/gz_fuel_tools_vendor:/opt/ros/rolling/opt/gz_msgs_vendor:/opt/ros/rolling/opt/gz_common_vendor:/opt/ros/rolling/opt/gz_math_vendor:/opt/ros/rolling/opt/gz_utils_vendor:/opt/ros/rolling/opt/gz_tools_vendor:/opt/ros/rolling/opt/gz_ogre_next_vendor:/opt/ros/rolling/opt/gz_dartsim_vendor:/opt/ros/rolling/opt/gz_cmake_vendor'}), 'shell': False}
+[0.099847] (-) TimerEvent: {}
+[0.104777] (state_estimator_msgs) StdoutLine: {'line': b'[  1%] Built target state_estimator_msgs__rosidl_generator_type_description\n'}
+[0.105150] (state_estimator_msgs) StdoutLine: {'line': b'[  2%] Built target state_estimator_msgs__rs\n'}
+[0.117938] (iit_commons) StdoutLine: {'line': b'[100%] Built target iit_commons\n'}
+[0.124852] (state_estimator_msgs) StdoutLine: {'line': b'[  2%] Built target ament_cmake_python_copy_state_estimator_msgs\n'}
+[0.142910] (iit_commons) CommandEnded: {'returncode': 0}
+[0.144095] (iit_commons) JobProgress: {'identifier': 'iit_commons', 'progress': 'install'}
+[0.149398] (state_estimator_msgs) StdoutLine: {'line': b'[  4%] Built target state_estimator_msgs__cpp\n'}
+[0.159465] (iit_commons) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons'], 'cwd': '/home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons', 'env': OrderedDict({'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'ISAACSIM_PYTHON_EXE': '/home/jonas/.local/share/ov/pkg/isaac-sim-4.2.0/python.sh', 'PYTHON_BASIC_REPL': '1', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'GZ_SIM_RESOURCE_PATH': '/opt/ros/rolling/share', 'USER': 'jonas', 'GZ_CONFIG_PATH': '/opt/ros/rolling/opt/gz_sim_vendor/share/gz:/opt/ros/rolling/opt/gz_gui_vendor/share/gz:/opt/ros/rolling/opt/gz_transport_vendor/share/gz:/opt/ros/rolling/opt/sdformat_vendor/share/gz:/opt/ros/rolling/opt/gz_rendering_vendor/share/gz:/opt/ros/rolling/opt/gz_plugin_vendor/share/gz:/opt/ros/rolling/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/rolling/opt/gz_msgs_vendor/share/gz:/opt/ros/rolling/opt/gz_common_vendor/share/gz', 'XDG_SESSION_TYPE': 'x11', 'GIT_ASKPASS': '/usr/share/code/resources/app/extensions/git/dist/askpass.sh', 'ISAACSIM_PATH': '/home/jonas/.local/share/ov/pkg/isaac-sim-4.2.0', 'CLUTTER_DISABLE_MIPMAPPED_TEXT': '1', 'SHLVL': '1', 'LD_LIBRARY_PATH': 'HOME/.mujoco/mujoco210/bin:/home/jonas/Documents/Kamaro/Quadruped-PyMPC-Luna/quadruped_pympc/acados/lib', 'ACADOS_SOURCE_DIR': '/home/jonas/Documents/Kamaro/Quadruped-PyMPC-Luna/quadruped_pympc/acados', 'HOME': '/home/jonas', 'CHROME_DESKTOP': 'code.desktop', 'TERM_PROGRAM_VERSION': '1.105.1', 'DESKTOP_SESSION': 'ubuntu', 'GIO_LAUNCHED_DESKTOP_FILE': '/usr/share/applications/code.desktop', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'VSCODE_GIT_ASKPASS_MAIN': '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js', 'VSCODE_GIT_ASKPASS_NODE': '/usr/share/code/code', 'MANAGERPID': '783195', 'PYDEVD_DISABLE_FILE_VALIDATION': '1', 'SYSTEMD_EXEC_PID': '783645', 'BUNDLED_DEBUGPY_PATH': '/home/jonas/.vscode/extensions/ms-python.debugpy-2025.14.1-linux-x64/bundled/libs/debugpy', 'VSCODE_PYTHON_AUTOACTIVATE_GUARD': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '788399', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'ROS_DISTRO': 'rolling', 'LOGNAME': 'jonas', 'JOURNAL_STREAM': '9:4285037', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@x11.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'jonas', 'TERM': 'xterm-256color', 'COPPELIASIM_ROOT_DIR': '/home/jonas/Programs/CoppeliaSim', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'WINDOWPATH': '2', 'PATH': '/home/jonas/miniconda3/bin:/home/jonas/.local/bin:/opt/ros/rolling/opt/gz_msgs_vendor/bin:/opt/ros/rolling/opt/gz_tools_vendor/bin:/opt/ros/rolling/opt/gz_ogre_next_vendor/bin:/opt/ros/rolling/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/jonas/.vscode/extensions/ms-python.debugpy-2025.14.1-linux-x64/bundled/scripts/noConfigScripts:/home/jonas/.config/Code/User/globalStorage/github.copilot-chat/debugCommand:/home/jonas/.local/bin', 'SESSION_MANAGER': 'local/jonas-MS-7B86:@/tmp/.ICE-unix/783611,unix/jonas-MS-7B86:/tmp/.ICE-unix/783611', 'INVOCATION_ID': 'f7402b6b975d4b7494dc5e8383796c3f', 'XDG_MENU_PREFIX': 'gnome-', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'x11', 'DISPLAY': ':1', 'VSCODE_DEBUGPY_ADAPTER_ENDPOINTS': '/home/jonas/.vscode/extensions/ms-python.debugpy-2025.14.1-linux-x64/.noConfigDebugAdapterEndpoints/endpoint-362bcc0598cc4ffd.txt', 'LD_PRELOAD': ':/usr/lib/x86_64-linux-gnu/libGLEW.so:/usr/lib/x86_64-linux-gnu/libGLEW.so', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'Unity', 'PYTHONSTARTUP': '/home/jonas/.config/Code/User/workspaceStorage/49463d16e51cac3ae658ad28c550dff5/ms-python.python/pythonrc.py', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/gdm/Xauthority', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'VSCODE_GIT_IPC_HANDLE': '/run/user/1000/vscode-git-df17cfa46a.sock', 'TERM_PROGRAM': 'vscode', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/opt/ros/rolling', 'ORIGINAL_XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'GPG_AGENT_INFO': '/run/user/1000/gnupg/S.gpg-agent:0:1', 'GJS_DEBUG_OUTPUT': 'stderr', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/home/jonas/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/rolling/opt/gz_sim_vendor/lib/python:/opt/ros/rolling/opt/gz_transport_vendor/lib/python:/opt/ros/rolling/opt/gz_msgs_vendor/lib/python:/opt/ros/rolling/opt/gz_math_vendor/lib/python:/opt/ros/rolling/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'CMAKE_PREFIX_PATH': '/opt/ros/rolling/opt/gz_sim_vendor:/opt/ros/rolling/opt/gz_sensors_vendor:/opt/ros/rolling/opt/gz_gui_vendor:/opt/ros/rolling/opt/gz_transport_vendor:/opt/ros/rolling/opt/gz_physics_vendor:/opt/ros/rolling/opt/sdformat_vendor:/opt/ros/rolling/opt/gz_rendering_vendor:/opt/ros/rolling/opt/gz_plugin_vendor:/opt/ros/rolling/opt/gz_fuel_tools_vendor:/opt/ros/rolling/opt/gz_msgs_vendor:/opt/ros/rolling/opt/gz_common_vendor:/opt/ros/rolling/opt/gz_math_vendor:/opt/ros/rolling/opt/gz_utils_vendor:/opt/ros/rolling/opt/gz_tools_vendor:/opt/ros/rolling/opt/gz_ogre_next_vendor:/opt/ros/rolling/opt/gz_dartsim_vendor:/opt/ros/rolling/opt/gz_cmake_vendor'}), 'shell': False}
+[0.160494] (state_estimator_msgs) StdoutLine: {'line': b'[ 26%] Built target state_estimator_msgs__rosidl_generator_c\n'}
+[0.174151] (iit_commons) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[0.174421] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include\n'}
+[0.174552] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit\n'}
+[0.174651] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/rbd\n'}
+[0.174758] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/rbd/rbd.h\n'}
+[0.175179] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/rbd/StateDependentMatrix.h\n'}
+[0.175419] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/rbd/InertiaMatrix.h\n'}
+[0.175625] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/rbd/StateDependentBase.h\n'}
+[0.175721] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/rbd/robcogen_commons.h\n'}
+[0.175825] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/rbd/TransformsBase.h\n'}
+[0.175909] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/rbd/internals.h\n'}
+[0.176247] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/rbd/utils.h\n'}
+[0.176588] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/rbd/eigen_traits.h\n'}
+[0.176687] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/robcogen\n'}
+[0.176801] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/robcogen/test\n'}
+[0.176899] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/robcogen/test/dynamics_consistency.h\n'}
+[0.177025] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/robcogen/test/dynamics_cmd_line.h\n'}
+[0.177132] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/robcogen/utils.h\n'}
+[0.177229] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons\n'}
+[0.177331] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/SL\n'}
+[0.177419] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/SL/joint_status_conversion.h\n'}
+[0.178094] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/SL/rbd_conversion.h\n'}
+[0.178196] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/SL/eigen_conversion.h\n'}
+[0.178296] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/SL/generic_dynamics.h\n'}
+[0.178392] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/control\n'}
+[0.178482] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/control/VirtualModel.hpp\n'}
+[0.178584] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/planning\n'}
+[0.178685] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/planning/planning.h\n'}
+[0.178788] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/four_bar_linkage.h\n'}
+[0.178890] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/euler_angles\n'}
+[0.179000] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/euler_angles/transforms_internal.h\n'}
+[0.179104] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/euler_angles/common.h\n'}
+[0.179205] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/euler_angles/transform.h\n'}
+[0.179304] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/euler_angles/eigen_traits.h\n'}
+[0.179403] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/control.h\n'}
+[0.179505] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry\n'}
+[0.179660] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h\n'}
+[0.179780] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/polygon.h\n'}
+[0.180190] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/algebra.h\n'}
+[0.180302] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog\n'}
+[0.180386] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/test_k.h\n'}
+[0.180469] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/body_lengths.h\n'}
+[0.180552] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/link_data_map.h\n'}
+[0.180632] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/joint_id_tricks.h\n'}
+[0.180713] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/inverse_dynamics.h\n'}
+[0.182173] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/declarations.h\n'}
+[0.182781] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/robot_limits.h\n'}
+[0.183991] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/feet_contact_forces.h\n'}
+[0.184100] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/inertia_properties.h\n'}
+[0.184204] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/joint_bool_map.h\n'}
+[0.184339] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/inverse_kinematics.h\n'}
+[0.186637] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/kin_dyn_params.h\n'}
+[0.186750] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/leg_data_map.h\n'}
+[0.186859] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/feet_jacobians.h\n'}
+[0.186962] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/forward_kinematics.h\n'}
+[0.187053] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/transforms.h\n'}
+[0.187153] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/joint_data_map.h\n'}
+[0.187258] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/jsim.h\n'}
+[0.187359] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/leg_bool_map.h\n'}
+[0.187461] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/dog.hpp\n'}
+[0.187549] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/shin_jacobians.h\n'}
+[0.187664] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/dog/test_fk.h\n'}
+[0.187758] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/hydraulics.h\n'}
+[0.187842] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/yaml_config\n'}
+[0.187927] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/yaml_config/yaml_config.h\n'}
+[0.188011] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/eigen_matrix_utils.h\n'}
+[0.188102] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/filters.h\n'}
+[0.188190] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/libiit_commons.so\n'}
+[0.188409] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/environment/library_path.sh\n'}
+[0.188500] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/environment/library_path.dsv\n'}
+[0.188584] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/ament_index/resource_index/package_run_dependencies/iit_commons\n'}
+[0.189367] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/ament_index/resource_index/parent_prefix_path/iit_commons\n'}
+[0.189498] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/environment/ament_prefix_path.sh\n'}
+[0.189586] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/environment/ament_prefix_path.dsv\n'}
+[0.189700] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/environment/path.sh\n'}
+[0.190023] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/environment/path.dsv\n'}
+[0.190129] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/local_setup.bash\n'}
+[0.190230] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/local_setup.sh\n'}
+[0.190327] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/local_setup.zsh\n'}
+[0.190422] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/local_setup.dsv\n'}
+[0.190523] (iit_commons) StdoutLine: {'line': b'-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/package.dsv\n'}
+[0.190623] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/ament_index/resource_index/packages/iit_commons\n'}
+[0.191830] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[0.191985] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[0.192078] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[0.192173] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/cmake/iit_commonsConfig.cmake\n'}
+[0.192271] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/cmake/iit_commonsConfig-version.cmake\n'}
+[0.192364] (iit_commons) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/package.xml\n'}
+[0.192461] (iit_commons) CommandEnded: {'returncode': 0}
+[0.200865] (-) TimerEvent: {}
+[0.214032] (state_estimator_msgs) StdoutLine: {'line': b'[ 36%] Built target state_estimator_msgs__rosidl_typesupport_c\n'}
+[0.214213] (iit_commons) JobEnded: {'identifier': 'iit_commons', 'rc': 0}
+[0.215777] (state_estimator_msgs) StdoutLine: {'line': b'[ 45%] Built target state_estimator_msgs__rosidl_typesupport_fastrtps_c\n'}
+[0.216678] (state_estimator_msgs) StdoutLine: {'line': b'[ 54%] Built target state_estimator_msgs__rosidl_typesupport_cpp\n'}
+[0.217146] (state_estimator_msgs) StdoutLine: {'line': b'[ 64%] Built target state_estimator_msgs__rosidl_typesupport_introspection_c\n'}
+[0.218387] (state_estimator_msgs) StdoutLine: {'line': b'[ 73%] Built target state_estimator_msgs__rosidl_typesupport_fastrtps_cpp\n'}
+[0.227900] (state_estimator_msgs) StdoutLine: {'line': b'[ 82%] Built target state_estimator_msgs__rosidl_typesupport_introspection_cpp\n'}
+[0.264855] (state_estimator_msgs) StdoutLine: {'line': b'[ 82%] Built target state_estimator_msgs\n'}
+[0.300997] (-) TimerEvent: {}
+[0.302748] (state_estimator_msgs) StdoutLine: {'line': b'[ 84%] Built target state_estimator_msgs__py\n'}
+[0.353256] (state_estimator_msgs) StdoutLine: {'line': b'[ 92%] Built target state_estimator_msgs__rosidl_generator_py\n'}
+[0.394995] (state_estimator_msgs) StdoutLine: {'line': b'[100%] Built target state_estimator_msgs_s__rosidl_typesupport_fastrtps_c\n'}
+[0.395242] (state_estimator_msgs) StdoutLine: {'line': b'[100%] Built target state_estimator_msgs_s__rosidl_typesupport_introspection_c\n'}
+[0.395329] (state_estimator_msgs) StdoutLine: {'line': b'[100%] Built target state_estimator_msgs_s__rosidl_typesupport_c\n'}
+[0.397172] (state_estimator_msgs) StdoutLine: {'line': b'running egg_info\n'}
+[0.401057] (-) TimerEvent: {}
+[0.420313] (state_estimator_msgs) StdoutLine: {'line': b'writing state_estimator_msgs.egg-info/PKG-INFO\n'}
+[0.420613] (state_estimator_msgs) StdoutLine: {'line': b'writing dependency_links to state_estimator_msgs.egg-info/dependency_links.txt\n'}
+[0.420742] (state_estimator_msgs) StdoutLine: {'line': b'writing top-level names to state_estimator_msgs.egg-info/top_level.txt\n'}
+[0.497686] (state_estimator_msgs) StdoutLine: {'line': b"reading manifest file 'state_estimator_msgs.egg-info/SOURCES.txt'\n"}
+[0.498297] (state_estimator_msgs) StdoutLine: {'line': b"writing manifest file 'state_estimator_msgs.egg-info/SOURCES.txt'\n"}
+[0.501138] (-) TimerEvent: {}
+[0.540479] (state_estimator_msgs) StdoutLine: {'line': b'[100%] Built target ament_cmake_python_build_state_estimator_msgs_egg\n'}
+[0.560048] (state_estimator_msgs) CommandEnded: {'returncode': 0}
+[0.560975] (state_estimator_msgs) JobProgress: {'identifier': 'state_estimator_msgs', 'progress': 'install'}
+[0.561363] (state_estimator_msgs) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs'], 'cwd': '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs', 'env': OrderedDict({'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'ISAACSIM_PYTHON_EXE': '/home/jonas/.local/share/ov/pkg/isaac-sim-4.2.0/python.sh', 'PYTHON_BASIC_REPL': '1', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'GZ_SIM_RESOURCE_PATH': '/opt/ros/rolling/share', 'USER': 'jonas', 'GZ_CONFIG_PATH': '/opt/ros/rolling/opt/gz_sim_vendor/share/gz:/opt/ros/rolling/opt/gz_gui_vendor/share/gz:/opt/ros/rolling/opt/gz_transport_vendor/share/gz:/opt/ros/rolling/opt/sdformat_vendor/share/gz:/opt/ros/rolling/opt/gz_rendering_vendor/share/gz:/opt/ros/rolling/opt/gz_plugin_vendor/share/gz:/opt/ros/rolling/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/rolling/opt/gz_msgs_vendor/share/gz:/opt/ros/rolling/opt/gz_common_vendor/share/gz', 'XDG_SESSION_TYPE': 'x11', 'GIT_ASKPASS': '/usr/share/code/resources/app/extensions/git/dist/askpass.sh', 'ISAACSIM_PATH': '/home/jonas/.local/share/ov/pkg/isaac-sim-4.2.0', 'CLUTTER_DISABLE_MIPMAPPED_TEXT': '1', 'SHLVL': '1', 'LD_LIBRARY_PATH': 'HOME/.mujoco/mujoco210/bin:/home/jonas/Documents/Kamaro/Quadruped-PyMPC-Luna/quadruped_pympc/acados/lib', 'ACADOS_SOURCE_DIR': '/home/jonas/Documents/Kamaro/Quadruped-PyMPC-Luna/quadruped_pympc/acados', 'HOME': '/home/jonas', 'CHROME_DESKTOP': 'code.desktop', 'TERM_PROGRAM_VERSION': '1.105.1', 'DESKTOP_SESSION': 'ubuntu', 'GIO_LAUNCHED_DESKTOP_FILE': '/usr/share/applications/code.desktop', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'VSCODE_GIT_ASKPASS_MAIN': '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js', 'VSCODE_GIT_ASKPASS_NODE': '/usr/share/code/code', 'MANAGERPID': '783195', 'PYDEVD_DISABLE_FILE_VALIDATION': '1', 'SYSTEMD_EXEC_PID': '783645', 'BUNDLED_DEBUGPY_PATH': '/home/jonas/.vscode/extensions/ms-python.debugpy-2025.14.1-linux-x64/bundled/libs/debugpy', 'VSCODE_PYTHON_AUTOACTIVATE_GUARD': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '788399', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'ROS_DISTRO': 'rolling', 'LOGNAME': 'jonas', 'JOURNAL_STREAM': '9:4285037', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@x11.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'jonas', 'TERM': 'xterm-256color', 'COPPELIASIM_ROOT_DIR': '/home/jonas/Programs/CoppeliaSim', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'WINDOWPATH': '2', 'PATH': '/home/jonas/miniconda3/bin:/home/jonas/.local/bin:/opt/ros/rolling/opt/gz_msgs_vendor/bin:/opt/ros/rolling/opt/gz_tools_vendor/bin:/opt/ros/rolling/opt/gz_ogre_next_vendor/bin:/opt/ros/rolling/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/jonas/.vscode/extensions/ms-python.debugpy-2025.14.1-linux-x64/bundled/scripts/noConfigScripts:/home/jonas/.config/Code/User/globalStorage/github.copilot-chat/debugCommand:/home/jonas/.local/bin', 'SESSION_MANAGER': 'local/jonas-MS-7B86:@/tmp/.ICE-unix/783611,unix/jonas-MS-7B86:/tmp/.ICE-unix/783611', 'INVOCATION_ID': 'f7402b6b975d4b7494dc5e8383796c3f', 'XDG_MENU_PREFIX': 'gnome-', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'x11', 'DISPLAY': ':1', 'VSCODE_DEBUGPY_ADAPTER_ENDPOINTS': '/home/jonas/.vscode/extensions/ms-python.debugpy-2025.14.1-linux-x64/.noConfigDebugAdapterEndpoints/endpoint-362bcc0598cc4ffd.txt', 'LD_PRELOAD': ':/usr/lib/x86_64-linux-gnu/libGLEW.so:/usr/lib/x86_64-linux-gnu/libGLEW.so', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'Unity', 'PYTHONSTARTUP': '/home/jonas/.config/Code/User/workspaceStorage/49463d16e51cac3ae658ad28c550dff5/ms-python.python/pythonrc.py', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/gdm/Xauthority', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'VSCODE_GIT_IPC_HANDLE': '/run/user/1000/vscode-git-df17cfa46a.sock', 'TERM_PROGRAM': 'vscode', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/opt/ros/rolling', 'ORIGINAL_XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'GPG_AGENT_INFO': '/run/user/1000/gnupg/S.gpg-agent:0:1', 'GJS_DEBUG_OUTPUT': 'stderr', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/home/jonas/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/rolling/opt/gz_sim_vendor/lib/python:/opt/ros/rolling/opt/gz_transport_vendor/lib/python:/opt/ros/rolling/opt/gz_msgs_vendor/lib/python:/opt/ros/rolling/opt/gz_math_vendor/lib/python:/opt/ros/rolling/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'CMAKE_PREFIX_PATH': '/opt/ros/rolling/opt/gz_sim_vendor:/opt/ros/rolling/opt/gz_sensors_vendor:/opt/ros/rolling/opt/gz_gui_vendor:/opt/ros/rolling/opt/gz_transport_vendor:/opt/ros/rolling/opt/gz_physics_vendor:/opt/ros/rolling/opt/sdformat_vendor:/opt/ros/rolling/opt/gz_rendering_vendor:/opt/ros/rolling/opt/gz_plugin_vendor:/opt/ros/rolling/opt/gz_fuel_tools_vendor:/opt/ros/rolling/opt/gz_msgs_vendor:/opt/ros/rolling/opt/gz_common_vendor:/opt/ros/rolling/opt/gz_math_vendor:/opt/ros/rolling/opt/gz_utils_vendor:/opt/ros/rolling/opt/gz_tools_vendor:/opt/ros/rolling/opt/gz_ogre_next_vendor:/opt/ros/rolling/opt/gz_dartsim_vendor:/opt/ros/rolling/opt/gz_cmake_vendor'}), 'shell': False}
+[0.572966] (state_estimator_msgs) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[0.573236] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/ament_index/resource_index/rosidl_interfaces/state_estimator_msgs\n'}
+[0.573338] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/Attitude.json\n'}
+[0.573512] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/ContactDetection.json\n'}
+[0.573631] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/JointStateWithAcceleration.json\n'}
+[0.573795] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/LegOdometry.json\n'}
+[0.573902] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/SensorFusion.json\n'}
+[0.574004] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs\n'}
+[0.574102] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg\n'}
+[0.574298] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/attitude.h\n'}
+[0.574382] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/joint_state_with_acceleration.h\n'}
+[0.574458] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/contact_detection.h\n'}
+[0.574542] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail\n'}
+[0.574606] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__functions.c\n'}
+[0.574665] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__struct.h\n'}
+[0.574941] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__struct.h\n'}
+[0.575019] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__functions.c\n'}
+[0.575083] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__type_support.h\n'}
+[0.575145] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__functions.c\n'}
+[0.575259] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__functions.h\n'}
+[0.575318] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__functions.c\n'}
+[0.575375] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__type_support.h\n'}
+[0.575435] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__type_support.c\n'}
+[0.575515] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__type_support.c\n'}
+[0.575583] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__functions.h\n'}
+[0.575662] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__functions.h\n'}
+[0.575736] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__type_support.h\n'}
+[0.575839] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__description.c\n'}
+[0.575919] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__struct.h\n'}
+[0.576000] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__description.c\n'}
+[0.576080] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__functions.c\n'}
+[0.576150] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__type_support.c\n'}
+[0.576207] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__functions.h\n'}
+[0.576269] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__type_support.c\n'}
+[0.576329] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__functions.h\n'}
+[0.576434] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__type_support.h\n'}
+[0.576564] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__description.c\n'}
+[0.576629] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__struct.h\n'}
+[0.576691] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__description.c\n'}
+[0.576814] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__struct.h\n'}
+[0.576878] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__description.c\n'}
+[0.576940] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__type_support.h\n'}
+[0.577046] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__type_support.c\n'}
+[0.577123] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/rosidl_generator_c__visibility_control.h\n'}
+[0.577180] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/sensor_fusion.h\n'}
+[0.577243] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/leg_odometry.h\n'}
+[0.577300] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/environment/library_path.sh\n'}
+[0.577361] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/environment/library_path.dsv\n'}
+[0.577423] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_generator_c.so\n'}
+[0.577490] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs\n'}
+[0.577553] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg\n'}
+[0.577709] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/rosidl_typesupport_fastrtps_c__visibility_control.h\n'}
+[0.577792] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail\n'}
+[0.577867] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__rosidl_typesupport_fastrtps_c.h\n'}
+[0.577943] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__rosidl_typesupport_fastrtps_c.h\n'}
+[0.578029] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__rosidl_typesupport_fastrtps_c.h\n'}
+[0.578100] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__rosidl_typesupport_fastrtps_c.h\n'}
+[0.578175] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__rosidl_typesupport_fastrtps_c.h\n'}
+[0.578291] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_typesupport_fastrtps_c.so\n'}
+[0.578377] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs\n'}
+[0.578458] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg\n'}
+[0.578777] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/rosidl_typesupport_introspection_c__visibility_control.h\n'}
+[0.578867] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail\n'}
+[0.578935] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__rosidl_typesupport_introspection_c.h\n'}
+[0.578996] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__rosidl_typesupport_introspection_c.h\n'}
+[0.579063] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__type_support.c\n'}
+[0.579125] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__rosidl_typesupport_introspection_c.h\n'}
+[0.579304] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__type_support.c\n'}
+[0.579388] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__rosidl_typesupport_introspection_c.h\n'}
+[0.579484] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__type_support.c\n'}
+[0.579548] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__type_support.c\n'}
+[0.579608] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__type_support.c\n'}
+[0.579668] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__rosidl_typesupport_introspection_c.h\n'}
+[0.579741] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_typesupport_introspection_c.so\n'}
+[0.579804] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_typesupport_c.so\n'}
+[0.579866] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs\n'}
+[0.579950] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg\n'}
+[0.580030] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/attitude.hpp\n'}
+[0.580090] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/leg_odometry.hpp\n'}
+[0.580150] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/sensor_fusion.hpp\n'}
+[0.580214] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/rosidl_generator_cpp__visibility_control.hpp\n'}
+[0.580303] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail\n'}
+[0.580373] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__traits.hpp\n'}
+[0.580438] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__traits.hpp\n'}
+[0.580503] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__builder.hpp\n'}
+[0.580566] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__struct.hpp\n'}
+[0.580698] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__builder.hpp\n'}
+[0.580800] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__struct.hpp\n'}
+[0.580866] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__struct.hpp\n'}
+[0.580926] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__type_support.hpp\n'}
+[0.580994] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__type_support.hpp\n'}
+[0.581072] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__builder.hpp\n'}
+[0.581130] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__type_support.hpp\n'}
+[0.581216] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__traits.hpp\n'}
+[0.581279] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__builder.hpp\n'}
+[0.581340] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__struct.hpp\n'}
+[0.581404] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__traits.hpp\n'}
+[0.581477] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__traits.hpp\n'}
+[0.581612] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__type_support.hpp\n'}
+[0.581679] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__struct.hpp\n'}
+[0.581750] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__type_support.hpp\n'}
+[0.581811] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__builder.hpp\n'}
+[0.581871] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/contact_detection.hpp\n'}
+[0.581930] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/joint_state_with_acceleration.hpp\n'}
+[0.582103] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs\n'}
+[0.582200] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg\n'}
+[0.582261] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h\n'}
+[0.582320] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail\n'}
+[0.582379] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[0.582446] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[0.582522] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[0.582584] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[0.582645] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[0.582705] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/dds_fastrtps\n'}
+[0.582811] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_typesupport_fastrtps_cpp.so\n'}
+[0.582886] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs\n'}
+[0.582948] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg\n'}
+[0.583005] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail\n'}
+[0.583061] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__type_support.cpp\n'}
+[0.583119] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__rosidl_typesupport_introspection_cpp.hpp\n'}
+[0.583177] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__type_support.cpp\n'}
+[0.583268] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__rosidl_typesupport_introspection_cpp.hpp\n'}
+[0.583366] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__type_support.cpp\n'}
+[0.583440] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__type_support.cpp\n'}
+[0.583515] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__rosidl_typesupport_introspection_cpp.hpp\n'}
+[0.583577] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__rosidl_typesupport_introspection_cpp.hpp\n'}
+[0.583638] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__rosidl_typesupport_introspection_cpp.hpp\n'}
+[0.583694] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__type_support.cpp\n'}
+[0.583830] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_typesupport_introspection_cpp.so\n'}
+[0.583916] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_typesupport_cpp.so\n'}
+[0.583993] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/environment/pythonpath.sh\n'}
+[0.584069] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/environment/pythonpath.dsv\n'}
+[0.584144] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs-0.0.1-py3.12.egg-info\n'}
+[0.584203] (state_estimator_msgs) StdoutLine: {'line': b'-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs-0.0.1-py3.12.egg-info/dependency_links.txt\n'}
+[0.584259] (state_estimator_msgs) StdoutLine: {'line': b'-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs-0.0.1-py3.12.egg-info/PKG-INFO\n'}
+[0.584325] (state_estimator_msgs) StdoutLine: {'line': b'-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs-0.0.1-py3.12.egg-info/SOURCES.txt\n'}
+[0.584408] (state_estimator_msgs) StdoutLine: {'line': b'-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs-0.0.1-py3.12.egg-info/top_level.txt\n'}
+[0.584475] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs\n'}
+[0.584532] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_introspection_c.so\n'}
+[0.584603] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/py.typed\n'}
+[0.584660] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/_state_estimator_msgs_s.ep.rosidl_typesupport_c.c\n'}
+[0.584716] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_c.so\n'}
+[0.584790] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_fastrtps_c.so\n'}
+[0.584849] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg\n'}
+[0.584904] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_contact_detection_s.c\n'}
+[0.584960] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_leg_odometry.py\n'}
+[0.585021] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_sensor_fusion.py\n'}
+[0.585076] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_joint_state_with_acceleration.py\n'}
+[0.585132] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_sensor_fusion_s.c\n'}
+[0.585188] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_contact_detection.py\n'}
+[0.585248] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_attitude.py\n'}
+[0.585304] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_leg_odometry_s.c\n'}
+[0.585359] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/__init__.py\n'}
+[0.585415] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_attitude_s.c\n'}
+[0.585470] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_joint_state_with_acceleration_s.c\n'}
+[0.585526] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/__init__.py\n'}
+[0.585582] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/_state_estimator_msgs_s.ep.rosidl_typesupport_introspection_c.c\n'}
+[0.585639] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/_state_estimator_msgs_s.ep.rosidl_typesupport_fastrtps_c.c\n'}
+[0.601233] (-) TimerEvent: {}
+[0.620636] (state_estimator_msgs) StdoutLine: {'line': b"Listing '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs'...\n"}
+[0.620825] (state_estimator_msgs) StdoutLine: {'line': b"Listing '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg'...\n"}
+[0.629100] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_fastrtps_c.so\n'}
+[0.629679] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_introspection_c.so\n'}
+[0.629837] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_c.so\n'}
+[0.630175] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_generator_py.so\n'}
+[0.630503] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/ament_index/resource_index/rust_packages/state_estimator_msgs\n'}
+[0.630590] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/rust\n'}
+[0.630733] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/rust/src\n'}
+[0.630833] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/rust/src/msg.rs\n'}
+[0.630896] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/rust/src/lib.rs\n'}
+[0.630954] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/rust/Cargo.toml\n'}
+[0.631040] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/rust/build.rs\n'}
+[0.631107] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/Attitude.idl\n'}
+[0.631191] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/ContactDetection.idl\n'}
+[0.631307] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/JointStateWithAcceleration.idl\n'}
+[0.631381] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/LegOdometry.idl\n'}
+[0.631440] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/SensorFusion.idl\n'}
+[0.631572] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/Attitude.msg\n'}
+[0.631658] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/ContactDetection.msg\n'}
+[0.631805] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/JointStateWithAcceleration.msg\n'}
+[0.631888] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/LegOdometry.msg\n'}
+[0.631997] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/SensorFusion.msg\n'}
+[0.632090] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/ament_index/resource_index/package_run_dependencies/state_estimator_msgs\n'}
+[0.632157] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/ament_index/resource_index/parent_prefix_path/state_estimator_msgs\n'}
+[0.632222] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/environment/ament_prefix_path.sh\n'}
+[0.632334] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/environment/ament_prefix_path.dsv\n'}
+[0.632395] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/environment/path.sh\n'}
+[0.632468] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/environment/path.dsv\n'}
+[0.632542] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/local_setup.bash\n'}
+[0.632617] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/local_setup.sh\n'}
+[0.632691] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/local_setup.zsh\n'}
+[0.632779] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/local_setup.dsv\n'}
+[0.632858] (state_estimator_msgs) StdoutLine: {'line': b'-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/package.dsv\n'}
+[0.632936] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/ament_index/resource_index/packages/state_estimator_msgs\n'}
+[0.633000] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/export_state_estimator_msgs__rosidl_generator_cExport.cmake\n'}
+[0.633137] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/export_state_estimator_msgs__rosidl_generator_cExport-noconfig.cmake\n'}
+[0.633243] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/export_state_estimator_msgs__rosidl_typesupport_fastrtps_cExport.cmake\n'}
+[0.633336] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/export_state_estimator_msgs__rosidl_typesupport_fastrtps_cExport-noconfig.cmake\n'}
+[0.633432] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgs__rosidl_typesupport_introspection_cExport.cmake\n'}
+[0.633538] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgs__rosidl_typesupport_introspection_cExport-noconfig.cmake\n'}
+[0.633627] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgs__rosidl_typesupport_cExport.cmake\n'}
+[0.633751] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgs__rosidl_typesupport_cExport-noconfig.cmake\n'}
+[0.633878] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/export_state_estimator_msgs__rosidl_generator_cppExport.cmake\n'}
+[0.633954] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/export_state_estimator_msgs__rosidl_typesupport_fastrtps_cppExport.cmake\n'}
+[0.634014] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/export_state_estimator_msgs__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake\n'}
+[0.634072] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgs__rosidl_typesupport_introspection_cppExport.cmake\n'}
+[0.634129] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgs__rosidl_typesupport_introspection_cppExport-noconfig.cmake\n'}
+[0.634186] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgs__rosidl_typesupport_cppExport.cmake\n'}
+[0.634243] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgs__rosidl_typesupport_cppExport-noconfig.cmake\n'}
+[0.634300] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/export_state_estimator_msgs__rosidl_generator_pyExport.cmake\n'}
+[0.634355] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/export_state_estimator_msgs__rosidl_generator_pyExport-noconfig.cmake\n'}
+[0.634411] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/rosidl_cmake-extras.cmake\n'}
+[0.634477] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[0.634534] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[0.634590] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[0.634646] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[0.634707] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake\n'}
+[0.634784] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake\n'}
+[0.634851] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgsConfig.cmake\n'}
+[0.634907] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgsConfig-version.cmake\n'}
+[0.634973] (state_estimator_msgs) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/package.xml\n'}
+[0.637799] (state_estimator_msgs) CommandEnded: {'returncode': 0}
+[0.650981] (state_estimator_msgs) JobEnded: {'identifier': 'state_estimator_msgs', 'rc': 0}
+[0.651964] (state_estimator) JobStarted: {'identifier': 'state_estimator'}
+[0.667915] (state_estimator) JobProgress: {'identifier': 'state_estimator', 'progress': 'cmake'}
+[0.668464] (state_estimator) JobProgress: {'identifier': 'state_estimator', 'progress': 'build'}
+[0.668692] (state_estimator) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator', '--', '-j12', '-l12'], 'cwd': '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator', 'env': OrderedDict({'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'ISAACSIM_PYTHON_EXE': '/home/jonas/.local/share/ov/pkg/isaac-sim-4.2.0/python.sh', 'PYTHON_BASIC_REPL': '1', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'GZ_SIM_RESOURCE_PATH': '/opt/ros/rolling/share', 'USER': 'jonas', 'GZ_CONFIG_PATH': '/opt/ros/rolling/opt/gz_sim_vendor/share/gz:/opt/ros/rolling/opt/gz_gui_vendor/share/gz:/opt/ros/rolling/opt/gz_transport_vendor/share/gz:/opt/ros/rolling/opt/sdformat_vendor/share/gz:/opt/ros/rolling/opt/gz_rendering_vendor/share/gz:/opt/ros/rolling/opt/gz_plugin_vendor/share/gz:/opt/ros/rolling/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/rolling/opt/gz_msgs_vendor/share/gz:/opt/ros/rolling/opt/gz_common_vendor/share/gz', 'XDG_SESSION_TYPE': 'x11', 'GIT_ASKPASS': '/usr/share/code/resources/app/extensions/git/dist/askpass.sh', 'ROS_PACKAGE_PATH': '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share', 'ISAACSIM_PATH': '/home/jonas/.local/share/ov/pkg/isaac-sim-4.2.0', 'CLUTTER_DISABLE_MIPMAPPED_TEXT': '1', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib:HOME/.mujoco/mujoco210/bin:/home/jonas/Documents/Kamaro/Quadruped-PyMPC-Luna/quadruped_pympc/acados/lib', 'ACADOS_SOURCE_DIR': '/home/jonas/Documents/Kamaro/Quadruped-PyMPC-Luna/quadruped_pympc/acados', 'HOME': '/home/jonas', 'CHROME_DESKTOP': 'code.desktop', 'TERM_PROGRAM_VERSION': '1.105.1', 'DESKTOP_SESSION': 'ubuntu', 'GIO_LAUNCHED_DESKTOP_FILE': '/usr/share/applications/code.desktop', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'VSCODE_GIT_ASKPASS_MAIN': '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js', 'VSCODE_GIT_ASKPASS_NODE': '/usr/share/code/code', 'MANAGERPID': '783195', 'PYDEVD_DISABLE_FILE_VALIDATION': '1', 'SYSTEMD_EXEC_PID': '783645', 'BUNDLED_DEBUGPY_PATH': '/home/jonas/.vscode/extensions/ms-python.debugpy-2025.14.1-linux-x64/bundled/libs/debugpy', 'VSCODE_PYTHON_AUTOACTIVATE_GUARD': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '788399', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'ROS_DISTRO': 'rolling', 'LOGNAME': 'jonas', 'JOURNAL_STREAM': '9:4285037', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@x11.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'PKG_CONFIG_PATH': '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/pkgconfig', 'USERNAME': 'jonas', 'TERM': 'xterm-256color', 'COPPELIASIM_ROOT_DIR': '/home/jonas/Programs/CoppeliaSim', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'WINDOWPATH': '2', 'PATH': '/home/jonas/miniconda3/bin:/home/jonas/.local/bin:/opt/ros/rolling/opt/gz_msgs_vendor/bin:/opt/ros/rolling/opt/gz_tools_vendor/bin:/opt/ros/rolling/opt/gz_ogre_next_vendor/bin:/opt/ros/rolling/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/jonas/.vscode/extensions/ms-python.debugpy-2025.14.1-linux-x64/bundled/scripts/noConfigScripts:/home/jonas/.config/Code/User/globalStorage/github.copilot-chat/debugCommand:/home/jonas/.local/bin', 'SESSION_MANAGER': 'local/jonas-MS-7B86:@/tmp/.ICE-unix/783611,unix/jonas-MS-7B86:/tmp/.ICE-unix/783611', 'INVOCATION_ID': 'f7402b6b975d4b7494dc5e8383796c3f', 'XDG_MENU_PREFIX': 'gnome-', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'x11', 'DISPLAY': ':1', 'VSCODE_DEBUGPY_ADAPTER_ENDPOINTS': '/home/jonas/.vscode/extensions/ms-python.debugpy-2025.14.1-linux-x64/.noConfigDebugAdapterEndpoints/endpoint-362bcc0598cc4ffd.txt', 'LD_PRELOAD': ':/usr/lib/x86_64-linux-gnu/libGLEW.so:/usr/lib/x86_64-linux-gnu/libGLEW.so', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'Unity', 'PYTHONSTARTUP': '/home/jonas/.config/Code/User/workspaceStorage/49463d16e51cac3ae658ad28c550dff5/ms-python.python/pythonrc.py', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/gdm/Xauthority', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'VSCODE_GIT_IPC_HANDLE': '/run/user/1000/vscode-git-df17cfa46a.sock', 'TERM_PROGRAM': 'vscode', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/opt/ros/rolling', 'ORIGINAL_XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'GPG_AGENT_INFO': '/run/user/1000/gnupg/S.gpg-agent:0:1', 'GJS_DEBUG_OUTPUT': 'stderr', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/home/jonas/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages:/opt/ros/rolling/opt/gz_sim_vendor/lib/python:/opt/ros/rolling/opt/gz_transport_vendor/lib/python:/opt/ros/rolling/opt/gz_msgs_vendor/lib/python:/opt/ros/rolling/opt/gz_math_vendor/lib/python:/opt/ros/rolling/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'CMAKE_PREFIX_PATH': '/opt/ros/rolling:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons:/opt/ros/rolling/opt/gz_sim_vendor:/opt/ros/rolling/opt/gz_sensors_vendor:/opt/ros/rolling/opt/gz_gui_vendor:/opt/ros/rolling/opt/gz_transport_vendor:/opt/ros/rolling/opt/gz_physics_vendor:/opt/ros/rolling/opt/sdformat_vendor:/opt/ros/rolling/opt/gz_rendering_vendor:/opt/ros/rolling/opt/gz_plugin_vendor:/opt/ros/rolling/opt/gz_fuel_tools_vendor:/opt/ros/rolling/opt/gz_msgs_vendor:/opt/ros/rolling/opt/gz_common_vendor:/opt/ros/rolling/opt/gz_math_vendor:/opt/ros/rolling/opt/gz_utils_vendor:/opt/ros/rolling/opt/gz_tools_vendor:/opt/ros/rolling/opt/gz_ogre_next_vendor:/opt/ros/rolling/opt/gz_dartsim_vendor:/opt/ros/rolling/opt/gz_cmake_vendor'}), 'shell': False}
+[0.701344] (-) TimerEvent: {}
+[0.780691] (state_estimator) StdoutLine: {'line': b'[ 22%] Built target state_estimator_node\n'}
+[0.801459] (-) TimerEvent: {}
+[0.817020] (state_estimator) StdoutLine: {'line': b'[ 33%] \x1b[32mBuilding CXX object CMakeFiles/state_estimator_plugins.dir/src/plugins/sensor_fusion_plugin.cpp.o\x1b[0m\n'}
+[0.901560] (-) TimerEvent: {}
+[1.001852] (-) TimerEvent: {}
+[1.102138] (-) TimerEvent: {}
+[1.202661] (-) TimerEvent: {}
+[1.303007] (-) TimerEvent: {}
+[1.403337] (-) TimerEvent: {}
+[1.503674] (-) TimerEvent: {}
+[1.604083] (-) TimerEvent: {}
+[1.706815] (-) TimerEvent: {}
+[1.807212] (-) TimerEvent: {}
+[1.907500] (-) TimerEvent: {}
+[2.007812] (-) TimerEvent: {}
+[2.108179] (-) TimerEvent: {}
+[2.208465] (-) TimerEvent: {}
+[2.308792] (-) TimerEvent: {}
+[2.409117] (-) TimerEvent: {}
+[2.509457] (-) TimerEvent: {}
+[2.609868] (-) TimerEvent: {}
+[2.710214] (-) TimerEvent: {}
+[2.810508] (-) TimerEvent: {}
+[2.910788] (-) TimerEvent: {}
+[3.011050] (-) TimerEvent: {}
+[3.111297] (-) TimerEvent: {}
+[3.211555] (-) TimerEvent: {}
+[3.311897] (-) TimerEvent: {}
+[3.412217] (-) TimerEvent: {}
+[3.512525] (-) TimerEvent: {}
+[3.612771] (-) TimerEvent: {}
+[3.713056] (-) TimerEvent: {}
+[3.813394] (-) TimerEvent: {}
+[3.908270] (state_estimator) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Estimator.hpp:4\x1b[m\x1b[K,\n'}
+[3.908611] (state_estimator) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/Observer.hpp:7\x1b[m\x1b[K,\n'}
+[3.908760] (state_estimator) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:6\x1b[m\x1b[K,\n'}
+[3.908907] (state_estimator) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:4\x1b[m\x1b[K,\n'}
+[3.909073] (state_estimator) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:1\x1b[m\x1b[K:\n'}
+[3.909215] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:\x1b[m\x1b[K In function \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<double, 3, 3> state_estimator::\x1b[01;32m\x1b[Kcalc_Rzyx\x1b[m\x1b[K(const Eigen::Matrix<double, 3, 1>&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[3.909331] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:41:43:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kvariable \xe2\x80\x98\x1b[01m\x1b[Ku1\x1b[m\x1b[K\xe2\x80\x99 set but not used [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable\x07-Wunused-but-set-variable\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[3.909469] (state_estimator) StderrLine: {'line': b'   41 |                 Eigen::Matrix<double,3,1> \x1b[01;35m\x1b[Ku1\x1b[m\x1b[K = R.block(0,0,3,1);\n'}
+[3.909582] (state_estimator) StderrLine: {'line': b'      |                                           \x1b[01;35m\x1b[K^~\x1b[m\x1b[K\n'}
+[3.909691] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:42:43:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kvariable \xe2\x80\x98\x1b[01m\x1b[Ku2\x1b[m\x1b[K\xe2\x80\x99 set but not used [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable\x07-Wunused-but-set-variable\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[3.909823] (state_estimator) StderrLine: {'line': b'   42 |                 Eigen::Matrix<double,3,1> \x1b[01;35m\x1b[Ku2\x1b[m\x1b[K = R.block(0,1,3,1);\n'}
+[3.909957] (state_estimator) StderrLine: {'line': b'      |                                           \x1b[01;35m\x1b[K^~\x1b[m\x1b[K\n'}
+[3.910077] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:43:43:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kvariable \xe2\x80\x98\x1b[01m\x1b[Ku3\x1b[m\x1b[K\xe2\x80\x99 set but not used [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable\x07-Wunused-but-set-variable\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[3.910194] (state_estimator) StderrLine: {'line': b'   43 |                 Eigen::Matrix<double,3,1> \x1b[01;35m\x1b[Ku3\x1b[m\x1b[K = R.block(0,2,3,1);\n'}
+[3.910312] (state_estimator) StderrLine: {'line': b'      |                                           \x1b[01;35m\x1b[K^~\x1b[m\x1b[K\n'}
+[3.913479] (-) TimerEvent: {}
+[4.013783] (-) TimerEvent: {}
+[4.058105] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:\x1b[m\x1b[K In function \xe2\x80\x98\x1b[01m\x1b[Kstd::string state_estimator::\x1b[01;32m\x1b[Kns2str\x1b[m\x1b[K(uint64_t)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[4.058305] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:150:26:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused variable \xe2\x80\x98\x1b[01m\x1b[Kns\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable\x07-Wunused-variable\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[4.058380] (state_estimator) StderrLine: {'line': b'  150 |                 uint64_t \x1b[01;35m\x1b[Kns\x1b[m\x1b[K =  t-y*31536000000000000-d*86400000000000-h*3600000000000-m*60000000000-s*1000000000-ms*1000000-us*1000;\n'}
+[4.058449] (state_estimator) StderrLine: {'line': b'      |                          \x1b[01;35m\x1b[K^~\x1b[m\x1b[K\n'}
+[4.058510] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:156:26:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused variable \xe2\x80\x98\x1b[01m\x1b[Kx\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable\x07-Wunused-variable\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[4.058571] (state_estimator) StderrLine: {'line': b'  156 |                 uint64_t \x1b[01;35m\x1b[Kx\x1b[m\x1b[K = 1;\n'}
+[4.058632] (state_estimator) StderrLine: {'line': b'      |                          \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[4.068228] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Estimator.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual void state_estimator::EstimatorBase::\x1b[01;32m\x1b[KupdateGen\x1b[m\x1b[K(double, Eigen::MatrixXd&, Eigen::MatrixXd&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[4.068445] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Estimator.hpp:39:31:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kt\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[4.068590] (state_estimator) StderrLine: {'line': b'   39 | virtual void updateGen(\x1b[01;35m\x1b[Kdouble t\x1b[m\x1b[K, Eigen::MatrixXd &u, Eigen::MatrixXd &z) { }\n'}
+[4.068698] (state_estimator) StderrLine: {'line': b'      |                        \x1b[01;35m\x1b[K~~~~~~~^\x1b[m\x1b[K\n'}
+[4.068823] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Estimator.hpp:39:51:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Ku\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[4.068975] (state_estimator) StderrLine: {'line': b'   39 | virtual void updateGen(double t, \x1b[01;35m\x1b[KEigen::MatrixXd &u\x1b[m\x1b[K, Eigen::MatrixXd &z) { }\n'}
+[4.069110] (state_estimator) StderrLine: {'line': b'      |                                  \x1b[01;35m\x1b[K~~~~~~~~~~~~~~~~~^\x1b[m\x1b[K\n'}
+[4.069274] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Estimator.hpp:39:71:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kz\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[4.069459] (state_estimator) StderrLine: {'line': b'   39 | virtual void updateGen(double t, Eigen::MatrixXd &u, \x1b[01;35m\x1b[KEigen::MatrixXd &z\x1b[m\x1b[K) { }\n'}
+[4.069636] (state_estimator) StderrLine: {'line': b'      |                                                      \x1b[01;35m\x1b[K~~~~~~~~~~~~~~~~~^\x1b[m\x1b[K\n'}
+[4.113863] (-) TimerEvent: {}
+[4.203043] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:\x1b[m\x1b[K In constructor \xe2\x80\x98\x1b[01m\x1b[Kstate_estimator::KFSensorFusion::\x1b[01;32m\x1b[KKFSensorFusion\x1b[m\x1b[K(double, const Eigen::Matrix<double, 6, 1>&, const Eigen::Matrix<double, 6, 6>&, const Eigen::Matrix<double, 6, 6>&, const Eigen::Matrix<double, 3, 3>&, bool, bool)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[4.203334] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:52:84:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Klidar\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[4.203442] (state_estimator) StderrLine: {'line': b'   52 |                                           const Eigen::Matrix<double,3,3> &R, \x1b[01;35m\x1b[Kbool lidar\x1b[m\x1b[K, bool slippage)\n'}
+[4.203524] (state_estimator) StderrLine: {'line': b'      |                                                                               \x1b[01;35m\x1b[K~~~~~^~~~~\x1b[m\x1b[K\n'}
+[4.203613] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:52:96:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kslippage\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[4.203717] (state_estimator) StderrLine: {'line': b'   52 |                                           const Eigen::Matrix<double,3,3> &R, bool lidar, \x1b[01;35m\x1b[Kbool slippage\x1b[m\x1b[K)\n'}
+[4.203923] (state_estimator) StderrLine: {'line': b'      |                                                                                           \x1b[01;35m\x1b[K~~~~~^~~~~~~~\x1b[m\x1b[K\n'}
+[4.213986] (-) TimerEvent: {}
+[4.314299] (-) TimerEvent: {}
+[4.414613] (-) TimerEvent: {}
+[4.514878] (-) TimerEvent: {}
+[4.615151] (-) TimerEvent: {}
+[4.715416] (-) TimerEvent: {}
+[4.815764] (-) TimerEvent: {}
+[4.818686] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual Eigen::Matrix<double, 6, 1> state_estimator::KFSensorFusion::\x1b[01;32m\x1b[Kcalc_f\x1b[m\x1b[K(double, const Eigen::Matrix<double, 6, 1>&, const Eigen::Matrix<double, 3, 1>&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[4.818970] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:109:68:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kt\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[4.819123] (state_estimator) StderrLine: {'line': b'  109 |     inline Eigen::Matrix<double,6,1> KFSensorFusion::calc_f(\x1b[01;35m\x1b[Kdouble t\x1b[m\x1b[K, const Eigen::Matrix<double,6,1> &x, const Eigen::Matrix<double,3,1> &u)\n'}
+[4.819264] (state_estimator) StderrLine: {'line': b'      |                                                             \x1b[01;35m\x1b[K~~~~~~~^\x1b[m\x1b[K\n'}
+[4.819490] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual Eigen::Matrix<double, 6, 6> state_estimator::KFSensorFusion::\x1b[01;32m\x1b[Kcalc_F\x1b[m\x1b[K(double, const Eigen::Matrix<double, 6, 1>&, const Eigen::Matrix<double, 3, 1>&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[4.820004] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:118:68:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kt\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[4.820367] (state_estimator) StderrLine: {'line': b'  118 |     inline Eigen::Matrix<double,6,6> KFSensorFusion::calc_F(\x1b[01;35m\x1b[Kdouble t\x1b[m\x1b[K, const Eigen::Matrix<double,6,1> &x, const Eigen::Matrix<double,3,1> &u)\n'}
+[4.820479] (state_estimator) StderrLine: {'line': b'      |                                                             \x1b[01;35m\x1b[K~~~~~~~^\x1b[m\x1b[K\n'}
+[4.820573] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:118:104:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kx\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[4.820672] (state_estimator) StderrLine: {'line': b'  118 |     inline Eigen::Matrix<double,6,6> KFSensorFusion::calc_F(double t, \x1b[01;35m\x1b[Kconst Eigen::Matrix<double,6,1> &x\x1b[m\x1b[K, const Eigen::Matrix<double,3,1> &u)\n'}
+[4.820777] (state_estimator) StderrLine: {'line': b'      |                                                                       \x1b[01;35m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\x1b[m\x1b[K\n'}
+[4.820867] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:118:140:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Ku\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[4.820963] (state_estimator) StderrLine: {'line': b'  118 |     inline Eigen::Matrix<double,6,6> KFSensorFusion::calc_F(double t, const Eigen::Matrix<double,6,1> &x, \x1b[01;35m\x1b[Kconst Eigen::Matrix<double,3,1> &u\x1b[m\x1b[K)\n'}
+[4.821058] (state_estimator) StderrLine: {'line': b'      |                                                                                                           \x1b[01;35m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\x1b[m\x1b[K\n'}
+[4.821147] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual Eigen::Matrix<double, 3, 1> state_estimator::KFSensorFusion::\x1b[01;32m\x1b[Kcalc_h\x1b[m\x1b[K(double, const Eigen::Matrix<double, 6, 1>&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[4.821246] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:130:68:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kt\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[4.821447] (state_estimator) StderrLine: {'line': b'  130 |     inline Eigen::Matrix<double,3,1> KFSensorFusion::calc_h(\x1b[01;35m\x1b[Kdouble t\x1b[m\x1b[K, const Eigen::Matrix<double,6,1> &x)\n'}
+[4.821677] (state_estimator) StderrLine: {'line': b'      |                                                             \x1b[01;35m\x1b[K~~~~~~~^\x1b[m\x1b[K\n'}
+[4.822524] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvirtual Eigen::Matrix<double, 3, 6, 0, 3, 6> state_estimator::KFSensorFusion::\x1b[01;32m\x1b[Kcalc_H\x1b[m\x1b[K(double, const Eigen::Matrix<double, 6, 1>&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[4.822639] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:136:68:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kt\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[4.822746] (state_estimator) StderrLine: {'line': b'  136 |     inline Eigen::Matrix<double,3,6> KFSensorFusion::calc_H(\x1b[01;35m\x1b[Kdouble t\x1b[m\x1b[K, const Eigen::Matrix<double,6,1> &x)\n'}
+[4.822829] (state_estimator) StderrLine: {'line': b'      |                                                             \x1b[01;35m\x1b[K~~~~~~~^\x1b[m\x1b[K\n'}
+[4.822912] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:136:104:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kx\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[4.823004] (state_estimator) StderrLine: {'line': b'  136 |     inline Eigen::Matrix<double,3,6> KFSensorFusion::calc_H(double t, \x1b[01;35m\x1b[Kconst Eigen::Matrix<double,6,1> &x\x1b[m\x1b[K)\n'}
+[4.823097] (state_estimator) StderrLine: {'line': b'      |                                                                       \x1b[01;35m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\x1b[m\x1b[K\n'}
+[4.823177] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvoid state_estimator::KFSensorFusion::\x1b[01;32m\x1b[KsetMatricesSF\x1b[m\x1b[K(bool)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[4.823261] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:146:52:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kslippage\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[4.823346] (state_estimator) StderrLine: {'line': b'  146 |     inline void KFSensorFusion::setMatricesSF(\x1b[01;35m\x1b[Kbool slippage\x1b[m\x1b[K)\n'}
+[4.823426] (state_estimator) StderrLine: {'line': b'      |                                               \x1b[01;35m\x1b[K~~~~~^~~~~~~~\x1b[m\x1b[K\n'}
+[4.915841] (-) TimerEvent: {}
+[5.016197] (-) TimerEvent: {}
+[5.116594] (-) TimerEvent: {}
+[5.160789] (state_estimator) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:5\x1b[m\x1b[K,\n'}
+[5.161036] (state_estimator) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:15\x1b[m\x1b[K:\n'}
+[5.161140] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/algebra.h:\x1b[m\x1b[K In function \xe2\x80\x98\x1b[01m\x1b[Kvoid iit::commons::\x1b[01;32m\x1b[KcomputeQR\x1b[m\x1b[K(const MatrixXR&, MatrixXR&, MatrixXR&, const double&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[5.161237] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/algebra.h:271:37:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Ktolerance\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[5.161327] (state_estimator) StderrLine: {'line': b'  271 |                       \x1b[01;35m\x1b[Kconst double& tolerance\x1b[m\x1b[K)\n'}
+[5.161429] (state_estimator) StderrLine: {'line': b'      |                       \x1b[01;35m\x1b[K~~~~~~~~~~~~~~^~~~~~~~~\x1b[m\x1b[K\n'}
+[5.180643] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:\x1b[m\x1b[K In function \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix3d iit::commons::\x1b[01;32m\x1b[KrpyToEar\x1b[m\x1b[K(const Eigen::Vector3d&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[5.180928] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:143:12:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused variable \xe2\x80\x98\x1b[01m\x1b[Kyaw\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable\x07-Wunused-variable\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[5.181073] (state_estimator) StderrLine: {'line': b'  143 |     double \x1b[01;35m\x1b[Kyaw\x1b[m\x1b[K = rpy(2);\n'}
+[5.181265] (state_estimator) StderrLine: {'line': b'      |            \x1b[01;35m\x1b[K^~~\x1b[m\x1b[K\n'}
+[5.181396] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:\x1b[m\x1b[K In function \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix3d iit::commons::\x1b[01;32m\x1b[KrpyToEarInv_dot\x1b[m\x1b[K(const Eigen::Vector3d&, const Eigen::Vector3d&)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[5.181524] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:163:12:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused variable \xe2\x80\x98\x1b[01m\x1b[Kroll\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable\x07-Wunused-variable\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[5.181650] (state_estimator) StderrLine: {'line': b'  163 |     double \x1b[01;35m\x1b[Kroll\x1b[m\x1b[K = rpy(0);\n'}
+[5.181788] (state_estimator) StderrLine: {'line': b'      |            \x1b[01;35m\x1b[K^~~~\x1b[m\x1b[K\n'}
+[5.181911] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:166:12:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused variable \xe2\x80\x98\x1b[01m\x1b[Krolld\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable\x07-Wunused-variable\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[5.182040] (state_estimator) StderrLine: {'line': b'  166 |     double \x1b[01;35m\x1b[Krolld\x1b[m\x1b[K = rpyd(0);\n'}
+[5.182162] (state_estimator) StderrLine: {'line': b'      |            \x1b[01;35m\x1b[K^~~~~\x1b[m\x1b[K\n'}
+[5.216743] (-) TimerEvent: {}
+[5.317061] (-) TimerEvent: {}
+[5.417502] (-) TimerEvent: {}
+[5.508752] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:\x1b[m\x1b[K At global scope:\n'}
+[5.509238] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:123:89:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Ksensor_msgs::msg::Imu_<std::allocator<void> >::ConstPtr\x1b[m\x1b[K\xe2\x80\x99 is deprecated [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations\x07-Wdeprecated-declarations\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[5.509530] (state_estimator) StderrLine: {'line': b'  123 |                         const state_estimator_msgs::msg::LegOdometry::ConstPtr &leg_odom\x1b[01;35m\x1b[K)\x1b[m\x1b[K\n'}
+[5.509775] (state_estimator) StderrLine: {'line': b'      |                                                                                         \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[5.509991] (state_estimator) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/opt/ros/rolling/include/sensor_msgs/sensor_msgs/msg/imu.hpp:7\x1b[m\x1b[K,\n'}
+[5.510229] (state_estimator) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:10\x1b[m\x1b[K:\n'}
+[5.510442] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/rolling/include/sensor_msgs/sensor_msgs/msg/detail/imu__struct.hpp:186:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kdeclared here\n'}
+[5.510675] (state_estimator) StderrLine: {'line': b'  186 |     \x1b[01;36m\x1b[KConstPtr\x1b[m\x1b[K;\n'}
+[5.510920] (state_estimator) StderrLine: {'line': b'      |     \x1b[01;36m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[5.511141] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:123:89:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kstate_estimator_msgs::msg::Attitude_<std::allocator<void> >::ConstPtr\x1b[m\x1b[K\xe2\x80\x99 is deprecated [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations\x07-Wdeprecated-declarations\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[5.511347] (state_estimator) StderrLine: {'line': b'  123 |                         const state_estimator_msgs::msg::LegOdometry::ConstPtr &leg_odom\x1b[01;35m\x1b[K)\x1b[m\x1b[K\n'}
+[5.511556] (state_estimator) StderrLine: {'line': b'      |                                                                                         \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[5.511786] (state_estimator) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/attitude.hpp:7\x1b[m\x1b[K,\n'}
+[5.512085] (state_estimator) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:12\x1b[m\x1b[K:\n'}
+[5.512291] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__struct.hpp:169:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kdeclared here\n'}
+[5.512493] (state_estimator) StderrLine: {'line': b'  169 |     \x1b[01;36m\x1b[KConstPtr\x1b[m\x1b[K;\n'}
+[5.512669] (state_estimator) StderrLine: {'line': b'      |     \x1b[01;36m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[5.512862] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:123:89:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kstate_estimator_msgs::msg::LegOdometry_<std::allocator<void> >::ConstPtr\x1b[m\x1b[K\xe2\x80\x99 is deprecated [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations\x07-Wdeprecated-declarations\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[5.513053] (state_estimator) StderrLine: {'line': b'  123 |                         const state_estimator_msgs::msg::LegOdometry::ConstPtr &leg_odom\x1b[01;35m\x1b[K)\x1b[m\x1b[K\n'}
+[5.513240] (state_estimator) StderrLine: {'line': b'      |                                                                                         \x1b[01;35m\x1b[K^\x1b[m\x1b[K\n'}
+[5.513433] (state_estimator) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/leg_odometry.hpp:7\x1b[m\x1b[K,\n'}
+[5.513532] (state_estimator) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:11\x1b[m\x1b[K:\n'}
+[5.513634] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__struct.hpp:172:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kdeclared here\n'}
+[5.513750] (state_estimator) StderrLine: {'line': b'  172 |     \x1b[01;36m\x1b[KConstPtr\x1b[m\x1b[K;\n'}
+[5.513845] (state_estimator) StderrLine: {'line': b'      |     \x1b[01;36m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[5.517577] (-) TimerEvent: {}
+[5.519776] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:\x1b[m\x1b[K In destructor \xe2\x80\x98\x1b[01m\x1b[Kvirtual state_estimator_plugins::SensorFusionPlugin::\x1b[01;32m\x1b[K~SensorFusionPlugin\x1b[m\x1b[K()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[5.520054] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:41:25:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kdeleting object of polymorphic class type \xe2\x80\x98\x1b[01m\x1b[Kstate_estimator::KFSensorFusion\x1b[m\x1b[K\xe2\x80\x99 which has non-virtual destructor might cause undefined behavior [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdelete-non-virtual-dtor\x07-Wdelete-non-virtual-dtor\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[5.520224] (state_estimator) StderrLine: {'line': b'   41 |                         \x1b[01;35m\x1b[Kdelete sensor_fusion_\x1b[m\x1b[K;\n'}
+[5.520355] (state_estimator) StderrLine: {'line': b'      |                         \x1b[01;35m\x1b[K^~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[5.617716] (-) TimerEvent: {}
+[5.718080] (-) TimerEvent: {}
+[5.818389] (-) TimerEvent: {}
+[5.918777] (-) TimerEvent: {}
+[6.019044] (-) TimerEvent: {}
+[6.119309] (-) TimerEvent: {}
+[6.219589] (-) TimerEvent: {}
+[6.319912] (-) TimerEvent: {}
+[6.420295] (-) TimerEvent: {}
+[6.520646] (-) TimerEvent: {}
+[6.621117] (-) TimerEvent: {}
+[6.721554] (-) TimerEvent: {}
+[6.822021] (-) TimerEvent: {}
+[6.922427] (-) TimerEvent: {}
+[7.023006] (-) TimerEvent: {}
+[7.123322] (-) TimerEvent: {}
+[7.223632] (-) TimerEvent: {}
+[7.323967] (-) TimerEvent: {}
+[7.424294] (-) TimerEvent: {}
+[7.524581] (-) TimerEvent: {}
+[7.624926] (-) TimerEvent: {}
+[7.725339] (-) TimerEvent: {}
+[7.825693] (-) TimerEvent: {}
+[7.926121] (-) TimerEvent: {}
+[8.026533] (-) TimerEvent: {}
+[8.126846] (-) TimerEvent: {}
+[8.227139] (-) TimerEvent: {}
+[8.327425] (-) TimerEvent: {}
+[8.427697] (-) TimerEvent: {}
+[8.528013] (-) TimerEvent: {}
+[8.628310] (-) TimerEvent: {}
+[8.728706] (-) TimerEvent: {}
+[8.829039] (-) TimerEvent: {}
+[8.929345] (-) TimerEvent: {}
+[9.029638] (-) TimerEvent: {}
+[9.129956] (-) TimerEvent: {}
+[9.230273] (-) TimerEvent: {}
+[9.330581] (-) TimerEvent: {}
+[9.430893] (-) TimerEvent: {}
+[9.531197] (-) TimerEvent: {}
+[9.631518] (-) TimerEvent: {}
+[9.731784] (-) TimerEvent: {}
+[9.832083] (-) TimerEvent: {}
+[9.932395] (-) TimerEvent: {}
+[10.032680] (-) TimerEvent: {}
+[10.132983] (-) TimerEvent: {}
+[10.233329] (-) TimerEvent: {}
+[10.333709] (-) TimerEvent: {}
+[10.434079] (-) TimerEvent: {}
+[10.534389] (-) TimerEvent: {}
+[10.634706] (-) TimerEvent: {}
+[10.735096] (-) TimerEvent: {}
+[10.835365] (-) TimerEvent: {}
+[10.935663] (-) TimerEvent: {}
+[11.036010] (-) TimerEvent: {}
+[11.136431] (-) TimerEvent: {}
+[11.236772] (-) TimerEvent: {}
+[11.337134] (-) TimerEvent: {}
+[11.437458] (-) TimerEvent: {}
+[11.537716] (-) TimerEvent: {}
+[11.638063] (-) TimerEvent: {}
+[11.738465] (-) TimerEvent: {}
+[11.838995] (-) TimerEvent: {}
+[11.939474] (-) TimerEvent: {}
+[12.039848] (-) TimerEvent: {}
+[12.140178] (-) TimerEvent: {}
+[12.240493] (-) TimerEvent: {}
+[12.340790] (-) TimerEvent: {}
+[12.441095] (-) TimerEvent: {}
+[12.541391] (-) TimerEvent: {}
+[12.641748] (-) TimerEvent: {}
+[12.742060] (-) TimerEvent: {}
+[12.842325] (-) TimerEvent: {}
+[12.942619] (-) TimerEvent: {}
+[13.042900] (-) TimerEvent: {}
+[13.143277] (-) TimerEvent: {}
+[13.243559] (-) TimerEvent: {}
+[13.343816] (-) TimerEvent: {}
+[13.444501] (-) TimerEvent: {}
+[13.544932] (-) TimerEvent: {}
+[13.645261] (-) TimerEvent: {}
+[13.745548] (-) TimerEvent: {}
+[13.845870] (-) TimerEvent: {}
+[13.946171] (-) TimerEvent: {}
+[14.046469] (-) TimerEvent: {}
+[14.146748] (-) TimerEvent: {}
+[14.247125] (-) TimerEvent: {}
+[14.347466] (-) TimerEvent: {}
+[14.447796] (-) TimerEvent: {}
+[14.548105] (-) TimerEvent: {}
+[14.648381] (-) TimerEvent: {}
+[14.748695] (-) TimerEvent: {}
+[14.848995] (-) TimerEvent: {}
+[14.949323] (-) TimerEvent: {}
+[15.049706] (-) TimerEvent: {}
+[15.150045] (-) TimerEvent: {}
+[15.250345] (-) TimerEvent: {}
+[15.350710] (-) TimerEvent: {}
+[15.451551] (-) TimerEvent: {}
+[15.551830] (-) TimerEvent: {}
+[15.652127] (-) TimerEvent: {}
+[15.752455] (-) TimerEvent: {}
+[15.852770] (-) TimerEvent: {}
+[15.953420] (-) TimerEvent: {}
+[16.053761] (-) TimerEvent: {}
+[16.154091] (-) TimerEvent: {}
+[16.254397] (-) TimerEvent: {}
+[16.354711] (-) TimerEvent: {}
+[16.455061] (-) TimerEvent: {}
+[16.555468] (-) TimerEvent: {}
+[16.655789] (-) TimerEvent: {}
+[16.756078] (-) TimerEvent: {}
+[16.856334] (-) TimerEvent: {}
+[16.956614] (-) TimerEvent: {}
+[17.056921] (-) TimerEvent: {}
+[17.157242] (-) TimerEvent: {}
+[17.257563] (-) TimerEvent: {}
+[17.357856] (-) TimerEvent: {}
+[17.458129] (-) TimerEvent: {}
+[17.558396] (-) TimerEvent: {}
+[17.658678] (-) TimerEvent: {}
+[17.758969] (-) TimerEvent: {}
+[17.859281] (-) TimerEvent: {}
+[17.959563] (-) TimerEvent: {}
+[18.059970] (-) TimerEvent: {}
+[18.160254] (-) TimerEvent: {}
+[18.260560] (-) TimerEvent: {}
+[18.360964] (-) TimerEvent: {}
+[18.461261] (-) TimerEvent: {}
+[18.561535] (-) TimerEvent: {}
+[18.661829] (-) TimerEvent: {}
+[18.762126] (-) TimerEvent: {}
+[18.862458] (-) TimerEvent: {}
+[18.962869] (-) TimerEvent: {}
+[19.063207] (-) TimerEvent: {}
+[19.163528] (-) TimerEvent: {}
+[19.263906] (-) TimerEvent: {}
+[19.364172] (-) TimerEvent: {}
+[19.464461] (-) TimerEvent: {}
+[19.564814] (-) TimerEvent: {}
+[19.665170] (-) TimerEvent: {}
+[19.686904] (state_estimator) StderrLine: {'line': b'/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp: In instantiation of \xe2\x80\x98\x1b[01m\x1b[Kvoid state_estimator::EKFBase<T, N1, N2, N3, N4, N5, N6, N7>::\x1b[01;32m\x1b[Kpredict\x1b[m\x1b[K(T, const Eigen::Matrix<T, N2, 1>&) \x1b[35m\x1b[K[with T = double; int N1 = 6; int N2 = 3; int N3 = 3; int N4 = 6; int N5 = 3; int N6 = 6; int N7 = 6]\x1b[m\x1b[K\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[19.687236] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:40:15:\x1b[m\x1b[K   required from here\n'}
+[19.687353] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:40:32:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kt\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[19.687450] (state_estimator) StderrLine: {'line': b'   40 |         virtual void predict(\x1b[01;35m\x1b[KT t\x1b[m\x1b[K, const Eigen::Matrix<T,N2,1> &u) override\n'}
+[19.687547] (state_estimator) StderrLine: {'line': b'      |                              \x1b[01;35m\x1b[K~~^\x1b[m\x1b[K\n'}
+[19.687632] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:40:64:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Ku\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[19.687713] (state_estimator) StderrLine: {'line': b'   40 |         virtual void predict(T t, \x1b[01;35m\x1b[Kconst Eigen::Matrix<T,N2,1> &u\x1b[m\x1b[K) override\n'}
+[19.687923] (state_estimator) StderrLine: {'line': b'      |                                   \x1b[01;35m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\x1b[m\x1b[K\n'}
+[19.688074] (state_estimator) StderrLine: {'line': b'/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp: In instantiation of \xe2\x80\x98\x1b[01m\x1b[Kvoid state_estimator::EKFBase<T, N1, N2, N3, N4, N5, N6, N7>::\x1b[01;32m\x1b[Kupdate\x1b[m\x1b[K(T, const Eigen::Matrix<T, N3, 1>&) \x1b[35m\x1b[K[with T = double; int N1 = 6; int N2 = 3; int N3 = 3; int N4 = 6; int N5 = 3; int N6 = 6; int N7 = 6]\x1b[m\x1b[K\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[19.688212] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:48:15:\x1b[m\x1b[K   required from here\n'}
+[19.688336] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:48:31:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kt\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[19.688459] (state_estimator) StderrLine: {'line': b'   48 |         virtual void update(\x1b[01;35m\x1b[KT t\x1b[m\x1b[K, const Eigen::Matrix<T,N3,1> &z) override {\n'}
+[19.688584] (state_estimator) StderrLine: {'line': b'      |                             \x1b[01;35m\x1b[K~~^\x1b[m\x1b[K\n'}
+[19.688770] (state_estimator) StderrLine: {'line': b'\x1b[01m\x1b[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:48:63:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused parameter \xe2\x80\x98\x1b[01m\x1b[Kz\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter\x07-Wunused-parameter\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[19.688898] (state_estimator) StderrLine: {'line': b'   48 |         virtual void update(T t, \x1b[01;35m\x1b[Kconst Eigen::Matrix<T,N3,1> &z\x1b[m\x1b[K) override {\n'}
+[19.689016] (state_estimator) StderrLine: {'line': b'      |                                  \x1b[01;35m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\x1b[m\x1b[K\n'}
+[19.765277] (-) TimerEvent: {}
+[19.865574] (-) TimerEvent: {}
+[19.965866] (-) TimerEvent: {}
+[20.066170] (-) TimerEvent: {}
+[20.166460] (-) TimerEvent: {}
+[20.266772] (-) TimerEvent: {}
+[20.367045] (-) TimerEvent: {}
+[20.467318] (-) TimerEvent: {}
+[20.567597] (-) TimerEvent: {}
+[20.668114] (-) TimerEvent: {}
+[20.768379] (-) TimerEvent: {}
+[20.868690] (-) TimerEvent: {}
+[20.968994] (-) TimerEvent: {}
+[21.069279] (-) TimerEvent: {}
+[21.169588] (-) TimerEvent: {}
+[21.269957] (-) TimerEvent: {}
+[21.370269] (-) TimerEvent: {}
+[21.470612] (-) TimerEvent: {}
+[21.570980] (-) TimerEvent: {}
+[21.671290] (-) TimerEvent: {}
+[21.771627] (-) TimerEvent: {}
+[21.872039] (-) TimerEvent: {}
+[21.972363] (-) TimerEvent: {}
+[22.072679] (-) TimerEvent: {}
+[22.173003] (-) TimerEvent: {}
+[22.273276] (-) TimerEvent: {}
+[22.373641] (-) TimerEvent: {}
+[22.473990] (-) TimerEvent: {}
+[22.574320] (-) TimerEvent: {}
+[22.674636] (-) TimerEvent: {}
+[22.774992] (-) TimerEvent: {}
+[22.875304] (-) TimerEvent: {}
+[22.975680] (-) TimerEvent: {}
+[23.076030] (-) TimerEvent: {}
+[23.176303] (-) TimerEvent: {}
+[23.276634] (-) TimerEvent: {}
+[23.376929] (-) TimerEvent: {}
+[23.477210] (-) TimerEvent: {}
+[23.577556] (-) TimerEvent: {}
+[23.677892] (-) TimerEvent: {}
+[23.778184] (-) TimerEvent: {}
+[23.878470] (-) TimerEvent: {}
+[23.978781] (-) TimerEvent: {}
+[24.079112] (-) TimerEvent: {}
+[24.179395] (-) TimerEvent: {}
+[24.279665] (-) TimerEvent: {}
+[24.380006] (-) TimerEvent: {}
+[24.480367] (-) TimerEvent: {}
+[24.580695] (-) TimerEvent: {}
+[24.681069] (-) TimerEvent: {}
+[24.781380] (-) TimerEvent: {}
+[24.881697] (-) TimerEvent: {}
+[24.982027] (-) TimerEvent: {}
+[25.082328] (-) TimerEvent: {}
+[25.182585] (-) TimerEvent: {}
+[25.282908] (-) TimerEvent: {}
+[25.383212] (-) TimerEvent: {}
+[25.483505] (-) TimerEvent: {}
+[25.583793] (-) TimerEvent: {}
+[25.684213] (-) TimerEvent: {}
+[25.784533] (-) TimerEvent: {}
+[25.884808] (-) TimerEvent: {}
+[25.985170] (-) TimerEvent: {}
+[26.085480] (-) TimerEvent: {}
+[26.185801] (-) TimerEvent: {}
+[26.286183] (-) TimerEvent: {}
+[26.386472] (-) TimerEvent: {}
+[26.486812] (-) TimerEvent: {}
+[26.587177] (-) TimerEvent: {}
+[26.687588] (-) TimerEvent: {}
+[26.787977] (-) TimerEvent: {}
+[26.888322] (-) TimerEvent: {}
+[26.988664] (-) TimerEvent: {}
+[27.089074] (-) TimerEvent: {}
+[27.189450] (-) TimerEvent: {}
+[27.289750] (-) TimerEvent: {}
+[27.390072] (-) TimerEvent: {}
+[27.490440] (-) TimerEvent: {}
+[27.591044] (-) TimerEvent: {}
+[27.691375] (-) TimerEvent: {}
+[27.791687] (-) TimerEvent: {}
+[27.891995] (-) TimerEvent: {}
+[27.993484] (-) TimerEvent: {}
+[28.093901] (-) TimerEvent: {}
+[28.194225] (-) TimerEvent: {}
+[28.294609] (-) TimerEvent: {}
+[28.394983] (-) TimerEvent: {}
+[28.495259] (-) TimerEvent: {}
+[28.595513] (-) TimerEvent: {}
+[28.695781] (-) TimerEvent: {}
+[28.796068] (-) TimerEvent: {}
+[28.896324] (-) TimerEvent: {}
+[28.996599] (-) TimerEvent: {}
+[29.096927] (-) TimerEvent: {}
+[29.197291] (-) TimerEvent: {}
+[29.297666] (-) TimerEvent: {}
+[29.398056] (-) TimerEvent: {}
+[29.498384] (-) TimerEvent: {}
+[29.598959] (-) TimerEvent: {}
+[29.699272] (-) TimerEvent: {}
+[29.799541] (-) TimerEvent: {}
+[29.899784] (-) TimerEvent: {}
+[30.000070] (-) TimerEvent: {}
+[30.100389] (-) TimerEvent: {}
+[30.200675] (-) TimerEvent: {}
+[30.300973] (-) TimerEvent: {}
+[30.401324] (-) TimerEvent: {}
+[30.501634] (-) TimerEvent: {}
+[30.601980] (-) TimerEvent: {}
+[30.702298] (-) TimerEvent: {}
+[30.802616] (-) TimerEvent: {}
+[30.902899] (-) TimerEvent: {}
+[31.003176] (-) TimerEvent: {}
+[31.103469] (-) TimerEvent: {}
+[31.203792] (-) TimerEvent: {}
+[31.304063] (-) TimerEvent: {}
+[31.404345] (-) TimerEvent: {}
+[31.504674] (-) TimerEvent: {}
+[31.605170] (-) TimerEvent: {}
+[31.705511] (-) TimerEvent: {}
+[31.805867] (-) TimerEvent: {}
+[31.906192] (-) TimerEvent: {}
+[32.006551] (-) TimerEvent: {}
+[32.106867] (-) TimerEvent: {}
+[32.207177] (-) TimerEvent: {}
+[32.253476] (state_estimator) StdoutLine: {'line': b'[ 44%] \x1b[32m\x1b[1mLinking CXX shared library libstate_estimator_plugins.so\x1b[0m\n'}
+[32.307283] (-) TimerEvent: {}
+[32.407613] (-) TimerEvent: {}
+[32.508001] (-) TimerEvent: {}
+[32.608338] (-) TimerEvent: {}
+[32.708639] (-) TimerEvent: {}
+[32.808982] (-) TimerEvent: {}
+[32.909272] (-) TimerEvent: {}
+[33.009632] (-) TimerEvent: {}
+[33.110017] (-) TimerEvent: {}
+[33.210443] (-) TimerEvent: {}
+[33.310785] (-) TimerEvent: {}
+[33.411122] (-) TimerEvent: {}
+[33.511458] (-) TimerEvent: {}
+[33.611871] (-) TimerEvent: {}
+[33.712260] (-) TimerEvent: {}
+[33.812751] (-) TimerEvent: {}
+[33.913093] (-) TimerEvent: {}
+[34.013462] (-) TimerEvent: {}
+[34.113818] (-) TimerEvent: {}
+[34.214146] (-) TimerEvent: {}
+[34.314434] (-) TimerEvent: {}
+[34.414802] (-) TimerEvent: {}
+[34.515150] (-) TimerEvent: {}
+[34.615502] (-) TimerEvent: {}
+[34.715945] (-) TimerEvent: {}
+[34.816311] (-) TimerEvent: {}
+[34.916637] (-) TimerEvent: {}
+[35.016984] (-) TimerEvent: {}
+[35.117304] (-) TimerEvent: {}
+[35.217676] (-) TimerEvent: {}
+[35.317985] (-) TimerEvent: {}
+[35.418252] (-) TimerEvent: {}
+[35.518546] (-) TimerEvent: {}
+[35.615694] (state_estimator) StdoutLine: {'line': b'[100%] Built target state_estimator_plugins\n'}
+[35.618613] (-) TimerEvent: {}
+[35.637221] (state_estimator) CommandEnded: {'returncode': 0}
+[35.638233] (state_estimator) JobProgress: {'identifier': 'state_estimator', 'progress': 'install'}
+[35.638814] (state_estimator) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator'], 'cwd': '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator', 'env': OrderedDict({'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'ISAACSIM_PYTHON_EXE': '/home/jonas/.local/share/ov/pkg/isaac-sim-4.2.0/python.sh', 'PYTHON_BASIC_REPL': '1', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'GZ_SIM_RESOURCE_PATH': '/opt/ros/rolling/share', 'USER': 'jonas', 'GZ_CONFIG_PATH': '/opt/ros/rolling/opt/gz_sim_vendor/share/gz:/opt/ros/rolling/opt/gz_gui_vendor/share/gz:/opt/ros/rolling/opt/gz_transport_vendor/share/gz:/opt/ros/rolling/opt/sdformat_vendor/share/gz:/opt/ros/rolling/opt/gz_rendering_vendor/share/gz:/opt/ros/rolling/opt/gz_plugin_vendor/share/gz:/opt/ros/rolling/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/rolling/opt/gz_msgs_vendor/share/gz:/opt/ros/rolling/opt/gz_common_vendor/share/gz', 'XDG_SESSION_TYPE': 'x11', 'GIT_ASKPASS': '/usr/share/code/resources/app/extensions/git/dist/askpass.sh', 'ROS_PACKAGE_PATH': '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share', 'ISAACSIM_PATH': '/home/jonas/.local/share/ov/pkg/isaac-sim-4.2.0', 'CLUTTER_DISABLE_MIPMAPPED_TEXT': '1', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib:HOME/.mujoco/mujoco210/bin:/home/jonas/Documents/Kamaro/Quadruped-PyMPC-Luna/quadruped_pympc/acados/lib', 'ACADOS_SOURCE_DIR': '/home/jonas/Documents/Kamaro/Quadruped-PyMPC-Luna/quadruped_pympc/acados', 'HOME': '/home/jonas', 'CHROME_DESKTOP': 'code.desktop', 'TERM_PROGRAM_VERSION': '1.105.1', 'DESKTOP_SESSION': 'ubuntu', 'GIO_LAUNCHED_DESKTOP_FILE': '/usr/share/applications/code.desktop', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'VSCODE_GIT_ASKPASS_MAIN': '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js', 'VSCODE_GIT_ASKPASS_NODE': '/usr/share/code/code', 'MANAGERPID': '783195', 'PYDEVD_DISABLE_FILE_VALIDATION': '1', 'SYSTEMD_EXEC_PID': '783645', 'BUNDLED_DEBUGPY_PATH': '/home/jonas/.vscode/extensions/ms-python.debugpy-2025.14.1-linux-x64/bundled/libs/debugpy', 'VSCODE_PYTHON_AUTOACTIVATE_GUARD': '1', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '788399', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'ROS_DISTRO': 'rolling', 'LOGNAME': 'jonas', 'JOURNAL_STREAM': '9:4285037', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@x11.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'PKG_CONFIG_PATH': '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/pkgconfig', 'USERNAME': 'jonas', 'TERM': 'xterm-256color', 'COPPELIASIM_ROOT_DIR': '/home/jonas/Programs/CoppeliaSim', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'WINDOWPATH': '2', 'PATH': '/home/jonas/miniconda3/bin:/home/jonas/.local/bin:/opt/ros/rolling/opt/gz_msgs_vendor/bin:/opt/ros/rolling/opt/gz_tools_vendor/bin:/opt/ros/rolling/opt/gz_ogre_next_vendor/bin:/opt/ros/rolling/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/jonas/.vscode/extensions/ms-python.debugpy-2025.14.1-linux-x64/bundled/scripts/noConfigScripts:/home/jonas/.config/Code/User/globalStorage/github.copilot-chat/debugCommand:/home/jonas/.local/bin', 'SESSION_MANAGER': 'local/jonas-MS-7B86:@/tmp/.ICE-unix/783611,unix/jonas-MS-7B86:/tmp/.ICE-unix/783611', 'INVOCATION_ID': 'f7402b6b975d4b7494dc5e8383796c3f', 'XDG_MENU_PREFIX': 'gnome-', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'x11', 'DISPLAY': ':1', 'VSCODE_DEBUGPY_ADAPTER_ENDPOINTS': '/home/jonas/.vscode/extensions/ms-python.debugpy-2025.14.1-linux-x64/.noConfigDebugAdapterEndpoints/endpoint-362bcc0598cc4ffd.txt', 'LD_PRELOAD': ':/usr/lib/x86_64-linux-gnu/libGLEW.so:/usr/lib/x86_64-linux-gnu/libGLEW.so', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'Unity', 'PYTHONSTARTUP': '/home/jonas/.config/Code/User/workspaceStorage/49463d16e51cac3ae658ad28c550dff5/ms-python.python/pythonrc.py', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/gdm/Xauthority', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'VSCODE_GIT_IPC_HANDLE': '/run/user/1000/vscode-git-df17cfa46a.sock', 'TERM_PROGRAM': 'vscode', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/opt/ros/rolling', 'ORIGINAL_XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'GPG_AGENT_INFO': '/run/user/1000/gnupg/S.gpg-agent:0:1', 'GJS_DEBUG_OUTPUT': 'stderr', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/home/jonas/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages:/opt/ros/rolling/opt/gz_sim_vendor/lib/python:/opt/ros/rolling/opt/gz_transport_vendor/lib/python:/opt/ros/rolling/opt/gz_msgs_vendor/lib/python:/opt/ros/rolling/opt/gz_math_vendor/lib/python:/opt/ros/rolling/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'CMAKE_PREFIX_PATH': '/opt/ros/rolling:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons:/opt/ros/rolling/opt/gz_sim_vendor:/opt/ros/rolling/opt/gz_sensors_vendor:/opt/ros/rolling/opt/gz_gui_vendor:/opt/ros/rolling/opt/gz_transport_vendor:/opt/ros/rolling/opt/gz_physics_vendor:/opt/ros/rolling/opt/sdformat_vendor:/opt/ros/rolling/opt/gz_rendering_vendor:/opt/ros/rolling/opt/gz_plugin_vendor:/opt/ros/rolling/opt/gz_fuel_tools_vendor:/opt/ros/rolling/opt/gz_msgs_vendor:/opt/ros/rolling/opt/gz_common_vendor:/opt/ros/rolling/opt/gz_math_vendor:/opt/ros/rolling/opt/gz_utils_vendor:/opt/ros/rolling/opt/gz_tools_vendor:/opt/ros/rolling/opt/gz_ogre_next_vendor:/opt/ros/rolling/opt/gz_dartsim_vendor:/opt/ros/rolling/opt/gz_cmake_vendor'}), 'shell': False}
+[35.649532] (state_estimator) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[35.650024] (state_estimator) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[35.650639] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/EigenExtra.hpp\n'}
+[35.650847] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Estimator.hpp\n'}
+[35.651046] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Models/attitude_bias_NLO.hpp\n'}
+[35.651232] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp\n'}
+[35.651405] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Models/sensor_fusion.hpp\n'}
+[35.651558] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Observers/EKF.hpp\n'}
+[35.651688] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Observers/NLO.hpp\n'}
+[35.651830] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Observers/Observer.hpp\n'}
+[35.651962] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Observers/XKF.hpp\n'}
+[35.652085] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Robot.hpp\n'}
+[35.652204] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Services.hpp\n'}
+[35.652322] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/lib.hpp\n'}
+[35.652438] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/plugin.hpp\n'}
+[35.652592] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/plugin_base.hpp\n'}
+[35.652733] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/state_estimator_node.hpp\n'}
+[35.652859] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/urdfs/aliengo.urdf\n'}
+[35.652980] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/urdfs/anymal.urdf\n'}
+[35.653119] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/urdfs/go1.urdf\n'}
+[35.653364] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/state_estimator_plugins.xml\n'}
+[35.653496] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/state_estimator_tools.xml\n'}
+[35.653736] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//state_estimator_plugins.xml\n'}
+[35.653995] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/lib/state_estimator/state_estimator_node\n'}
+[35.654342] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//launch/pluginlist.yaml\n'}
+[35.654565] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//launch/state_estimator.launch\n'}
+[35.654689] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//launch/state_estimator.launch.py\n'}
+[35.654922] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//launch/timeout.yaml\n'}
+[35.655122] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//config/attitude_plugin.yaml\n'}
+[35.655292] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//config/contact_data_packaging_plugin.yaml\n'}
+[35.655487] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//config/contact_plugin.yaml\n'}
+[35.655655] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//config/joint_state_downsampler_plugin.yaml\n'}
+[35.655849] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//config/leg_odometry.yaml\n'}
+[35.655942] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//config/sensor_fusion.yaml\n'}
+[35.656068] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/environment/library_path.sh\n'}
+[35.656300] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/environment/library_path.dsv\n'}
+[35.656602] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/ament_index/resource_index/package_run_dependencies/state_estimator\n'}
+[35.656929] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/ament_index/resource_index/parent_prefix_path/state_estimator\n'}
+[35.657214] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/environment/ament_prefix_path.sh\n'}
+[35.657523] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/environment/ament_prefix_path.dsv\n'}
+[35.658029] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/environment/path.sh\n'}
+[35.658579] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/environment/path.dsv\n'}
+[35.659035] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/local_setup.bash\n'}
+[35.659478] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/local_setup.sh\n'}
+[35.659737] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/local_setup.zsh\n'}
+[35.659962] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/local_setup.dsv\n'}
+[35.660137] (state_estimator) StdoutLine: {'line': b'-- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/package.dsv\n'}
+[35.675063] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/ament_index/resource_index/packages/state_estimator\n'}
+[35.675291] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/ament_index/resource_index/state_estimator__pluginlib__plugin/state_estimator\n'}
+[35.675526] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[35.675756] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[35.675971] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[35.676178] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/cmake/state_estimatorConfig.cmake\n'}
+[35.676300] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/cmake/state_estimatorConfig-version.cmake\n'}
+[35.676569] (state_estimator) StdoutLine: {'line': b'-- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/package.xml\n'}
+[35.676875] (state_estimator) StdoutLine: {'line': b'-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/lib/libstate_estimator_plugins.so\n'}
+[35.718739] (-) TimerEvent: {}
+[35.738856] (state_estimator) StdoutLine: {'line': b'-- Set non-toolchain portion of runtime path of "/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/lib/libstate_estimator_plugins.so" to ""\n'}
+[35.739110] (state_estimator) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/cmake/export_state_estimatorExport.cmake\n'}
+[35.739211] (state_estimator) StdoutLine: {'line': b'-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/cmake/export_state_estimatorExport-noconfig.cmake\n'}
+[35.742132] (state_estimator) CommandEnded: {'returncode': 0}
+[35.756784] (state_estimator) JobEnded: {'identifier': 'state_estimator', 'rc': 0}
+[35.757787] (-) EventReactorShutdown: {}

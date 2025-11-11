@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_files("/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator" FILES "/opt/ros/rolling/lib/python3.12/site-packages/ament_package/template/environment_hook/library_path.sh" "DESTINATION" "share/state_estimator/environment")

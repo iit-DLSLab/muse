@@ -1,0 +1,939 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "rosidl_generator_py/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_fastrtps_c.so"
+		}
+	],
+	"backtrace" : 7,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"__Python3_add_library",
+			"python3_add_library",
+			"include",
+			"ament_execute_extensions",
+			"rosidl_generate_interfaces",
+			"install",
+			"target_link_libraries",
+			"set_target_properties",
+			"find_package",
+			"add_dependencies",
+			"add_definitions",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"/usr/share/cmake-3.28/Modules/FindPython/Support.cmake",
+			"/usr/share/cmake-3.28/Modules/FindPython3.cmake",
+			"/opt/ros/rolling/share/rosidl_generator_py/cmake/rosidl_generator_py_generate_interfaces.cmake",
+			"/opt/ros/rolling/share/ament_cmake_core/cmake/core/ament_execute_extensions.cmake",
+			"/opt/ros/rolling/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake",
+			"CMakeLists.txt",
+			"/opt/ros/rolling/share/rosidl_typesupport_c/cmake/rosidl_typesupport_c_generate_interfaces.cmake",
+			"/opt/ros/rolling/share/rosidl_typesupport_fastrtps_c/cmake/rosidl_typesupport_fastrtps_c_generate_interfaces.cmake",
+			"/opt/ros/rolling/share/rosidl_generator_c/cmake/rosidl_generator_c_generate_interfaces.cmake",
+			"/opt/ros/rolling/share/rosidl_typesupport_fastrtps_cpp/cmake/rosidl_typesupport_fastrtps_cppExport.cmake",
+			"/opt/ros/rolling/share/rosidl_typesupport_fastrtps_cpp/cmake/ament_cmake_export_targets-extras.cmake",
+			"/opt/ros/rolling/share/rosidl_typesupport_fastrtps_cpp/cmake/rosidl_typesupport_fastrtps_cppConfig.cmake",
+			"/opt/ros/rolling/share/rosidl_typesupport_cpp/cmake/rosidl_typesupport_cpp-extras.cmake",
+			"/opt/ros/rolling/share/rosidl_typesupport_cpp/cmake/rosidl_typesupport_cppConfig.cmake",
+			"/opt/ros/rolling/share/rosidl_core_generators/cmake/rosidl_core_generators-extras.cmake",
+			"/opt/ros/rolling/share/rosidl_core_generators/cmake/rosidl_core_generatorsConfig.cmake",
+			"/opt/ros/rolling/share/rosidl_default_generators/cmake/ament_cmake_export_dependencies-extras.cmake",
+			"/opt/ros/rolling/share/rosidl_default_generators/cmake/rosidl_default_generatorsConfig.cmake",
+			"/opt/ros/rolling/share/rmw/cmake/rmwExport.cmake",
+			"/opt/ros/rolling/share/rmw/cmake/ament_cmake_export_targets-extras.cmake",
+			"/opt/ros/rolling/share/rmw/cmake/rmwConfig.cmake",
+			"/opt/ros/rolling/share/rosidl_typesupport_fastrtps_cpp/cmake/ament_cmake_export_dependencies-extras.cmake",
+			"/opt/ros/rolling/share/rosidl_runtime_c/cmake/rosidl_runtime_cExport.cmake",
+			"/opt/ros/rolling/share/rosidl_runtime_c/cmake/ament_cmake_export_targets-extras.cmake",
+			"/opt/ros/rolling/share/rosidl_runtime_c/cmake/rosidl_runtime_cConfig.cmake",
+			"/opt/ros/rolling/share/rosidl_typesupport_fastrtps_c/cmake/ament_cmake_export_dependencies-extras.cmake",
+			"/opt/ros/rolling/share/rosidl_typesupport_fastrtps_c/cmake/rosidl_typesupport_fastrtps_cConfig.cmake",
+			"/opt/ros/rolling/share/rosidl_typesupport_c/cmake/rosidl_typesupport_c-extras.cmake",
+			"/opt/ros/rolling/share/rosidl_typesupport_c/cmake/rosidl_typesupport_cConfig.cmake",
+			"/opt/ros/rolling/share/rcutils/cmake/rcutilsExport.cmake",
+			"/opt/ros/rolling/share/rcutils/cmake/ament_cmake_export_targets-extras.cmake",
+			"/opt/ros/rolling/share/rcutils/cmake/rcutilsConfig.cmake",
+			"/opt/ros/rolling/share/rosidl_runtime_c/cmake/ament_cmake_export_dependencies-extras.cmake",
+			"/opt/ros/rolling/share/ament_cmake_ros_core/cmake/ament_cmake_ros_core-extras.cmake",
+			"/opt/ros/rolling/share/ament_cmake_ros_core/cmake/ament_cmake_ros_coreConfig.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 5
+			},
+			{
+				"command" : 5,
+				"file" : 5,
+				"line" : 11,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 4,
+				"line" : 280,
+				"parent" : 1
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 48,
+				"parent" : 2
+			},
+			{
+				"file" : 2,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 192,
+				"parent" : 4
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 549,
+				"parent" : 5
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 4073,
+				"parent" : 6
+			},
+			{
+				"command" : 6,
+				"file" : 2,
+				"line" : 238,
+				"parent" : 4
+			},
+			{
+				"command" : 7,
+				"file" : 2,
+				"line" : 212,
+				"parent" : 4
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 48,
+				"parent" : 2
+			},
+			{
+				"file" : 6,
+				"parent" : 10
+			},
+			{
+				"command" : 7,
+				"file" : 6,
+				"line" : 146,
+				"parent" : 11
+			},
+			{
+				"command" : 7,
+				"file" : 6,
+				"line" : 146,
+				"parent" : 11
+			},
+			{
+				"command" : 7,
+				"file" : 6,
+				"line" : 146,
+				"parent" : 11
+			},
+			{
+				"command" : 7,
+				"file" : 6,
+				"line" : 146,
+				"parent" : 11
+			},
+			{
+				"command" : 7,
+				"file" : 6,
+				"line" : 146,
+				"parent" : 11
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 48,
+				"parent" : 2
+			},
+			{
+				"file" : 7,
+				"parent" : 17
+			},
+			{
+				"command" : 7,
+				"file" : 7,
+				"line" : 146,
+				"parent" : 18
+			},
+			{
+				"command" : 7,
+				"file" : 7,
+				"line" : 156,
+				"parent" : 18
+			},
+			{
+				"command" : 7,
+				"file" : 7,
+				"line" : 156,
+				"parent" : 18
+			},
+			{
+				"command" : 7,
+				"file" : 7,
+				"line" : 156,
+				"parent" : 18
+			},
+			{
+				"command" : 3,
+				"file" : 3,
+				"line" : 48,
+				"parent" : 2
+			},
+			{
+				"file" : 8,
+				"parent" : 23
+			},
+			{
+				"command" : 7,
+				"file" : 8,
+				"line" : 165,
+				"parent" : 24
+			},
+			{
+				"command" : 7,
+				"file" : 8,
+				"line" : 165,
+				"parent" : 24
+			},
+			{
+				"command" : 7,
+				"file" : 8,
+				"line" : 165,
+				"parent" : 24
+			},
+			{
+				"command" : 7,
+				"file" : 7,
+				"line" : 156,
+				"parent" : 18
+			},
+			{
+				"command" : 7,
+				"file" : 7,
+				"line" : 156,
+				"parent" : 18
+			},
+			{
+				"command" : 7,
+				"file" : 7,
+				"line" : 130,
+				"parent" : 18
+			},
+			{
+				"command" : 9,
+				"file" : 5,
+				"line" : 6,
+				"parent" : 0
+			},
+			{
+				"file" : 17,
+				"parent" : 31
+			},
+			{
+				"command" : 3,
+				"file" : 17,
+				"line" : 41,
+				"parent" : 32
+			},
+			{
+				"file" : 16,
+				"parent" : 33
+			},
+			{
+				"command" : 9,
+				"file" : 16,
+				"line" : 21,
+				"parent" : 34
+			},
+			{
+				"file" : 15,
+				"parent" : 35
+			},
+			{
+				"command" : 3,
+				"file" : 15,
+				"line" : 41,
+				"parent" : 36
+			},
+			{
+				"file" : 14,
+				"parent" : 37
+			},
+			{
+				"command" : 9,
+				"file" : 14,
+				"line" : 21,
+				"parent" : 38
+			},
+			{
+				"file" : 13,
+				"parent" : 39
+			},
+			{
+				"command" : 3,
+				"file" : 13,
+				"line" : 41,
+				"parent" : 40
+			},
+			{
+				"file" : 12,
+				"parent" : 41
+			},
+			{
+				"command" : 9,
+				"file" : 12,
+				"line" : 13,
+				"parent" : 42
+			},
+			{
+				"file" : 11,
+				"parent" : 43
+			},
+			{
+				"command" : 3,
+				"file" : 11,
+				"line" : 41,
+				"parent" : 44
+			},
+			{
+				"file" : 10,
+				"parent" : 45
+			},
+			{
+				"command" : 3,
+				"file" : 10,
+				"line" : 9,
+				"parent" : 46
+			},
+			{
+				"file" : 9,
+				"parent" : 47
+			},
+			{
+				"command" : 8,
+				"file" : 9,
+				"line" : 61,
+				"parent" : 48
+			},
+			{
+				"command" : 3,
+				"file" : 11,
+				"line" : 41,
+				"parent" : 44
+			},
+			{
+				"file" : 21,
+				"parent" : 50
+			},
+			{
+				"command" : 9,
+				"file" : 21,
+				"line" : 21,
+				"parent" : 51
+			},
+			{
+				"file" : 20,
+				"parent" : 52
+			},
+			{
+				"command" : 3,
+				"file" : 20,
+				"line" : 41,
+				"parent" : 53
+			},
+			{
+				"file" : 19,
+				"parent" : 54
+			},
+			{
+				"command" : 3,
+				"file" : 19,
+				"line" : 9,
+				"parent" : 55
+			},
+			{
+				"file" : 18,
+				"parent" : 56
+			},
+			{
+				"command" : 8,
+				"file" : 18,
+				"line" : 61,
+				"parent" : 57
+			},
+			{
+				"command" : 7,
+				"file" : 8,
+				"line" : 165,
+				"parent" : 24
+			},
+			{
+				"command" : 7,
+				"file" : 8,
+				"line" : 165,
+				"parent" : 24
+			},
+			{
+				"command" : 9,
+				"file" : 14,
+				"line" : 21,
+				"parent" : 38
+			},
+			{
+				"file" : 28,
+				"parent" : 61
+			},
+			{
+				"command" : 3,
+				"file" : 28,
+				"line" : 41,
+				"parent" : 62
+			},
+			{
+				"file" : 27,
+				"parent" : 63
+			},
+			{
+				"command" : 9,
+				"file" : 27,
+				"line" : 13,
+				"parent" : 64
+			},
+			{
+				"file" : 26,
+				"parent" : 65
+			},
+			{
+				"command" : 3,
+				"file" : 26,
+				"line" : 41,
+				"parent" : 66
+			},
+			{
+				"file" : 25,
+				"parent" : 67
+			},
+			{
+				"command" : 9,
+				"file" : 25,
+				"line" : 21,
+				"parent" : 68
+			},
+			{
+				"file" : 24,
+				"parent" : 69
+			},
+			{
+				"command" : 3,
+				"file" : 24,
+				"line" : 41,
+				"parent" : 70
+			},
+			{
+				"file" : 23,
+				"parent" : 71
+			},
+			{
+				"command" : 3,
+				"file" : 23,
+				"line" : 9,
+				"parent" : 72
+			},
+			{
+				"file" : 22,
+				"parent" : 73
+			},
+			{
+				"command" : 8,
+				"file" : 22,
+				"line" : 61,
+				"parent" : 74
+			},
+			{
+				"command" : 3,
+				"file" : 24,
+				"line" : 41,
+				"parent" : 70
+			},
+			{
+				"file" : 32,
+				"parent" : 76
+			},
+			{
+				"command" : 9,
+				"file" : 32,
+				"line" : 21,
+				"parent" : 77
+			},
+			{
+				"file" : 31,
+				"parent" : 78
+			},
+			{
+				"command" : 3,
+				"file" : 31,
+				"line" : 41,
+				"parent" : 79
+			},
+			{
+				"file" : 30,
+				"parent" : 80
+			},
+			{
+				"command" : 3,
+				"file" : 30,
+				"line" : 9,
+				"parent" : 81
+			},
+			{
+				"file" : 29,
+				"parent" : 82
+			},
+			{
+				"command" : 8,
+				"file" : 29,
+				"line" : 61,
+				"parent" : 83
+			},
+			{
+				"command" : 10,
+				"file" : 2,
+				"line" : 232,
+				"parent" : 4
+			},
+			{
+				"command" : 10,
+				"file" : 2,
+				"line" : 195,
+				"parent" : 4
+			},
+			{
+				"command" : 8,
+				"file" : 2,
+				"line" : 206,
+				"parent" : 4
+			},
+			{
+				"command" : 9,
+				"file" : 7,
+				"line" : 21,
+				"parent" : 18
+			},
+			{
+				"file" : 34,
+				"parent" : 88
+			},
+			{
+				"command" : 3,
+				"file" : 34,
+				"line" : 41,
+				"parent" : 89
+			},
+			{
+				"file" : 33,
+				"parent" : 90
+			},
+			{
+				"command" : 11,
+				"file" : 33,
+				"line" : 18,
+				"parent" : 91
+			},
+			{
+				"command" : 12,
+				"file" : 2,
+				"line" : 222,
+				"parent" : 4
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 4082,
+				"parent" : 6
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-fPIC"
+				},
+				{
+					"backtrace" : 87,
+					"fragment" : "-Wall"
+				},
+				{
+					"backtrace" : 87,
+					"fragment" : "-Wextra"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 9,
+					"define" : "FASTCDR_DYN_LINK"
+				},
+				{
+					"backtrace" : 92,
+					"define" : "ROS_PACKAGE_NAME=\"state_estimator_msgs\""
+				},
+				{
+					"define" : "state_estimator_msgs_s__rosidl_typesupport_fastrtps_c_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 93,
+					"path" : "/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs/rosidl_generator_c"
+				},
+				{
+					"backtrace" : 93,
+					"path" : "/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs/rosidl_generator_py"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs/rosidl_typesupport_fastrtps_c"
+				},
+				{
+					"backtrace" : 94,
+					"isSystem" : true,
+					"path" : "/usr/include/python3.12"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "/opt/ros/rolling/include/fastcdr"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "/opt/ros/rolling/include/rosidl_runtime_c"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "/opt/ros/rolling/include/rcutils"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "/opt/ros/rolling/include/rosidl_typesupport_interface"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "/opt/ros/rolling/include/rosidl_runtime_cpp"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "/opt/ros/rolling/include/rosidl_typesupport_fastrtps_cpp"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "/opt/ros/rolling/include/rmw"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "/opt/ros/rolling/include/rosidl_dynamic_typesupport"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "/opt/ros/rolling/include/rosidl_typesupport_fastrtps_c"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "/opt/ros/rolling/include/geometry_msgs"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "/opt/ros/rolling/include/std_msgs"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "/opt/ros/rolling/include/builtin_interfaces"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "/opt/ros/rolling/include/sensor_msgs"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "/opt/ros/rolling/include/service_msgs"
+				},
+				{
+					"backtrace" : 9,
+					"isSystem" : true,
+					"path" : "/opt/ros/rolling/include/rosidl_typesupport_c"
+				}
+			],
+			"language" : "C",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 9,
+			"id" : "state_estimator_msgs__rosidl_generator_c::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 85,
+			"id" : "state_estimator_msgs__rosidl_typesupport_fastrtps_c::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 86,
+			"id" : "state_estimator_msgs__rosidl_typesupport_c::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 9,
+			"id" : "state_estimator_msgs__rosidl_generator_py::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 86,
+			"id" : "state_estimator_msgs__py::@b2e9989ddf84d39109d7"
+		}
+	],
+	"id" : "state_estimator_msgs_s__rosidl_typesupport_fastrtps_c::@6890427a1f51a3e7e1df",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 8,
+				"path" : "lib/python3.12/site-packages/state_estimator_msgs"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs"
+		}
+	},
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-Wl,-rpath,/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs:/opt/ros/rolling/lib:",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 9,
+				"fragment" : "libstate_estimator_msgs__rosidl_generator_py.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 9,
+				"fragment" : "libstate_estimator_msgs__rosidl_typesupport_fastrtps_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 9,
+				"fragment" : "libstate_estimator_msgs__rosidl_typesupport_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 12,
+				"fragment" : "/opt/ros/rolling/lib/libsensor_msgs__rosidl_typesupport_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 13,
+				"fragment" : "/opt/ros/rolling/lib/libgeometry_msgs__rosidl_typesupport_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 14,
+				"fragment" : "/opt/ros/rolling/lib/libstd_msgs__rosidl_typesupport_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 15,
+				"fragment" : "/opt/ros/rolling/lib/libservice_msgs__rosidl_typesupport_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 16,
+				"fragment" : "/opt/ros/rolling/lib/libbuiltin_interfaces__rosidl_typesupport_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 9,
+				"fragment" : "/opt/ros/rolling/lib/librosidl_typesupport_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 19,
+				"fragment" : "libstate_estimator_msgs__rosidl_generator_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 20,
+				"fragment" : "/opt/ros/rolling/lib/libsensor_msgs__rosidl_typesupport_fastrtps_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 21,
+				"fragment" : "/opt/ros/rolling/lib/libgeometry_msgs__rosidl_typesupport_fastrtps_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 22,
+				"fragment" : "/opt/ros/rolling/lib/libstd_msgs__rosidl_typesupport_fastrtps_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 25,
+				"fragment" : "/opt/ros/rolling/lib/libsensor_msgs__rosidl_generator_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 26,
+				"fragment" : "/opt/ros/rolling/lib/libgeometry_msgs__rosidl_generator_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 27,
+				"fragment" : "/opt/ros/rolling/lib/libstd_msgs__rosidl_generator_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 28,
+				"fragment" : "/opt/ros/rolling/lib/libservice_msgs__rosidl_typesupport_fastrtps_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 29,
+				"fragment" : "/opt/ros/rolling/lib/libbuiltin_interfaces__rosidl_typesupport_fastrtps_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 30,
+				"fragment" : "/opt/ros/rolling/lib/librosidl_typesupport_fastrtps_cpp.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 49,
+				"fragment" : "/opt/ros/rolling/lib/librmw.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 58,
+				"fragment" : "/opt/ros/rolling/lib/librosidl_dynamic_typesupport.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 30,
+				"fragment" : "/opt/ros/rolling/lib/librosidl_typesupport_fastrtps_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 30,
+				"fragment" : "/opt/ros/rolling/lib/libfastcdr.so.2.3.2",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 59,
+				"fragment" : "/opt/ros/rolling/lib/libservice_msgs__rosidl_generator_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 60,
+				"fragment" : "/opt/ros/rolling/lib/libbuiltin_interfaces__rosidl_generator_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 9,
+				"fragment" : "/opt/ros/rolling/lib/librosidl_runtime_c.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 75,
+				"fragment" : "/opt/ros/rolling/lib/librcutils.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 84,
+				"fragment" : "-ldl",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 84,
+				"fragment" : "-latomic",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-Wl,-rpath-link,/opt/ros/rolling/lib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "C"
+	},
+	"name" : "state_estimator_msgs_s__rosidl_typesupport_fastrtps_c",
+	"nameOnDisk" : "state_estimator_msgs_s__rosidl_typesupport_fastrtps_c.so",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 7,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs/rosidl_generator_py/state_estimator_msgs/_state_estimator_msgs_s.ep.rosidl_typesupport_fastrtps_c.c",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "MODULE_LIBRARY"
+}

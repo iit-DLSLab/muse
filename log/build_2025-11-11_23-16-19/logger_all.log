@@ -1,0 +1,310 @@
+[0.108s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install']
+[0.109s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=12, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x70f9affbab70>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x70f9affba8a0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x70f9affba8a0>>, mixin_verb=('build',))
+[0.148s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.148s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.148s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.148s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.148s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.148s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.148s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/jonas/Documents/Kamaro/muse_ros2'
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.148s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.149s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.149s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.149s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.149s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.149s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.149s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.149s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.173s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws) by extensions ['ignore', 'ignore_ament_install']
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws) by extension 'ignore'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws) by extension 'ignore_ament_install'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws) by extensions ['colcon_pkg']
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws) by extension 'colcon_pkg'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws) by extensions ['colcon_meta']
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws) by extension 'colcon_meta'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws) by extensions ['ros']
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws) by extension 'ros'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws) by extensions ['cmake', 'python']
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws) by extension 'cmake'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws) by extension 'python'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws) by extensions ['python_setup_py']
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws) by extension 'python_setup_py'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/build) by extensions ['ignore', 'ignore_ament_install']
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/build) by extension 'ignore'
+[0.174s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/build) ignored
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/install) by extensions ['ignore', 'ignore_ament_install']
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/install) by extension 'ignore'
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/install) ignored
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/log) by extensions ['ignore', 'ignore_ament_install']
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/log) by extension 'ignore'
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/log) ignored
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src) by extensions ['ignore', 'ignore_ament_install']
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src) by extension 'ignore'
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src) by extension 'ignore_ament_install'
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src) by extensions ['colcon_pkg']
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src) by extension 'colcon_pkg'
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src) by extensions ['colcon_meta']
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src) by extension 'colcon_meta'
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src) by extensions ['ros']
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src) by extension 'ros'
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src) by extensions ['cmake', 'python']
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src) by extension 'cmake'
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src) by extension 'python'
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src) by extensions ['python_setup_py']
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src) by extension 'python_setup_py'
+[0.175s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/iit_commons) by extensions ['ignore', 'ignore_ament_install']
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/iit_commons) by extension 'ignore'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/iit_commons) by extension 'ignore_ament_install'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/iit_commons) by extensions ['colcon_pkg']
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/iit_commons) by extension 'colcon_pkg'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/iit_commons) by extensions ['colcon_meta']
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/iit_commons) by extension 'colcon_meta'
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/iit_commons) by extensions ['ros']
+[0.176s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/iit_commons) by extension 'ros'
+[0.196s] DEBUG:colcon.colcon_core.package_identification:Package 'muse_ws/src/iit_commons' with type 'ros.catkin' and name 'iit_commons'
+[0.196s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/state_estimator) by extensions ['ignore', 'ignore_ament_install']
+[0.196s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/state_estimator) by extension 'ignore'
+[0.196s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/state_estimator) by extension 'ignore_ament_install'
+[0.196s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/state_estimator) by extensions ['colcon_pkg']
+[0.196s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/state_estimator) by extension 'colcon_pkg'
+[0.196s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/state_estimator) by extensions ['colcon_meta']
+[0.196s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/state_estimator) by extension 'colcon_meta'
+[0.196s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/state_estimator) by extensions ['ros']
+[0.196s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/state_estimator) by extension 'ros'
+[0.198s] DEBUG:colcon.colcon_core.package_identification:Package 'muse_ws/src/state_estimator' with type 'ros.ament_cmake' and name 'state_estimator'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/state_estimator_msgs) by extensions ['ignore', 'ignore_ament_install']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/state_estimator_msgs) by extension 'ignore'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/state_estimator_msgs) by extension 'ignore_ament_install'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/state_estimator_msgs) by extensions ['colcon_pkg']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/state_estimator_msgs) by extension 'colcon_pkg'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/state_estimator_msgs) by extensions ['colcon_meta']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/state_estimator_msgs) by extension 'colcon_meta'
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/state_estimator_msgs) by extensions ['ros']
+[0.198s] Level 1:colcon.colcon_core.package_identification:_identify(muse_ws/src/state_estimator_msgs) by extension 'ros'
+[0.199s] DEBUG:colcon.colcon_core.package_identification:Package 'muse_ws/src/state_estimator_msgs' with type 'ros.catkin' and name 'state_estimator_msgs'
+[0.199s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.199s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.199s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.199s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.199s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.217s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.217s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.220s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 404 installed packages in /opt/ros/rolling
+[0.222s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'iit_commons' build argument 'cmake_args' from command line to 'None'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'iit_commons' build argument 'cmake_target' from command line to 'None'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'iit_commons' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'iit_commons' build argument 'cmake_clean_cache' from command line to 'False'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'iit_commons' build argument 'cmake_clean_first' from command line to 'False'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'iit_commons' build argument 'cmake_force_configure' from command line to 'False'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'iit_commons' build argument 'ament_cmake_args' from command line to 'None'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'iit_commons' build argument 'catkin_cmake_args' from command line to 'None'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'iit_commons' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.276s] DEBUG:colcon.colcon_core.verb:Building package 'iit_commons' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons', 'merge_install': False, 'path': '/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/iit_commons', 'symlink_install': True, 'test_result_base': None}
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'state_estimator_msgs' build argument 'cmake_args' from command line to 'None'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'state_estimator_msgs' build argument 'cmake_target' from command line to 'None'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'state_estimator_msgs' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'state_estimator_msgs' build argument 'cmake_clean_cache' from command line to 'False'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'state_estimator_msgs' build argument 'cmake_clean_first' from command line to 'False'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'state_estimator_msgs' build argument 'cmake_force_configure' from command line to 'False'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'state_estimator_msgs' build argument 'ament_cmake_args' from command line to 'None'
+[0.276s] Level 5:colcon.colcon_core.verb:set package 'state_estimator_msgs' build argument 'catkin_cmake_args' from command line to 'None'
+[0.277s] Level 5:colcon.colcon_core.verb:set package 'state_estimator_msgs' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.277s] DEBUG:colcon.colcon_core.verb:Building package 'state_estimator_msgs' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs', 'merge_install': False, 'path': '/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator_msgs', 'symlink_install': True, 'test_result_base': None}
+[0.277s] Level 5:colcon.colcon_core.verb:set package 'state_estimator' build argument 'cmake_args' from command line to 'None'
+[0.277s] Level 5:colcon.colcon_core.verb:set package 'state_estimator' build argument 'cmake_target' from command line to 'None'
+[0.277s] Level 5:colcon.colcon_core.verb:set package 'state_estimator' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.277s] Level 5:colcon.colcon_core.verb:set package 'state_estimator' build argument 'cmake_clean_cache' from command line to 'False'
+[0.277s] Level 5:colcon.colcon_core.verb:set package 'state_estimator' build argument 'cmake_clean_first' from command line to 'False'
+[0.277s] Level 5:colcon.colcon_core.verb:set package 'state_estimator' build argument 'cmake_force_configure' from command line to 'False'
+[0.277s] Level 5:colcon.colcon_core.verb:set package 'state_estimator' build argument 'ament_cmake_args' from command line to 'None'
+[0.277s] Level 5:colcon.colcon_core.verb:set package 'state_estimator' build argument 'catkin_cmake_args' from command line to 'None'
+[0.277s] Level 5:colcon.colcon_core.verb:set package 'state_estimator' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.277s] DEBUG:colcon.colcon_core.verb:Building package 'state_estimator' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator', 'merge_install': False, 'path': '/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator', 'symlink_install': True, 'test_result_base': None}
+[0.277s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.279s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.279s] INFO:colcon.colcon_ros.task.catkin.build:Building ROS package in '/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/iit_commons' with build type 'catkin'
+[0.279s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/iit_commons'
+[0.281s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.281s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.281s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.285s] INFO:colcon.colcon_ros.task.catkin.build:Building ROS package in '/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator_msgs' with build type 'catkin'
+[0.285s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator_msgs'
+[0.285s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.285s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.293s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/iit_commons -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCATKIN_SYMLINK_INSTALL=ON -DCMAKE_INSTALL_PREFIX=/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons
+[0.297s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator_msgs -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCATKIN_SYMLINK_INSTALL=ON -DCMAKE_INSTALL_PREFIX=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs
+[2.770s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/iit_commons -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCATKIN_SYMLINK_INSTALL=ON -DCMAKE_INSTALL_PREFIX=/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons
+[2.771s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons -- -j12 -l12
+[4.898s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator_msgs -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCATKIN_SYMLINK_INSTALL=ON -DCMAKE_INSTALL_PREFIX=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs
+[4.900s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs -- -j12 -l12
+[10.146s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs -- -j12 -l12
+[10.161s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs
+[10.281s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs
+[10.281s] Level 1:colcon.colcon_core.shell:create_environment_hook('state_estimator_msgs', 'ros_package_path')
+[10.282s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/ros_package_path.ps1'
+[10.282s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/ros_package_path.dsv'
+[10.283s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/ros_package_path.sh'
+[10.283s] Level 1:colcon.colcon_ros.task.catkin:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages'
+[10.283s] Level 1:colcon.colcon_core.shell:create_environment_hook('state_estimator_msgs', 'catkin_pythonpath')
+[10.284s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/catkin_pythonpath.ps1'
+[10.284s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/catkin_pythonpath.dsv'
+[10.284s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/catkin_pythonpath.sh'
+[10.285s] Level 1:colcon.colcon_core.shell:create_environment_hook('state_estimator_msgs', 'pkg_config_path')
+[10.285s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/pkg_config_path.ps1'
+[10.285s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/pkg_config_path.dsv'
+[10.285s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/pkg_config_path.sh'
+[10.289s] Level 1:colcon.colcon_core.shell:create_environment_hook('state_estimator_msgs', 'pkg_config_path_multiarch')
+[10.289s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/pkg_config_path_multiarch.ps1'
+[10.289s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/pkg_config_path_multiarch.dsv'
+[10.290s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/pkg_config_path_multiarch.sh'
+[10.290s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(state_estimator_msgs)
+[10.292s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs' for CMake module files
+[10.293s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs' for CMake config files
+[10.293s] Level 1:colcon.colcon_core.shell:create_environment_hook('state_estimator_msgs', 'cmake_prefix_path')
+[10.293s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/cmake_prefix_path.ps1'
+[10.294s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/cmake_prefix_path.dsv'
+[10.294s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/cmake_prefix_path.sh'
+[10.294s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib'
+[10.294s] Level 1:colcon.colcon_core.shell:create_environment_hook('state_estimator_msgs', 'ld_library_path_lib')
+[10.295s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/ld_library_path_lib.ps1'
+[10.295s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/ld_library_path_lib.dsv'
+[10.295s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/ld_library_path_lib.sh'
+[10.295s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/bin'
+[10.296s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/pkgconfig/state_estimator_msgs.pc'
+[10.296s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages'
+[10.296s] Level 1:colcon.colcon_core.shell:create_environment_hook('state_estimator_msgs', 'pythonpath')
+[10.296s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/pythonpath.ps1'
+[10.296s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/pythonpath.dsv'
+[10.296s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/hook/pythonpath.sh'
+[10.297s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/bin'
+[10.297s] INFO:colcon.colcon_core.shell:Creating package script '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/package.ps1'
+[10.298s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/package.dsv'
+[10.298s] INFO:colcon.colcon_core.shell:Creating package script '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/package.sh'
+[10.299s] INFO:colcon.colcon_core.shell:Creating package script '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/package.bash'
+[10.300s] INFO:colcon.colcon_core.shell:Creating package script '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/package.zsh'
+[10.300s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/colcon-core/packages/state_estimator_msgs)
+[17.307s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons -- -j12 -l12
+[17.308s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons
+[17.355s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons
+[17.355s] Level 1:colcon.colcon_core.shell:create_environment_hook('iit_commons', 'ros_package_path')
+[17.355s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/hook/ros_package_path.ps1'
+[17.356s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/hook/ros_package_path.dsv'
+[17.356s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/hook/ros_package_path.sh'
+[17.357s] Level 1:colcon.colcon_core.shell:create_environment_hook('iit_commons', 'pkg_config_path')
+[17.357s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/hook/pkg_config_path.ps1'
+[17.357s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/hook/pkg_config_path.dsv'
+[17.357s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/hook/pkg_config_path.sh'
+[17.358s] Level 1:colcon.colcon_core.shell:create_environment_hook('iit_commons', 'pkg_config_path_multiarch')
+[17.358s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/hook/pkg_config_path_multiarch.ps1'
+[17.358s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/hook/pkg_config_path_multiarch.dsv'
+[17.358s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/hook/pkg_config_path_multiarch.sh'
+[17.359s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(iit_commons)
+[17.359s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons' for CMake module files
+[17.359s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons' for CMake config files
+[17.360s] Level 1:colcon.colcon_core.shell:create_environment_hook('iit_commons', 'cmake_prefix_path')
+[17.360s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/hook/cmake_prefix_path.ps1'
+[17.360s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/hook/cmake_prefix_path.dsv'
+[17.360s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/hook/cmake_prefix_path.sh'
+[17.361s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib'
+[17.361s] Level 1:colcon.colcon_core.shell:create_environment_hook('iit_commons', 'ld_library_path_lib')
+[17.361s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/hook/ld_library_path_lib.ps1'
+[17.361s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/hook/ld_library_path_lib.dsv'
+[17.361s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/hook/ld_library_path_lib.sh'
+[17.362s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/bin'
+[17.362s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/pkgconfig/iit_commons.pc'
+[17.362s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/python3.12/site-packages'
+[17.362s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/bin'
+[17.363s] INFO:colcon.colcon_core.shell:Creating package script '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/package.ps1'
+[17.363s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/package.dsv'
+[17.364s] INFO:colcon.colcon_core.shell:Creating package script '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/package.sh'
+[17.364s] INFO:colcon.colcon_core.shell:Creating package script '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/package.bash'
+[17.364s] INFO:colcon.colcon_core.shell:Creating package script '/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/package.zsh'
+[17.364s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/colcon-core/packages/iit_commons)
+[17.365s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator' with build type 'ament_cmake'
+[17.365s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator'
+[17.365s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[17.365s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[17.387s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator': CMAKE_PREFIX_PATH=/opt/ros/rolling:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/pkgconfig PYTHONPATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share /usr/bin/cmake /home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator
+[22.003s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator' returned '0': CMAKE_PREFIX_PATH=/opt/ros/rolling:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/pkgconfig PYTHONPATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share /usr/bin/cmake /home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator
+[22.005s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator': CMAKE_PREFIX_PATH=/opt/ros/rolling:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/pkgconfig PYTHONPATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share /usr/bin/cmake --build /home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator -- -j12 -l12
+[67.406s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator' returned '0': CMAKE_PREFIX_PATH=/opt/ros/rolling:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/pkgconfig PYTHONPATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share /usr/bin/cmake --build /home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator -- -j12 -l12
+[67.407s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator': CMAKE_PREFIX_PATH=/opt/ros/rolling:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/pkgconfig PYTHONPATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share /usr/bin/cmake --install /home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator
+[68.191s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(state_estimator)
+[68.192s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator' for CMake module files
+[68.192s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator' returned '0': CMAKE_PREFIX_PATH=/opt/ros/rolling:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/pkgconfig PYTHONPATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share /usr/bin/cmake --install /home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator
+[68.193s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator' for CMake config files
+[68.193s] Level 1:colcon.colcon_core.shell:create_environment_hook('state_estimator', 'cmake_prefix_path')
+[68.194s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/hook/cmake_prefix_path.ps1'
+[68.194s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/hook/cmake_prefix_path.dsv'
+[68.194s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/hook/cmake_prefix_path.sh'
+[68.195s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/lib'
+[68.195s] Level 1:colcon.colcon_core.shell:create_environment_hook('state_estimator', 'ld_library_path_lib')
+[68.195s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/hook/ld_library_path_lib.ps1'
+[68.195s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/hook/ld_library_path_lib.dsv'
+[68.195s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/hook/ld_library_path_lib.sh'
+[68.196s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/bin'
+[68.196s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/lib/pkgconfig/state_estimator.pc'
+[68.196s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/lib/python3.12/site-packages'
+[68.196s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/bin'
+[68.196s] INFO:colcon.colcon_core.shell:Creating package script '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/package.ps1'
+[68.197s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/package.dsv'
+[68.197s] INFO:colcon.colcon_core.shell:Creating package script '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/package.sh'
+[68.197s] INFO:colcon.colcon_core.shell:Creating package script '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/package.bash'
+[68.197s] INFO:colcon.colcon_core.shell:Creating package script '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/package.zsh'
+[68.198s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/colcon-core/packages/state_estimator)
+[68.198s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(state_estimator)
+[68.198s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator' for CMake module files
+[68.199s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator' for CMake config files
+[68.199s] Level 1:colcon.colcon_core.shell:create_environment_hook('state_estimator', 'cmake_prefix_path')
+[68.200s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/hook/cmake_prefix_path.ps1'
+[68.205s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/hook/cmake_prefix_path.dsv'
+[68.233s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/hook/cmake_prefix_path.sh'
+[68.234s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/lib'
+[68.234s] Level 1:colcon.colcon_core.shell:create_environment_hook('state_estimator', 'ld_library_path_lib')
+[68.234s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/hook/ld_library_path_lib.ps1'
+[68.235s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/hook/ld_library_path_lib.dsv'
+[68.253s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/hook/ld_library_path_lib.sh'
+[68.254s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/bin'
+[68.254s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/lib/pkgconfig/state_estimator.pc'
+[68.255s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/lib/python3.12/site-packages'
+[68.255s] Level 1:colcon.colcon_core.environment:checking '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/bin'
+[68.255s] INFO:colcon.colcon_core.shell:Creating package script '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/package.ps1'
+[68.256s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/package.dsv'
+[68.256s] INFO:colcon.colcon_core.shell:Creating package script '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/package.sh'
+[68.256s] INFO:colcon.colcon_core.shell:Creating package script '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/package.bash'
+[68.257s] INFO:colcon.colcon_core.shell:Creating package script '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/package.zsh'
+[68.257s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/colcon-core/packages/state_estimator)
+[68.257s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[68.258s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[68.258s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[68.258s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[68.263s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[68.263s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[68.263s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[68.280s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[68.280s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jonas/Documents/Kamaro/muse_ros2/install/local_setup.ps1'
+[68.281s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/jonas/Documents/Kamaro/muse_ros2/install/_local_setup_util_ps1.py'
+[68.283s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jonas/Documents/Kamaro/muse_ros2/install/setup.ps1'
+[68.284s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jonas/Documents/Kamaro/muse_ros2/install/local_setup.sh'
+[68.284s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/jonas/Documents/Kamaro/muse_ros2/install/_local_setup_util_sh.py'
+[68.285s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jonas/Documents/Kamaro/muse_ros2/install/setup.sh'
+[68.286s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jonas/Documents/Kamaro/muse_ros2/install/local_setup.bash'
+[68.286s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jonas/Documents/Kamaro/muse_ros2/install/setup.bash'
+[68.287s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/jonas/Documents/Kamaro/muse_ros2/install/local_setup.zsh'
+[68.287s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/jonas/Documents/Kamaro/muse_ros2/install/setup.zsh'

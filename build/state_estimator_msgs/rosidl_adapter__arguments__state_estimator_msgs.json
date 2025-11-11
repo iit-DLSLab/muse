@@ -1,0 +1,10 @@
+{
+  "package_name": "state_estimator_msgs",
+  "non_idl_tuples": [
+    "/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator_msgs:msg/Attitude.msg",
+    "/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator_msgs:msg/ContactDetection.msg",
+    "/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator_msgs:msg/JointStateWithAcceleration.msg",
+    "/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator_msgs:msg/LegOdometry.msg",
+    "/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator_msgs:msg/SensorFusion.msg"
+  ]
+}

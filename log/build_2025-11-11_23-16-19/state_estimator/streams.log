@@ -1,0 +1,497 @@
+[0.020s] Invoking command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator': CMAKE_PREFIX_PATH=/opt/ros/rolling:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/pkgconfig PYTHONPATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share /usr/bin/cmake /home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator
+[0.111s] -- The C compiler identification is GNU 13.3.0
+[0.185s] -- The CXX compiler identification is GNU 13.3.0
+[0.215s] -- Detecting C compiler ABI info
+[0.357s] -- Detecting C compiler ABI info - done
+[0.368s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.368s] -- Detecting C compile features
+[0.369s] -- Detecting C compile features - done
+[0.387s] -- Detecting CXX compiler ABI info
+[0.539s] -- Detecting CXX compiler ABI info - done
+[0.551s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.551s] -- Detecting CXX compile features
+[0.552s] -- Detecting CXX compile features - done
+[0.555s] -- Found ament_cmake: 2.8.4 (/opt/ros/rolling/share/ament_cmake/cmake)
+[0.742s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[0.818s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.861s] -- Found rclcpp: 30.1.1 (/opt/ros/rolling/share/rclcpp/cmake)
+[0.905s] -- Found rosidl_generator_c: 5.1.0 (/opt/ros/rolling/share/rosidl_generator_c/cmake)
+[0.913s] -- Found rosidl_generator_cpp: 5.1.0 (/opt/ros/rolling/share/rosidl_generator_cpp/cmake)
+[0.925s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.939s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.012s] -- Found rmw_implementation_cmake: 7.9.0 (/opt/ros/rolling/share/rmw_implementation_cmake/cmake)
+[1.015s] -- Found rmw_fastrtps_cpp: 9.4.3 (/opt/ros/rolling/share/rmw_fastrtps_cpp/cmake)
+[1.170s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  
+[1.187s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.266s] -- Found std_msgs: 5.9.0 (/opt/ros/rolling/share/std_msgs/cmake)
+[1.289s] -- Found pluginlib: 5.8.0 (/opt/ros/rolling/share/pluginlib/cmake)
+[1.364s] -- Found state_estimator_msgs: 0.0.1 (/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake)
+[1.443s] -- Found iit_commons: 1.0.0 (/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share/iit_commons/cmake)
+[1.471s] -- Found nav_msgs: 5.9.0 (/opt/ros/rolling/share/nav_msgs/cmake)
+[1.604s] -- Found rosbag2_transport: 0.33.0 (/opt/ros/rolling/share/rosbag2_transport/cmake)
+[1.976s] -- Setting yaml-cpp_DIR to: '/opt/ros/rolling/share/yaml_cpp_vendor/cmake/../../../opt/yaml_cpp_vendor/share/cmake/yaml-cpp'
+[2.068s] -- Found message_filters: 7.3.3 (/opt/ros/rolling/share/message_filters/cmake)
+[2.085s] -- pinocchio_default FOUND. pinocchio_default at /opt/ros/rolling/lib/x86_64-linux-gnu/libpinocchio_default.so
+[2.085s] -- pinocchio_parsers FOUND. pinocchio_parsers at /opt/ros/rolling/lib/x86_64-linux-gnu/libpinocchio_parsers.so
+[2.093s] -- boost_filesystem FOUND. boost_filesystem at /lib/x86_64-linux-gnu/libboost_filesystem.so
+[2.807s] -- Found Boost: /usr/include (found version "1.83.0") found components: filesystem serialization system 
+[2.841s] -- eigenpy FOUND. eigenpy at /opt/ros/rolling/lib/x86_64-linux-gnu/libeigenpy.so
+[2.881s] -- Checking for NumPy
+[3.106s] --   NUMPY_INCLUDE_DIRS=/usr/lib/python3/dist-packages/numpy/core/include
+[3.223s] --   NUMPY_VERSION=1.26.4
+[3.615s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter Development.Module NumPy 
+[3.618s] -- PythonLibraryDirs: 
+[3.618s] -- PythonLibVersionString: 3.12.3
+[3.646s] -- Python site lib: lib/python3.12/site-packages
+[3.646s] -- Python include dirs: /usr/include/python3.12
+[3.703s] -- Checking for NumPy
+[3.826s] --   NUMPY_INCLUDE_DIRS=/usr/lib/python3/dist-packages/numpy/core/include
+[3.930s] --   NUMPY_VERSION=1.26.4
+[3.931s] -- NumPy include dir: /usr/lib/python3/dist-packages/numpy/core/include
+[3.942s] -- Found Boost: /usr/include (found version "1.83.0") found components: python312 
+[4.351s] -- Default C++ standard: 201703
+[4.351s] -- Minimal C++ standard upgraded to 11
+[4.352s] -- C++ standard sufficient: Minimal required 11, currently defined: 14
+[4.401s] -- hpp-fcl FOUND. hpp-fcl at /opt/ros/rolling/lib/x86_64-linux-gnu/libhpp-fcl.so
+[4.414s] -- Found Boost: /usr/include (found version "1.83.0") found components: chrono serialization filesystem 
+[4.438s] -- Minimal C++ standard upgraded to 14
+[4.438s] -- C++ standard sufficient: Minimal required 14, currently defined: 14
+[4.452s] -- C++ standard sufficient: Minimal required 14, currently defined: 14
+[4.452s] [0mCMake Deprecation Warning at /opt/ros/rolling/share/ament_cmake_target_dependencies/cmake/ament_target_dependencies.cmake:87 (message):
+[4.452s]   ament_target_dependencies() is deprecated.  Use target_link_libraries()
+[4.452s]   with modern CMake targets instead.  Try replacing this call with:
+[4.453s] 
+[4.453s]     target_link_libraries(state_estimator_node PUBLIC
+[4.453s]       ${std_msgs_TARGETS}
+[4.453s]       pluginlib::pluginlib
+[4.453s]       rclcpp::rclcpp
+[4.453s]     )
+[4.453s] 
+[4.453s] Call Stack (most recent call first):
+[4.453s]   CMakeLists.txt:32 (ament_target_dependencies)
+[4.453s] 
+[4.454s] [0m
+[4.579s] -- Configuring done (4.5s)
+[4.613s] -- Generating done (0.0s)
+[4.620s] -- Build files have been written to: /home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator
+[4.635s] Invoked command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator' returned '0': CMAKE_PREFIX_PATH=/opt/ros/rolling:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/pkgconfig PYTHONPATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share /usr/bin/cmake /home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator
+[4.638s] Invoking command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator': CMAKE_PREFIX_PATH=/opt/ros/rolling:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/pkgconfig PYTHONPATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share /usr/bin/cmake --build /home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator -- -j12 -l12
+[4.716s] [ 33%] [32mBuilding CXX object CMakeFiles/state_estimator_plugins.dir/src/plugins/leg_odometry_plugin.cpp.o[0m
+[4.717s] [ 33%] [32mBuilding CXX object CMakeFiles/state_estimator_plugins.dir/src/plugins/attitude_estimation_plugin.cpp.o[0m
+[4.717s] [ 55%] [32mBuilding CXX object CMakeFiles/state_estimator_plugins.dir/src/plugins/contact_detection_plugin.cpp.o[0m
+[4.719s] [ 55%] [32mBuilding CXX object CMakeFiles/state_estimator_plugins.dir/src/plugins/sensor_fusion_plugin.cpp.o[0m
+[4.719s] [ 55%] [32mBuilding CXX object CMakeFiles/state_estimator_plugins.dir/src/plugins/joint_state_downsampler_plugin.cpp.o[0m
+[4.719s] [ 66%] [32mBuilding CXX object CMakeFiles/state_estimator_node.dir/src/state_estimator_node.cpp.o[0m
+[4.719s] [ 77%] [32mBuilding CXX object CMakeFiles/state_estimator_plugins.dir/src/plugins/contact_data_packaging_plugin.cpp.o[0m
+[8.394s] In file included from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Estimator.hpp:4[m[K,
+[8.394s]                  from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/Observer.hpp:7[m[K,
+[8.394s]                  from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:6[m[K,
+[8.394s]                  from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:4[m[K,
+[8.394s]                  from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:1[m[K:
+[8.394s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:[m[K In function ‘[01m[KEigen::Matrix<double, 3, 3> state_estimator::[01;32m[Kcalc_Rzyx[m[K(const Eigen::Matrix<double, 3, 1>&)[m[K’:
+[8.395s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:41:43:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Ku1[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[8.395s]    41 |                 Eigen::Matrix<double,3,1> [01;35m[Ku1[m[K = R.block(0,0,3,1);
+[8.395s]       |                                           [01;35m[K^~[m[K
+[8.395s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:42:43:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Ku2[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[8.395s]    42 |                 Eigen::Matrix<double,3,1> [01;35m[Ku2[m[K = R.block(0,1,3,1);
+[8.395s]       |                                           [01;35m[K^~[m[K
+[8.395s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:43:43:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Ku3[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[8.395s]    43 |                 Eigen::Matrix<double,3,1> [01;35m[Ku3[m[K = R.block(0,2,3,1);
+[8.395s]       |                                           [01;35m[K^~[m[K
+[8.513s] In file included from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Estimator.hpp:4[m[K,
+[8.513s]                  from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/Observer.hpp:7[m[K,
+[8.513s]                  from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/NLO.hpp:4[m[K,
+[8.513s]                  from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_NLO.hpp:4[m[K,
+[8.513s]                  from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/attitude_estimation_plugin.cpp:2[m[K:
+[8.513s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:[m[K In function ‘[01m[KEigen::Matrix<double, 3, 3> state_estimator::[01;32m[Kcalc_Rzyx[m[K(const Eigen::Matrix<double, 3, 1>&)[m[K’:
+[8.513s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:41:43:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Ku1[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[8.513s]    41 |                 Eigen::Matrix<double,3,1> [01;35m[Ku1[m[K = R.block(0,0,3,1);
+[8.514s]       |                                           [01;35m[K^~[m[K
+[8.514s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:42:43:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Ku2[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[8.514s]    42 |                 Eigen::Matrix<double,3,1> [01;35m[Ku2[m[K = R.block(0,1,3,1);
+[8.514s]       |                                           [01;35m[K^~[m[K
+[8.514s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:43:43:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Ku3[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[8.514s]    43 |                 Eigen::Matrix<double,3,1> [01;35m[Ku3[m[K = R.block(0,2,3,1);
+[8.514s]       |                                           [01;35m[K^~[m[K
+[8.617s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:[m[K In function ‘[01m[Kstd::string state_estimator::[01;32m[Kns2str[m[K(uint64_t)[m[K’:
+[8.619s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:150:26:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kns[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[8.619s]   150 |                 uint64_t [01;35m[Kns[m[K =  t-y*31536000000000000-d*86400000000000-h*3600000000000-m*60000000000-s*1000000000-ms*1000000-us*1000;
+[8.619s]       |                          [01;35m[K^~[m[K
+[8.619s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:156:26:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kx[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[8.619s]   156 |                 uint64_t [01;35m[Kx[m[K = 1;
+[8.619s]       |                          [01;35m[K^[m[K
+[8.633s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Estimator.hpp:[m[K In member function ‘[01m[Kvirtual void state_estimator::EstimatorBase::[01;32m[KupdateGen[m[K(double, Eigen::MatrixXd&, Eigen::MatrixXd&)[m[K’:
+[8.633s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Estimator.hpp:39:31:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[8.634s]    39 | virtual void updateGen([01;35m[Kdouble t[m[K, Eigen::MatrixXd &u, Eigen::MatrixXd &z) { }
+[8.634s]       |                        [01;35m[K~~~~~~~^[m[K
+[8.634s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Estimator.hpp:39:51:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Ku[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[8.635s]    39 | virtual void updateGen(double t, [01;35m[KEigen::MatrixXd &u[m[K, Eigen::MatrixXd &z) { }
+[8.635s]       |                                  [01;35m[K~~~~~~~~~~~~~~~~~^[m[K
+[8.635s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Estimator.hpp:39:71:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kz[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[8.635s]    39 | virtual void updateGen(double t, Eigen::MatrixXd &u, [01;35m[KEigen::MatrixXd &z[m[K) { }
+[8.635s]       |                                                      [01;35m[K~~~~~~~~~~~~~~~~~^[m[K
+[8.669s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:[m[K In function ‘[01m[Kstd::string state_estimator::[01;32m[Kns2str[m[K(uint64_t)[m[K’:
+[8.669s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:150:26:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kns[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[8.669s]   150 |                 uint64_t [01;35m[Kns[m[K =  t-y*31536000000000000-d*86400000000000-h*3600000000000-m*60000000000-s*1000000000-ms*1000000-us*1000;
+[8.670s]       |                          [01;35m[K^~[m[K
+[8.670s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:156:26:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kx[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[8.670s]   156 |                 uint64_t [01;35m[Kx[m[K = 1;
+[8.670s]       |                          [01;35m[K^[m[K
+[8.685s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Estimator.hpp:[m[K In member function ‘[01m[Kvirtual void state_estimator::EstimatorBase::[01;32m[KupdateGen[m[K(double, Eigen::MatrixXd&, Eigen::MatrixXd&)[m[K’:
+[8.685s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Estimator.hpp:39:31:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[8.685s]    39 | virtual void updateGen([01;35m[Kdouble t[m[K, Eigen::MatrixXd &u, Eigen::MatrixXd &z) { }
+[8.686s]       |                        [01;35m[K~~~~~~~^[m[K
+[8.686s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Estimator.hpp:39:51:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Ku[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[8.686s]    39 | virtual void updateGen(double t, [01;35m[KEigen::MatrixXd &u[m[K, Eigen::MatrixXd &z) { }
+[8.686s]       |                                  [01;35m[K~~~~~~~~~~~~~~~~~^[m[K
+[8.686s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Estimator.hpp:39:71:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kz[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[8.686s]    39 | virtual void updateGen(double t, Eigen::MatrixXd &u, [01;35m[KEigen::MatrixXd &z[m[K) { }
+[8.686s]       |                                                      [01;35m[K~~~~~~~~~~~~~~~~~^[m[K
+[8.702s] /home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/NLO.hpp: In instantiation of ‘[01m[Kclass state_estimator::NLO<double, 7, 3, 6>[m[K’:
+[8.702s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_NLO.hpp:8:33:[m[K   required from here
+[8.702s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/Observer.hpp:52:29:[m[K [01;35m[Kwarning: [m[K‘[01m[Kstd::string state_estimator::Observer<T, N, M, O>::[01;32m[KDebugString[m[K() const [35m[K[with T = double; unsigned int N = 7; unsigned int M = 3; unsigned int O = 6; std::string = std::__cxx11::basic_string<char>][m[K[m[K’ was hidden [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Woverloaded-virtual=-Woverloaded-virtual=]8;;[m[K]
+[8.703s]    52 |         virtual std::string [01;35m[KDebugString[m[K() const {
+[8.703s]       |                             [01;35m[K^~~~~~~~~~~[m[K
+[8.703s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/NLO.hpp:18:29:[m[K [01;36m[Knote: [m[K  by ‘[01m[Kstd::string state_estimator::NLO<T, N, M, O>::[01;32m[KDebugString[m[K() [35m[K[with T = double; int N = 7; int M = 3; int O = 6; std::string = std::__cxx11::basic_string<char>][m[K[m[K’
+[8.703s]    18 |         virtual std::string [01;36m[KDebugString[m[K() {
+[8.703s]       |                             [01;36m[K^~~~~~~~~~~[m[K
+[8.716s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_NLO.hpp:[m[K In member function ‘[01m[Kvirtual void state_estimator::AttitudeBiasNLO::[01;32m[Kpredict[m[K(double, const Eigen::Vector3d&)[m[K’:
+[8.716s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_NLO.hpp:22:45:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[8.716s]    22 |                 virtual void predict([01;35m[Kdouble t[m[K, const Eigen::Vector3d &u) override {}
+[8.716s]       |                                      [01;35m[K~~~~~~~^[m[K
+[8.716s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_NLO.hpp:22:71:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Ku[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[8.717s]    22 |                 virtual void predict(double t, [01;35m[Kconst Eigen::Vector3d &u[m[K) override {}
+[8.717s]       |                                                [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~^[m[K
+[8.718s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_NLO.hpp:[m[K In member function ‘[01m[Kvirtual void state_estimator::AttitudeBiasNLO::[01;32m[Kupdate[m[K(double, const Eigen::Vector6d&)[m[K’:
+[8.718s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_NLO.hpp:24:44:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[8.718s]    24 |                 virtual void update([01;35m[Kdouble t[m[K, const Eigen::Vector6d &z) override {}
+[8.718s]       |                                     [01;35m[K~~~~~~~^[m[K
+[8.718s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_NLO.hpp:24:70:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kz[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[8.719s]    24 |                 virtual void update(double t, [01;35m[Kconst Eigen::Vector6d &z[m[K) override {}
+[8.719s]       |                                               [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~^[m[K
+[8.813s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:[m[K In constructor ‘[01m[Kstate_estimator::KFSensorFusion::[01;32m[KKFSensorFusion[m[K(double, const Eigen::Matrix<double, 6, 1>&, const Eigen::Matrix<double, 6, 6>&, const Eigen::Matrix<double, 6, 6>&, const Eigen::Matrix<double, 3, 3>&, bool, bool)[m[K’:
+[8.813s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:52:84:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Klidar[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[8.813s]    52 |                                           const Eigen::Matrix<double,3,3> &R, [01;35m[Kbool lidar[m[K, bool slippage)
+[8.813s]       |                                                                               [01;35m[K~~~~~^~~~~[m[K
+[8.813s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:52:96:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kslippage[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[8.813s]    52 |                                           const Eigen::Matrix<double,3,3> &R, bool lidar, [01;35m[Kbool slippage[m[K)
+[8.813s]       |                                                                                           [01;35m[K~~~~~^~~~~~~~[m[K
+[9.581s] In file included from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/attitude_estimation_plugin.cpp:3[m[K:
+[9.581s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:[m[K In destructor ‘[01m[Kstate_estimator::AttitudeBiasXKF::[01;32m[K~AttitudeBiasXKF[m[K()[m[K’:
+[9.581s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:30:49:[m[K [01;35m[Kwarning: [m[Kdeleting object of abstract class type ‘[01m[Kstate_estimator::NLO<double, 7, 3, 6>[m[K’ which has non-virtual destructor will cause undefined behavior [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdelete-non-virtual-dtor-Wdelete-non-virtual-dtor]8;;[m[K]
+[9.581s]    30 |                         if (this->nlo!=nullptr) [01;35m[Kdelete(this->nlo)[m[K;
+[9.581s]       |                                                 [01;35m[K^~~~~~~~~~~~~~~~~[m[K
+[9.714s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:[m[K In member function ‘[01m[Kvirtual Eigen::Matrix<double, 6, 1> state_estimator::KFSensorFusion::[01;32m[Kcalc_f[m[K(double, const Eigen::Matrix<double, 6, 1>&, const Eigen::Matrix<double, 3, 1>&)[m[K’:
+[9.715s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:109:68:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[9.715s]   109 |     inline Eigen::Matrix<double,6,1> KFSensorFusion::calc_f([01;35m[Kdouble t[m[K, const Eigen::Matrix<double,6,1> &x, const Eigen::Matrix<double,3,1> &u)
+[9.715s]       |                                                             [01;35m[K~~~~~~~^[m[K
+[9.716s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:[m[K In member function ‘[01m[Kvirtual Eigen::Matrix<double, 6, 6> state_estimator::KFSensorFusion::[01;32m[Kcalc_F[m[K(double, const Eigen::Matrix<double, 6, 1>&, const Eigen::Matrix<double, 3, 1>&)[m[K’:
+[9.716s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:118:68:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[9.716s]   118 |     inline Eigen::Matrix<double,6,6> KFSensorFusion::calc_F([01;35m[Kdouble t[m[K, const Eigen::Matrix<double,6,1> &x, const Eigen::Matrix<double,3,1> &u)
+[9.716s]       |                                                             [01;35m[K~~~~~~~^[m[K
+[9.717s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:118:104:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kx[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[9.717s]   118 |     inline Eigen::Matrix<double,6,6> KFSensorFusion::calc_F(double t, [01;35m[Kconst Eigen::Matrix<double,6,1> &x[m[K, const Eigen::Matrix<double,3,1> &u)
+[9.717s]       |                                                                       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[m[K
+[9.717s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:118:140:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Ku[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[9.717s]   118 |     inline Eigen::Matrix<double,6,6> KFSensorFusion::calc_F(double t, const Eigen::Matrix<double,6,1> &x, [01;35m[Kconst Eigen::Matrix<double,3,1> &u[m[K)
+[9.717s]       |                                                                                                           [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[m[K
+[9.717s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:[m[K In member function ‘[01m[Kvirtual Eigen::Matrix<double, 3, 1> state_estimator::KFSensorFusion::[01;32m[Kcalc_h[m[K(double, const Eigen::Matrix<double, 6, 1>&)[m[K’:
+[9.717s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:130:68:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[9.718s]   130 |     inline Eigen::Matrix<double,3,1> KFSensorFusion::calc_h([01;35m[Kdouble t[m[K, const Eigen::Matrix<double,6,1> &x)
+[9.718s]       |                                                             [01;35m[K~~~~~~~^[m[K
+[9.718s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:[m[K In member function ‘[01m[Kvirtual Eigen::Matrix<double, 3, 6, 0, 3, 6> state_estimator::KFSensorFusion::[01;32m[Kcalc_H[m[K(double, const Eigen::Matrix<double, 6, 1>&)[m[K’:
+[9.718s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:136:68:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[9.718s]   136 |     inline Eigen::Matrix<double,3,6> KFSensorFusion::calc_H([01;35m[Kdouble t[m[K, const Eigen::Matrix<double,6,1> &x)
+[9.718s]       |                                                             [01;35m[K~~~~~~~^[m[K
+[9.718s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:136:104:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kx[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[9.718s]   136 |     inline Eigen::Matrix<double,3,6> KFSensorFusion::calc_H(double t, [01;35m[Kconst Eigen::Matrix<double,6,1> &x[m[K)
+[9.718s]       |                                                                       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[m[K
+[9.718s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:[m[K In member function ‘[01m[Kvoid state_estimator::KFSensorFusion::[01;32m[KsetMatricesSF[m[K(bool)[m[K’:
+[9.718s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:146:52:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kslippage[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[9.718s]   146 |     inline void KFSensorFusion::setMatricesSF([01;35m[Kbool slippage[m[K)
+[9.719s]       |                                               [01;35m[K~~~~~^~~~~~~~[m[K
+[10.102s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:[m[K In member function ‘[01m[Kvirtual void state_estimator::AttitudeBiasXKF::[01;32m[Kupdate[m[K(double, const Eigen::Vector6d&)[m[K’:
+[10.102s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:71:41:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Kxbar[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[10.102s]    71 |                         Eigen::Vector7d [01;35m[Kxbar[m[K = this->x_bar;
+[10.102s]       |                                         [01;35m[K^~~~[m[K
+[10.103s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:74:41:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Kf_bar[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[10.103s]    74 |                         Eigen::Vector3d [01;35m[Kf_bar[m[K = R_bar.transpose()*this->f_n;
+[10.103s]       |                                         [01;35m[K^~~~~[m[K
+[10.103s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:75:41:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Km_bar[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[10.103s]    75 |                         Eigen::Vector3d [01;35m[Km_bar[m[K = R_bar.transpose()*this->m_n;
+[10.103s]       |                                         [01;35m[K^~~~~[m[K
+[10.138s] In file included from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:5[m[K,
+[10.139s]                  from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:15[m[K:
+[10.139s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/algebra.h:[m[K In function ‘[01m[Kvoid iit::commons::[01;32m[KcomputeQR[m[K(const MatrixXR&, MatrixXR&, MatrixXR&, const double&)[m[K’:
+[10.140s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/algebra.h:271:37:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Ktolerance[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[10.140s]   271 |                       [01;35m[Kconst double& tolerance[m[K)
+[10.140s]       |                       [01;35m[K~~~~~~~~~~~~~~^~~~~~~~~[m[K
+[10.163s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:[m[K In function ‘[01m[KEigen::Matrix3d iit::commons::[01;32m[KrpyToEar[m[K(const Eigen::Vector3d&)[m[K’:
+[10.163s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:143:12:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kyaw[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[10.163s]   143 |     double [01;35m[Kyaw[m[K = rpy(2);
+[10.164s]       |            [01;35m[K^~~[m[K
+[10.164s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:[m[K In function ‘[01m[KEigen::Matrix3d iit::commons::[01;32m[KrpyToEarInv_dot[m[K(const Eigen::Vector3d&, const Eigen::Vector3d&)[m[K’:
+[10.164s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:163:12:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kroll[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[10.164s]   163 |     double [01;35m[Kroll[m[K = rpy(0);
+[10.165s]       |            [01;35m[K^~~~[m[K
+[10.165s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:166:12:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Krolld[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[10.165s]   166 |     double [01;35m[Krolld[m[K = rpyd(0);
+[10.165s]       |            [01;35m[K^~~~~[m[K
+[10.170s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:[m[K In member function ‘[01m[Kvirtual Eigen::Vector7d state_estimator::AttitudeBiasXKF::[01;32m[Kcalc_f[m[K(double, const Eigen::Vector7d&, const Eigen::Vector3d&)[m[K’:
+[10.170s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:122:47:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[10.171s]   122 |                 Eigen::Vector7d calc_f([01;35m[Kdouble t[m[K, const Eigen::Vector7d &x, const Eigen::Vector3d &u)
+[10.171s]       |                                        [01;35m[K~~~~~~~^[m[K
+[10.184s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:[m[K In member function ‘[01m[Kvirtual Eigen::Vector6d state_estimator::AttitudeBiasXKF::[01;32m[Kcalc_h[m[K(double, const Eigen::Vector7d&)[m[K’:
+[10.185s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:142:41:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Kb[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[10.185s]   142 |                         Eigen::Vector3d [01;35m[Kb[m[K = x.tail(3);
+[10.185s]       |                                         [01;35m[K^[m[K
+[10.185s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:138:47:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[10.186s]   138 |                 Eigen::Vector6d calc_h([01;35m[Kdouble t[m[K, const Eigen::Vector7d &x)
+[10.186s]       |                                        [01;35m[K~~~~~~~^[m[K
+[10.240s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:[m[K In member function ‘[01m[Kvirtual Eigen::Matrix7d state_estimator::AttitudeBiasXKF::[01;32m[Kcalc_F[m[K(double, const Eigen::Vector7d&, const Eigen::Vector3d&)[m[K’:
+[10.240s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:153:47:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[10.240s]   153 |                 Eigen::Matrix7d calc_F([01;35m[Kdouble t[m[K, const Eigen::Vector7d &x, const Eigen::Vector3d &u)
+[10.240s]       |                                        [01;35m[K~~~~~~~^[m[K
+[10.404s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:[m[K In member function ‘[01m[KEigen::Matrix6d state_estimator::AttitudeBiasXKF::[01;32m[Kcalc_F[m[K(double, const Eigen::Vector7d&, const Eigen::Vector7d&, const Eigen::Vector3d&)[m[K’:
+[10.404s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:175:41:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Komega[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[10.404s]   175 |                         Eigen::Vector3d [01;35m[Komega[m[K = u;
+[10.404s]       |                                         [01;35m[K^~~~~[m[K
+[10.404s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:168:47:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[10.404s]   168 |                 Eigen::Matrix6d calc_F([01;35m[Kdouble t[m[K, const Eigen::Vector7d &xhat, const Eigen::Vector7d &xbar, const Eigen::Vector3d &u)
+[10.404s]       |                                        [01;35m[K~~~~~~~^[m[K
+[10.405s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:[m[K In member function ‘[01m[KEigen::Matrix6d state_estimator::AttitudeBiasXKF::[01;32m[Kcalc_G[m[K(double, const Eigen::Vector7d&, const Eigen::Vector7d&, const Eigen::Vector3d&)[m[K’:
+[10.405s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:197:41:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Kbhat[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[10.405s]   197 |                         Eigen::Vector3d [01;35m[Kbhat[m[K = xhat.tail(3);
+[10.405s]       |                                         [01;35m[K^~~~[m[K
+[10.406s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:199:41:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Kbbar[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[10.406s]   199 |                         Eigen::Vector3d [01;35m[Kbbar[m[K = xbar.tail(3);
+[10.406s]       |                                         [01;35m[K^~~~[m[K
+[10.406s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:200:41:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Komega[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[10.406s]   200 |                         Eigen::Vector3d [01;35m[Komega[m[K = u;
+[10.406s]       |                                         [01;35m[K^~~~~[m[K
+[10.406s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:193:47:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[10.406s]   193 |                 Eigen::Matrix6d calc_G([01;35m[Kdouble t[m[K, const Eigen::Vector7d &xhat, const Eigen::Vector7d &xbar, const Eigen::Vector3d &u)
+[10.406s]       |                                        [01;35m[K~~~~~~~^[m[K
+[10.508s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:[m[K In member function ‘[01m[KEigen::Matrix6d state_estimator::AttitudeBiasXKF::[01;32m[Kcalc_H[m[K(double, const Eigen::Vector7d&, const Eigen::Vector7d&)[m[K’:
+[10.508s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:214:47:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[10.508s]   214 |                 Eigen::Matrix6d calc_H([01;35m[Kdouble t[m[K, const Eigen::Vector7d &xhat, const Eigen::Vector7d &xbar)
+[10.508s]       |                                        [01;35m[K~~~~~~~^[m[K
+[10.547s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:[m[K In member function ‘[01m[Kvirtual Eigen::Matrix<double, 6, 7, 0, 6, 7> state_estimator::AttitudeBiasXKF::[01;32m[Kcalc_H[m[K(double, const Eigen::Vector7d&)[m[K’:
+[10.547s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:233:65:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[10.547s]   233 |                 virtual Eigen::Matrix<double,6,7> calc_H([01;35m[Kdouble t[m[K, const Eigen::Vector7d &x)
+[10.548s]       |                                                          [01;35m[K~~~~~~~^[m[K
+[10.568s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:[m[K At global scope:
+[10.569s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:123:89:[m[K [01;35m[Kwarning: [m[K‘[01m[Ksensor_msgs::msg::Imu_<std::allocator<void> >::ConstPtr[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[10.569s]   123 |                         const state_estimator_msgs::msg::LegOdometry::ConstPtr &leg_odom[01;35m[K)[m[K
+[10.569s]       |                                                                                         [01;35m[K^[m[K
+[10.569s] In file included from [01m[K/opt/ros/rolling/include/sensor_msgs/sensor_msgs/msg/imu.hpp:7[m[K,
+[10.569s]                  from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:10[m[K:
+[10.569s] [01m[K/opt/ros/rolling/include/sensor_msgs/sensor_msgs/msg/detail/imu__struct.hpp:186:5:[m[K [01;36m[Knote: [m[Kdeclared here
+[10.569s]   186 |     [01;36m[KConstPtr[m[K;
+[10.569s]       |     [01;36m[K^~~~~~~~[m[K
+[10.569s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:123:89:[m[K [01;35m[Kwarning: [m[K‘[01m[Kstate_estimator_msgs::msg::Attitude_<std::allocator<void> >::ConstPtr[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[10.569s]   123 |                         const state_estimator_msgs::msg::LegOdometry::ConstPtr &leg_odom[01;35m[K)[m[K
+[10.569s]       |                                                                                         [01;35m[K^[m[K
+[10.569s] In file included from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/attitude.hpp:7[m[K,
+[10.570s]                  from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:12[m[K:
+[10.570s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__struct.hpp:169:5:[m[K [01;36m[Knote: [m[Kdeclared here
+[10.570s]   169 |     [01;36m[KConstPtr[m[K;
+[10.570s]       |     [01;36m[K^~~~~~~~[m[K
+[10.570s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:123:89:[m[K [01;35m[Kwarning: [m[K‘[01m[Kstate_estimator_msgs::msg::LegOdometry_<std::allocator<void> >::ConstPtr[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[10.570s]   123 |                         const state_estimator_msgs::msg::LegOdometry::ConstPtr &leg_odom[01;35m[K)[m[K
+[10.570s]       |                                                                                         [01;35m[K^[m[K
+[10.570s] In file included from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/leg_odometry.hpp:7[m[K,
+[10.570s]                  from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:11[m[K:
+[10.570s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__struct.hpp:172:5:[m[K [01;36m[Knote: [m[Kdeclared here
+[10.571s]   172 |     [01;36m[KConstPtr[m[K;
+[10.571s]       |     [01;36m[K^~~~~~~~[m[K
+[10.581s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:[m[K In destructor ‘[01m[Kvirtual state_estimator_plugins::SensorFusionPlugin::[01;32m[K~SensorFusionPlugin[m[K()[m[K’:
+[10.581s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:41:25:[m[K [01;35m[Kwarning: [m[Kdeleting object of polymorphic class type ‘[01m[Kstate_estimator::KFSensorFusion[m[K’ which has non-virtual destructor might cause undefined behavior [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdelete-non-virtual-dtor-Wdelete-non-virtual-dtor]8;;[m[K]
+[10.581s]    41 |                         [01;35m[Kdelete sensor_fusion_[m[K;
+[10.581s]       |                         [01;35m[K^~~~~~~~~~~~~~~~~~~~~[m[K
+[10.884s] In file included from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:5[m[K,
+[10.884s]                  from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/attitude_estimation_plugin.cpp:4[m[K:
+[10.884s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/algebra.h:[m[K In function ‘[01m[Kvoid iit::commons::[01;32m[KcomputeQR[m[K(const MatrixXR&, MatrixXR&, MatrixXR&, const double&)[m[K’:
+[10.884s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/algebra.h:271:37:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Ktolerance[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[10.884s]   271 |                       [01;35m[Kconst double& tolerance[m[K)
+[10.885s]       |                       [01;35m[K~~~~~~~~~~~~~~^~~~~~~~~[m[K
+[10.901s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:[m[K In function ‘[01m[KEigen::Matrix3d iit::commons::[01;32m[KrpyToEar[m[K(const Eigen::Vector3d&)[m[K’:
+[10.902s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:143:12:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kyaw[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[10.902s]   143 |     double [01;35m[Kyaw[m[K = rpy(2);
+[10.902s]       |            [01;35m[K^~~[m[K
+[10.902s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:[m[K In function ‘[01m[KEigen::Matrix3d iit::commons::[01;32m[KrpyToEarInv_dot[m[K(const Eigen::Vector3d&, const Eigen::Vector3d&)[m[K’:
+[10.902s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:163:12:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kroll[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[10.902s]   163 |     double [01;35m[Kroll[m[K = rpy(0);
+[10.902s]       |            [01;35m[K^~~~[m[K
+[10.902s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:166:12:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Krolld[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[10.903s]   166 |     double [01;35m[Krolld[m[K = rpyd(0);
+[10.903s]       |            [01;35m[K^~~~~[m[K
+[11.343s] In file included from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/state_estimator_node.hpp:27[m[K,
+[11.343s]                  from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/state_estimator_node.cpp:1[m[K:
+[11.343s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:[m[K In function ‘[01m[KEigen::Matrix<double, 3, 3> state_estimator::[01;32m[Kcalc_Rzyx[m[K(const Eigen::Matrix<double, 3, 1>&)[m[K’:
+[11.343s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:41:43:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Ku1[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[11.343s]    41 |                 Eigen::Matrix<double,3,1> [01;35m[Ku1[m[K = R.block(0,0,3,1);
+[11.343s]       |                                           [01;35m[K^~[m[K
+[11.343s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:42:43:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Ku2[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[11.344s]    42 |                 Eigen::Matrix<double,3,1> [01;35m[Ku2[m[K = R.block(0,1,3,1);
+[11.344s]       |                                           [01;35m[K^~[m[K
+[11.344s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:43:43:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Ku3[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[11.344s]    43 |                 Eigen::Matrix<double,3,1> [01;35m[Ku3[m[K = R.block(0,2,3,1);
+[11.344s]       |                                           [01;35m[K^~[m[K
+[11.498s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:[m[K In function ‘[01m[Kstd::string state_estimator::[01;32m[Kns2str[m[K(uint64_t)[m[K’:
+[11.498s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:150:26:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kns[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[11.498s]   150 |                 uint64_t [01;35m[Kns[m[K =  t-y*31536000000000000-d*86400000000000-h*3600000000000-m*60000000000-s*1000000000-ms*1000000-us*1000;
+[11.498s]       |                          [01;35m[K^~[m[K
+[11.499s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:156:26:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kx[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[11.499s]   156 |                 uint64_t [01;35m[Kx[m[K = 1;
+[11.499s]       |                          [01;35m[K^[m[K
+[11.509s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/attitude_estimation_plugin.cpp:[m[K In destructor ‘[01m[Kvirtual state_estimator_plugins::AttitudeEstimationPlugin::[01;32m[K~AttitudeEstimationPlugin[m[K()[m[K’:
+[11.509s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/attitude_estimation_plugin.cpp:36:33:[m[K [01;35m[Kwarning: [m[Kdeleting object of polymorphic class type ‘[01m[Kstate_estimator::AttitudeBiasXKF[m[K’ which has non-virtual destructor might cause undefined behavior [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdelete-non-virtual-dtor-Wdelete-non-virtual-dtor]8;;[m[K]
+[11.509s]    36 |                                 [01;35m[Kdelete attitude_[m[K;
+[11.509s]       |                                 [01;35m[K^~~~~~~~~~~~~~~~[m[K
+[11.542s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/attitude_estimation_plugin.cpp:[m[K In member function ‘[01m[Kvirtual void state_estimator_plugins::AttitudeEstimationPlugin::[01;32m[Kinitialize_[m[K()[m[K’:
+[11.542s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/attitude_estimation_plugin.cpp:56:104:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kconst rcl_interfaces::msg::ParameterDescriptor[m[K’ {aka ‘[01m[Kconst rcl_interfaces::msg::ParameterDescriptor_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Krcl_interfaces::msg::ParameterDescriptor_<ContainerAllocator>::[01;32m[KParameterDescriptor_[m[K(rosidl_runtime_cpp::MessageInitialization) [35m[K[with ContainerAllocator = std::allocator<void>][m[K[m[K’
+[11.542s]    56 |                         std::vector<double> base_R_imu_vec = [01;35m[Knh->declare_parameter<std::vector<double>>("attitude_estimation_plugin.base_R_imu", {})[m[K;
+[11.542s]       |                                                              [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[11.542s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/attitude_estimation_plugin.cpp:56:104:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[11.543s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/attitude_estimation_plugin.cpp:57:99:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kconst rcl_interfaces::msg::ParameterDescriptor[m[K’ {aka ‘[01m[Kconst rcl_interfaces::msg::ParameterDescriptor_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Krcl_interfaces::msg::ParameterDescriptor_<ContainerAllocator>::[01;32m[KParameterDescriptor_[m[K(rosidl_runtime_cpp::MessageInitialization) [35m[K[with ContainerAllocator = std::allocator<void>][m[K[m[K’
+[11.543s]    57 |                         std::vector<double> north_vec = [01;35m[Knh->declare_parameter<std::vector<double>>("attitude_estimation_plugin.north_vector", {})[m[K;
+[11.543s]       |                                                         [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[11.543s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/attitude_estimation_plugin.cpp:57:99:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[11.543s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/attitude_estimation_plugin.cpp:58:101:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kconst rcl_interfaces::msg::ParameterDescriptor[m[K’ {aka ‘[01m[Kconst rcl_interfaces::msg::ParameterDescriptor_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Krcl_interfaces::msg::ParameterDescriptor_<ContainerAllocator>::[01;32m[KParameterDescriptor_[m[K(rosidl_runtime_cpp::MessageInitialization) [35m[K[with ContainerAllocator = std::allocator<void>][m[K[m[K’
+[11.544s]    58 |                         std::vector<double> gravity_vec = [01;35m[Knh->declare_parameter<std::vector<double>>("attitude_estimation_plugin.gravity_vector", {})[m[K;
+[11.544s]       |                                                           [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[11.544s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/attitude_estimation_plugin.cpp:58:101:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[11.544s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/attitude_estimation_plugin.cpp:59:95:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kconst rcl_interfaces::msg::ParameterDescriptor[m[K’ {aka ‘[01m[Kconst rcl_interfaces::msg::ParameterDescriptor_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Krcl_interfaces::msg::ParameterDescriptor_<ContainerAllocator>::[01;32m[KParameterDescriptor_[m[K(rosidl_runtime_cpp::MessageInitialization) [35m[K[with ContainerAllocator = std::allocator<void>][m[K[m[K’
+[11.544s]    59 |                         std::vector<double> P_vec = [01;35m[Knh->declare_parameter<std::vector<double>>("attitude_estimation_plugin.P", {})[m[K;
+[11.544s]       |                                                     [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[11.544s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/attitude_estimation_plugin.cpp:59:95:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[11.544s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/attitude_estimation_plugin.cpp:60:95:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kconst rcl_interfaces::msg::ParameterDescriptor[m[K’ {aka ‘[01m[Kconst rcl_interfaces::msg::ParameterDescriptor_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Krcl_interfaces::msg::ParameterDescriptor_<ContainerAllocator>::[01;32m[KParameterDescriptor_[m[K(rosidl_runtime_cpp::MessageInitialization) [35m[K[with ContainerAllocator = std::allocator<void>][m[K[m[K’
+[11.544s]    60 |                         std::vector<double> Q_vec = [01;35m[Knh->declare_parameter<std::vector<double>>("attitude_estimation_plugin.Q", {})[m[K;
+[11.544s]       |                                                     [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[11.544s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/attitude_estimation_plugin.cpp:60:95:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[11.544s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/attitude_estimation_plugin.cpp:61:95:[m[K [01;35m[Kwarning: [m[Kconverting to ‘[01m[Kconst rcl_interfaces::msg::ParameterDescriptor[m[K’ {aka ‘[01m[Kconst rcl_interfaces::msg::ParameterDescriptor_<std::allocator<void> >[m[K’} from initializer list would use explicit constructor ‘[01m[Krcl_interfaces::msg::ParameterDescriptor_<ContainerAllocator>::[01;32m[KParameterDescriptor_[m[K(rosidl_runtime_cpp::MessageInitialization) [35m[K[with ContainerAllocator = std::allocator<void>][m[K[m[K’
+[11.545s]    61 |                         std::vector<double> R_vec = [01;35m[Knh->declare_parameter<std::vector<double>>("attitude_estimation_plugin.R", {})[m[K;
+[11.545s]       |                                                     [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[11.545s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/attitude_estimation_plugin.cpp:61:95:[m[K [01;36m[Knote: [m[Kin C++11 and above a default constructor can be explicit
+[13.006s] In file included from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:5[m[K,
+[13.006s]                  from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/leg_odometry_plugin.cpp:10[m[K:
+[13.006s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/algebra.h:[m[K In function ‘[01m[Kvoid iit::commons::[01;32m[KcomputeQR[m[K(const MatrixXR&, MatrixXR&, MatrixXR&, const double&)[m[K’:
+[13.006s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/algebra.h:271:37:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Ktolerance[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[13.006s]   271 |                       [01;35m[Kconst double& tolerance[m[K)
+[13.006s]       |                       [01;35m[K~~~~~~~~~~~~~~^~~~~~~~~[m[K
+[13.023s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:[m[K In function ‘[01m[KEigen::Matrix3d iit::commons::[01;32m[KrpyToEar[m[K(const Eigen::Vector3d&)[m[K’:
+[13.023s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:143:12:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kyaw[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[13.023s]   143 |     double [01;35m[Kyaw[m[K = rpy(2);
+[13.023s]       |            [01;35m[K^~~[m[K
+[13.024s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:[m[K In function ‘[01m[KEigen::Matrix3d iit::commons::[01;32m[KrpyToEarInv_dot[m[K(const Eigen::Vector3d&, const Eigen::Vector3d&)[m[K’:
+[13.024s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:163:12:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kroll[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[13.024s]   163 |     double [01;35m[Kroll[m[K = rpy(0);
+[13.024s]       |            [01;35m[K^~~~[m[K
+[13.024s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/include/iit/commons/geometry/rotations.h:166:12:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Krolld[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[13.024s]   166 |     double [01;35m[Krolld[m[K = rpyd(0);
+[13.024s]       |            [01;35m[K^~~~~[m[K
+[14.509s] [ 88%] [32m[1mLinking CXX executable state_estimator_node[0m
+[14.778s] [ 88%] Built target state_estimator_node
+[15.665s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/leg_odometry_plugin.cpp:[m[K In member function ‘[01m[Kvoid state_estimator_plugins::LegOdometryPlugin::[01;32m[Kcallback[m[K(sensor_msgs::msg::Imu_<std::allocator<void> >::ConstSharedPtr, sensor_msgs::msg::JointState_<std::allocator<void> >::ConstSharedPtr, state_estimator_msgs::msg::ContactDetection_<std::allocator<void> >::ConstSharedPtr, state_estimator_msgs::msg::Attitude_<std::allocator<void> >::ConstSharedPtr)[m[K’:
+[15.665s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/src/plugins/leg_odometry_plugin.cpp:224:49:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kpinocchio::JointIndex[m[K’ {aka ‘[01m[Klong unsigned int[m[K’} and ‘[01m[Kint[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+[15.665s]   224 |             for (pinocchio::JointIndex i = 1; [01;35m[Ki < model_.njoints[m[K; ++i)
+[15.665s]       |                                               [01;35m[K~~^~~~~~~~~~~~~~~~[m[K
+[26.784s] /home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp: In instantiation of ‘[01m[Kvoid state_estimator::EKFBase<T, N1, N2, N3, N4, N5, N6, N7>::[01;32m[Kpredict[m[K(T, const Eigen::Matrix<T, N2, 1>&) [35m[K[with T = double; int N1 = 6; int N2 = 3; int N3 = 3; int N4 = 6; int N5 = 3; int N6 = 6; int N7 = 6][m[K[m[K’:
+[26.784s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:40:15:[m[K   required from here
+[26.784s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:40:32:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[26.784s]    40 |         virtual void predict([01;35m[KT t[m[K, const Eigen::Matrix<T,N2,1> &u) override
+[26.784s]       |                              [01;35m[K~~^[m[K
+[26.784s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:40:64:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Ku[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[26.785s]    40 |         virtual void predict(T t, [01;35m[Kconst Eigen::Matrix<T,N2,1> &u[m[K) override
+[26.785s]       |                                   [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[m[K
+[26.785s] /home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp: In instantiation of ‘[01m[Kvoid state_estimator::EKFBase<T, N1, N2, N3, N4, N5, N6, N7>::[01;32m[Kupdate[m[K(T, const Eigen::Matrix<T, N3, 1>&) [35m[K[with T = double; int N1 = 6; int N2 = 3; int N3 = 3; int N4 = 6; int N5 = 3; int N6 = 6; int N7 = 6][m[K[m[K’:
+[26.785s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:48:15:[m[K   required from here
+[26.785s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:48:31:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[26.785s]    48 |         virtual void update([01;35m[KT t[m[K, const Eigen::Matrix<T,N3,1> &z) override {
+[26.785s]       |                             [01;35m[K~~^[m[K
+[26.785s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:48:63:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kz[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[26.785s]    48 |         virtual void update(T t, [01;35m[Kconst Eigen::Matrix<T,N3,1> &z[m[K) override {
+[26.785s]       |                                  [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[m[K
+[30.736s] In file included from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/XKF.hpp:4[m[K,
+[30.737s]                  from [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp:4[m[K:
+[30.737s] /home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp: In instantiation of ‘[01m[Kvoid state_estimator::EKFBase<T, N1, N2, N3, N4, N5, N6, N7>::[01;32m[Kpredict[m[K(T, const Eigen::Matrix<T, N2, 1>&) [35m[K[with T = double; int N1 = 7; int N2 = 3; int N3 = 6; int N4 = 7; int N5 = 6; int N6 = 6; int N7 = 6][m[K[m[K’:
+[30.737s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:40:15:[m[K   required from here
+[30.737s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:40:32:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[30.737s]    40 |         virtual void predict([01;35m[KT t[m[K, const Eigen::Matrix<T,N2,1> &u) override
+[30.737s]       |                              [01;35m[K~~^[m[K
+[30.737s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:40:64:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Ku[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[30.738s]    40 |         virtual void predict(T t, [01;35m[Kconst Eigen::Matrix<T,N2,1> &u[m[K) override
+[30.738s]       |                                   [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[m[K
+[30.738s] /home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp: In instantiation of ‘[01m[Kvoid state_estimator::EKFBase<T, N1, N2, N3, N4, N5, N6, N7>::[01;32m[Kupdate[m[K(T, const Eigen::Matrix<T, N3, 1>&) [35m[K[with T = double; int N1 = 7; int N2 = 3; int N3 = 6; int N4 = 7; int N5 = 6; int N6 = 6; int N7 = 6][m[K[m[K’:
+[30.738s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:48:15:[m[K   required from here
+[30.738s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:48:31:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[30.738s]    48 |         virtual void update([01;35m[KT t[m[K, const Eigen::Matrix<T,N3,1> &z) override {
+[30.738s]       |                             [01;35m[K~~^[m[K
+[30.738s] [01m[K/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:48:63:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kz[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[30.738s]    48 |         virtual void update(T t, [01;35m[Kconst Eigen::Matrix<T,N3,1> &z[m[K) override {
+[30.738s]       |                                  [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^[m[K
+[46.746s] [100%] [32m[1mLinking CXX shared library libstate_estimator_plugins.so[0m
+[50.022s] [100%] Built target state_estimator_plugins
+[50.039s] Invoked command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator' returned '0': CMAKE_PREFIX_PATH=/opt/ros/rolling:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/pkgconfig PYTHONPATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share /usr/bin/cmake --build /home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator -- -j12 -l12
+[50.040s] Invoking command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator': CMAKE_PREFIX_PATH=/opt/ros/rolling:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/pkgconfig PYTHONPATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share /usr/bin/cmake --install /home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator
+[50.049s] -- Install configuration: ""
+[50.050s] -- Execute custom install script
+[50.051s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/EigenExtra.hpp
+[50.062s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Estimator.hpp
+[50.076s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Models/attitude_bias_NLO.hpp
+[50.090s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Models/attitude_bias_XKF.hpp
+[50.103s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Models/sensor_fusion.hpp
+[50.116s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Observers/EKF.hpp
+[50.129s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Observers/NLO.hpp
+[50.143s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Observers/Observer.hpp
+[50.156s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Observers/XKF.hpp
+[50.170s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Robot.hpp
+[50.183s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/Services.hpp
+[50.196s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/lib.hpp
+[50.209s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/plugin.hpp
+[50.222s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/plugin_base.hpp
+[50.235s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/include/state_estimator/state_estimator_node.hpp
+[50.247s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/urdfs/aliengo.urdf
+[50.262s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/urdfs/anymal.urdf
+[50.277s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/urdfs/go1.urdf
+[50.290s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/state_estimator_plugins.xml
+[50.302s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/state_estimator_tools.xml
+[50.315s] -- Up-to-date symlink: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//state_estimator_plugins.xml
+[50.316s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/lib/state_estimator/state_estimator_node
+[50.329s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//launch/pluginlist.yaml
+[50.342s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//launch/state_estimator.launch
+[50.354s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//launch/state_estimator.launch.py
+[50.369s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//launch/timeout.yaml
+[50.383s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//config/attitude_plugin.yaml
+[50.396s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//config/contact_data_packaging_plugin.yaml
+[50.410s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//config/contact_plugin.yaml
+[50.424s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//config/joint_state_downsampler_plugin.yaml
+[50.438s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//config/leg_odometry.yaml
+[50.449s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator//config/sensor_fusion.yaml
+[50.465s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/environment/library_path.sh
+[50.481s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/environment/library_path.dsv
+[50.496s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/ament_index/resource_index/package_run_dependencies/state_estimator
+[50.510s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/ament_index/resource_index/parent_prefix_path/state_estimator
+[50.527s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/environment/ament_prefix_path.sh
+[50.541s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/environment/ament_prefix_path.dsv
+[50.554s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/environment/path.sh
+[50.571s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/environment/path.dsv
+[50.587s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/local_setup.bash
+[50.602s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/local_setup.sh
+[50.614s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/local_setup.zsh
+[50.627s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/local_setup.dsv
+[50.640s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/package.dsv
+[50.654s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/ament_index/resource_index/packages/state_estimator
+[50.669s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/ament_index/resource_index/state_estimator__pluginlib__plugin/state_estimator
+[50.682s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/cmake/ament_cmake_export_include_directories-extras.cmake
+[50.697s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/cmake/ament_cmake_export_libraries-extras.cmake
+[50.712s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/cmake/ament_cmake_export_targets-extras.cmake
+[50.726s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/cmake/state_estimatorConfig.cmake
+[50.740s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/cmake/state_estimatorConfig-version.cmake
+[50.755s] -- Symlinking: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/package.xml
+[50.769s] -- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/lib/libstate_estimator_plugins.so
+[50.821s] -- Set non-toolchain portion of runtime path of "/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/lib/libstate_estimator_plugins.so" to ""
+[50.821s] -- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/cmake/export_state_estimatorExport.cmake
+[50.821s] -- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator/share/state_estimator/cmake/export_state_estimatorExport-noconfig.cmake
+[50.825s] Invoked command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator' returned '0': CMAKE_PREFIX_PATH=/opt/ros/rolling:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib:${LD_LIBRARY_PATH} PKG_CONFIG_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/x86_64-linux-gnu/pkgconfig:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/lib/pkgconfig PYTHONPATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages:${PYTHONPATH} ROS_PACKAGE_PATH=/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share:/home/jonas/Documents/Kamaro/muse_ros2/install/iit_commons/share /usr/bin/cmake --install /home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator

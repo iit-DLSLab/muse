@@ -289,7 +289,7 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
             Eigen::Quaterniond quat_est;
 			quat_est.w() = attitude->quaternion[0];
 			quat_est.vec() << attitude->quaternion[1], attitude->quaternion[2], attitude->quaternion[3];
-			Eigen::Matrix3d w_R_b = iit::commons::quatToRotMat(quat_est).transpose();
+			Eigen::Matrix3d w_R_b = iit::commons::quatToRotMat(quat_est);
 
             base_velocity = w_R_b*base_velocity;
 

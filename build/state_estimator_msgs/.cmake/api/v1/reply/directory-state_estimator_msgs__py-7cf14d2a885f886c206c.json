@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "state_estimator_msgs__py",
+		"source" : "/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs/state_estimator_msgs__py"
+	}
+}

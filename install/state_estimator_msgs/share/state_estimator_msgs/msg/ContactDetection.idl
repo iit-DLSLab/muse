@@ -1,0 +1,21 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from state_estimator_msgs/msg/ContactDetection.msg
+// generated code does not contain a copyright notice
+
+#include "std_msgs/msg/Header.idl"
+
+module state_estimator_msgs {
+  module msg {
+    struct ContactDetection {
+      std_msgs::msg::Header header;
+
+      boolean stance_lf;
+
+      boolean stance_rf;
+
+      boolean stance_lh;
+
+      boolean stance_rh;
+    };
+  };
+};

@@ -1,0 +1,4 @@
+Invoking command in '/home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons -- -j12 -l12
+Invoked command in '/home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons -- -j12 -l12
+Invoking command in '/home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons
+Invoked command in '/home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/jonas/Documents/Kamaro/muse_ros2/build/iit_commons

@@ -1,0 +1,374 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 2.8.4 (/opt/ros/rolling/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Found rosidl_default_generators: 1.8.1 (/opt/ros/rolling/share/rosidl_default_generators/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rosidl_adapter: 5.1.0 (/opt/ros/rolling/share/rosidl_adapter/cmake)
+-- Found geometry_msgs: 5.9.0 (/opt/ros/rolling/share/geometry_msgs/cmake)
+-- Found sensor_msgs: 5.9.0 (/opt/ros/rolling/share/sensor_msgs/cmake)
+-- Found ament_cmake_ros_core: 0.15.2 (/opt/ros/rolling/share/ament_cmake_ros_core/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter Development NumPy Development.Module Development.Embed 
+-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Configuring done (4.5s)
+-- Generating done (0.0s)
+[33mCMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CATKIN_INSTALL_INTO_PREFIX_ROOT
+    CATKIN_SYMLINK_INSTALL
+
+[0m
+-- Build files have been written to: /home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs
+[  1%] [34m[1mGenerating type hashes for ROS interfaces[0m
+[  2%] [34m[1mGenerating Rust code for ROS interfaces[0m
+[  2%] Built target ament_cmake_python_copy_state_estimator_msgs
+running egg_info
+creating state_estimator_msgs.egg-info
+writing state_estimator_msgs.egg-info/PKG-INFO
+writing dependency_links to state_estimator_msgs.egg-info/dependency_links.txt
+writing top-level names to state_estimator_msgs.egg-info/top_level.txt
+writing manifest file 'state_estimator_msgs.egg-info/SOURCES.txt'
+[  2%] Built target state_estimator_msgs__rosidl_generator_type_description
+[  4%] [34m[1mGenerating C code for ROS interfaces[0m
+[  5%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[  5%] Built target state_estimator_msgs__rs
+reading manifest file 'state_estimator_msgs.egg-info/SOURCES.txt'
+writing manifest file 'state_estimator_msgs.egg-info/SOURCES.txt'
+[  5%] Built target ament_cmake_python_build_state_estimator_msgs_egg
+[  5%] Built target state_estimator_msgs__cpp
+[ 10%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_c.dir/rosidl_generator_c/state_estimator_msgs/msg/detail/attitude__description.c.o[0m
+[ 10%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_c.dir/rosidl_generator_c/state_estimator_msgs/msg/detail/attitude__type_support.c.o[0m
+[ 10%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_c.dir/rosidl_generator_c/state_estimator_msgs/msg/detail/attitude__functions.c.o[0m
+[ 10%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_c.dir/rosidl_generator_c/state_estimator_msgs/msg/detail/contact_detection__functions.c.o[0m
+[ 12%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_c.dir/rosidl_generator_c/state_estimator_msgs/msg/detail/contact_detection__description.c.o[0m
+[ 13%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_c.dir/rosidl_generator_c/state_estimator_msgs/msg/detail/joint_state_with_acceleration__type_support.c.o[0m
+[ 16%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_c.dir/rosidl_generator_c/state_estimator_msgs/msg/detail/joint_state_with_acceleration__functions.c.o[0m
+[ 14%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_c.dir/rosidl_generator_c/state_estimator_msgs/msg/detail/contact_detection__type_support.c.o[0m
+[ 17%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_c.dir/rosidl_generator_c/state_estimator_msgs/msg/detail/joint_state_with_acceleration__description.c.o[0m
+[ 18%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_c.dir/rosidl_generator_c/state_estimator_msgs/msg/detail/leg_odometry__functions.c.o[0m
+[ 20%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_c.dir/rosidl_generator_c/state_estimator_msgs/msg/detail/leg_odometry__description.c.o[0m
+[ 21%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_c.dir/rosidl_generator_c/state_estimator_msgs/msg/detail/leg_odometry__type_support.c.o[0m
+[ 24%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_c.dir/rosidl_generator_c/state_estimator_msgs/msg/detail/sensor_fusion__functions.c.o[0m
+[ 24%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_c.dir/rosidl_generator_c/state_estimator_msgs/msg/detail/sensor_fusion__description.c.o[0m
+[ 25%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_c.dir/rosidl_generator_c/state_estimator_msgs/msg/detail/sensor_fusion__type_support.c.o[0m
+[ 26%] [32m[1mLinking C shared library libstate_estimator_msgs__rosidl_generator_c.so[0m
+[ 26%] Built target state_estimator_msgs__rosidl_generator_c
+[ 28%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[ 34%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[ 34%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[ 34%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[ 34%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[ 34%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[ 36%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/state_estimator_msgs/msg/sensor_fusion__type_support.cpp.o[0m
+[ 37%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/state_estimator_msgs/msg/joint_state_with_acceleration__type_support.cpp.o[0m
+[ 38%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/state_estimator_msgs/msg/leg_odometry__type_support.cpp.o[0m
+[ 41%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/state_estimator_msgs/msg/contact_detection__type_support.cpp.o[0m
+[ 41%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/state_estimator_msgs/msg/attitude__type_support.cpp.o[0m
+[ 42%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/state_estimator_msgs/msg/attitude__type_support.cpp.o[0m
+[ 44%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/state_estimator_msgs/msg/joint_state_with_acceleration__type_support.cpp.o[0m
+[ 45%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/state_estimator_msgs/msg/contact_detection__type_support.cpp.o[0m
+[ 46%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/state_estimator_msgs/msg/leg_odometry__type_support.cpp.o[0m
+[ 48%] [32m[1mLinking CXX shared library libstate_estimator_msgs__rosidl_typesupport_c.so[0m
+[ 49%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/state_estimator_msgs/msg/sensor_fusion__type_support.cpp.o[0m
+[ 49%] Built target state_estimator_msgs__rosidl_typesupport_c
+[ 50%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/state_estimator_msgs/msg/detail/attitude__type_support.cpp.o[0m
+[ 52%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/state_estimator_msgs/msg/detail/contact_detection__type_support.c.o[0m
+[ 53%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/state_estimator_msgs/msg/detail/attitude__type_support.c.o[0m
+[ 54%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/state_estimator_msgs/msg/detail/joint_state_with_acceleration__type_support.cpp.o[0m
+[ 56%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/state_estimator_msgs/msg/detail/contact_detection__type_support.cpp.o[0m
+[ 57%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/state_estimator_msgs/msg/detail/dds_fastrtps/attitude__type_support.cpp.o[0m
+[ 58%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/state_estimator_msgs/msg/detail/joint_state_with_acceleration__type_support.c.o[0m
+[ 60%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/state_estimator_msgs/msg/detail/leg_odometry__type_support.c.o[0m
+[ 61%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/state_estimator_msgs/msg/detail/attitude__type_support_c.cpp.o[0m
+[ 62%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/state_estimator_msgs/msg/detail/sensor_fusion__type_support.cpp.o[0m
+[ 64%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/state_estimator_msgs/msg/detail/leg_odometry__type_support.cpp.o[0m
+[ 65%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/state_estimator_msgs/msg/detail/sensor_fusion__type_support.c.o[0m
+[ 66%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/state_estimator_msgs/msg/detail/contact_detection__type_support_c.cpp.o[0m
+[ 68%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/state_estimator_msgs/msg/detail/dds_fastrtps/contact_detection__type_support.cpp.o[0m
+[ 69%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/state_estimator_msgs/msg/detail/joint_state_with_acceleration__type_support_c.cpp.o[0m
+[ 70%] [32m[1mLinking CXX shared library libstate_estimator_msgs__rosidl_typesupport_cpp.so[0m
+[ 72%] [32m[1mLinking C shared library libstate_estimator_msgs__rosidl_typesupport_introspection_c.so[0m
+[ 72%] Built target state_estimator_msgs__rosidl_typesupport_cpp
+[ 72%] Built target state_estimator_msgs__rosidl_typesupport_introspection_c
+[ 73%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/state_estimator_msgs/msg/detail/leg_odometry__type_support_c.cpp.o[0m
+[ 74%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/state_estimator_msgs/msg/detail/dds_fastrtps/joint_state_with_acceleration__type_support.cpp.o[0m
+[ 76%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/state_estimator_msgs/msg/detail/sensor_fusion__type_support_c.cpp.o[0m
+[ 77%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/state_estimator_msgs/msg/detail/dds_fastrtps/leg_odometry__type_support.cpp.o[0m
+[ 78%] [32mBuilding CXX object CMakeFiles/state_estimator_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/state_estimator_msgs/msg/detail/dds_fastrtps/sensor_fusion__type_support.cpp.o[0m
+[ 80%] [32m[1mLinking CXX shared library libstate_estimator_msgs__rosidl_typesupport_introspection_cpp.so[0m
+[ 80%] Built target state_estimator_msgs__rosidl_typesupport_introspection_cpp
+[ 81%] [32m[1mLinking CXX shared library libstate_estimator_msgs__rosidl_typesupport_fastrtps_c.so[0m
+[ 82%] [32m[1mLinking CXX shared library libstate_estimator_msgs__rosidl_typesupport_fastrtps_cpp.so[0m
+[ 82%] Built target state_estimator_msgs__rosidl_typesupport_fastrtps_c
+[ 82%] Built target state_estimator_msgs__rosidl_typesupport_fastrtps_cpp
+[ 82%] Built target state_estimator_msgs
+[ 84%] [34m[1mGenerating Python code for ROS interfaces[0m
+[ 84%] Built target state_estimator_msgs__py
+[ 86%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_py.dir/rosidl_generator_py/state_estimator_msgs/msg/_contact_detection_s.c.o[0m
+[ 86%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_py.dir/rosidl_generator_py/state_estimator_msgs/msg/_leg_odometry_s.c.o[0m
+[ 89%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_py.dir/rosidl_generator_py/state_estimator_msgs/msg/_attitude_s.c.o[0m
+[ 89%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_py.dir/rosidl_generator_py/state_estimator_msgs/msg/_joint_state_with_acceleration_s.c.o[0m
+[ 90%] [32mBuilding C object CMakeFiles/state_estimator_msgs__rosidl_generator_py.dir/rosidl_generator_py/state_estimator_msgs/msg/_sensor_fusion_s.c.o[0m
+[ 92%] [32m[1mLinking C shared library libstate_estimator_msgs__rosidl_generator_py.so[0m
+[ 92%] Built target state_estimator_msgs__rosidl_generator_py
+[ 94%] [32mBuilding C object CMakeFiles/state_estimator_msgs_s__rosidl_typesupport_fastrtps_c.dir/rosidl_generator_py/state_estimator_msgs/_state_estimator_msgs_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[ 94%] [32mBuilding C object CMakeFiles/state_estimator_msgs_s__rosidl_typesupport_c.dir/rosidl_generator_py/state_estimator_msgs/_state_estimator_msgs_s.ep.rosidl_typesupport_c.c.o[0m
+[ 96%] [32mBuilding C object CMakeFiles/state_estimator_msgs_s__rosidl_typesupport_introspection_c.dir/rosidl_generator_py/state_estimator_msgs/_state_estimator_msgs_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[ 97%] [32m[1mLinking C shared module rosidl_generator_py/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_c.so[0m
+[ 98%] [32m[1mLinking C shared module rosidl_generator_py/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_introspection_c.so[0m
+[100%] [32m[1mLinking C shared module rosidl_generator_py/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_fastrtps_c.so[0m
+[100%] Built target state_estimator_msgs_s__rosidl_typesupport_introspection_c
+[100%] Built target state_estimator_msgs_s__rosidl_typesupport_c
+[100%] Built target state_estimator_msgs_s__rosidl_typesupport_fastrtps_c
+-- Install configuration: ""
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/ament_index/resource_index/rosidl_interfaces/state_estimator_msgs
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/Attitude.json
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/ContactDetection.json
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/JointStateWithAcceleration.json
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/LegOdometry.json
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/SensorFusion.json
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/attitude.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/joint_state_with_acceleration.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/contact_detection.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__functions.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__struct.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__struct.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__functions.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__type_support.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__functions.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__functions.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__functions.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__type_support.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__type_support.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__type_support.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__functions.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__functions.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__type_support.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__description.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__struct.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__description.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__functions.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__type_support.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__functions.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__type_support.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__functions.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__type_support.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__description.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__struct.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__description.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__struct.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__description.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__type_support.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__type_support.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/rosidl_generator_c__visibility_control.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/sensor_fusion.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/leg_odometry.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/environment/library_path.sh
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/environment/library_path.dsv
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_generator_c.so
+-- Set non-toolchain portion of runtime path of "/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_generator_c.so" to ""
+-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs
+-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__rosidl_typesupport_fastrtps_c.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__rosidl_typesupport_fastrtps_c.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__rosidl_typesupport_fastrtps_c.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__rosidl_typesupport_fastrtps_c.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__rosidl_typesupport_fastrtps_c.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_typesupport_fastrtps_c.so
+-- Set non-toolchain portion of runtime path of "/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_typesupport_fastrtps_c.so" to ""
+-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs
+-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/rosidl_typesupport_introspection_c__visibility_control.h
+-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__rosidl_typesupport_introspection_c.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__rosidl_typesupport_introspection_c.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__type_support.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__rosidl_typesupport_introspection_c.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__type_support.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__rosidl_typesupport_introspection_c.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__type_support.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__type_support.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__type_support.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__rosidl_typesupport_introspection_c.h
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_typesupport_introspection_c.so
+-- Set non-toolchain portion of runtime path of "/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_typesupport_introspection_c.so" to ""
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_typesupport_c.so
+-- Set non-toolchain portion of runtime path of "/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_typesupport_c.so" to ""
+-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs
+-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/attitude.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/leg_odometry.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/sensor_fusion.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/rosidl_generator_cpp__visibility_control.hpp
+-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__traits.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__traits.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__builder.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__struct.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__builder.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__struct.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__struct.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__type_support.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__type_support.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__builder.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__type_support.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__traits.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__builder.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__struct.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__traits.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__traits.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__type_support.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__struct.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__type_support.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__builder.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/contact_detection.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/joint_state_with_acceleration.hpp
+-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs
+-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__rosidl_typesupport_fastrtps_cpp.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__rosidl_typesupport_fastrtps_cpp.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__rosidl_typesupport_fastrtps_cpp.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__rosidl_typesupport_fastrtps_cpp.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__rosidl_typesupport_fastrtps_cpp.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/dds_fastrtps
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_typesupport_fastrtps_cpp.so
+-- Set non-toolchain portion of runtime path of "/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_typesupport_fastrtps_cpp.so" to ""
+-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs
+-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg
+-- Up-to-date: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__type_support.cpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__rosidl_typesupport_introspection_cpp.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/leg_odometry__type_support.cpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/sensor_fusion__rosidl_typesupport_introspection_cpp.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__type_support.cpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__type_support.cpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/joint_state_with_acceleration__rosidl_typesupport_introspection_cpp.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/attitude__rosidl_typesupport_introspection_cpp.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__rosidl_typesupport_introspection_cpp.hpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/include/state_estimator_msgs/state_estimator_msgs/msg/detail/contact_detection__type_support.cpp
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_typesupport_introspection_cpp.so
+-- Set non-toolchain portion of runtime path of "/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_typesupport_introspection_cpp.so" to ""
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_typesupport_cpp.so
+-- Set non-toolchain portion of runtime path of "/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_typesupport_cpp.so" to ""
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/environment/pythonpath.sh
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/environment/pythonpath.dsv
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs-0.0.1-py3.12.egg-info
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs-0.0.1-py3.12.egg-info/dependency_links.txt
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs-0.0.1-py3.12.egg-info/PKG-INFO
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs-0.0.1-py3.12.egg-info/SOURCES.txt
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs-0.0.1-py3.12.egg-info/top_level.txt
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_introspection_c.so
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/py.typed
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/_state_estimator_msgs_s.ep.rosidl_typesupport_c.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_c.so
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_fastrtps_c.so
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_contact_detection_s.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_leg_odometry.py
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_sensor_fusion.py
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_joint_state_with_acceleration.py
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_sensor_fusion_s.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_contact_detection.py
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_attitude.py
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_leg_odometry_s.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/__init__.py
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_attitude_s.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_joint_state_with_acceleration_s.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/__init__.py
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/_state_estimator_msgs_s.ep.rosidl_typesupport_introspection_c.c
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/_state_estimator_msgs_s.ep.rosidl_typesupport_fastrtps_c.c
+Listing '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs'...
+Compiling '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/__init__.py'...
+Listing '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg'...
+Compiling '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/__init__.py'...
+Compiling '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_attitude.py'...
+Compiling '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_contact_detection.py'...
+Compiling '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_joint_state_with_acceleration.py'...
+Compiling '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_leg_odometry.py'...
+Compiling '/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/msg/_sensor_fusion.py'...
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_fastrtps_c.so
+-- Set non-toolchain portion of runtime path of "/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_fastrtps_c.so" to ""
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_introspection_c.so
+-- Set non-toolchain portion of runtime path of "/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_introspection_c.so" to ""
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_c.so
+-- Set non-toolchain portion of runtime path of "/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/python3.12/site-packages/state_estimator_msgs/state_estimator_msgs_s__rosidl_typesupport_c.so" to ""
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_generator_py.so
+-- Set non-toolchain portion of runtime path of "/home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/lib/libstate_estimator_msgs__rosidl_generator_py.so" to ""
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/ament_index/resource_index/rust_packages/state_estimator_msgs
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/rust
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/rust/src
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/rust/src/msg.rs
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/rust/src/lib.rs
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/rust/Cargo.toml
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/rust/build.rs
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/Attitude.idl
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/ContactDetection.idl
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/JointStateWithAcceleration.idl
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/LegOdometry.idl
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/SensorFusion.idl
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/Attitude.msg
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/ContactDetection.msg
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/JointStateWithAcceleration.msg
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/LegOdometry.msg
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/msg/SensorFusion.msg
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/ament_index/resource_index/package_run_dependencies/state_estimator_msgs
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/ament_index/resource_index/parent_prefix_path/state_estimator_msgs
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/environment/ament_prefix_path.sh
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/environment/ament_prefix_path.dsv
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/environment/path.sh
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/environment/path.dsv
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/local_setup.bash
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/local_setup.sh
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/local_setup.zsh
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/local_setup.dsv
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/package.dsv
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/ament_index/resource_index/packages/state_estimator_msgs
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/export_state_estimator_msgs__rosidl_generator_cExport.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/export_state_estimator_msgs__rosidl_generator_cExport-noconfig.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/export_state_estimator_msgs__rosidl_typesupport_fastrtps_cExport.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/export_state_estimator_msgs__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgs__rosidl_typesupport_introspection_cExport.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgs__rosidl_typesupport_introspection_cExport-noconfig.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgs__rosidl_typesupport_cExport.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgs__rosidl_typesupport_cExport-noconfig.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/export_state_estimator_msgs__rosidl_generator_cppExport.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/export_state_estimator_msgs__rosidl_typesupport_fastrtps_cppExport.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/export_state_estimator_msgs__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgs__rosidl_typesupport_introspection_cppExport.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgs__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgs__rosidl_typesupport_cppExport.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgs__rosidl_typesupport_cppExport-noconfig.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/export_state_estimator_msgs__rosidl_generator_pyExport.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/export_state_estimator_msgs__rosidl_generator_pyExport-noconfig.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/rosidl_cmake-extras.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/ament_cmake_export_libraries-extras.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/ament_cmake_export_targets-extras.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgsConfig.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/cmake/state_estimator_msgsConfig-version.cmake
+-- Installing: /home/jonas/Documents/Kamaro/muse_ros2/install/state_estimator_msgs/share/state_estimator_msgs/package.xml

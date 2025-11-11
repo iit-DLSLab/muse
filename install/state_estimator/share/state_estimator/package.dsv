@@ -1,0 +1,11 @@
+source;share/state_estimator/hook/cmake_prefix_path.ps1
+source;share/state_estimator/hook/cmake_prefix_path.dsv
+source;share/state_estimator/hook/cmake_prefix_path.sh
+source;share/state_estimator/hook/ld_library_path_lib.ps1
+source;share/state_estimator/hook/ld_library_path_lib.dsv
+source;share/state_estimator/hook/ld_library_path_lib.sh
+source;share/state_estimator/local_setup.bash
+source;share/state_estimator/local_setup.dsv
+source;share/state_estimator/local_setup.ps1
+source;share/state_estimator/local_setup.sh
+source;share/state_estimator/local_setup.zsh

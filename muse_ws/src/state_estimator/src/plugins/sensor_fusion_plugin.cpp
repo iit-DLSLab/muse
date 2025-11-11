@@ -130,7 +130,7 @@ namespace state_estimator_plugins
 			quat_est.w() = attitude->quaternion[0];
 			quat_est.vec() << attitude->quaternion[1], attitude->quaternion[2], attitude->quaternion[3];
 			rpy = iit::commons::quatToRPY(quat_est);
-			w_R_b = iit::commons::quatToRotMat(quat_est).transpose();
+			w_R_b = iit::commons::quatToRotMat(quat_est);
 
 			// Reading leg odometry
 			v_b << leg_odom->base_velocity[0], leg_odom->base_velocity[1], leg_odom->base_velocity[2];
@@ -154,7 +154,32 @@ namespace state_estimator_plugins
 			// input u = w_R_b*f_b - gravity
 			Eigen::Vector3d gravity;
 			gravity << 0.0, 0.0, -9.81;
-			Eigen::Vector3d u = w_R_b * f_b + gravity;
+			Eigen::Vector3d u = w_R_b * f_b - gravity;
+
+			// DEBUG: Log key values every 100 iterations
+			static int debug_counter = 0;
+			if (debug_counter++ % 100 == 0) {
+				RCLCPP_INFO(this->node_->get_logger(), 
+					"=== DEBUG [t=%.3f] ===\n"
+					"Raw IMU acc: [%.3f, %.3f, %.3f]\n"
+					"f_b (base frame): [%.3f, %.3f, %.3f]\n"
+					"w_R_b*f_b: [%.3f, %.3f, %.3f]\n"
+					"u (accel input): [%.3f, %.3f, %.3f]\n"
+					"v_b (leg odom): [%.3f, %.3f, %.3f]\n"
+					"w_v_b (world vel): [%.3f, %.3f, %.3f]\n"
+					"State pos: [%.3f, %.3f, %.3f]\n"
+					"State vel: [%.3f, %.3f, %.3f]",
+					time_,
+					acc.x(), acc.y(), acc.z(),
+					f_b.x(), f_b.y(), f_b.z(),
+					(w_R_b * f_b).x(), (w_R_b * f_b).y(), (w_R_b * f_b).z(),
+					u.x(), u.y(), u.z(),
+					v_b.x(), v_b.y(), v_b.z(),
+					(w_R_b * v_b).x(), (w_R_b * v_b).y(), (w_R_b * v_b).z(),
+					xhat_estimated(0), xhat_estimated(1), xhat_estimated(2),
+					xhat_estimated(3), xhat_estimated(4), xhat_estimated(5));
+			}
+
 			// prediction
 			sensor_fusion_->predict(time_, u);
 

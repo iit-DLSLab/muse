@@ -1,0 +1,4 @@
+Invoking command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs -- -j12 -l12
+Invoked command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs -- -j12 -l12
+Invoking command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs
+Invoked command in '/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator_msgs
