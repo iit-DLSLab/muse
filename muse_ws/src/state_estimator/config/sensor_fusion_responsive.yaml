@@ -1,0 +1,39 @@
+/**:
+     ros__parameters:
+          sensor_fusion_plugin:
+               plugin: "SensorFusionPlugin"
+               imu_topic: "/imu"
+               attitude_topic: "/state_estimator/attitude"
+               leg_odometry_topic: "/state_estimator/leg_odometry"
+               pub_topic: "/sensor_fusion"
+
+               P:  # Initial covariance - moderate uncertainty
+                    [
+                         0.1,  0.0,  0.0,  0.0,  0.0,  0.0,
+                         0.0,  0.1,  0.0,  0.0,  0.0,  0.0,
+                         0.0,  0.0,  0.1,  0.0,  0.0,  0.0,
+                         0.0,  0.0,  0.0,  0.1,  0.0,  0.0,
+                         0.0,  0.0,  0.0,  0.0,  0.1,  0.0,
+                         0.0,  0.0,  0.0,  0.0,  0.0,  0.1,
+                    ]
+
+               Q:  # Maximum responsiveness - high velocity process noise
+                    [
+                         1.0,   0.0,   0.0,   0.0,   0.0,   0.0,
+                         0.0,   1.0,   0.0,   0.0,   0.0,   0.0,
+                         0.0,   0.0,   1.0,   0.0,   0.0,   0.0,
+                         0.0,   0.0,   0.0,   10.0,  0.0,   0.0,
+                         0.0,   0.0,   0.0,   0.0,   10.0,  0.0,
+                         0.0,   0.0,   0.0,   0.0,   0.0,   10.0,
+                    ]
+
+               R:  # Extremely confident in leg odometry measurements
+                    [0.001, 0.0, 0.0, 
+                     0.0, 0.001, 0.0, 
+                     0.0, 0.0, 0.002]
+
+               base_R_imu: [1.0, 0.0, 0.0,
+                    0.0, 1.0, 0.0,
+                    0.0, 0.0, 1.0]
+
+               gravity_vector: [0.0, 0.0, -9.81]

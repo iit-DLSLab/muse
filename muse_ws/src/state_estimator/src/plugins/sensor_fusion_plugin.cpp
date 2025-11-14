@@ -75,6 +75,18 @@ namespace state_estimator_plugins
 
 			sensor_fusion_ = new state_estimator::KFSensorFusion(t0, xhat_estimated, P, Q, R, false, false);
 
+			// Gravity vector in world frame (default Z-up world, gravity down is +9.81 along +Z specific force sense)
+			// We will use u = R * f_b + g_w, so at rest u ≈ 0 if g_w matches world gravity sign convention
+			std::vector<double> gravity_vec = nh->declare_parameter<std::vector<double>>("sensor_fusion_plugin.gravity_vector", {0.0, 0.0, 9.81});
+			if (gravity_vec.size() == 3) {
+				gravity_w_ << gravity_vec[0], gravity_vec[1], gravity_vec[2];
+				RCLCPP_INFO(nh->get_logger(), "sensor_fusion_plugin.gravity_vector: [%.3f, %.3f, %.3f]",
+					gravity_w_.x(), gravity_w_.y(), gravity_w_.z());
+			} else {
+				RCLCPP_WARN(nh->get_logger(), "gravity_vector size != 3; using default [0,0,9.81]");
+				gravity_w_ << 0.0, 0.0, 9.81;
+			}
+
 			const std::vector<double> base_R_imu_vec = nh->declare_parameter("sensor_fusion_plugin.base_R_imu", std::vector<double>(9, 0.0));
 			if (base_R_imu_vec.size() == 9)
 			{
@@ -151,20 +163,21 @@ namespace state_estimator_plugins
 			// reading acceleration from imu
 			Eigen::Vector3d f_b = base_R_imu_ * acc;
 
-			// input u = w_R_b*f_b - gravity
-			Eigen::Vector3d gravity;
-			gravity << 0.0, 0.0, -9.81;
-			Eigen::Vector3d u = w_R_b * f_b - gravity;
+			// Consistent gravity removal: IMU measures specific force f_b.
+			// World acceleration a_w = w_R_b * f_b + g_w. Use u = a_w as process input.
+			Eigen::Vector3d w_f = w_R_b * f_b;
+			Eigen::Vector3d u = w_f + gravity_w_;
 
 			// DEBUG: Log key values every 100 iterations
 			static int debug_counter = 0;
-			if (debug_counter++ % 100 == 0) {
+			if (debug_counter++ % 1000 == 0) {
 				RCLCPP_INFO(this->node_->get_logger(), 
 					"=== DEBUG [t=%.3f] ===\n"
 					"Raw IMU acc: [%.3f, %.3f, %.3f]\n"
 					"f_b (base frame): [%.3f, %.3f, %.3f]\n"
-					"w_R_b*f_b: [%.3f, %.3f, %.3f]\n"
-					"u (accel input): [%.3f, %.3f, %.3f]\n"
+					"w_R_b*f_b (world specific force): [%.3f, %.3f, %.3f]\n"
+					"gravity_w: [%.3f, %.3f, %.3f]\n"
+					"u = w_R_b*f_b + gravity_w: [%.3f, %.3f, %.3f]\n"
 					"v_b (leg odom): [%.3f, %.3f, %.3f]\n"
 					"w_v_b (world vel): [%.3f, %.3f, %.3f]\n"
 					"State pos: [%.3f, %.3f, %.3f]\n"
@@ -172,7 +185,8 @@ namespace state_estimator_plugins
 					time_,
 					acc.x(), acc.y(), acc.z(),
 					f_b.x(), f_b.y(), f_b.z(),
-					(w_R_b * f_b).x(), (w_R_b * f_b).y(), (w_R_b * f_b).z(),
+					w_f.x(), w_f.y(), w_f.z(),
+					gravity_w_.x(), gravity_w_.y(), gravity_w_.z(),
 					u.x(), u.y(), u.z(),
 					v_b.x(), v_b.y(), v_b.z(),
 					(w_R_b * v_b).x(), (w_R_b * v_b).y(), (w_R_b * v_b).z(),
@@ -184,12 +198,26 @@ namespace state_estimator_plugins
 			sensor_fusion_->predict(time_, u);
 
 			// reading leg odometry
-			Eigen::Vector3d w_v_b = w_R_b * v_b;
+            Eigen::Vector3d w_v_b = w_R_b * v_b;
 
-			Eigen::Vector3d z_proprio;
-			z_proprio << w_v_b;
+            Eigen::Vector3d z_proprio;
+            z_proprio << w_v_b;
 
-			// // correction
+            // DIAGNOSTIC: Check Kalman gain behavior
+            Eigen::Vector3d innovation = z_proprio - xhat_estimated.tail<3>();
+            static int tune_counter = 0;
+            if (tune_counter++ % 100 == 0) {
+                RCLCPP_INFO(this->node_->get_logger(),
+                    "=== TUNING DEBUG ===\n"
+                    "Measurement (leg odom vel): [%.3f, %.3f, %.3f]\n"
+                    "Predicted vel: [%.3f, %.3f, %.3f]\n"
+                    "Innovation (meas-pred): [%.3f, %.3f, %.3f] norm=%.3f",
+                    z_proprio.x(), z_proprio.y(), z_proprio.z(),
+                    xhat_estimated(3), xhat_estimated(4), xhat_estimated(5),
+                    innovation.x(), innovation.y(), innovation.z(), innovation.norm());
+            }
+
+            // // correction
 			sensor_fusion_->update(time_, z_proprio);
 			xhat_estimated = sensor_fusion_->getX();
 
@@ -246,6 +274,8 @@ namespace state_estimator_plugins
 		Eigen::Vector3d rpy;
 		Eigen::Matrix3d w_R_b;
 		Eigen::Matrix3d base_R_imu_;
+		// World gravity vector (loaded from parameter or defaulted to [0,0,9.81])
+		Eigen::Vector3d gravity_w_;
 
 		Eigen::Matrix3d w_R_wb; // world frame
 

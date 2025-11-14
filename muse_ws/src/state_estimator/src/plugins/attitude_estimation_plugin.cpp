@@ -80,13 +80,14 @@ namespace state_estimator_plugins
 			    m_n << 1.0 / std::sqrt(3.0), 1.0 / std::sqrt(3.0), 1.0 / std::sqrt(3.0);
 			}
 
-			// Convert gravity_vector
+			// Convert gravity_vector (world specific force direction; default assumes Z-up world, specific force +g)
 			if (gravity_vec.size() == 3) {
 			    f_n = Eigen::Map<Eigen::Vector3d>(gravity_vec.data());
 			} else {
-			    RCLCPP_WARN(nh->get_logger(), "Invalid or missing gravity_vector config — using default.");
+			    RCLCPP_WARN(nh->get_logger(), "Invalid or missing gravity_vector config — using default [0,0,9.81].");
 			    f_n << 0.0, 0.0, 9.81;
 			}
+			RCLCPP_INFO(nh->get_logger(), "Attitude gravity_vector: [%.3f, %.3f, %.3f]", f_n.x(), f_n.y(), f_n.z());
 			
 			// Matrices P0, Q, R (6x6) from parameter vectors; use safe defaults if sizes mismatch
 			Eigen::Matrix<double, 6, 6> P0_local = Eigen::Matrix<double, 6, 6>::Identity();
@@ -147,6 +148,32 @@ namespace state_estimator_plugins
 			if (begin)
 			{
 				time_begin_ = this->node_->get_clock()->now().seconds();
+				
+				// Initialize attitude from accelerometer (gravity-based)
+				// This gives us roll and pitch immediately
+				Eigen::Vector3d acc_normalized = (b_R_imu * acc).normalized();
+				Eigen::Vector3d gravity_dir(0, 0, 1);  // Expected gravity direction in world frame
+				
+				// Calculate roll and pitch from accelerometer
+				double roll = atan2(acc_normalized.y(), acc_normalized.z());
+				double pitch = atan2(-acc_normalized.x(), sqrt(acc_normalized.y()*acc_normalized.y() + acc_normalized.z()*acc_normalized.z()));
+				double yaw = 0.0;  // Can't determine yaw from accel alone
+				
+				// Convert to quaternion
+				Eigen::AngleAxisd rollAngle(roll, Eigen::Vector3d::UnitX());
+				Eigen::AngleAxisd pitchAngle(pitch, Eigen::Vector3d::UnitY());
+				Eigen::AngleAxisd yawAngle(yaw, Eigen::Vector3d::UnitZ());
+				Eigen::Quaterniond q_init = yawAngle * pitchAngle * rollAngle;
+				
+				xhat_estimated(0) = q_init.w();
+				xhat_estimated(1) = q_init.x();
+				xhat_estimated(2) = q_init.y();
+				xhat_estimated(3) = q_init.z();
+				
+				RCLCPP_INFO(this->node_->get_logger(), 
+					"Initialized attitude from accelerometer: Roll=%.2f°, Pitch=%.2f°",
+					roll * 180.0 / M_PI, pitch * 180.0 / M_PI);
+				
 				begin = false;
 			}		
 
@@ -156,6 +183,9 @@ namespace state_estimator_plugins
 	      	quat_est.vec() << xhat_estimated(1), xhat_estimated(2), xhat_estimated(3);
 
 	      	f_b = b_R_imu * acc;
+	      	
+	      	// TEMPORARY: Use computed mag vector until we have real magnetometer
+	      	// This means yaw will drift, but roll/pitch should be accurate
 	      	m_b = iit::commons::quatToRotMat(quat_est) * m_n;
 
 	      	z << f_b, m_b; 
@@ -190,6 +220,7 @@ namespace state_estimator_plugins
 			msg_.angular_velocity[0] = omega_filt(0);
 			msg_.angular_velocity[1] = omega_filt(1);
 			msg_.angular_velocity[2] = omega_filt(2);
+
 
 			pub_->publish(msg_);
 
