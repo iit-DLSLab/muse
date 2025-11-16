@@ -12,6 +12,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   # "msg/YourMessageFile.msg"
   # Add all your .msg files here
   "msg/Attitude.msg"
+  "msg/BaseHeight.msg"
   "msg/ContactDetection.msg"
   "msg/JointStateWithAcceleration.msg"
   "msg/LegOdometry.msg"
@@ -19,5 +20,6 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   DEPENDENCIES geometry_msgs sensor_msgs std_msgs
 )
 ament_export_dependencies(rosidl_default_runtime)
+ament_export_dependencies(geometry_msgs sensor_msgs std_msgs)
 
 ament_package()
