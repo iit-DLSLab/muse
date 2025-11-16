@@ -1,0 +1,3 @@
+[submodule "muse_ws/src/go2_description"]
+	path = muse_ws/src/go2_description
+	url = https://github.com/Unitree-Go2-Robot/go2_description.git
