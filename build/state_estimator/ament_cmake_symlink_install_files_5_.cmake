@@ -1,1 +1,0 @@
-ament_cmake_symlink_install_files("/home/jonas/Documents/Kamaro/muse_ros2/muse_ws/src/state_estimator" FILES "/home/jonas/Documents/Kamaro/muse_ros2/build/state_estimator/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/state_estimator" "DESTINATION" "share/ament_index/resource_index/parent_prefix_path")

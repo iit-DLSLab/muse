@@ -1,1 +1,0 @@
-rclcpp;sensor_msgs;tf2_ros;pluginlib;iit_commons;rosbag2_transport;state_estimator_msgs;pinocchio

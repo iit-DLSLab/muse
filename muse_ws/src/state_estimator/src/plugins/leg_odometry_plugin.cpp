@@ -16,6 +16,7 @@
 #include <ament_index_cpp/get_package_share_directory.hpp>
 
 #include "state_estimator_msgs/msg/leg_odometry.hpp"
+#include "state_estimator_msgs/msg/base_height.hpp"
 #include "state_estimator_msgs/msg/joint_state_with_acceleration.hpp" 
 #include "state_estimator_msgs/msg/contact_detection.hpp"
 #include "state_estimator_msgs/msg/attitude.hpp"
@@ -182,6 +183,11 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
             }
             pub_ = node->create_publisher<state_estimator_msgs::msg::LegOdometry>(pub_topic, rclcpp::QoS(10));
 
+            // Base height publisher
+            std::string base_height_topic = node->declare_parameter<std::string>(
+                "leg_odometry_plugin.base_height_topic", "/state_estimator/base_height");
+            base_height_pub_ = node->create_publisher<state_estimator_msgs::msg::BaseHeight>(base_height_topic, rclcpp::QoS(10));
+
 		}
 
 
@@ -293,6 +299,38 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
 
             base_velocity = w_R_b*base_velocity;
 
+            // Calculate base height from foot positions
+            std::vector<double> foot_heights;
+            std::vector<bool> stance_flags = {stance_lf, stance_rf, stance_lh, stance_rh};
+            
+            for (size_t i = 0; i < feet_frame_names_.size(); ++i) {
+                const auto& foot_name = feet_frame_names_[i];
+                std::size_t frame_id = model_.getFrameId(foot_name);
+                
+                // Get foot position in base frame (z-coordinate gives height above ground)
+                Eigen::Vector3d foot_pos_base = data_.oMf[frame_id].translation();
+                
+                // The negative z-position gives the height of the base above the foot
+                // (assuming foot is on the ground when in contact)
+                double foot_height = -foot_pos_base.z();
+                foot_heights.push_back(foot_height);
+            }
+            
+            // Calculate weighted average height using only feet in contact
+            double total_weighted_height = 0.0;
+            double total_weight = 0.0;
+            int num_feet_in_contact = 0;
+            
+            for (size_t i = 0; i < stance_flags.size(); ++i) {
+                if (stance_flags[i]) {
+                    total_weighted_height += foot_heights[i];
+                    total_weight += 1.0;
+                    num_feet_in_contact++;
+                }
+            }
+            
+            double estimated_height = (total_weight > 0) ? (total_weighted_height / total_weight) : 0.0;
+
             // publishing	
             msg_.header.stamp = this->node_->get_clock()->now();
 
@@ -306,6 +344,21 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
 
 			pub_->publish(msg_);
 
+            // Publish base height
+            base_height_msg_.header.stamp = this->node_->get_clock()->now();
+            base_height_msg_.height = estimated_height;
+            base_height_msg_.height_lf = foot_heights[0];
+            base_height_msg_.height_rf = foot_heights[1];
+            base_height_msg_.height_lh = foot_heights[2];
+            base_height_msg_.height_rh = foot_heights[3];
+            base_height_msg_.stance_lf = stance_lf;
+            base_height_msg_.stance_rf = stance_rf;
+            base_height_msg_.stance_lh = stance_lh;
+            base_height_msg_.stance_rh = stance_rh;
+            base_height_msg_.num_feet_in_contact = num_feet_in_contact;
+
+            base_height_pub_->publish(base_height_msg_);
+
 		} // end callback
 
 
@@ -318,8 +371,10 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
     std::shared_ptr<message_filters::Synchronizer<MySyncPolicy>> sync_;
 
         rclcpp::Publisher<state_estimator_msgs::msg::LegOdometry>::SharedPtr pub_;
+        rclcpp::Publisher<state_estimator_msgs::msg::BaseHeight>::SharedPtr base_height_pub_;
 
         state_estimator_msgs::msg::LegOdometry msg_;
+        state_estimator_msgs::msg::BaseHeight base_height_msg_;
 
         pinocchio::Model model_;
         pinocchio::Data data_;

@@ -1,7 +1,0 @@
-[33mCMake Warning:
-  Manually-specified variables were not used by the project:
-
-    CATKIN_INSTALL_INTO_PREFIX_ROOT
-    CATKIN_SYMLINK_INSTALL
-
-[0m
