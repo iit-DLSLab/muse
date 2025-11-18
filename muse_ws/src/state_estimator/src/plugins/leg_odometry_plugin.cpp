@@ -100,6 +100,19 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
                 pinocchio::urdf::buildModel(resolved_path, model_);
                 data_ = pinocchio::Data(model_);
                 RCLCPP_INFO(node->get_logger(), "URDF loaded into Pinocchio model successfully.");
+                
+                // Debug: Print model structure
+                RCLCPP_INFO(node->get_logger(), "=== Pinocchio Model Structure ===");
+                RCLCPP_INFO(node->get_logger(), "nq (config space dim): %d", model_.nq);
+                RCLCPP_INFO(node->get_logger(), "nv (velocity space dim): %d", model_.nv);
+                RCLCPP_INFO(node->get_logger(), "njoints (number of joints): %zu", model_.njoints);
+                
+                RCLCPP_INFO(node->get_logger(), "Joint names in model:");
+                for (pinocchio::JointIndex i = 0; i < model_.njoints; ++i) {
+                    const std::string& joint_name = model_.names[i];
+                    RCLCPP_INFO(node->get_logger(), "  Joint[%d]: %s", i, joint_name.c_str());
+                }
+                RCLCPP_INFO(node->get_logger(), "=================================");
             } catch (const std::exception& e) {
                 RCLCPP_ERROR(node->get_logger(), "Failed to load URDF: %s", e.what());
             }
@@ -145,6 +158,76 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
                     "Using feet_frame_names: [%s, %s, %s, %s]",
                     feet_frame_names_[0].c_str(), feet_frame_names_[1].c_str(),
                     feet_frame_names_[2].c_str(), feet_frame_names_[3].c_str());
+            }
+
+            // Joint order parameter (vector<string>)
+            // This explicitly defines the expected order of joints to guard against incorrect ordering
+            auto joint_order_param = node->declare_parameter<std::vector<std::string>>(
+                "leg_odometry_plugin.joint_order", std::vector<std::string>{}
+            );
+            auto joint_order_legacy = node->declare_parameter<std::vector<std::string>>(
+                "leg_odometry_plugin/joint_order", std::vector<std::string>{}
+            );
+            if (!joint_order_legacy.empty() && joint_order_param.empty()) {
+                RCLCPP_WARN(node->get_logger(),
+                    "Using legacy param 'leg_odometry_plugin/joint_order'; prefer 'leg_odometry_plugin.joint_order'");
+                joint_order_param = joint_order_legacy;
+            }
+
+            if (!joint_order_param.empty()) {
+                // Validate joint order: check that all specified joints exist in the model
+                bool all_joints_valid = true;
+                std::vector<std::string> missing_joints;
+                
+                for (const auto& joint_name : joint_order_param) {
+                    bool found = false;
+                    for (pinocchio::JointIndex i = 1; i < model_.njoints; ++i) {
+                        if (model_.names[i] == joint_name) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        all_joints_valid = false;
+                        missing_joints.push_back(joint_name);
+                    }
+                }
+
+                if (!all_joints_valid) {
+                    RCLCPP_WARN(node->get_logger(),
+                        "Joint order parameter contains joints not found in URDF model. Missing: [%s]. Using URDF model joint order instead.",
+                        [&missing_joints]() {
+                            std::string result;
+                            for (size_t i = 0; i < missing_joints.size(); ++i) {
+                                result += missing_joints[i];
+                                if (i < missing_joints.size() - 1) result += ", ";
+                            }
+                            return result;
+                        }().c_str());
+                    use_explicit_joint_order_ = false;
+                } else if (joint_order_param.size() != static_cast<size_t>(model_.nq)) {
+                    RCLCPP_WARN(node->get_logger(),
+                        "Joint order parameter size (%zu) does not match model DOF (%d). Using URDF model joint order instead.",
+                        joint_order_param.size(), model_.nq);
+                    use_explicit_joint_order_ = false;
+                } else {
+                    expected_joint_order_ = joint_order_param;
+                    use_explicit_joint_order_ = true;
+                    RCLCPP_INFO(node->get_logger(),
+                        "Using explicit joint order with %zu joints", expected_joint_order_.size());
+                    
+                    // Log the joint order for verification
+                    std::string joint_order_str;
+                    for (size_t i = 0; i < expected_joint_order_.size(); ++i) {
+                        joint_order_str += expected_joint_order_[i];
+                        if (i < expected_joint_order_.size() - 1) joint_order_str += ", ";
+                    }
+                    RCLCPP_INFO(node->get_logger(), "Joint order: [%s]", joint_order_str.c_str());
+                }
+            } else {
+                RCLCPP_INFO(node->get_logger(),
+                    "No explicit joint order specified; using URDF model joint order");
+                use_explicit_joint_order_ = false;
             }
 
             // Topics
@@ -210,6 +293,22 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
             Eigen::VectorXd q(model_.nq);
             Eigen::VectorXd v(model_.nv);
 
+            // Debug: Log incoming joint state data (throttled to once per 5 seconds)
+            static bool first_callback = true;
+            if (first_callback) {
+                RCLCPP_INFO(this->node_->get_logger(), "=== Incoming Joint State Message ===");
+                RCLCPP_INFO(this->node_->get_logger(), "Number of joints in message: %zu", js->name.size());
+                RCLCPP_INFO(this->node_->get_logger(), "Joint names and values:");
+                for (size_t i = 0; i < js->name.size(); ++i) {
+                    double pos = (i < js->position.size()) ? js->position[i] : 0.0;
+                    double vel = (i < js->velocity.size()) ? js->velocity[i] : 0.0;
+                    RCLCPP_INFO(this->node_->get_logger(), "  [%zu] %s: pos=%.4f, vel=%.4f", 
+                                i, js->name[i].c_str(), pos, vel);
+                }
+                RCLCPP_INFO(this->node_->get_logger(), "====================================");
+                first_callback = false;
+            }
+
             if (js->position.size() != static_cast<size_t>(model_.nq) || js->velocity.size() != static_cast<size_t>(model_.nv)) {
                 RCLCPP_WARN_THROTTLE(this->node_->get_logger(), *this->node_->get_clock(), 1000,
                                      "Mismatch in joint state size (pos=%zu vs nq=%d, vel=%zu vs nv=%d)",
@@ -226,20 +325,94 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
                     joint_vel_map[js->name[i]] = js->velocity[i];
             }
 
-            // Fill q and v in model's joint order (skip index 0 — "universe")
-            for (pinocchio::JointIndex i = 1; i < model_.njoints; ++i)
-            {
-                const std::string& joint_name = model_.names[i];
+            // Fill q and v according to explicit joint order or model's joint order
+            if (use_explicit_joint_order_) {
+                // Use the explicit joint order specified in parameters
+                // Verify incoming joint names match expected order
+                bool order_mismatch = false;
+                if (js->name.size() != expected_joint_order_.size()) {
+                    order_mismatch = true;
+                } else {
+                    for (size_t i = 0; i < expected_joint_order_.size(); ++i) {
+                        if (joint_pos_map.find(expected_joint_order_[i]) == joint_pos_map.end()) {
+                            order_mismatch = true;
+                            break;
+                        }
+                    }
+                }
 
-                if (joint_pos_map.count(joint_name))
-                    q[i - 1] = joint_pos_map[joint_name];
-                else
-                    q[i - 1] = 0.0;  // fallback
+                if (order_mismatch) {
+                    RCLCPP_WARN_THROTTLE(this->node_->get_logger(), *this->node_->get_clock(), 5000,
+                        "Incoming joint names do not match expected joint order. "
+                        "Expected %zu joints, received %zu. Check joint_order parameter.",
+                        expected_joint_order_.size(), js->name.size());
+                }
 
-                if (joint_vel_map.count(joint_name))
-                    v[i - 1] = joint_vel_map[joint_name];
-                else
-                    v[i - 1] = 0.0;
+                // Fill q and v using explicit order
+                for (size_t i = 0; i < expected_joint_order_.size(); ++i) {
+                    const std::string& joint_name = expected_joint_order_[i];
+                    
+                    if (joint_pos_map.count(joint_name)) {
+                        q[i] = joint_pos_map[joint_name];
+                    } else {
+                        q[i] = 0.0;
+                        RCLCPP_WARN_THROTTLE(this->node_->get_logger(), *this->node_->get_clock(), 5000,
+                            "Joint '%s' from expected order not found in incoming message", joint_name.c_str());
+                    }
+
+                    if (joint_vel_map.count(joint_name)) {
+                        v[i] = joint_vel_map[joint_name];
+                    } else {
+                        v[i] = 0.0;
+                    }
+                }
+            } else {
+                // Fall back to model's joint order (skip index 0 — "universe")
+                static bool logged_mapping = false;
+                if (!logged_mapping) {
+                    RCLCPP_INFO(this->node_->get_logger(), "=== Joint Mapping (Model Order) ===");
+                    RCLCPP_INFO(this->node_->get_logger(), "Mapping model joints to q/v vectors:");
+                }
+                
+                for (pinocchio::JointIndex i = 1; i < model_.njoints; ++i)
+                {
+                    const std::string& joint_name = model_.names[i];
+
+                    if (!logged_mapping) {
+                        RCLCPP_INFO(this->node_->get_logger(), "  model_.names[%d]='%s' -> q[%d], v[%d]", 
+                                    i, joint_name.c_str(), i-1, i-1);
+                    }
+
+                    if (joint_pos_map.count(joint_name))
+                        q[i - 1] = joint_pos_map[joint_name];
+                    else
+                        q[i - 1] = 0.0;  // fallback
+
+                    if (joint_vel_map.count(joint_name))
+                        v[i - 1] = joint_vel_map[joint_name];
+                    else
+                        v[i - 1] = 0.0;
+                }
+                
+                if (!logged_mapping) {
+                    RCLCPP_INFO(this->node_->get_logger(), "===================================");
+                    logged_mapping = true;
+                }
+            }
+
+            // Debug: Log the filled q and v vectors (only on first few callbacks)
+            static int callback_count = 0;
+            if (callback_count < 3) {
+                RCLCPP_INFO(this->node_->get_logger(), "=== Filled q vector (callback %d) ===", callback_count);
+                for (int i = 0; i < model_.nq; ++i) {
+                    RCLCPP_INFO(this->node_->get_logger(), "  q[%d] = %.4f", i, q[i]);
+                }
+                RCLCPP_INFO(this->node_->get_logger(), "=== Filled v vector (callback %d) ===", callback_count);
+                for (int i = 0; i < model_.nv; ++i) {
+                    RCLCPP_INFO(this->node_->get_logger(), "  v[%d] = %.4f", i, v[i]);
+                }
+                RCLCPP_INFO(this->node_->get_logger(), "====================================");
+                callback_count++;
             }
 
            
@@ -380,6 +553,9 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
         pinocchio::Data data_;
     // Default foot frame names (can be overridden via parameters)
     std::vector<std::string> feet_frame_names_ = {"FL_foot", "FR_foot", "RL_foot", "RR_foot"};   // Aliengo robot
+    // Expected joint order (if empty, use model order)
+    std::vector<std::string> expected_joint_order_;
+    bool use_explicit_joint_order_{false};
 
         bool model_loaded_{false};
 

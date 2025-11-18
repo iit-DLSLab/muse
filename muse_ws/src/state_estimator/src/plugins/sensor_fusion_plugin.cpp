@@ -163,21 +163,22 @@ namespace state_estimator_plugins
 			// reading acceleration from imu
 			Eigen::Vector3d f_b = base_R_imu_ * acc;
 
-			// Consistent gravity removal: IMU measures specific force f_b.
-			// World acceleration a_w = w_R_b * f_b + g_w. Use u = a_w as process input.
+			// Consistent gravity removal: IMU measures specific force f_b (upward when at rest).
+			// True world acceleration: a_w = w_R_b * f_b - g_w, where g_w points downward [0,0,9.81]
+			// This removes the gravity component from the specific force measurement.
 			Eigen::Vector3d w_f = w_R_b * f_b;
-			Eigen::Vector3d u = w_f + gravity_w_;
+			Eigen::Vector3d u = w_f - gravity_w_;
 
-			// DEBUG: Log key values every 100 iterations
+			// DEBUG: Log key values every 50000 iterations
 			static int debug_counter = 0;
-			if (debug_counter++ % 1000 == 0) {
+			if (debug_counter++ % 5000 == 0) {
 				RCLCPP_INFO(this->node_->get_logger(), 
 					"=== DEBUG [t=%.3f] ===\n"
 					"Raw IMU acc: [%.3f, %.3f, %.3f]\n"
 					"f_b (base frame): [%.3f, %.3f, %.3f]\n"
 					"w_R_b*f_b (world specific force): [%.3f, %.3f, %.3f]\n"
 					"gravity_w: [%.3f, %.3f, %.3f]\n"
-					"u = w_R_b*f_b + gravity_w: [%.3f, %.3f, %.3f]\n"
+					"u = w_R_b*f_b - gravity_w: [%.3f, %.3f, %.3f]\n"
 					"v_b (leg odom): [%.3f, %.3f, %.3f]\n"
 					"w_v_b (world vel): [%.3f, %.3f, %.3f]\n"
 					"State pos: [%.3f, %.3f, %.3f]\n"
@@ -206,7 +207,7 @@ namespace state_estimator_plugins
             // DIAGNOSTIC: Check Kalman gain behavior
             Eigen::Vector3d innovation = z_proprio - xhat_estimated.tail<3>();
             static int tune_counter = 0;
-            if (tune_counter++ % 100 == 0) {
+            if (tune_counter++ % 50000 == 0) {
                 RCLCPP_INFO(this->node_->get_logger(),
                     "=== TUNING DEBUG ===\n"
                     "Measurement (leg odom vel): [%.3f, %.3f, %.3f]\n"

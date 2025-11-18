@@ -11,5 +11,11 @@
       attitude_topic: "/state_estimator/attitude"
       pub_topic: "/state_estimator/leg_odometry"
       base_height_topic: "/state_estimator/base_height"
-      # Feet frame names (order: FL, FR, RL, RR)
-      feet_frame_names: ["FL_foot", "FR_foot", "RL_foot", "RR_foot"]
+      # Feet frame names (order: FL, FR, BL, BR)
+      feet_frame_names: ["FL_foot", "FR_foot", "BL_foot", "BR_foot"]
+      # Joint order: explicit ordering of joint names to match the model
+      # If empty, the plugin will use the order from the URDF model
+      joint_order: ["FL_shoulder_joint", "FL_thigh_joint", "FL_calf_joint", 
+                     "FR_shoulder_joint", "FR_thigh_joint", "FR_calf_joint",
+                     "BL_shoulder_joint", "BL_thigh_joint", "BL_calf_joint",
+                     "BR_shoulder_joint", "BR_thigh_joint", "BR_calf_joint"]
