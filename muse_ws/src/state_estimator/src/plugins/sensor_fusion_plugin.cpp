@@ -142,7 +142,9 @@ namespace state_estimator_plugins
 			quat_est.w() = attitude->quaternion[0];
 			quat_est.vec() << attitude->quaternion[1], attitude->quaternion[2], attitude->quaternion[3];
 			rpy = iit::commons::quatToRPY(quat_est);
-			w_R_b = iit::commons::quatToRotMat(quat_est);
+			Eigen::Matrix3d b_R_w = iit::commons::quatToRotMat(quat_est);
+			// Use body->world rotation
+			Eigen::Matrix3d w_R_b = b_R_w.transpose();
 
 			// Reading leg odometry
 			v_b << leg_odom->base_velocity[0], leg_odom->base_velocity[1], leg_odom->base_velocity[2];
@@ -163,10 +165,10 @@ namespace state_estimator_plugins
 			// reading acceleration from imu
 			Eigen::Vector3d f_b = base_R_imu_ * acc;
 
-			// Consistent gravity removal: IMU measures specific force f_b (upward when at rest).
-			// True world acceleration: a_w = w_R_b * f_b - g_w, where g_w points downward [0,0,9.81]
-			// This removes the gravity component from the specific force measurement.
+			// World specific force (should be ≈ gravity when stationary)
 			Eigen::Vector3d w_f = w_R_b * f_b;
+
+			// True world linear acceleration (control input)
 			Eigen::Vector3d u = w_f - gravity_w_;
 
 			// DEBUG: Log key values every 50000 iterations
@@ -202,7 +204,7 @@ namespace state_estimator_plugins
             Eigen::Vector3d w_v_b = w_R_b * v_b;
 
             Eigen::Vector3d z_proprio;
-            z_proprio << w_v_b;
+            z_proprio << w_v_b;  // ← This is VELOCITY, not POSITION!
 
             // DIAGNOSTIC: Check Kalman gain behavior
             Eigen::Vector3d innovation = z_proprio - xhat_estimated.tail<3>();
