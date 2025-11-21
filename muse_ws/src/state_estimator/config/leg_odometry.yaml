@@ -19,3 +19,6 @@
                      "FR_shoulder_joint", "FR_thigh_joint", "FR_calf_joint",
                      "BL_shoulder_joint", "BL_thigh_joint", "BL_calf_joint",
                      "BR_shoulder_joint", "BR_thigh_joint", "BR_calf_joint"]
+      base_R_imu: [1.0, 0.0, 0.0,
+                   0.0, 1.0, 0.0,
+                   0.0, 0.0, 1.0]
