@@ -18,6 +18,7 @@ namespace state_estimator
         void predict(double t, const Eigen::Matrix<double,3,1> &u) override;
         void update(double t, const Eigen::Matrix<double,3,1> &z);
         void setMatricesSF(bool slippage);
+        void setState(const Eigen::Matrix<double,6,1> &x) { this->xhat = x; }
 
     protected:
         Eigen::Matrix<double,6,1> calc_f(double t, const Eigen::Matrix<double,6,1> &x, const Eigen::Matrix<double,3,1> &u) override;

@@ -10,6 +10,7 @@
 #include <sensor_msgs/msg/imu.hpp>					 // read acceleration from imu
 #include "state_estimator_msgs/msg/leg_odometry.hpp" // read base velocity from leg odometry
 #include "state_estimator_msgs/msg/attitude.hpp"	 // read orientation from attitude estimation
+#include "state_estimator_msgs/msg/base_height.hpp"  // initial base height message
 #include <nav_msgs/msg/odometry.hpp>				 // read position from lidar odometry
 
 #include <iit/commons/geometry/rotations.h>
@@ -106,6 +107,7 @@ namespace state_estimator_plugins
 			const std::string attitude_topic = nh->declare_parameter<std::string>("sensor_fusion_plugin.attitude_topic", "/state_estimator/attitude");
 			const std::string leg_odom_topic = nh->declare_parameter<std::string>("sensor_fusion_plugin.leg_odometry_topic", "/sensors/leg_odometry");
 			const std::string pub_topic = nh->declare_parameter<std::string>("sensor_fusion_plugin.pub_topic", "/sensors/odometry");
+			const std::string base_height_topic = nh->declare_parameter<std::string>("sensor_fusion_plugin.base_height_topic", "/state_estimator/base_height");
 
 			// QoS profile for sensor data
 			auto sensor_qos = rclcpp::SensorDataQoS();
@@ -120,6 +122,21 @@ namespace state_estimator_plugins
 
 			// Publisher
 			pub_ = nh->create_publisher<nav_msgs::msg::Odometry>(pub_topic, sensor_qos);
+
+			// One-shot BaseHeight subscription (first message seeds z position)
+			base_height_sub_ = nh->create_subscription<state_estimator_msgs::msg::BaseHeight>(
+				base_height_topic,
+				sensor_qos,
+				[this](const state_estimator_msgs::msg::BaseHeight::SharedPtr msg) {
+					if (!initial_height_set_) {
+						xhat_estimated(2) = msg->height; // set z component
+						if (sensor_fusion_) {
+							sensor_fusion_->setState(xhat_estimated);
+						}
+						initial_height_set_ = true;
+						RCLCPP_INFO(this->node_->get_logger(), "Initial height received: %.3f m (frame=%s)", msg->height, msg->header.frame_id.c_str());
+					}
+				});
 
 			RCLCPP_INFO(nh->get_logger(), "SensorFusionPlugin initialized");
 		}
@@ -148,6 +165,7 @@ namespace state_estimator_plugins
 
 			// Reading leg odometry
 			v_b << leg_odom->base_velocity[0], leg_odom->base_velocity[1], leg_odom->base_velocity[2];
+			
 			computeLinPosVel(acc, w_R_b, v_b);
 		}
 
@@ -158,6 +176,9 @@ namespace state_estimator_plugins
 				time_begin_ = this->node_->get_clock()->now().seconds();
 				w_R_wb = w_R_b;
 				begin = false;
+				if (!initial_height_set_) {
+					RCLCPP_DEBUG(this->node_->get_logger(), "Initial height not yet received; using z=%.3f until BaseHeight arrives", xhat_estimated(2));
+				}
 			}
 
 			time_ = this->node_->get_clock()->now().seconds() - time_begin_;
@@ -199,12 +220,9 @@ namespace state_estimator_plugins
 
 			// prediction
 			sensor_fusion_->predict(time_, u);
-
-			// reading leg odometry
-            Eigen::Vector3d w_v_b = w_R_b * v_b;
-
             Eigen::Vector3d z_proprio;
-            z_proprio << w_v_b;  // ← This is VELOCITY, not POSITION!
+			//Convert leg odometry from body to world frame
+            z_proprio << w_R_b * v_b;
 
             // DIAGNOSTIC: Check Kalman gain behavior
             Eigen::Vector3d innovation = z_proprio - xhat_estimated.tail<3>();
@@ -262,6 +280,7 @@ namespace state_estimator_plugins
 		std::shared_ptr<message_filters::Subscriber<state_estimator_msgs::msg::LegOdometry>> leg_odom_sub_;
 
 		std::shared_ptr<message_filters::Synchronizer<MySyncPolicy>> sync_;
+		rclcpp::Subscription<state_estimator_msgs::msg::BaseHeight>::SharedPtr base_height_sub_;
 
 		rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr pub_;
 
@@ -269,6 +288,7 @@ namespace state_estimator_plugins
 
 		double time_{};
 		bool begin{true};
+		bool initial_height_set_{false};
 		double time_begin_;
 		Eigen::Vector3d v_b;
 		Eigen::Quaterniond quat_est;
