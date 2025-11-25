@@ -9,7 +9,6 @@
 
 #include "iit/commons/geometry/rotations.h"
 
-
 // Core
 #include "state_estimator/plugin.hpp"
 #include <rclcpp/rclcpp.hpp>
@@ -33,7 +32,7 @@
 #include <message_filters/sync_policies/exact_time.hpp>
 
 #include <unordered_map>
-
+#include <fstream>
 
 namespace state_estimator_plugins
 {
@@ -48,528 +47,588 @@ using ExactTimePolicy = message_filters::sync_policies::ExactTime<ImuMsg, JointS
 
 #define MySyncPolicy ApproximateTimePolicy
 
-//  This class calculates the base velocity as estimated from the leg kinematics. These are NOT the velocity of the legs.
-	class LegOdometryPlugin : public PluginBase
-	{
-	public:
-        LegOdometryPlugin() = default;
+class LegOdometryPlugin : public PluginBase
+{
+public:
+    LegOdometryPlugin() = default;
+    ~LegOdometryPlugin() override = default;
 
-        ~LegOdometryPlugin() override = default;
+    std::string getName() override { return std::string("LegOdometry"); }
+    std::string getDescription() override { return std::string("Leg Odometry Plugin"); }
 
-		std::string getName() override { return std::string("LegOdometry"); }
-		std::string getDescription() override { return std::string("Leg Odometry Plugin"); }
+    void initialize_() override {
+        auto node = this->node_;
+        if (!node) {
+            throw std::runtime_error("LegOdometryPlugin: node_ is null");
+        }
 
-		void initialize_() override {
+        // Initialize member variables
+        omega_.setZero();
+        base_omega_.setZero();
+        stance_lf_ = false;
+        stance_rf_ = false;
+        stance_lh_ = false;
+        stance_rh_ = false;
+        base_R_imu_.setIdentity();
+        model_loaded_ = false;
 
-            auto node = this->node_;
-            if (!node) {
-                throw std::runtime_error("LegOdometryPlugin: node_ is null");
-            }
+        // Load URDF
+        if (!loadURDF()) {
+            throw std::runtime_error("Failed to load URDF model");
+        }
 
-            // URDF path param (ROS 2 style). Accept legacy name as fallback.
-            std::string urdf_path_param = node->declare_parameter<std::string>(
-                "leg_odometry_plugin.urdf_path", "");
-            const std::string legacy_urdf = node->declare_parameter<std::string>(
-                "leg_odometry_plugin/urdf_path", "");
-            if (!legacy_urdf.empty()) {
-                RCLCPP_WARN(node->get_logger(),
-                    "Using legacy param 'leg_odometry_plugin/urdf_path'; prefer 'leg_odometry_plugin.urdf_path'");
-                urdf_path_param = legacy_urdf;
-            }
+        // Configure rotation matrix
+        configureRotationMatrix();
 
-            if (urdf_path_param.empty()) {
-                RCLCPP_ERROR(node->get_logger(), "URDF path is not set.");
-                return;
-            }
+        // Configure feet frame names
+        configureFeetFrames();
 
-            // Resolve $(find <pkg>)/path using ament_index
-            std::string resolved_path = urdf_path_param;
-            const std::string find_token = "$(find ";
-            if (resolved_path.find(find_token) != std::string::npos) {
-                const size_t start = resolved_path.find(find_token) + find_token.length();
-                const size_t end = resolved_path.find(')', start);
-                const std::string package_name = resolved_path.substr(start, end - start);
-                const std::string pkg_share = ament_index_cpp::get_package_share_directory(package_name);
-                // Replace "$(find pkg)" with pkg_share
-                resolved_path.replace(resolved_path.find(find_token), end - resolved_path.find(find_token) + 1, pkg_share);
-            }
+        // Configure joint order
+        configureJointOrder();
 
-            RCLCPP_INFO(node->get_logger(), "Loading URDF from: %s", resolved_path.c_str());
+        // Setup subscribers and publishers
+        setupTopics();
 
-            try {
-                pinocchio::urdf::buildModel(resolved_path, model_);
-                data_ = pinocchio::Data(model_);
-                RCLCPP_INFO(node->get_logger(), "URDF loaded into Pinocchio model successfully.");
-                
-                // Debug: Print model structure
-                RCLCPP_INFO(node->get_logger(), "=== Pinocchio Model Structure ===");
-                RCLCPP_INFO(node->get_logger(), "nq (config space dim): %d", model_.nq);
-                RCLCPP_INFO(node->get_logger(), "nv (velocity space dim): %d", model_.nv);
-                RCLCPP_INFO(node->get_logger(), "njoints (number of joints): %zu", model_.njoints);
-                
-                RCLCPP_INFO(node->get_logger(), "Joint names in model:");
-                for (pinocchio::JointIndex i = 0; i < model_.njoints; ++i) {
-                    const std::string& joint_name = model_.names[i];
-                    RCLCPP_INFO(node->get_logger(), "  Joint[%d]: %s", i, joint_name.c_str());
-                }
-                RCLCPP_INFO(node->get_logger(), "=================================");
-            } catch (const std::exception& e) {
-                RCLCPP_ERROR(node->get_logger(), "Failed to load URDF: %s", e.what());
-            }
+        RCLCPP_INFO(node->get_logger(), "LegOdometryPlugin initialized successfully");
+    }
 
-            // base_R_imu from attitude plugin params
-            std::vector<double> base_R_imu_vec = node->declare_parameter<std::vector<double>>( 
-                "leg_odometry_plugin.base_R_imu", std::vector<double>());
-            if (base_R_imu_vec.size() == 9) {
-                base_R_imu_ = Eigen::Map<const Eigen::Matrix<double,3,3,Eigen::RowMajor>>(base_R_imu_vec.data());
-            } else {
-                RCLCPP_WARN(node->get_logger(), "base_R_imu size != 9; using identity");
-                base_R_imu_.setIdentity();
-            }
+    void shutdown_() override {}
+    void pause_() override {}
+    void resume_() override {}
+    void reset_() override {}
 
-            // Feet frame names (vector<string>)
-            // Prefer dot-style key; accept legacy slash-style fallback. Warn when not set and use defaults.
-            auto frames_param = node->declare_parameter<std::vector<std::string>>(
-                "leg_odometry_plugin.feet_frame_names", std::vector<std::string>{}
-            );
-            auto frames_legacy = node->declare_parameter<std::vector<std::string>>(
-                "leg_odometry_plugin/feet_frame_names", std::vector<std::string>{}
-            );
-            if (!frames_legacy.empty() && frames_param.empty()) {
-                RCLCPP_WARN(node->get_logger(),
-                    "Using legacy param 'leg_odometry_plugin/feet_frame_names'; prefer 'leg_odometry_plugin.feet_frame_names'");
-                frames_param = frames_legacy;
-            }
-            // Validate size (expect 4 names for quadruped); if invalid, fall back to default
-            if (!frames_param.empty() && frames_param.size() != 4) {
-                RCLCPP_WARN(node->get_logger(),
-                    "Parameter 'leg_odometry_plugin.feet_frame_names' must contain exactly 4 frame names; got %zu. Using default.",
-                    frames_param.size());
-                frames_param.clear();
-            }
-            if (frames_param.empty()) {
-                RCLCPP_WARN(node->get_logger(),
-                    "Parameter 'leg_odometry_plugin.feet_frame_names' not set; using default: [%s, %s, %s, %s]",
-                    feet_frame_names_[0].c_str(), feet_frame_names_[1].c_str(),
-                    feet_frame_names_[2].c_str(), feet_frame_names_[3].c_str());
-            } else {
-                feet_frame_names_ = frames_param;
-                RCLCPP_INFO(node->get_logger(),
-                    "Using feet_frame_names: [%s, %s, %s, %s]",
-                    feet_frame_names_[0].c_str(), feet_frame_names_[1].c_str(),
-                    feet_frame_names_[2].c_str(), feet_frame_names_[3].c_str());
-            }
-
-            // Joint order parameter (vector<string>)
-            // This explicitly defines the expected order of joints to guard against incorrect ordering
-            auto joint_order_param = node->declare_parameter<std::vector<std::string>>(
-                "leg_odometry_plugin.joint_order", std::vector<std::string>{}
-            );
-            auto joint_order_legacy = node->declare_parameter<std::vector<std::string>>(
-                "leg_odometry_plugin/joint_order", std::vector<std::string>{}
-            );
-            if (!joint_order_legacy.empty() && joint_order_param.empty()) {
-                RCLCPP_WARN(node->get_logger(),
-                    "Using legacy param 'leg_odometry_plugin/joint_order'; prefer 'leg_odometry_plugin.joint_order'");
-                joint_order_param = joint_order_legacy;
-            }
-
-            if (!joint_order_param.empty()) {
-                // Validate joint order: check that all specified joints exist in the model
-                bool all_joints_valid = true;
-                std::vector<std::string> missing_joints;
-                
-                for (const auto& joint_name : joint_order_param) {
-                    bool found = false;
-                    for (pinocchio::JointIndex i = 1; i < model_.njoints; ++i) {
-                        if (model_.names[i] == joint_name) {
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (!found) {
-                        all_joints_valid = false;
-                        missing_joints.push_back(joint_name);
-                    }
-                }
-
-                if (!all_joints_valid) {
-                    RCLCPP_WARN(node->get_logger(),
-                        "Joint order parameter contains joints not found in URDF model. Missing: [%s]. Using URDF model joint order instead.",
-                        [&missing_joints]() {
-                            std::string result;
-                            for (size_t i = 0; i < missing_joints.size(); ++i) {
-                                result += missing_joints[i];
-                                if (i < missing_joints.size() - 1) result += ", ";
-                            }
-                            return result;
-                        }().c_str());
-                    use_explicit_joint_order_ = false;
-                } else if (joint_order_param.size() != static_cast<size_t>(model_.nq)) {
-                    RCLCPP_WARN(node->get_logger(),
-                        "Joint order parameter size (%zu) does not match model DOF (%d). Using URDF model joint order instead.",
-                        joint_order_param.size(), model_.nq);
-                    use_explicit_joint_order_ = false;
-                } else {
-                    expected_joint_order_ = joint_order_param;
-                    use_explicit_joint_order_ = true;
-                    RCLCPP_INFO(node->get_logger(),
-                        "Using explicit joint order with %zu joints", expected_joint_order_.size());
-                    
-                    // Log the joint order for verification
-                    std::string joint_order_str;
-                    for (size_t i = 0; i < expected_joint_order_.size(); ++i) {
-                        joint_order_str += expected_joint_order_[i];
-                        if (i < expected_joint_order_.size() - 1) joint_order_str += ", ";
-                    }
-                    RCLCPP_INFO(node->get_logger(), "Joint order: [%s]", joint_order_str.c_str());
-                }
-            } else {
-                RCLCPP_INFO(node->get_logger(),
-                    "No explicit joint order specified; using URDF model joint order");
-                use_explicit_joint_order_ = false;
-            }
-
-            // Topics
-            std::string imu_topic = node->declare_parameter<std::string>(
-                "leg_odometry_plugin.imu_topic", "/imu");
-            std::string joint_states_topic = node->declare_parameter<std::string>(
-                "leg_odometry_plugin.joint_states_topic", "/state_estimator/joint_states");
-            std::string contact_topic = node->declare_parameter<std::string>(
-                "leg_odometry_plugin.contact_topic", "/state_estimator/contact_detection");
-            std::string attitude_topic = node->declare_parameter<std::string>(
-                "leg_odometry_plugin.attitude_topic", "/state_estimator/attitude");
-
-            // Subscribers with SensorDataQoS
-            auto sensor_qos = rclcpp::SensorDataQoS();
-
-            imu_sub_ = std::make_shared<message_filters::Subscriber<ImuMsg>>(node, imu_topic, sensor_qos);
-            joint_state_sub_ = std::make_shared<message_filters::Subscriber<JointStateMsg>>(node, joint_states_topic, sensor_qos);
-            contact_sub_ = std::make_shared<message_filters::Subscriber<ContactMsg>>(node, contact_topic, sensor_qos);
-            attitude_sub_ = std::make_shared<message_filters::Subscriber<AttitudeMsg>>(node, attitude_topic, sensor_qos);
-
-            sync_ = std::make_shared<message_filters::Synchronizer<MySyncPolicy>>(MySyncPolicy(100), *imu_sub_, *joint_state_sub_, *contact_sub_, *attitude_sub_);
-            sync_->registerCallback(std::bind(&LegOdometryPlugin::callback, this,
-                                              std::placeholders::_1,
-                                              std::placeholders::_2,
-                                              std::placeholders::_3,
-                                              std::placeholders::_4));
-
-            std::string pub_topic = node->declare_parameter<std::string>(
-                "leg_odometry_plugin.pub_topic", "/state_estimator/leg_odometry");
-            // Legacy
-            const std::string pub_topic_legacy = node->declare_parameter<std::string>("leg_odometry_plugin/pub_topic", "");
-            if (!pub_topic_legacy.empty()) {
-                RCLCPP_WARN(node->get_logger(),
-                  "Using legacy parameter 'leg_odometry_plugin/pub_topic'; prefer 'leg_odometry_plugin.pub_topic'");
-                pub_topic = pub_topic_legacy;
-            }
-            pub_ = node->create_publisher<state_estimator_msgs::msg::LegOdometry>(pub_topic, rclcpp::QoS(10));
-
-            // Base height publisher
-            std::string base_height_topic = node->declare_parameter<std::string>(
-                "leg_odometry_plugin.base_height_topic", "/state_estimator/base_height");
-            base_height_pub_ = node->create_publisher<state_estimator_msgs::msg::BaseHeight>(base_height_topic, rclcpp::QoS(10));
-
-		}
-
-
-		void shutdown_() override { }
-		void pause_() override { }
-		void resume_() override { }
-		void reset_() override { }
-
-        void callback
-        (
-            const ImuMsg::ConstSharedPtr imu,
-            const JointStateMsg::ConstSharedPtr js,
-            const ContactMsg::ConstSharedPtr contact,
-            const AttitudeMsg::ConstSharedPtr attitude
-        )
-		{
-
-			// Robot joint states
-            // Fill q and v from joint state
-            Eigen::VectorXd q(model_.nq);
-            Eigen::VectorXd v(model_.nv);
-
-            // Debug: Log incoming joint state data (throttled to once per 5 seconds)
-            static bool first_callback = true;
-            if (first_callback) {
-                RCLCPP_INFO(this->node_->get_logger(), "=== Incoming Joint State Message ===");
-                RCLCPP_INFO(this->node_->get_logger(), "Number of joints in message: %zu", js->name.size());
-                RCLCPP_INFO(this->node_->get_logger(), "Joint names and values:");
-                for (size_t i = 0; i < js->name.size(); ++i) {
-                    double pos = (i < js->position.size()) ? js->position[i] : 0.0;
-                    double vel = (i < js->velocity.size()) ? js->velocity[i] : 0.0;
-                    RCLCPP_INFO(this->node_->get_logger(), "  [%zu] %s: pos=%.4f, vel=%.4f", 
-                                i, js->name[i].c_str(), pos, vel);
-                }
-                RCLCPP_INFO(this->node_->get_logger(), "====================================");
-                first_callback = false;
-            }
-
-            if (js->position.size() != static_cast<size_t>(model_.nq) || js->velocity.size() != static_cast<size_t>(model_.nv)) {
-                RCLCPP_WARN_THROTTLE(this->node_->get_logger(), *this->node_->get_clock(), 1000,
-                                     "Mismatch in joint state size (pos=%zu vs nq=%d, vel=%zu vs nv=%d)",
-                                     js->position.size(), model_.nq, js->velocity.size(), model_.nv);
-                return;
-            }
-
-            // Build map from joint name to position/velocity
-            std::unordered_map<std::string, double> joint_pos_map, joint_vel_map;
-            for (size_t i = 0; i < js->name.size(); ++i)
-            {
-                joint_pos_map[js->name[i]] = js->position[i];
-                if (i < js->velocity.size())
-                    joint_vel_map[js->name[i]] = js->velocity[i];
-            }
-
-            // Fill q and v according to explicit joint order or model's joint order
-            if (use_explicit_joint_order_) {
-                // Use the explicit joint order specified in parameters
-                // Verify incoming joint names match expected order
-                bool order_mismatch = false;
-                if (js->name.size() != expected_joint_order_.size()) {
-                    order_mismatch = true;
-                } else {
-                    for (size_t i = 0; i < expected_joint_order_.size(); ++i) {
-                        if (joint_pos_map.find(expected_joint_order_[i]) == joint_pos_map.end()) {
-                            order_mismatch = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (order_mismatch) {
-                    RCLCPP_WARN_THROTTLE(this->node_->get_logger(), *this->node_->get_clock(), 5000,
-                        "Incoming joint names do not match expected joint order. "
-                        "Expected %zu joints, received %zu. Check joint_order parameter.",
-                        expected_joint_order_.size(), js->name.size());
-                }
-
-                // Fill q and v using explicit order
-                for (size_t i = 0; i < expected_joint_order_.size(); ++i) {
-                    const std::string& joint_name = expected_joint_order_[i];
-                    
-                    if (joint_pos_map.count(joint_name)) {
-                        q[i] = joint_pos_map[joint_name];
-                    } else {
-                        q[i] = 0.0;
-                        RCLCPP_WARN_THROTTLE(this->node_->get_logger(), *this->node_->get_clock(), 5000,
-                            "Joint '%s' from expected order not found in incoming message", joint_name.c_str());
-                    }
-
-                    if (joint_vel_map.count(joint_name)) {
-                        v[i] = joint_vel_map[joint_name];
-                    } else {
-                        v[i] = 0.0;
-                    }
-                }
-            } else {
-                // Fall back to model's joint order (skip index 0 — "universe")
-                static bool logged_mapping = false;
-                if (!logged_mapping) {
-                    RCLCPP_INFO(this->node_->get_logger(), "=== Joint Mapping (Model Order) ===");
-                    RCLCPP_INFO(this->node_->get_logger(), "Mapping model joints to q/v vectors:");
-                }
-                
-                for (pinocchio::JointIndex i = 1; i < model_.njoints; ++i)
-                {
-                    const std::string& joint_name = model_.names[i];
-
-                    if (!logged_mapping) {
-                        RCLCPP_INFO(this->node_->get_logger(), "  model_.names[%d]='%s' -> q[%d], v[%d]", 
-                                    i, joint_name.c_str(), i-1, i-1);
-                    }
-
-                    if (joint_pos_map.count(joint_name))
-                        q[i - 1] = joint_pos_map[joint_name];
-                    else
-                        q[i - 1] = 0.0;  // fallback
-
-                    if (joint_vel_map.count(joint_name))
-                        v[i - 1] = joint_vel_map[joint_name];
-                    else
-                        v[i - 1] = 0.0;
-                }
-                
-                if (!logged_mapping) {
-                    RCLCPP_INFO(this->node_->get_logger(), "===================================");
-                    logged_mapping = true;
-                }
-            }
-
-            // Debug: Log the filled q and v vectors (only on first few callbacks)
-            static int callback_count = 0;
-            if (callback_count < 3) {
-                RCLCPP_INFO(this->node_->get_logger(), "=== Filled q vector (callback %d) ===", callback_count);
-                for (int i = 0; i < model_.nq; ++i) {
-                    RCLCPP_INFO(this->node_->get_logger(), "  q[%d] = %.4f", i, q[i]);
-                }
-                RCLCPP_INFO(this->node_->get_logger(), "=== Filled v vector (callback %d) ===", callback_count);
-                for (int i = 0; i < model_.nv; ++i) {
-                    RCLCPP_INFO(this->node_->get_logger(), "  v[%d] = %.4f", i, v[i]);
-                }
-                RCLCPP_INFO(this->node_->get_logger(), "====================================");
-                callback_count++;
-            }
-
-           
-			omega << imu->angular_velocity.x, imu->angular_velocity.y, imu->angular_velocity.z;
-            stance_lf = contact->stance_lf;
-            stance_rf = contact->stance_rf;
-            stance_lh = contact->stance_lh;
-            stance_rh = contact->stance_rh;
-
-		    std::vector<Eigen::Vector3d> foot_velocities;
-
-            // Compute the forward kinematics first
-            pinocchio::forwardKinematics(model_, data_, q, v);
-            pinocchio::updateFramePlacements(model_, data_);
-            std::vector<Eigen::Vector3d> foot_vels;
-
-            for (size_t i = 0; i < feet_frame_names_.size(); ++i) {
-                const auto& foot_name = feet_frame_names_[i];
-                
-                // Check if frame exists in the model
-                if (!model_.existFrame(foot_name)) {
-                    RCLCPP_ERROR_THROTTLE(this->node_->get_logger(), *this->node_->get_clock(), 5000,
-                                         "Frame '%s' does not exist in the URDF model!", foot_name.c_str());
-                    return;
-                }
-                
-                std::size_t frame_id = model_.getFrameId(foot_name);
-            
-                // Get spatial velocity in LOCAL_WORLD_ALIGNED frame
-                pinocchio::Motion foot_vel_global = pinocchio::getFrameVelocity(model_, data_, frame_id, pinocchio::LOCAL_WORLD_ALIGNED);
-
-                // Get position of the foot in the base frame
-                Eigen::Vector3d foot_pos_base = data_.oMf[frame_id].translation();  // Position of foot in world
-                Eigen::Vector3d omega_rotated = base_R_imu_ * omega;
-
-                // Compute velocity contribution from base angular motion: ω x r
-                Eigen::Vector3d omega_cross_r = omega_rotated.cross(foot_pos_base);
-
-                // Compute linear velocity of the foot relative to base
-                Eigen::Vector3d rel_vel = -(foot_vel_global.linear() - omega_cross_r);
-                foot_vels.push_back(rel_vel);
-            
-            }
-
-            Eigen::Vector3d lin_leg_lf = foot_vels[0];
-            Eigen::Vector3d lin_leg_rf = foot_vels[1];  
-            Eigen::Vector3d lin_leg_lh = foot_vels[2];
-            Eigen::Vector3d lin_leg_rh = foot_vels[3];
-
-            double sum_stance = stance_lf + stance_rf + stance_lh + stance_rh;
-			Eigen::Vector3d base_velocity = (stance_lf*lin_leg_lf + stance_rf*lin_leg_rf + stance_lh*lin_leg_lh + stance_rh*lin_leg_rh)/(sum_stance + 1e-5);
-
-            Eigen::Quaterniond quat_est;
-			quat_est.w() = attitude->quaternion[0];
-			quat_est.vec() << attitude->quaternion[1], attitude->quaternion[2], attitude->quaternion[3];
-			Eigen::Matrix3d w_R_b = iit::commons::quatToRotMat(quat_est);
-
-            base_velocity = w_R_b*base_velocity;
-
-            // Calculate base height from foot positions
-            std::vector<double> foot_heights;
-            std::vector<bool> stance_flags = {stance_lf, stance_rf, stance_lh, stance_rh};
-            
-            for (size_t i = 0; i < feet_frame_names_.size(); ++i) {
-                const auto& foot_name = feet_frame_names_[i];
-                std::size_t frame_id = model_.getFrameId(foot_name);
-                
-                // Get foot position in base frame (z-coordinate gives height above ground)
-                Eigen::Vector3d foot_pos_base = data_.oMf[frame_id].translation();
-                
-                // The negative z-position gives the height of the base above the foot
-                // (assuming foot is on the ground when in contact)
-                double foot_height = -foot_pos_base.z();
-                foot_heights.push_back(foot_height);
-            }
-            
-            // Calculate weighted average height using only feet in contact
-            double total_weighted_height = 0.0;
-            double total_weight = 0.0;
-            int num_feet_in_contact = 0;
-            
-            for (size_t i = 0; i < stance_flags.size(); ++i) {
-                if (stance_flags[i]) {
-                    total_weighted_height += foot_heights[i];
-                    total_weight += 1.0;
-                    num_feet_in_contact++;
-                }
-            }
-            
-            double estimated_height = (total_weight > 0) ? (total_weighted_height / total_weight) : 0.0;
-
-            // publishing	
-            msg_.header.stamp = this->node_->get_clock()->now();
-
-			for (int j=0;j<3;j++) {
-				msg_.lin_vel_lf[j] = lin_leg_lf.data()[j];
-				msg_.lin_vel_rf[j] = lin_leg_rf.data()[j];
-				msg_.lin_vel_lh[j] = lin_leg_lh.data()[j];
-				msg_.lin_vel_rh[j] = lin_leg_rh.data()[j];
-				msg_.base_velocity[j] = base_velocity.data()[j];
-			}
-
-			pub_->publish(msg_);
-
-            // Publish base height
-            base_height_msg_.header.stamp = this->node_->get_clock()->now();
-            base_height_msg_.height = estimated_height;
-            base_height_msg_.height_lf = foot_heights[0];
-            base_height_msg_.height_rf = foot_heights[1];
-            base_height_msg_.height_lh = foot_heights[2];
-            base_height_msg_.height_rh = foot_heights[3];
-            base_height_msg_.stance_lf = stance_lf;
-            base_height_msg_.stance_rf = stance_rf;
-            base_height_msg_.stance_lh = stance_lh;
-            base_height_msg_.stance_rh = stance_rh;
-            base_height_msg_.num_feet_in_contact = num_feet_in_contact;
-
-            base_height_pub_->publish(base_height_msg_);
-
-		} // end callback
-
-
-    private:
-    
+private:
+    // Core components
     std::shared_ptr<message_filters::Subscriber<ImuMsg>> imu_sub_;
     std::shared_ptr<message_filters::Subscriber<JointStateMsg>> joint_state_sub_;
     std::shared_ptr<message_filters::Subscriber<ContactMsg>> contact_sub_;
     std::shared_ptr<message_filters::Subscriber<AttitudeMsg>> attitude_sub_;
     std::shared_ptr<message_filters::Synchronizer<MySyncPolicy>> sync_;
 
-        rclcpp::Publisher<state_estimator_msgs::msg::LegOdometry>::SharedPtr pub_;
-        rclcpp::Publisher<state_estimator_msgs::msg::BaseHeight>::SharedPtr base_height_pub_;
+    rclcpp::Publisher<state_estimator_msgs::msg::LegOdometry>::SharedPtr pub_;
+    rclcpp::Publisher<state_estimator_msgs::msg::BaseHeight>::SharedPtr base_height_pub_;
 
-        state_estimator_msgs::msg::LegOdometry msg_;
-        state_estimator_msgs::msg::BaseHeight base_height_msg_;
+    state_estimator_msgs::msg::LegOdometry msg_;
+    state_estimator_msgs::msg::BaseHeight base_height_msg_;
 
-        pinocchio::Model model_;
-        pinocchio::Data data_;
-    // Default foot frame names (can be overridden via parameters)
-    std::vector<std::string> feet_frame_names_ = {"FL_foot", "FR_foot", "RL_foot", "RR_foot"};   // Aliengo robot
-    // Expected joint order (if empty, use model order)
+    // Pinocchio model
+    pinocchio::Model model_;
+    pinocchio::Data data_;
+    bool model_loaded_;
+
+    // Configuration
+    std::vector<std::string> feet_frame_names_;
     std::vector<std::string> expected_joint_order_;
-    bool use_explicit_joint_order_{false};
+    bool use_explicit_joint_order_;
+    Eigen::Matrix3d base_R_imu_;
 
-        bool model_loaded_{false};
+    // State variables
+    Eigen::Vector3d omega_;
+    Eigen::Vector3d base_omega_;
+    bool stance_lf_, stance_rf_, stance_lh_, stance_rh_;
 
-        Eigen::Vector3d omega;
-        Eigen::Vector3d base_omega;
-		bool stance_lf;
-		bool stance_rf;
-		bool stance_lh;
-		bool stance_rh;
-        Eigen::Matrix3d base_R_imu_;
+    // Frame IDs for efficiency
+    std::vector<pinocchio::FrameIndex> foot_frame_ids_;
 
-	}; // end class LegOdometryPlugin
+    bool loadURDF() {
+        auto node = this->node_;
+        
+        // Get URDF path
+        std::string urdf_path = node->declare_parameter<std::string>(
+            "leg_odometry_plugin.urdf_path", "");
+        
+        // Check legacy parameter
+        const std::string legacy_urdf = node->declare_parameter<std::string>(
+            "leg_odometry_plugin/urdf_path", "");
+        if (!legacy_urdf.empty() && urdf_path.empty()) {
+            RCLCPP_WARN(node->get_logger(),
+                "Using legacy param 'leg_odometry_plugin/urdf_path'; prefer 'leg_odometry_plugin.urdf_path'");
+            urdf_path = legacy_urdf;
+        }
 
-} //end namespace state_estimator_plugins
+        if (urdf_path.empty()) {
+            RCLCPP_ERROR(node->get_logger(), "URDF path parameter not set");
+            return false;
+        }
+
+        // Resolve package path
+        std::string resolved_path = resolvePackagePath(urdf_path);
+        
+        // Check if file exists
+        std::ifstream file_check(resolved_path);
+        if (!file_check.good()) {
+            RCLCPP_ERROR(node->get_logger(), "URDF file does not exist: %s", resolved_path.c_str());
+            return false;
+        }
+
+        RCLCPP_INFO(node->get_logger(), "Loading URDF from: %s", resolved_path.c_str());
+
+        try {
+            pinocchio::urdf::buildModel(resolved_path, model_);
+            data_ = pinocchio::Data(model_);
+            model_loaded_ = true;
+            
+            RCLCPP_INFO(node->get_logger(), "URDF loaded successfully");
+            RCLCPP_INFO(node->get_logger(), "Model DOF: nq=%d, nv=%d, njoints=%zu", 
+                       model_.nq, model_.nv, model_.njoints);
+            
+            return true;
+        } catch (const std::exception& e) {
+            RCLCPP_ERROR(node->get_logger(), "Failed to load URDF: %s", e.what());
+            return false;
+        }
+    }
+
+    std::string resolvePackagePath(const std::string& path) {
+        std::string resolved_path = path;
+        const std::string find_token = "$(find ";
+        
+        if (resolved_path.find(find_token) != std::string::npos) {
+            const size_t start = resolved_path.find(find_token) + find_token.length();
+            const size_t end = resolved_path.find(')', start);
+            
+            if (end != std::string::npos) {
+                const std::string package_name = resolved_path.substr(start, end - start);
+                try {
+                    const std::string pkg_share = ament_index_cpp::get_package_share_directory(package_name);
+                    resolved_path.replace(resolved_path.find(find_token), 
+                                        end - resolved_path.find(find_token) + 1, pkg_share);
+                } catch (const std::exception& e) {
+                    RCLCPP_ERROR(this->node_->get_logger(), 
+                               "Failed to resolve package '%s': %s", package_name.c_str(), e.what());
+                }
+            }
+        }
+        
+        return resolved_path;
+    }
+
+    void configureRotationMatrix() {
+        auto node = this->node_;
+        
+        std::vector<double> base_R_imu_vec = node->declare_parameter<std::vector<double>>( 
+            "leg_odometry_plugin.base_R_imu", std::vector<double>());
+            
+        if (base_R_imu_vec.size() == 9) {
+            base_R_imu_ = Eigen::Map<const Eigen::Matrix<double,3,3,Eigen::RowMajor>>(base_R_imu_vec.data());
+            RCLCPP_INFO(node->get_logger(), "Using custom base_R_imu rotation matrix");
+        } else {
+            if (!base_R_imu_vec.empty()) {
+                RCLCPP_WARN(node->get_logger(), 
+                           "base_R_imu parameter size (%zu) != 9; using identity", base_R_imu_vec.size());
+            }
+            base_R_imu_.setIdentity();
+        }
+    }
+
+    void configureFeetFrames() {
+        auto node = this->node_;
+        
+        // Default frame names
+        feet_frame_names_ = {"FL_foot", "FR_foot", "RL_foot", "RR_foot"};
+        
+        auto frames_param = node->declare_parameter<std::vector<std::string>>(
+            "leg_odometry_plugin.feet_frame_names", std::vector<std::string>{}
+        );
+        auto frames_legacy = node->declare_parameter<std::vector<std::string>>(
+            "leg_odometry_plugin/feet_frame_names", std::vector<std::string>{}
+        );
+        
+        if (!frames_legacy.empty() && frames_param.empty()) {
+            RCLCPP_WARN(node->get_logger(),
+                "Using legacy param 'leg_odometry_plugin/feet_frame_names'");
+            frames_param = frames_legacy;
+        }
+        
+        if (!frames_param.empty()) {
+            if (frames_param.size() != 4) {
+                RCLCPP_WARN(node->get_logger(),
+                    "feet_frame_names must contain exactly 4 names, got %zu. Using defaults.",
+                    frames_param.size());
+            } else {
+                feet_frame_names_ = frames_param;
+            }
+        }
+
+        // Validate and cache frame IDs
+        foot_frame_ids_.clear();
+        for (const auto& frame_name : feet_frame_names_) {
+            if (!model_.existFrame(frame_name)) {
+                throw std::runtime_error("Frame '" + frame_name + "' does not exist in URDF model");
+            }
+            foot_frame_ids_.push_back(model_.getFrameId(frame_name));
+        }
+
+        RCLCPP_INFO(node->get_logger(), "Using feet frames: [%s, %s, %s, %s]",
+                   feet_frame_names_[0].c_str(), feet_frame_names_[1].c_str(),
+                   feet_frame_names_[2].c_str(), feet_frame_names_[3].c_str());
+    }
+
+    void configureJointOrder() {
+        auto node = this->node_;
+        
+        auto joint_order_param = node->declare_parameter<std::vector<std::string>>(
+            "leg_odometry_plugin.joint_order", std::vector<std::string>{}
+        );
+        auto joint_order_legacy = node->declare_parameter<std::vector<std::string>>(
+            "leg_odometry_plugin/joint_order", std::vector<std::string>{}
+        );
+        
+        if (!joint_order_legacy.empty() && joint_order_param.empty()) {
+            RCLCPP_WARN(node->get_logger(),
+                "Using legacy param 'leg_odometry_plugin/joint_order'");
+            joint_order_param = joint_order_legacy;
+        }
+
+        use_explicit_joint_order_ = false;
+        
+        if (!joint_order_param.empty()) {
+            if (validateJointOrder(joint_order_param)) {
+                expected_joint_order_ = joint_order_param;
+                use_explicit_joint_order_ = true;
+                RCLCPP_INFO(node->get_logger(), "Using explicit joint order with %zu joints", 
+                           expected_joint_order_.size());
+            }
+        } else {
+            RCLCPP_INFO(node->get_logger(), "Using URDF model joint order");
+        }
+    }
+
+    bool validateJointOrder(const std::vector<std::string>& joint_order) {
+        auto node = this->node_;
+        
+        if (joint_order.size() != static_cast<size_t>(model_.nq)) {
+            RCLCPP_WARN(node->get_logger(),
+                "Joint order size (%zu) != model DOF (%d)", joint_order.size(), model_.nq);
+            return false;
+        }
+
+        // Check all joints exist in model
+        for (const auto& joint_name : joint_order) {
+            bool found = false;
+            for (pinocchio::JointIndex i = 1; i < model_.njoints; ++i) {
+                if (model_.names[i] == joint_name) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                RCLCPP_WARN(node->get_logger(), "Joint '%s' not found in model", joint_name.c_str());
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    void setupTopics() {
+        auto node = this->node_;
+        
+        // Get topic names
+        std::string imu_topic = node->declare_parameter<std::string>(
+            "leg_odometry_plugin.imu_topic", "/imu");
+        std::string joint_states_topic = node->declare_parameter<std::string>(
+            "leg_odometry_plugin.joint_states_topic", "/state_estimator/joint_states");
+        std::string contact_topic = node->declare_parameter<std::string>(
+            "leg_odometry_plugin.contact_topic", "/state_estimator/contact_detection");
+        std::string attitude_topic = node->declare_parameter<std::string>(
+            "leg_odometry_plugin.attitude_topic", "/state_estimator/attitude");
+
+        // Setup subscribers
+        auto sensor_qos = rclcpp::SensorDataQoS();
+        
+        imu_sub_ = std::make_shared<message_filters::Subscriber<ImuMsg>>(node, imu_topic, sensor_qos);
+        joint_state_sub_ = std::make_shared<message_filters::Subscriber<JointStateMsg>>(node, joint_states_topic, sensor_qos);
+        contact_sub_ = std::make_shared<message_filters::Subscriber<ContactMsg>>(node, contact_topic, sensor_qos);
+        attitude_sub_ = std::make_shared<message_filters::Subscriber<AttitudeMsg>>(node, attitude_topic, sensor_qos);
+
+        sync_ = std::make_shared<message_filters::Synchronizer<MySyncPolicy>>(
+            MySyncPolicy(100), *imu_sub_, *joint_state_sub_, *contact_sub_, *attitude_sub_);
+        sync_->registerCallback(std::bind(&LegOdometryPlugin::callback, this,
+                                         std::placeholders::_1, std::placeholders::_2,
+                                         std::placeholders::_3, std::placeholders::_4));
+
+        // Setup publishers
+        std::string pub_topic = node->declare_parameter<std::string>(
+            "leg_odometry_plugin.pub_topic", "/state_estimator/leg_odometry");
+        std::string base_height_topic = node->declare_parameter<std::string>(
+            "leg_odometry_plugin.base_height_topic", "/state_estimator/base_height");
+
+        pub_ = node->create_publisher<state_estimator_msgs::msg::LegOdometry>(pub_topic, rclcpp::QoS(10));
+        base_height_pub_ = node->create_publisher<state_estimator_msgs::msg::BaseHeight>(base_height_topic, rclcpp::QoS(10));
+    }
+
+    void callback(const ImuMsg::ConstSharedPtr imu,
+                  const JointStateMsg::ConstSharedPtr js,
+                  const ContactMsg::ConstSharedPtr contact,
+                  const AttitudeMsg::ConstSharedPtr attitude) {
+        
+        if (!model_loaded_) {
+            RCLCPP_ERROR_THROTTLE(this->node_->get_logger(), *this->node_->get_clock(), 5000,
+                                 "Model not loaded, skipping callback");
+            return;
+        }
+
+        // Validate input sizes
+        if (!validateInputSizes(js)) {
+            return;
+        }
+
+        // Fill joint state vectors
+        Eigen::VectorXd q(model_.nq), v(model_.nv);
+        if (!fillJointVectors(js, q, v)) {
+            return;
+        }
+
+        // Extract IMU and contact data
+        extractSensorData(imu, contact);
+
+        // Compute kinematics
+        std::vector<Eigen::Vector3d> foot_velocities;
+        if (!computeFootVelocities(q, v, foot_velocities)) {
+            return;
+        }
+
+        // Compute base velocity from leg odometry
+        Eigen::Vector3d base_velocity = computeBaseVelocity(foot_velocities, attitude);
+
+        // Compute base height
+        double base_height;
+        std::vector<double> foot_heights;
+        int num_contacts;
+        computeBaseHeight(foot_heights, base_height, num_contacts);
+
+        // Publish results
+        publishResults(base_velocity, foot_velocities, base_height, foot_heights, num_contacts);
+    }
+
+    bool validateInputSizes(const JointStateMsg::ConstSharedPtr& js) {
+        if (js->position.size() != static_cast<size_t>(model_.nq) || 
+            js->velocity.size() != static_cast<size_t>(model_.nv)) {
+            RCLCPP_WARN_THROTTLE(this->node_->get_logger(), *this->node_->get_clock(), 5000,
+                                 "Joint state size mismatch (pos=%zu vs nq=%d, vel=%zu vs nv=%d)",
+                                 js->position.size(), model_.nq, js->velocity.size(), model_.nv);
+            return false;
+        }
+        return true;
+    }
+
+    bool fillJointVectors(const JointStateMsg::ConstSharedPtr& js, 
+                         Eigen::VectorXd& q, Eigen::VectorXd& v) {
+        
+        // Build joint maps for lookup
+        std::unordered_map<std::string, double> joint_pos_map, joint_vel_map;
+        for (size_t i = 0; i < js->name.size(); ++i) {
+            joint_pos_map[js->name[i]] = js->position[i];
+            if (i < js->velocity.size()) {
+                joint_vel_map[js->name[i]] = js->velocity[i];
+            }
+        }
+
+        if (use_explicit_joint_order_) {
+            return fillJointVectorsExplicit(joint_pos_map, joint_vel_map, q, v);
+        } else {
+            return fillJointVectorsModel(joint_pos_map, joint_vel_map, q, v);
+        }
+    }
+
+    bool fillJointVectorsExplicit(const std::unordered_map<std::string, double>& pos_map,
+                                 const std::unordered_map<std::string, double>& vel_map,
+                                 Eigen::VectorXd& q, Eigen::VectorXd& v) {
+        
+        for (size_t i = 0; i < expected_joint_order_.size(); ++i) {
+            const std::string& joint_name = expected_joint_order_[i];
+            
+            auto pos_it = pos_map.find(joint_name);
+            auto vel_it = vel_map.find(joint_name);
+            
+            if (pos_it == pos_map.end()) {
+                RCLCPP_WARN_THROTTLE(this->node_->get_logger(), *this->node_->get_clock(), 5000,
+                    "Joint '%s' not found in message", joint_name.c_str());
+                q[i] = 0.0;
+            } else {
+                q[i] = pos_it->second;
+            }
+
+            if (vel_it == vel_map.end()) {
+                v[i] = 0.0;
+            } else {
+                v[i] = vel_it->second;
+            }
+        }
+        return true;
+    }
+
+    bool fillJointVectorsModel(const std::unordered_map<std::string, double>& pos_map,
+                              const std::unordered_map<std::string, double>& vel_map,
+                              Eigen::VectorXd& q, Eigen::VectorXd& v) {
+        
+        for (pinocchio::JointIndex i = 1; i < model_.njoints; ++i) {
+            const std::string& joint_name = model_.names[i];
+            
+            auto pos_it = pos_map.find(joint_name);
+            auto vel_it = vel_map.find(joint_name);
+            
+            q[i - 1] = (pos_it != pos_map.end()) ? pos_it->second : 0.0;
+            v[i - 1] = (vel_it != vel_map.end()) ? vel_it->second : 0.0;
+        }
+        return true;
+    }
+
+    void extractSensorData(const ImuMsg::ConstSharedPtr& imu, 
+                          const ContactMsg::ConstSharedPtr& contact) {
+        omega_ << imu->angular_velocity.x, imu->angular_velocity.y, imu->angular_velocity.z;
+        stance_lf_ = contact->stance_lf;
+        stance_rf_ = contact->stance_rf;
+        stance_lh_ = contact->stance_lh;
+        stance_rh_ = contact->stance_rh;
+    }
+
+    bool computeFootVelocities(const Eigen::VectorXd& q, const Eigen::VectorXd& v,
+                              std::vector<Eigen::Vector3d>& foot_velocities) {
+        try {
+            // Compute forward kinematics
+            pinocchio::forwardKinematics(model_, data_, q, v);
+            pinocchio::updateFramePlacements(model_, data_);
+
+            foot_velocities.clear();
+            foot_velocities.reserve(4);
+
+            // Compute angular velocity in base frame
+            Eigen::Vector3d omega_rotated = base_R_imu_ * omega_;
+
+            for (size_t i = 0; i < foot_frame_ids_.size(); ++i) {
+                pinocchio::FrameIndex frame_id = foot_frame_ids_[i];
+                
+                // Get foot velocity in world frame
+                pinocchio::Motion foot_vel = pinocchio::getFrameVelocity(
+                    model_, data_, frame_id, pinocchio::LOCAL_WORLD_ALIGNED);
+
+                // Get foot position relative to base
+                Eigen::Vector3d foot_pos_base = data_.oMf[frame_id].translation();
+
+                // Compute velocity contribution from base angular motion: ω × r
+                Eigen::Vector3d omega_cross_r = omega_rotated.cross(foot_pos_base);
+
+                // Compute foot velocity relative to base (negative because we want base motion)
+                Eigen::Vector3d rel_vel = -(foot_vel.linear() - omega_cross_r);
+                
+                foot_velocities.push_back(rel_vel);
+            }
+            
+            return true;
+        } catch (const std::exception& e) {
+            RCLCPP_ERROR_THROTTLE(this->node_->get_logger(), *this->node_->get_clock(), 5000,
+                                 "Failed to compute foot velocities: %s", e.what());
+            return false;
+        }
+    }
+
+    Eigen::Vector3d computeBaseVelocity(const std::vector<Eigen::Vector3d>& foot_velocities,
+                                       const AttitudeMsg::ConstSharedPtr& attitude) {
+        
+        // Get stance indicators
+        std::vector<bool> stances = {stance_lf_, stance_rf_, stance_lh_, stance_rh_};
+        
+        // Compute weighted average of foot velocities
+        Eigen::Vector3d base_velocity = Eigen::Vector3d::Zero();
+        double total_weight = 0.0;
+        
+        for (size_t i = 0; i < foot_velocities.size() && i < stances.size(); ++i) {
+            if (stances[i]) {
+                base_velocity += foot_velocities[i];
+                total_weight += 1.0;
+            }
+        }
+        
+        if (total_weight > 0.0) {
+            base_velocity /= total_weight;
+        }
+
+        // Transform to world frame using attitude
+        Eigen::Quaterniond quat_est;
+        quat_est.w() = attitude->quaternion[0];
+        quat_est.vec() << attitude->quaternion[1], attitude->quaternion[2], attitude->quaternion[3];
+        
+        Eigen::Matrix3d w_R_b = iit::commons::quatToRotMat(quat_est);
+        
+        return w_R_b * base_velocity;
+    }
+
+    void computeBaseHeight(std::vector<double>& foot_heights, double& estimated_height, int& num_contacts) {
+        foot_heights.clear();
+        foot_heights.reserve(4);
+        
+        std::vector<bool> stances = {stance_lf_, stance_rf_, stance_lh_, stance_rh_};
+        
+        double total_weighted_height = 0.0;
+        num_contacts = 0;
+        
+        for (size_t i = 0; i < foot_frame_ids_.size(); ++i) {
+            pinocchio::FrameIndex frame_id = foot_frame_ids_[i];
+            
+            // Get foot position in base frame
+            Eigen::Vector3d foot_pos_base = data_.oMf[frame_id].translation();
+            
+            // Height is negative z-position (assuming z-up convention)
+            double foot_height = -foot_pos_base.z();
+            foot_heights.push_back(foot_height);
+            
+            // Add to weighted average if foot is in contact
+            if (i < stances.size() && stances[i]) {
+                total_weighted_height += foot_height;
+                num_contacts++;
+            }
+        }
+        
+        estimated_height = (num_contacts > 0) ? (total_weighted_height / num_contacts) : 0.0;
+    }
+
+    void publishResults(const Eigen::Vector3d& base_velocity,
+                       const std::vector<Eigen::Vector3d>& foot_velocities,
+                       double base_height,
+                       const std::vector<double>& foot_heights,
+                       int num_contacts) {
+        
+        auto now = this->node_->get_clock()->now();
+        
+        // Publish leg odometry
+        msg_.header.stamp = now;
+        
+        for (int j = 0; j < 3; ++j) {
+            if (foot_velocities.size() >= 4) {
+                msg_.lin_vel_lf[j] = foot_velocities[0][j];
+                msg_.lin_vel_rf[j] = foot_velocities[1][j];
+                msg_.lin_vel_lh[j] = foot_velocities[2][j];
+                msg_.lin_vel_rh[j] = foot_velocities[3][j];
+            }
+            msg_.base_velocity[j] = base_velocity[j];
+        }
+        
+        pub_->publish(msg_);
+
+        // Publish base height
+        base_height_msg_.header.stamp = now;
+        base_height_msg_.height = base_height;
+        
+        if (foot_heights.size() >= 4) {
+            base_height_msg_.height_lf = foot_heights[0];
+            base_height_msg_.height_rf = foot_heights[1];
+            base_height_msg_.height_lh = foot_heights[2];
+            base_height_msg_.height_rh = foot_heights[3];
+        }
+        
+        base_height_msg_.stance_lf = stance_lf_;
+        base_height_msg_.stance_rf = stance_rf_;
+        base_height_msg_.stance_lh = stance_lh_;
+        base_height_msg_.stance_rh = stance_rh_;
+        base_height_msg_.num_feet_in_contact = num_contacts;
+        
+        base_height_pub_->publish(base_height_msg_);
+    }
+};
+
+} // namespace state_estimator_plugins
 
 #include <pluginlib/class_list_macros.hpp>
 PLUGINLIB_EXPORT_CLASS(state_estimator_plugins::LegOdometryPlugin, state_estimator_plugins::PluginBase)
