@@ -6,21 +6,21 @@
 #include <iomanip>
 
 
-#include <iit_commons/commons/dog/declarations.h>
-#include <iit_commons/commons/dog/jsim.h>
+#include <iit/commons/dog/declarations.h>
+#include <iit/commons/dog/jsim.h>
 
-#include <iit_commons/commons/dog/leg_data_map.h>
-#include <iit_commons/commons/dog/leg_bool_map.h>
-#include <iit_commons/commons/control/VirtualModel.hpp>
+#include <iit/commons/dog/leg_data_map.h>
+#include <iit/commons/dog/leg_bool_map.h>
+#include <iit/commons/control/VirtualModel.hpp>
 
-#include <iit_commons/commons/planning/planning.h>
-#include <iit_commons/commons/geometry/algebra.h>
+#include <iit/commons/planning/planning.h>
+#include <iit/commons/geometry/algebra.h>
 
 #include <gtest/gtest.h>
 
 using namespace std;
-using namespace iit_commons;
-using namespace iit_commons::control;
+using namespace iit;
+using namespace iit::control;
 using namespace Eigen;
 
 class VirtualModelTest : public ::testing::Test {

@@ -71,103 +71,230 @@ ExactTimePolicy;
 		}		std::string getName() override { return std::string("LegOdometry"); }
 		std::string getDescription() override { return std::string("Leg Odometry Plugin"); }
 
-		void initialize_() override {
-
+		void initialize_() override
+		{
 			RCLCPP_INFO(node_->get_logger(), "Initializing LegOdometryPlugin...");
-
+		
+			// =======================
+			// 1) URDF PATH PARAMETER
+			// =======================
+			const std::string urdf_param_name = "leg_odometry_plugin.urdf_path";
 			std::string urdf_path_param;
-			// node_->declare_parameter("leg_odometry_plugin.urdf_path", "");
-			// urdf_path_param = node_->get_parameter("leg_odometry_plugin.urdf_path").as_string();
-			urdf_path_param = "/root/muse_ws/muse_ros2_ws/src/state_estimator/urdfs/anymal.urdf";
-			RCLCPP_INFO_STREAM(node_->get_logger(), "URDF path parameter: " << urdf_path_param);
-
-			if (urdf_path_param.empty()) {
-				RCLCPP_ERROR(node_->get_logger(), "URDF path is not set in parameter server.");
+		
+			try
+			{
+				// Declare only if not already declared (e.g. via YAML)
+				if (!node_->has_parameter(urdf_param_name))
+				{
+					node_->declare_parameter<std::string>(urdf_param_name, "");
+				}
+		
+				urdf_path_param = node_->get_parameter(urdf_param_name).as_string();
+			}
+			catch (const std::exception &e)
+			{
+				RCLCPP_ERROR_STREAM(
+					node_->get_logger(),
+					"Failed to access parameter '" << urdf_param_name << "': " << e.what());
 				return;
 			}
-
+		
+			if (urdf_path_param.empty())
+			{
+				RCLCPP_ERROR(node_->get_logger(),
+							 "URDF path parameter 'leg_odometry_plugin.urdf_path' is empty.");
+				return;
+			}
+		
 			// Resolve $(find ...) manually if present
 			std::string resolved_path = urdf_path_param;
-			std::string find_token = "$(find ";
-			if (resolved_path.find(find_token) != std::string::npos) {
-				size_t start = resolved_path.find(find_token) + find_token.length();
-				size_t end = resolved_path.find(")", start);
-				std::string package_name = resolved_path.substr(start, end - start);
-				std::string package_path = ament_index_cpp::get_package_share_directory(package_name);
-				resolved_path.replace(resolved_path.find(find_token), end - resolved_path.find(find_token) + 1, package_path);
+			const std::string find_token = "$(find ";
+			const auto pos = resolved_path.find(find_token);
+			if (pos != std::string::npos)
+			{
+				const std::size_t start = pos + find_token.length();
+				const std::size_t end = resolved_path.find(")", start);
+				if (end != std::string::npos)
+				{
+					const std::string package_name = resolved_path.substr(start, end - start);
+		
+					try
+					{
+						const std::string package_path =
+							ament_index_cpp::get_package_share_directory(package_name);
+		
+						resolved_path.replace(
+							pos,
+							end - pos + 1,  // length of "$(find pkg)"
+							package_path);
+					}
+					catch (const std::exception &e)
+					{
+						RCLCPP_ERROR_STREAM(
+							node_->get_logger(),
+							"Failed to resolve package path for '" << package_name
+																   << "': " << e.what());
+						return;
+					}
+				}
+				else
+				{
+					RCLCPP_ERROR(
+						node_->get_logger(),
+						"Malformed '$(find ...)' expression in URDF path parameter.");
+					return;
+				}
 			}
-
+		
 			RCLCPP_INFO_STREAM(node_->get_logger(), "Loading URDF from: " << resolved_path);
-
-			try {
+		
+			try
+			{
 				pinocchio::urdf::buildModel(resolved_path, model_);
 				data_ = pinocchio::Data(model_);
-				RCLCPP_INFO(node_->get_logger(), "URDF loaded into Pinocchio model successfully.");
-			} catch (const std::exception& e) {
-				RCLCPP_ERROR_STREAM(node_->get_logger(), "Failed to load URDF: " << e.what());
+				RCLCPP_INFO(node_->get_logger(),
+							"URDF loaded into Pinocchio model successfully.");
 			}
-
-			std::vector<double> base_R_imu_vec;
-			node_->declare_parameter("leg_odometry_plugin.base_R_imu", std::vector<double>(9, 0.0));
-			try {
-				base_R_imu_vec = node_->get_parameter("leg_odometry_plugin.base_R_imu").get_value<std::vector<double>>();
-				RCLCPP_INFO_STREAM(node_->get_logger(), "base_R_imu loaded, size: " << base_R_imu_vec.size());
-			} catch (const std::exception& e) {
-				RCLCPP_ERROR_STREAM(node_->get_logger(), "Failed to get base_R_imu parameter: " << e.what());
-				base_R_imu_vec = std::vector<double>(9, 0.0);
-			}
-
-			if (base_R_imu_vec.size() == 9) {
-				base_R_imu_ = Eigen::Map<const Eigen::Matrix<double, 3, 3, Eigen::RowMajor>>(base_R_imu_vec.data());
-				// RCLCPP_INFO_STREAM(node_->get_logger(), "Loaded base_R_imu:\n" << base_R_imu_);
-			} else {
-				RCLCPP_WARN(node_->get_logger(), "base_R_imu is not the correct size (should be 9). Using identity.");
-				base_R_imu_ = Eigen::Matrix3d::Identity();
-			}
-
-			std::string imu_topic, joint_states_topic, contact_topic, attitude_topic, pub_topic ;
-			
-			// Get topic names from parameters
-			RCLCPP_INFO(node_->get_logger(), "Declaring topic parameters...");
-			
-			node_->declare_parameter("leg_odometry_plugin.imu_topic", "/sensors/imu");
-			node_->declare_parameter("leg_odometry_plugin.joint_states_topic", "/state_estimator/joint_states");
-			node_->declare_parameter("leg_odometry_plugin.contact_topic", "/state_estimator/contact_detection");
-			node_->declare_parameter("leg_odometry_plugin.attitude_topic", "/attitude");
-			node_->declare_parameter("leg_odometry_plugin.pub_topic", "/state_estimator/leg_odometry");
-			
-			try {
-				imu_topic = node_->get_parameter("leg_odometry_plugin.imu_topic").as_string();
-				RCLCPP_INFO_STREAM(node_->get_logger(), "imu_topic: " << imu_topic);
-				
-				joint_states_topic = node_->get_parameter("leg_odometry_plugin.joint_states_topic").as_string();
-				RCLCPP_INFO_STREAM(node_->get_logger(), "joint_states_topic: " << joint_states_topic);
-				
-				contact_topic = node_->get_parameter("leg_odometry_plugin.contact_topic").as_string();
-				RCLCPP_INFO_STREAM(node_->get_logger(), "contact_topic: " << contact_topic);
-				
-				attitude_topic = node_->get_parameter("leg_odometry_plugin.attitude_topic").as_string();
-				RCLCPP_INFO_STREAM(node_->get_logger(), "attitude_topic: " << attitude_topic);
-				
-				pub_topic = node_->get_parameter("leg_odometry_plugin.pub_topic").as_string();
-				RCLCPP_INFO_STREAM(node_->get_logger(), "pub_topic: " << pub_topic);
-			} catch (const std::exception& e) {
-				RCLCPP_ERROR_STREAM(node_->get_logger(), "Failed to get topic parameters: " << e.what());
+			catch (const std::exception &e)
+			{
+				RCLCPP_ERROR_STREAM(node_->get_logger(),
+									"Failed to load URDF: " << e.what());
 				return;
 			}
-			
-			// Set up subscribers using smart pointers
-			imu_sub_ = std::make_shared<message_filters::Subscriber<sensor_msgs::msg::Imu>>(node_, imu_topic);
-			joint_state_sub_ = std::make_shared<message_filters::Subscriber<state_estimator_msgs::msg::JointStateWithAcceleration>>(node_, joint_states_topic);
-			contact_sub_ = std::make_shared<message_filters::Subscriber<state_estimator_msgs::msg::ContactDetection>>(node_, contact_topic);
-			attitude_sub_ = std::make_shared<message_filters::Subscriber<state_estimator_msgs::msg::Attitude>>(node_, attitude_topic);
-
-			sync_ = std::make_shared<message_filters::Synchronizer<MySyncPolicy>>(MySyncPolicy(100), *imu_sub_, *joint_state_sub_, *contact_sub_, *attitude_sub_); 
-			sync_->registerCallback(std::bind(&LegOdometryPlugin::callback, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
-
-			pub_ = node_->create_publisher<state_estimator_msgs::msg::LegOdometry>(pub_topic, 250);
-
+		
+			// =======================
+			// 2) base_R_imu PARAMETER
+			// =======================
+			const std::string base_R_param_name = "leg_odometry_plugin.base_R_imu";
+			std::vector<double> base_R_imu_vec;
+		
+			try
+			{
+				if (!node_->has_parameter(base_R_param_name))
+				{
+					node_->declare_parameter<std::vector<double>>(
+						base_R_param_name, std::vector<double>(9, 0.0));
+				}
+		
+				base_R_imu_vec =
+					node_->get_parameter(base_R_param_name).get_value<std::vector<double>>();
+				RCLCPP_INFO_STREAM(node_->get_logger(),
+								   "base_R_imu loaded, size: " << base_R_imu_vec.size());
+			}
+			catch (const std::exception &e)
+			{
+				RCLCPP_ERROR_STREAM(node_->get_logger(),
+									"Failed to get base_R_imu parameter: " << e.what());
+				base_R_imu_vec = std::vector<double>(9, 0.0);
+			}
+		
+			if (base_R_imu_vec.size() == 9)
+			{
+				base_R_imu_ = Eigen::Map<
+					const Eigen::Matrix<double, 3, 3, Eigen::RowMajor>>(
+					base_R_imu_vec.data());
+			}
+			else
+			{
+				RCLCPP_WARN(node_->get_logger(),
+							"base_R_imu is not the correct size (should be 9). Using identity.");
+				base_R_imu_ = Eigen::Matrix3d::Identity();
+			}
+		
+			// =======================
+			// 3) TOPIC PARAMETERS
+			// =======================
+			auto declare_and_get_topic =
+				[this](const std::string &name,
+					   const std::string &default_val,
+					   std::string &out) {
+					try
+					{
+						if (!node_->has_parameter(name))
+						{
+							node_->declare_parameter<std::string>(name, default_val);
+						}
+						out = node_->get_parameter(name).as_string();
+						RCLCPP_INFO_STREAM(node_->get_logger(), name << ": " << out);
+					}
+					catch (const std::exception &e)
+					{
+						RCLCPP_ERROR_STREAM(
+							node_->get_logger(),
+							"Failed to get parameter '" << name << "': " << e.what());
+						throw;  // let caller decide what to do
+					}
+				};
+		
+			std::string imu_topic, joint_states_topic, contact_topic, attitude_topic, pub_topic;
+		
+			RCLCPP_INFO(node_->get_logger(), "Declaring topic parameters...");
+		
+			try
+			{
+				declare_and_get_topic("leg_odometry_plugin.imu_topic",
+									  "/sensors/imu",
+									  imu_topic);
+		
+				declare_and_get_topic("leg_odometry_plugin.joint_states_topic",
+									  "/state_estimator/joint_states",
+									  joint_states_topic);
+		
+				declare_and_get_topic("leg_odometry_plugin.contact_topic",
+									  "/state_estimator/contact_detection",
+									  contact_topic);
+		
+				declare_and_get_topic("leg_odometry_plugin.attitude_topic",
+									  "/state_estimator/attitude",
+									  attitude_topic);
+		
+				declare_and_get_topic("leg_odometry_plugin.pub_topic",
+									  "/state_estimator/leg_odometry",
+									  pub_topic);
+			}
+			catch (...)
+			{
+				RCLCPP_ERROR(node_->get_logger(),
+							 "Failed to get one or more topic parameters. Aborting plugin init.");
+				return;
+			}
+		
+			// =======================
+			// 4) SUBSCRIBERS & PUB
+			// =======================
+			imu_sub_ = std::make_shared<message_filters::Subscriber<sensor_msgs::msg::Imu>>(
+				node_, imu_topic);
+			joint_state_sub_ =
+				std::make_shared<message_filters::Subscriber<
+					state_estimator_msgs::msg::JointStateWithAcceleration>>(
+					node_, joint_states_topic);
+			contact_sub_ =
+				std::make_shared<message_filters::Subscriber<
+					state_estimator_msgs::msg::ContactDetection>>(
+					node_, contact_topic);
+			attitude_sub_ =
+				std::make_shared<message_filters::Subscriber<
+					state_estimator_msgs::msg::Attitude>>(
+					node_, attitude_topic);
+		
+			sync_ = std::make_shared<message_filters::Synchronizer<MySyncPolicy>>(
+				MySyncPolicy(100),
+				*imu_sub_,
+				*joint_state_sub_,
+				*contact_sub_,
+				*attitude_sub_);
+			sync_->registerCallback(
+				std::bind(&LegOdometryPlugin::callback,
+						  this,
+						  std::placeholders::_1,
+						  std::placeholders::_2,
+						  std::placeholders::_3,
+						  std::placeholders::_4));
+		
+			pub_ = node_->create_publisher<state_estimator_msgs::msg::LegOdometry>(
+				pub_topic, 250);
 		}
+		
 		void shutdown_() override { }
 		void pause_() override { }
 		void resume_() override { }

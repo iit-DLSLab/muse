@@ -39,20 +39,20 @@ To install the `muse` package, follow these steps:
     ```sh
     git clone https://github.com/iit-DLSLab/muse.git
     cd muse
-    docker build -t muse-docker .
+    docker build -t muse-docker-ros2 .
     ```
 
 2. Enter the docker and build using `catkin_make`:
     ```sh
     cd muse_ws
     xhost +local:docker
-    docker run -it --rm --name muse -v "$(pwd)":/root/muse_ws -w  /root/muse_ws muse-docker
-    catkin_make -j$(proc) install
-    source devel/setup.bash  
+    docker run -it --rm --name muse -v "$(pwd)":/root/muse_ws -w  /root/muse_ws muse-docker-ros2
+    colcon build
+    source install/setup.bash  
     ```
 3. To launch the state estimator node:
    ```sh
-   roslaunch state_estimator state_estimator.launch
+   ros2 launch state_estimator state_estimator_simple.launch
    ```
 If you need to read the data from a rosbag, you need to mount the folder where you store your rosbags (`your_path_to_rosbags`), to make it visible inside the image, and then, you can attach a docker image in another terminal, for example:
 ```sh
@@ -63,21 +63,20 @@ docker run -it --rm --name muse \
   -v your_path_to_rosbags:/root/rosbags \
   -v "$(pwd)":/root/muse_ws \
   -w /root/muse_ws \
-  muse-docker (terminal 1)
+  muse-docker-ros2 (terminal 1)
 docker exec -it muse bash (terminal 2)
 source devel/setup.bash
 cd ~/rosbags (terminal 2)
 rosbag play your_rosbag.bag (terminal 2)
 ```
-To change the name of the topics, check the [config foder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/config).
+To change the name of the topics, check the [config foder](https://github.com/iit-DLSLab/muse/tree/ros2/muse_ros2/muse_ws/src/state_estimator/config).
 
 To visualize your data, you can use [PlotJuggler](https://github.com/facontidavide/PlotJuggler?tab=readme-ov-file) which is already installed in the docker image:
 ```sh
-rosrun plotjuggler plotjuggler
+ros2 run plotjuggler plotjuggler
 ```
 
-:warning: In this repo we provide an example with the ANYmal B300 robot. If you want to test MUSE with another one, you only need to add the URDF of your robot in [this folder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/urdfs), and change the name of the legs in the [leg odometry plugin, line 249](https://github.com/iit-DLSLab/muse/blob/main/muse_ws/src/state_estimator/src/plugins/leg_odometry_plugin.cpp#L249):
-
+If you want to test MUSE with another one, you only need to add the URDF of your robot, and change the name of the legs in the `leg_odometry_plugin.cpp`:
 ``` sh
 std::vector<std::string> feet_frame_names = {"LF_FOOT", "RF_FOOT", "LH_FOOT", "RH_FOOT"};   // Update with your actual link names
 ```
@@ -85,7 +84,7 @@ For real-world experiments, we recommend using this very nice [MPC](https://gith
 ## :scroll: TODO list
 - [ ] Extend the code to include exteroception
 - [x] Dockerization
-- [ ] Support for ROS2
+- [x] Support for ROS2
 
 ## :hugs: Contributing
 
