@@ -1,0 +1,46 @@
+stages:
+   - preamble
+   - build
+   - deploy
+
+# WARNING: Remember to change the TAG based on the branch: master -> stable, develop -> latest, any-other-branch -> latest
+variables:
+   TAG: latest
+   VERSION_BASED_ON_GIT_TAG: "true"
+
+before_script:
+    - source /root/dls_gitlab_ci/gitlab-script.sh
+
+preamble:
+  image: server-harbor:80/dls/dls-dev:$TAG
+  stage: preamble
+  tags:
+    - dls
+  script:
+    - source /root/dls_gitlab_ci/gitlab-preamble.sh
+  artifacts:
+    paths:
+      - version
+      - release
+
+build-and-test:
+  image: server-harbor:80/dls/dls-dev:$TAG
+  stage: build
+  tags:
+    - dls
+  script:
+    - source /root/dls_gitlab_ci/gitlab-ci.bash
+    - source /opt/ros/dls-distro/setup.bash
+    - catkin_make -DCMAKE_BUILD_TYPE=Debug && catkin_make run_tests && catkin_make test
+
+deploy:
+  image: server-harbor:80/dls/dls-dev:$TAG
+  stage: deploy
+  tags:
+    - dls
+  script:
+    - source /root/dls_gitlab_ci/gitlab-deployment.sh
+    - curl -X POST -F token=$DLS_DISTRO_TOKEN -F ref=$CI_COMMIT_REF_NAME -F variables[SUBMODULE_COMMIT_MSG]="$CI_COMMIT_MESSAGE" -F variables[SUBMODULE_COMMIT_SHA]=$CI_COMMIT_SHA -F variables[SUBMODULE]=$CI_PROJECT_NAME https://gitlab.advr.iit.it/api/v4/projects/43/trigger/pipeline
+  only:
+  - master
+  - develop

@@ -1,0 +1,9 @@
+state_estimator:
+  ros__parameters:
+    contact_detection_plugin.plugin: "ContactDetectionPlugin"
+    contact_detection_plugin.wrench_lf_topic: "/state_estimator/contact_force_lf_foot"
+    contact_detection_plugin.wrench_rf_topic: "/state_estimator/contact_force_rf_foot"
+    contact_detection_plugin.wrench_lh_topic: "/state_estimator/contact_force_lh_foot"
+    contact_detection_plugin.wrench_rh_topic: "/state_estimator/contact_force_rh_foot"
+    contact_detection_plugin.pub_topic: "contact_detection"
+    contact_detection_plugin.grf_threshold: 30.0

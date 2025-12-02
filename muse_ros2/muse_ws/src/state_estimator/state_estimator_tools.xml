@@ -1,0 +1,8 @@
+<library path="lib/libstate_estimator_tools">
+    <!-- <class name="changeFrame" type="state_estimator_plugins::changeFrame" base_class_type="state_estimator_plugins::PluginBase">
+	<desctiption>Converts a vector between two frames</desctiption>
+    </class>
+    <class name="quat2rpy" type="state_estimator_plugins::quat2rpy" base_class_type="state_estimator_plugins::PluginBase">
+	<desctiption>Converts quaternions to roll, pitch, yaw (XYZ Euler) angles</desctiption>
+    </class> -->
+</library>

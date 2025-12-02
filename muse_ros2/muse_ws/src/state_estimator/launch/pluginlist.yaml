@@ -1,0 +1,4 @@
+state_estimator:
+  ros__parameters:
+    plugin_whitelist: ["AttitudeEstimationPlugin", "ContactDetectionPlugin", "LegOdometryPlugin", "SensorFusionPlugin"]
+    plugin_blacklist: []

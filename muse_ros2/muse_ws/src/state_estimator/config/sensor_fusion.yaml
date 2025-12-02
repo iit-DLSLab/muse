@@ -1,0 +1,26 @@
+state_estimator:
+  ros__parameters:
+    sensor_fusion_plugin.plugin: "SensorFusionPlugin"
+    sensor_fusion_plugin.imu_topic: "/sensors/imu"
+    sensor_fusion_plugin.attitude_topic: "/state_estimator/attitude"
+    sensor_fusion_plugin.leg_odometry_topic: "/state_estimator/leg_odometry"
+    sensor_fusion_plugin.pub_topic: "sensor_fusion"
+    sensor_fusion_plugin.base_R_imu: [-1.0, 0.0, 0.0,
+                                      0.0, 1.0, 0.0,
+                                      0.0, 0.0, -1.0]
+    sensor_fusion_plugin.P: [1.0e-3, 0.0, 0.0, 0.0, 0.0, 0.0,
+                             0.0, 1.0e-3, 0.0, 0.0, 0.0, 0.0,
+                             0.0, 0.0, 1.0e-3, 0.0, 0.0, 0.0,
+                             0.0, 0.0, 0.0, 1.0e-4, 0.0, 0.0,
+                             0.0, 0.0, 0.0, 0.0, 1.0e-4, 0.0,
+                             0.0, 0.0, 0.0, 0.0, 0.0, 1.0e-4]
+    sensor_fusion_plugin.Q: [1.0e-9, 0.0, 0.0, 0.0, 0.0, 0.0,
+                             0.0, 1.0e-9, 0.0, 0.0, 0.0, 0.0,
+                             0.0, 0.0, 1.0e-9, 0.0, 0.0, 0.0,
+                             0.0, 0.0, 0.0, 1.0e-9, 0.0, 0.0,
+                             0.0, 0.0, 0.0, 0.0, 1.0e-9, 0.0,
+                             0.0, 0.0, 0.0, 0.0, 0.0, 1.0e-9]
+    sensor_fusion_plugin.R: [1.0e-11, 0.0, 0.0,
+                             0.0, 1.0e-11, 0.0,
+                             0.0, 0.0, 1.0e-11]
+

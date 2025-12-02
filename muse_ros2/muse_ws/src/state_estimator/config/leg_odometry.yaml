@@ -1,0 +1,12 @@
+state_estimator:
+  ros__parameters:
+    leg_odometry_plugin.plugin: "LegOdometryPlugin"
+    leg_odometry_plugin.urdf_path: "/home/ictg-5/Dhananjay/VisualOdometry/new_state/muse/muse_ros2/muse_ros2_ws/src/state_estimator/urdfs/anymal.urdf"
+    leg_odometry_plugin.imu_topic: "/sensors/imu"
+    leg_odometry_plugin.joint_states_topic: "/state_estimator/joint_states"
+    leg_odometry_plugin.contact_topic: "/state_estimator/contact_detection"
+    leg_odometry_plugin.attitude_topic: "/state_estimator/attitude"
+    leg_odometry_plugin.pub_topic: "leg_odometry"
+    leg_odometry_plugin.base_R_imu: [-1.0, 0.0, 0.0,
+                                     0.0, 1.0, 0.0,
+                                     0.0, 0.0, -1.0]
