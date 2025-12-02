@@ -1,8 +1,8 @@
-#include <iit_commons/commons/control/VirtualModel.hpp>
-#include <iit_commons/commons/geometry/rotations.h>
-#include <iit_commons/rbd/InertiaMatrix.h>
+#include <iit/commons/control/VirtualModel.hpp>
+#include <iit/commons/geometry/rotations.h>
+#include <iit/rbd/InertiaMatrix.h>
 
-namespace iit_commons {
+namespace iit {
 namespace control {
 
 

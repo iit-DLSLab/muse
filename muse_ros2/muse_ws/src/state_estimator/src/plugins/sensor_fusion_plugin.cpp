@@ -115,7 +115,7 @@ ExactTimePolicy;
         	node_->declare_parameter("sensor_fusion_plugin.imu_topic", "/sensors/imu");
         	node_->declare_parameter("sensor_fusion_plugin.attitude_topic", "/attitude");
         	node_->declare_parameter("sensor_fusion_plugin.leg_odometry_topic", "/state_estimator/leg_odometry");
-        	node_->declare_parameter("sensor_fusion_plugin.pub_topic", "sensor_fusion");
+        	node_->declare_parameter("sensor_fusion_plugin.pub_topic", "/state_estimator/sensor_fusion");
         	
         	imu_topic = node_->get_parameter("sensor_fusion_plugin.imu_topic").as_string();
         	attitude_topic = node_->get_parameter("sensor_fusion_plugin.attitude_topic").as_string();
