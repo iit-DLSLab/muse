@@ -2,7 +2,11 @@
 #define LIB_HPP
 
 #include <Eigen/Dense>
-#include <ros/ros.h>
+#include <cstdint>
+#include <cmath>
+#include <sstream>
+#include <iomanip>
+#include <string>
 
 namespace state_estimator {
 
@@ -133,11 +137,7 @@ namespace state_estimator {
 
 	
 	
-	inline uint64_t ros_time_to_nanoseconds(ros::Time t) { return ((uint64_t)t.sec)*1000000000+(uint64_t)t.nsec; }
-
-	inline uint64_t ros_time_to_nanoseconds(ros::WallTime t) { return ((uint64_t)t.sec)*1000000000+(uint64_t)t.nsec; }
-
-	inline std::string ns2str(uint64_t t)  {
+inline std::string ns2str(uint64_t t)  {
 
 		uint64_t  y = (t)/31536000000000000;
 		uint64_t  d = (t-y*31536000000000000)/86400000000000;

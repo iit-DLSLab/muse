@@ -1,10 +1,33 @@
 leg_odometry_plugin:
   plugin: "LegOdometryPlugin"
   # urdf_path: "$(find state_estimator)/urdfs/anymal.urdf"
-  urdf_path: "$(find state_estimator)/urdfs/go1.urdf"
-  
-  imu_topic: "/trunk_imu" # Unitree: "/trunk_imu" # ANYmal: "/sensors/imu"
-  joint_states_topic: "/go1_gazebo/joint_states" # Unitree (Go1): "/go1_gazebo/joint_states" # ANYmal: "/state_estimator/joint_states"
-  contact_topic: "/state_estimator/contact_detection"
-  attitude_topic: "/state_estimator/attitude"
-  pub_topic: "leg_odometry"
+  urdf_path: "$(find state_estimator)/urdfs/go2.urdf"
+
+  low_state_topic: "/lowstate"   # Unitree LowState topic
+  attitude_topic: "/muse/attitude"
+  pub_topic: "muse/leg_odometry"
+
+  # Force threshold (int16 raw) above which a foot is considered in stance
+  contact_force_threshold: 15.0
+
+  # Motor indices → joint names (Go2 order: FL hip/thigh/calf, FR, RL, RR)
+  motor_joint_names:
+    - "FL_hip_joint"
+    - "FL_thigh_joint"
+    - "FL_calf_joint"
+    - "FR_hip_joint"
+    - "FR_thigh_joint"
+    - "FR_calf_joint"
+    - "RL_hip_joint"
+    - "RL_thigh_joint"
+    - "RL_calf_joint"
+    - "RR_hip_joint"
+    - "RR_thigh_joint"
+    - "RR_calf_joint"
+
+  # Foot frame names in the URDF, in LF/FR/LH/RH order
+  feet_frame_names:
+    - "FL_foot"
+    - "FR_foot"
+    - "RL_foot"
+    - "RR_foot"

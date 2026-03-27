@@ -1,10 +1,10 @@
 #ifndef PLUGIN_HPP
 #define PLUGIN_HPP
 
-#include "ros/ros.h"
-#include "Robot.hpp"
-#include <pluginlib/pluginlib_exceptions.h>
+#include <rclcpp/rclcpp.hpp>
 #include <memory>
+#include <string>
+#include "state_estimator/Robot.hpp"
 
 namespace state_estimator_plugins {
 
@@ -16,14 +16,18 @@ public:
 	virtual ~PluginBase() {};
 
 
-        void initialize(ros::NodeHandle& nodehandle, std::shared_ptr<state_estimator::Robot> robot) {
-	    //if (initialized_) return; //TODO no ini
-            nh_ = nodehandle;
+        void initialize(rclcpp::Node::SharedPtr node,
+                        std::shared_ptr<state_estimator::Robot> robot,
+                        const std::string& config_dir = "",
+                        const std::string& launch_dir = "") {
+            node_ = node;
             robot_ = robot;
-	    initialize_();
+            config_dir_ = config_dir;
+            launch_dir_ = launch_dir;
+            initialize_();
             paused_ = false;
-	    running_ = true;
-	    initialized_ = true;
+            running_ = true;
+            initialized_ = true;
         }
 
         virtual std::string getName()=0;
@@ -61,8 +65,10 @@ public:
 
 protected:
 	PluginBase() {}
-	ros::NodeHandle nh_;
+	rclcpp::Node::SharedPtr node_;
 	std::shared_ptr<state_estimator::Robot> robot_;
+	std::string config_dir_;
+	std::string launch_dir_;
 	virtual void pause_() = 0;
 	virtual void shutdown_()=0;
 	virtual void resume_()=0;

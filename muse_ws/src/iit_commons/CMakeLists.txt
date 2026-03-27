@@ -1,13 +1,15 @@
-# Project configuration
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.8)
 project(iit_commons)
+
+find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_gtest QUIET)
 
 find_package(PkgConfig)
 pkg_check_modules(EIGEN3 eigen3 REQUIRED)
 
-find_package(catkin QUIET)
-
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(BUILD_DOC false  CACHE BOOL "Build Doxygen documentation")
 
@@ -34,13 +36,7 @@ if(${BUILD_DOC})
 endif()
 
 set(LIB_NAME iitcommons)
-
-catkin_package(
-   INCLUDE_DIRS include
-   CATKIN_DEPENDS
-   LIBRARIES ${LIB_NAME}
-   DEPENDS
-)
+set(LIB_INSTALL_ROOT lib)
 
 set(SOURCES src/hydraulics.cpp 
             src/fbl/four_bar_linkage.cpp
@@ -52,6 +48,11 @@ include_directories(include ${EIGEN3_INCLUDE_DIRS})
 
 # Add library
 add_library(${LIB_NAME} SHARED ${SOURCES})
+target_include_directories(${LIB_NAME} PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+    ${EIGEN3_INCLUDE_DIRS}
+)
 
 # Sub-libraries
 #
@@ -62,38 +63,50 @@ include(yaml_config.cmake)
 include(euler_angles.cmake)
 
 install(DIRECTORY include/
-  DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}
+  DESTINATION include
   PATTERN ".svn" EXCLUDE
 )
 
 install(TARGETS ${LIB_NAME}
-        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-        RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION lib
+        RUNTIME DESTINATION bin
 )
 
+ament_export_include_directories(include)
+ament_export_libraries(${LIB_NAME})
 
-if (CATKIN_ENABLE_TESTING)
-	find_package(catkin REQUIRED COMPONENTS rostest)
-	include_directories(include ${catkin_INCLUDE_DIRS})
+if (BUILD_TESTING AND ament_cmake_gtest_FOUND)
+    ament_add_gtest(vm-test src/control/testVirtualModel.cpp)
+    if(TARGET vm-test)
+        target_link_libraries(vm-test ${LIB_NAME} pthread)
+    endif()
 
-	catkin_add_gtest(vm-test src/control/testVirtualModel.cpp)
-	target_link_libraries(vm-test ${LIB_NAME} ${catkin_LIBRARIES} pthread)
+    ament_add_gtest(algebra-test src/algebra_test.cpp)
+    if(TARGET algebra-test)
+        target_link_libraries(algebra-test pthread)
+    endif()
 
-	catkin_add_gtest(algebra-test src/algebra_test.cpp)
-	target_link_libraries(algebra-test ${catkin_LIBRARIES} pthread)
+    ament_add_gtest(filt-test src/test-filters.cpp)
+    if(TARGET filt-test)
+        target_link_libraries(filt-test ${LIB_NAME})
+    endif()
 
-	catkin_add_gtest(filt-test src/test-filters.cpp)
-	target_link_libraries(filt-test ${LIB_NAME} ${catkin_LIBRARIES})
+    ament_add_gtest(legboolmap-test src/legboolmap_test.cpp)
+    if(TARGET legboolmap-test)
+        target_link_libraries(legboolmap-test ${LIB_NAME})
+    endif()
 
-	catkin_add_gtest(legboolmap-test src/legboolmap_test.cpp)
-	target_link_libraries(legboolmap-test ${LIB_NAME} ${catkin_LIBRARIES})
+    ament_add_gtest(planning-test src/planning_test.cpp)
+    if(TARGET planning-test)
+        target_link_libraries(planning-test ${LIB_NAME} pthread)
+    endif()
 
-	catkin_add_gtest(planning-test src/planning_test.cpp)
-	target_link_libraries(planning-test ${LIB_NAME} ${catkin_LIBRARIES} pthread)
-
-	catkin_add_gtest(rotation-test src/rotation_test.cpp)
-	target_link_libraries(rotation-test ${LIB_NAME} ${catkin_LIBRARIES} pthread)
-
+    ament_add_gtest(rotation-test src/rotation_test.cpp)
+    if(TARGET rotation-test)
+        target_link_libraries(rotation-test ${LIB_NAME} pthread)
+    endif()
 endif()
+
+ament_package()
 

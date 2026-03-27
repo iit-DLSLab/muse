@@ -1,18 +1,14 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>state_estimator_msgs</name>
+  <name>dls2_interface</name>
   <version>0.0.1</version>
-  <description>State estimator msgs</description>
-  <maintainer email="ylenia.nistico@iit.it">Geoff Fink</maintainer>
-  <license>GPLv3</license>
+  <description>DLS2 interface messages</description>
+
+  <maintainer email="ylenia.nistico@iit.it">IIT DLS</maintainer>
+  <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
   <build_depend>rosidl_default_generators</build_depend>
-
-  <depend>std_msgs</depend>
-  <depend>geometry_msgs</depend>
-  <depend>sensor_msgs</depend>
-
   <exec_depend>rosidl_default_runtime</exec_depend>
 
   <member_of_group>rosidl_interface_packages</member_of_group>
@@ -20,5 +16,4 @@
   <export>
     <build_type>ament_cmake</build_type>
   </export>
-
 </package>

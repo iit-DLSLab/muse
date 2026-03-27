@@ -1,8 +1,8 @@
 attitude_estimation_plugin:
   plugin: "AttitudeEstimationPlugin"
   # Subscriber and Publisher topic names
-  imu_topic: "/trunk_imu" # Unitree: "/trunk_imu" # ANYmal: "/sensors/imu"
-  pub_topic: "attitude"
+  imu_topic: "/lowstate" # Unitree: "/trunk_imu" # ANYmal: "/sensors/imu"
+  pub_topic: "muse/attitude"
 
   # Attitude Estimation Parameters
   kp: 10.0

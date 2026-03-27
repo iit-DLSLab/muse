@@ -31,7 +31,7 @@ build-and-test:
   script:
     - source /root/dls_gitlab_ci/gitlab-ci.bash
     - source /opt/ros/dls-distro/setup.bash
-    - catkin_make -DCMAKE_BUILD_TYPE=Debug && catkin_make run_tests && catkin_make test
+    - colcon build --cmake-args -DCMAKE_BUILD_TYPE=Debug && colcon test && colcon test-result --verbose
 
 deploy:
   image: server-harbor:80/dls/dls-dev:$TAG

@@ -1,4 +1,4 @@
-<library path="lib/libstate_estimator_plugins">
+<library path="state_estimator_plugins">
 
     <class name="AttitudeEstimation" type="state_estimator_plugins::AttitudeEstimationPlugin" base_class_type="state_estimator_plugins::PluginBase">
         <description>A plugin to estimate the attitude</description>
