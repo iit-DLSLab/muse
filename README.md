@@ -3,34 +3,40 @@
 
 <h4 align="center">This paper has been accepted to IEEE Robotics and Automation Letters, and it is available at https://arxiv.org/abs/2503.12101 </h4>
 
+> **Branch note (`unitree_sdk`)**: this branch is developed for full compatibility with the Unitree SDK and ROS2 communication. The code has been tested on a Unitree Go2 robot in both simulation and real-world experiments.
+
 <h3 align="center"> 
     
 ![muse_cropped](https://github.com/user-attachments/assets/b212edff-44a4-4e46-acb9-c48e160ae8cd)
     
 
-# :computer: Code
+# :computer: Overview
 
 The `muse` package provides a ROS node and utilities for estimating the state of a quadruped robot using sensor data. It includes algorithms for state estimation, sensor fusion, and filtering.
 
-This first version of the code provides a proprioceptive state estimator for quadruped robots. The necessary inputs are 
+This version of the code provides a proprioceptive state estimator for quadruped robots. The necessary inputs are 
 - **imu measurements**
 - **joint states**
 - **force exerted on the feet**
 
-    
-Additional code to fuse exteroceptive measurements will be available soon!
-TODO list at the end of the page
-</h2>
+To simplify setup, we provide a ready-to-use Conda environment so you do not have to manually resolve dependencies.
 
 
+## :octocat: Suggestions
+### Simulation
+If you want a running simulation, follow the instructions in [basic-locomotion-dls-isaaclab](https://github.com/iit-DLSLab/basic-locomotion-dls-isaaclab).
+
+### Real world experiments
+To run this code with Unitree robots, you need to port the URDF of your robot in [this folder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/urdfs) and connect to the robot through [unitree_ros2_dls](https://github.com/iit-DLSLab/unitree_ros2_dls).
+
+For real-world experiments, we recommend the following repositories to control your robot:
+- [basic-locomotion-dls-isaaclab](https://github.com/iit-DLSLab/basic-locomotion-dls-isaaclab)
+- [Quadruped-PyMPC](https://github.com/iit-DLSLab/Quadruped-PyMPC)
 
 ## :t-rex: Prerequisites
 * [Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
 * [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page)
 * [Pinocchio](https://github.com/stack-of-tasks/pinocchio/tree/master)
-
-⚠️ ATTENTION: ROS1 is deprecated. This repository is being migrated to ROS2 (`ament` + `colcon`) with a staged approach.
-
 
 
 ## :hammer_and_wrench: Building and Running
@@ -38,26 +44,24 @@ TODO list at the end of the page
 To install and run `muse` with Conda + ROS2:
 
 1. Clone and create the environment:
-  ```sh
-  git clone https://github.com/iit-DLSLab/muse.git
-  cd muse
-  conda env create -f environment.yml
-  conda activate muse-ros2
-  ```
+    ```sh
+    git clone https://github.com/iit-DLSLab/muse.git
+    cd muse
+    conda env create -f environment.yml
+    conda activate muse-ros2
+    ```
 
 2. Build with `colcon`:
-  ```sh
-  cd muse_ws
-  colcon build --symlink-install
-  source install/setup.bash
-  ```
+    ```sh
+    cd muse_ws
+    colcon build --symlink-install
+    source install/setup.bash
+    ```
 
 3. Launch the state estimator package:
-   ```sh
-   ros2 launch state_estimator state_estimator.launch.py
-   ```
-
-For migration details and remaining ROS1→ROS2 source porting tasks, see `ROS2_MIGRATION.md`.
+    ```sh
+    ros2 launch state_estimator state_estimator.launch.py
+    ```
 To change the name of the topics, check the [config foder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/config).
 
 To visualize your data, you can use [PlotJuggler](https://github.com/facontidavide/PlotJuggler?tab=readme-ov-file):
@@ -65,12 +69,9 @@ To visualize your data, you can use [PlotJuggler](https://github.com/facontidavi
 ros2 run plotjuggler plotjuggler
 ```
 
-:warning: In this repo we provide an example with the ANYmal B300 robot. If you want to test MUSE with another one, you only need to add the URDF of your robot in [this folder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/urdfs), and change the name of the legs in the [leg odometry plugin, line 249](https://github.com/iit-DLSLab/muse/blob/main/muse_ws/src/state_estimator/src/plugins/leg_odometry_plugin.cpp#L249):
+:warning: In this repo we provide an example with the Go2 robot. If you want to test MUSE with another one, you need to add the URDF of your robot in [this folder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/urdfs), and (possibly) change the name of the legs in the [config files](https://github.com/iit-DLSLab/muse/blob/main/muse_ws/src/state_estimator/config):
 
-``` sh
-std::vector<std::string> feet_frame_names = {"LF_FOOT", "RF_FOOT", "LH_FOOT", "RH_FOOT"};   // Update with your actual link names
-```
-For real-world experiments, we recommend using this very nice [MPC](https://github.com/iit-DLSLab/Quadruped-PyMPC) to control your robot!
+
 ## :scroll: TODO list
 - [ ] Extend the code to include exteroception
 - [x] Conda-based environment
