@@ -1,0 +1,30 @@
+name: muse-ros2
+channels:
+  - robostack-humble
+  - conda-forge
+dependencies:
+  - python=3.11
+  - cmake
+  - cxx-compiler
+  - make
+  - pkg-config
+  - eigen
+  - yaml-cpp
+  - pinocchio
+  - pip
+  - ros-humble-desktop
+  - ros-humble-ament-cmake
+  - ros-humble-ament-cmake-gtest
+  - ros-humble-rclcpp
+  - ros-humble-rclcpp-components
+  - ros-humble-pluginlib
+  - ros-humble-class-loader
+  - ros-humble-geometry-msgs
+  - ros-humble-nav-msgs
+  - ros-humble-sensor-msgs
+  - ros-humble-std-msgs
+  - ros-humble-tf2-ros
+  - ros-humble-rosidl-default-generators
+  - ros-humble-rosidl-default-runtime
+  - ros-humble-ament-index-cpp
+  - colcon-common-extensions

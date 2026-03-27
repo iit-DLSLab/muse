@@ -24,58 +24,45 @@ TODO list at the end of the page
 
 
 
-## :t-rex: Prerequisites (Don't worry! In this repo, we provide **Dockerization** to avoid dealing with the dependencies!)
+## :t-rex: Prerequisites
+* [Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
 * [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page)
 * [Pinocchio](https://github.com/stack-of-tasks/pinocchio/tree/master)
-* [ROS Noetic](https://wiki.ros.org/noetic/Installation/Ubuntu)
 
-⚠️ ATTENTION: ROS1 is deprecated. This repo will move to ROS2. There is a "still-not-stable" ROS2 version on the [`ros2`](https://github.com/iit-DLSLab/muse/tree/ros2) branch, that will become the official one at a certain point. The latest release with ROS1 is the [v1.0.0](https://github.com/iit-DLSLab/muse/releases/tag/v1.0.0).
+⚠️ ATTENTION: ROS1 is deprecated. This repository is being migrated to ROS2 (`ament` + `colcon`) with a staged approach.
 
 
 
 ## :hammer_and_wrench: Building and Running
 
-To install the `muse` package, follow these steps:
+To install and run `muse` with Conda + ROS2:
 
-1. Clone this repository and build the Docker image:
-    ```sh
-    git clone https://github.com/iit-DLSLab/muse.git
-    cd muse
-    docker build -t muse-docker .
-    ```
+1. Clone and create the environment:
+  ```sh
+  git clone https://github.com/iit-DLSLab/muse.git
+  cd muse
+  conda env create -f environment.yml
+  conda activate muse-ros2
+  ```
 
-2. Enter the docker and build using `catkin_make`:
-    ```sh
-    cd muse_ws
-    xhost +local:docker
-    docker run -it --rm --name muse -v "$(pwd)":/root/muse_ws -w  /root/muse_ws muse-docker
-    catkin_make -j$(proc) install
-    source devel/setup.bash  
-    ```
-3. To launch the state estimator node:
+2. Build with `colcon`:
+  ```sh
+  cd muse_ws
+  colcon build --symlink-install
+  source install/setup.bash
+  ```
+
+3. Launch the state estimator package:
    ```sh
-   roslaunch state_estimator state_estimator.launch
+   ros2 launch state_estimator state_estimator.launch.py
    ```
-If you need to read the data from a rosbag, you need to mount the folder where you store your rosbags (`your_path_to_rosbags`), to make it visible inside the image, and then, you can attach a docker image in another terminal, for example:
-```sh
-docker run -it --rm --name muse \
-  --net=host \
-  -e DISPLAY=$DISPLAY \
-  -v /tmp/.X11-unix:/tmp/.X11-unix \
-  -v your_path_to_rosbags:/root/rosbags \
-  -v "$(pwd)":/root/muse_ws \
-  -w /root/muse_ws \
-  muse-docker (terminal 1)
-docker exec -it muse bash (terminal 2)
-source devel/setup.bash
-cd ~/rosbags (terminal 2)
-rosbag play your_rosbag.bag (terminal 2)
-```
+
+For migration details and remaining ROS1→ROS2 source porting tasks, see `ROS2_MIGRATION.md`.
 To change the name of the topics, check the [config foder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/config).
 
-To visualize your data, you can use [PlotJuggler](https://github.com/facontidavide/PlotJuggler?tab=readme-ov-file) which is already installed in the docker image:
+To visualize your data, you can use [PlotJuggler](https://github.com/facontidavide/PlotJuggler?tab=readme-ov-file):
 ```sh
-rosrun plotjuggler plotjuggler
+ros2 run plotjuggler plotjuggler
 ```
 
 :warning: In this repo we provide an example with the ANYmal B300 robot. If you want to test MUSE with another one, you only need to add the URDF of your robot in [this folder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/urdfs), and change the name of the legs in the [leg odometry plugin, line 249](https://github.com/iit-DLSLab/muse/blob/main/muse_ws/src/state_estimator/src/plugins/leg_odometry_plugin.cpp#L249):
@@ -86,7 +73,7 @@ std::vector<std::string> feet_frame_names = {"LF_FOOT", "RF_FOOT", "LH_FOOT", "R
 For real-world experiments, we recommend using this very nice [MPC](https://github.com/iit-DLSLab/Quadruped-PyMPC) to control your robot!
 ## :scroll: TODO list
 - [ ] Extend the code to include exteroception
-- [x] Dockerization
+- [x] Conda-based environment
 - [x] Support for ROS2 (on going)
 
 ## :hugs: Contributing
