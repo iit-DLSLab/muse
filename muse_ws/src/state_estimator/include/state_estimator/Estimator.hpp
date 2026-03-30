@@ -36,7 +36,7 @@ public:
 		return ret;
 	}
 
-virtual void updateGen(double t, Eigen::MatrixXd &u, Eigen::MatrixXd &z) { }
+virtual void updateGen(double /*t*/, Eigen::MatrixXd & /*u*/, Eigen::MatrixXd & /*z*/) { }
 
 protected:
 

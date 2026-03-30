@@ -19,9 +19,9 @@ namespace state_estimator {
 			this->m_n = m_n;
 		}
 
-		virtual void predict(double t, const Eigen::Vector3d &u) override {}
+		virtual void predict(double /*t*/, const Eigen::Vector3d & /*u*/) override {}
 
-		virtual void update(double t, const Eigen::Vector6d &z) override {}
+		virtual void update(double /*t*/, const Eigen::Vector6d & /*z*/) override {}
 
 		virtual void update(double t, const Eigen::Vector3d &u, const Eigen::Vector6d &z) override 
 		{ 

@@ -37,7 +37,7 @@ public:
 
 	//xhatdot = f
 	//Pdot = FP+PF^T+Q
-	virtual void predict(T t, const Eigen::Matrix<T,N2,1> &u) override 
+	virtual void predict(T /*t*/, const Eigen::Matrix<T,N2,1> & /*u*/) override 
 	{
 
 	}
@@ -45,7 +45,7 @@ public:
 	// K = PH'(HPH'+R)^-1
 	// xhat = xhat + K(z-h)
 	// P = (I-KH)P
-	virtual void update(T t, const Eigen::Matrix<T,N3,1> &z) override {
+	virtual void update(T /*t*/, const Eigen::Matrix<T,N3,1> & /*z*/) override {
 	}
 
 	virtual Eigen::Matrix<T,N1,1>	calc_f(T t, const Eigen::Matrix<T,N1,1> &x, const Eigen::Matrix<T,N2,1> &u)=0;

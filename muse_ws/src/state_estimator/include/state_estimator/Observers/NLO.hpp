@@ -15,7 +15,7 @@ public:
 		this->kp=kp;
 	}
 
-	virtual std::string DebugString() {
+	virtual std::string DebugString() const override {
 		std::stringstream ss;
 		ss << "===Nonlinear Observer===" << std::endl;
 		ss << "t=" << this->t_prev << std::endl;

@@ -68,11 +68,7 @@ namespace state_estimator {
 			z.block(0,0,3,1) =  zc.head(3)/zc.head(3).norm();
 			z.block(3,0,3,1) =  zc.tail(3)/zc.tail(3).norm();
 
-			Eigen::Vector7d xbar = this->x_bar;
-
 			Eigen::Matrix3d R_bar = calc_Rquat(this->x_bar.head(4));
-			Eigen::Vector3d f_bar = R_bar.transpose()*this->f_n;
-			Eigen::Vector3d m_bar = R_bar.transpose()*this->m_n;
 
 			Eigen::Vector6d y_tilde; y_tilde = z;
 			Eigen::Vector6d zbar;
@@ -119,7 +115,7 @@ namespace state_estimator {
 			Observer::update(t,u,z); //call predict and update
 		}
 
-		Eigen::Vector7d calc_f(double t, const Eigen::Vector7d &x, const Eigen::Vector3d &u) 
+		Eigen::Vector7d calc_f(double /*t*/, const Eigen::Vector7d &x, const Eigen::Vector3d &u) 
 		{
 
 			Eigen::Vector4d q = x.head(4);
@@ -135,11 +131,10 @@ namespace state_estimator {
 			return xdot;
 		}
 
-		Eigen::Vector6d calc_h(double t, const Eigen::Vector7d &x) 
+		Eigen::Vector6d calc_h(double /*t*/, const Eigen::Vector7d &x) 
 		{
 			Eigen::Vector6d h;
 			Eigen::Vector4d q = x.head(4);
-			Eigen::Vector3d b = x.tail(3);
 
 			Eigen::Matrix3d Rnb = calc_Rquat(q);
 			Eigen::Matrix3d Rbn = Rnb.transpose();
@@ -150,7 +145,7 @@ namespace state_estimator {
 			return h;
 		}
 
-		Eigen::Matrix7d calc_F(double t, const Eigen::Vector7d &x, const Eigen::Vector3d &u) 
+		Eigen::Matrix7d calc_F(double /*t*/, const Eigen::Vector7d &x, const Eigen::Vector3d &u) 
 		{
 			Eigen::Matrix7d F;
 			Eigen::Vector3d omega = u;
@@ -165,14 +160,13 @@ namespace state_estimator {
 			return F;
 		}
 
-		Eigen::Matrix6d calc_F(double t, const Eigen::Vector7d &xhat, const Eigen::Vector7d &xbar, const Eigen::Vector3d &u) 
+		Eigen::Matrix6d calc_F(double /*t*/, const Eigen::Vector7d &xhat, const Eigen::Vector7d &xbar, const Eigen::Vector3d & /*u*/) 
 		{
 			Eigen::Matrix6d F;
 			Eigen::Vector4d qhat = xhat.head(4);
 			Eigen::Vector3d bhat = xhat.tail(3);
 			Eigen::Vector4d qbar = xbar.head(4);
 			Eigen::Vector3d bbar = xbar.tail(3);
-			Eigen::Vector3d omega = u;
 
 			Eigen::Matrix3d R_bar = calc_Rquat(qbar);
 			Eigen::Matrix<double,4,3> Psi_bar = calc_Psi(qbar);
@@ -190,14 +184,11 @@ namespace state_estimator {
 			return F;
 		}
 
-		Eigen::Matrix6d calc_G(double t, const Eigen::Vector7d &xhat, const Eigen::Vector7d &xbar, const Eigen::Vector3d &u) 
+		Eigen::Matrix6d calc_G(double /*t*/, const Eigen::Vector7d &xhat, const Eigen::Vector7d &xbar, const Eigen::Vector3d & /*u*/) 
 		{
 			Eigen::Matrix6d G;
 			Eigen::Vector4d qhat = xhat.head(4);
-			Eigen::Vector3d bhat = xhat.tail(3);
 			Eigen::Vector4d qbar = xbar.head(4);
-			Eigen::Vector3d bbar = xbar.tail(3);
-			Eigen::Vector3d omega = u;
 
 			Eigen::Matrix3d R_bar = calc_Rquat(qbar);
 			Eigen::Vector4d dq = calc_qmult(calc_quatinv(qhat),qbar);
@@ -211,7 +202,7 @@ namespace state_estimator {
 			return G;
 		}
 
-		Eigen::Matrix6d calc_H(double t, const Eigen::Vector7d &xhat, const Eigen::Vector7d &xbar) 
+		Eigen::Matrix6d calc_H(double /*t*/, const Eigen::Vector7d &xhat, const Eigen::Vector7d &xbar) 
 		{
 			Eigen::Matrix6d H;
 			Eigen::Vector4d qhat = xhat.head(4);
@@ -230,7 +221,7 @@ namespace state_estimator {
 			return H;
 		}
 
-		virtual Eigen::Matrix<double,6,7> calc_H(double t, const Eigen::Vector7d &x) 
+		virtual Eigen::Matrix<double,6,7> calc_H(double /*t*/, const Eigen::Vector7d &x) 
 		{
 			Eigen::Matrix<double,6,7> H;
 			Eigen::Vector4d q = x.head(4);

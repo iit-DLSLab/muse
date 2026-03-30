@@ -27,10 +27,7 @@ find_package(PkgConfig REQUIRED)
 find_package(pinocchio QUIET)
 find_package(yaml-cpp REQUIRED)
 
-include_directories(
-  include
-  /usr/include/eigen3
-)
+include_directories(include)
 if(pinocchio_FOUND)
   include_directories(${PINOCCHIO_INCLUDE_DIRS})
 endif()
@@ -49,6 +46,11 @@ else()
 endif()
 
 add_library(state_estimator_plugins SHARED ${PLUGIN_SOURCES})
+target_include_directories(state_estimator_plugins PUBLIC 
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+  ${EIGEN3_INCLUDE_DIR}
+)
 ament_target_dependencies(state_estimator_plugins
   rclcpp
   pluginlib
@@ -62,7 +64,7 @@ ament_target_dependencies(state_estimator_plugins
   iit_commons
   ament_index_cpp
 )
-target_link_libraries(state_estimator_plugins yaml-cpp)
+target_link_libraries(state_estimator_plugins Eigen3::Eigen yaml-cpp)
 if(pinocchio_FOUND)
   target_link_libraries(state_estimator_plugins ${PINOCCHIO_LIBRARIES})
 endif()
@@ -73,6 +75,11 @@ pluginlib_export_plugin_description_file(state_estimator state_estimator_plugins
 add_executable(state_estimator_node
   src/state_estimator.cpp
   src/state_estimator_node.cpp
+)
+target_include_directories(state_estimator_node PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+  ${EIGEN3_INCLUDE_DIR}
 )
 ament_target_dependencies(state_estimator_node
   rclcpp
@@ -87,7 +94,7 @@ ament_target_dependencies(state_estimator_node
   iit_commons
   ament_index_cpp
 )
-target_link_libraries(state_estimator_node state_estimator_plugins yaml-cpp)
+target_link_libraries(state_estimator_node state_estimator_plugins Eigen3::Eigen yaml-cpp)
 if(pinocchio_FOUND)
   target_link_libraries(state_estimator_node ${PINOCCHIO_LIBRARIES})
 endif()
