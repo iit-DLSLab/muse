@@ -186,7 +186,6 @@ class SensorFusionPlugin : public PluginBase
 			time_begin_ = node_->now().seconds();
 			begin_ = false;
 		}
-		// std::cout << "AAAAAAAAAAAAAAAAAAAA" << std::endl;
 
 		time_ = node_->now().seconds() - time_begin_;
 
@@ -248,6 +247,9 @@ class SensorFusionPlugin : public PluginBase
 			w_R_b = Eigen::Matrix3d::Identity();
 		}
 
+
+
+
 		// ────────────── Compute leg odometry velocity v_b ──────────────
 		Eigen::Vector3d v_b(0.0, 0.0, 0.0);
 		bool stance_lf = false, stance_rf = false, stance_lh = false, stance_rh = false;
@@ -297,7 +299,7 @@ class SensorFusionPlugin : public PluginBase
 		}
 
 		// With a fixed-base model, WORLD quantities are expressed in the base frame.
-		pinocchio::Motion foot_vel_base = pinocchio::getFrameVelocity(model_, data_, frame_id, pinocchio::WORLD);
+		pinocchio::Motion foot_vel_base = pinocchio::getFrameVelocity(model_, data_, frame_id, pinocchio::LOCAL_WORLD_ALIGNED);
 		Eigen::Vector3d foot_pos_base = data_.oMf[frame_id].translation();
 
 		// For a stance foot: 0 = v_b + ω×r + v_foot/base  ⇒  v_b = -(v_foot/base + ω×r)
@@ -317,7 +319,7 @@ class SensorFusionPlugin : public PluginBase
 				v_b.setZero();
 			}
 		}
-		std::cout << "v_b: " << v_b.transpose() << " stance_count: " << stance_count << std::endl;
+		// std::cout << "v_b: " << v_b.transpose() << " stance_count: " << stance_count << std::endl;
 		}
 
 		// ────────────── Sensor fusion update ──────────────
@@ -361,13 +363,23 @@ class SensorFusionPlugin : public PluginBase
 		msg_.twist.twist.linear.y = xhat_estimated(4);
 		msg_.twist.twist.linear.z = xhat_estimated(5);
 
-		Eigen::Vector3d w_omega = w_R_b * omega;
-		if (!finite3(w_omega)) {
-			w_omega.setZero();
+		// Eigen::Vector3d w_omega = w_R_b * omega;
+		// if (!finite3(w_omega)) {
+		// 	w_omega.setZero();
+		// }
+
+		Eigen::Vector7d xdot = attitude_->calc_f(time_, xhat_att_, omega_b);
+		Eigen::Quaterniond quat_dot;
+		quat_dot.w() = xdot(0);
+		quat_dot.vec() << xdot(1), xdot(2), xdot(3);
+		Eigen::Vector3d omega_filt = iit::commons::quatToOmega(quat_est, quat_dot);
+		if (!finite3(omega_filt)) {
+			omega_filt.setZero();
 		}
-		msg_.twist.twist.angular.x = w_omega[0];
-		msg_.twist.twist.angular.y = w_omega[1];
-		msg_.twist.twist.angular.z = w_omega[2];
+
+		msg_.twist.twist.angular.x = omega_filt[0];
+		msg_.twist.twist.angular.y = omega_filt[1];
+		msg_.twist.twist.angular.z = omega_filt[2];
 
 		pub_->publish(msg_);
 

@@ -223,7 +223,7 @@ continue;
 }
 
 // With a fixed-base model, WORLD quantities are expressed in the base frame.
-pinocchio::Motion foot_vel_base = pinocchio::getFrameVelocity(model_, data_, frame_id, pinocchio::WORLD);
+pinocchio::Motion foot_vel_base = pinocchio::getFrameVelocity(model_, data_, frame_id, pinocchio::LOCAL_WORLD_ALIGNED);
 Eigen::Vector3d foot_pos_base = data_.oMf[frame_id].translation();
 
 // For a stance foot: 0 = v_b + ω×r + v_foot/base  ⇒  v_b = -(v_foot/base + ω×r)
