@@ -49,7 +49,7 @@ namespace state_estimator
 
     inline KFSensorFusion::KFSensorFusion(double t0, const Eigen::Matrix<double,6,1> &xhat0,
                                           const Eigen::Matrix<double,6,6> &P0, const Eigen::Matrix<double,6,6> &Q, 
-                                          const Eigen::Matrix<double,3,3> &R, bool lidar, bool slippage)
+                                          const Eigen::Matrix<double,3,3> &R, bool /*lidar*/, bool /*slippage*/)
         : EKFBase(t0, xhat0, P0, Q, R)
     {
         // Optionally call setMatricesSF(slippage) if needed:
@@ -106,7 +106,7 @@ namespace state_estimator
         this->fixP();
     }
 
-    inline Eigen::Matrix<double,6,1> KFSensorFusion::calc_f(double t, const Eigen::Matrix<double,6,1> &x, const Eigen::Matrix<double,3,1> &u)
+    inline Eigen::Matrix<double,6,1> KFSensorFusion::calc_f(double /*t*/, const Eigen::Matrix<double,6,1> &x, const Eigen::Matrix<double,3,1> &u)
     {
         // x is composed of [position; velocity], so extract velocity:
         v = x.tail(3);
@@ -115,7 +115,7 @@ namespace state_estimator
         return fx_local;
     }
 
-    inline Eigen::Matrix<double,6,6> KFSensorFusion::calc_F(double t, const Eigen::Matrix<double,6,1> &x, const Eigen::Matrix<double,3,1> &u)
+    inline Eigen::Matrix<double,6,6> KFSensorFusion::calc_F(double /*t*/, const Eigen::Matrix<double,6,1> & /*x*/, const Eigen::Matrix<double,3,1> & /*u*/)
     {
         Eigen::Matrix<double,6,6> F_local;
         F_local <<    0.0, 0.0, 0.0, 1.0, 0.0, 0.0,
@@ -127,13 +127,13 @@ namespace state_estimator
         return F_local;
     } 
 
-    inline Eigen::Matrix<double,3,1> KFSensorFusion::calc_h(double t, const Eigen::Matrix<double,6,1> &x)
+    inline Eigen::Matrix<double,3,1> KFSensorFusion::calc_h(double /*t*/, const Eigen::Matrix<double,6,1> &x)
     {
         // Estimated velocity measurement from the state vector
         return x.tail(3);
     }
 
-    inline Eigen::Matrix<double,3,6> KFSensorFusion::calc_H(double t, const Eigen::Matrix<double,6,1> &x)
+    inline Eigen::Matrix<double,3,6> KFSensorFusion::calc_H(double /*t*/, const Eigen::Matrix<double,6,1> & /*x*/)
     {
         Eigen::Matrix<double,3,6> H_local;
         H_local << 0.0, 0.0, 0.0, 1.0, 0.0, 0.0,
@@ -143,7 +143,7 @@ namespace state_estimator
     }
 
     // Optional: define setMatricesSF if needed
-    inline void KFSensorFusion::setMatricesSF(bool slippage)
+    inline void KFSensorFusion::setMatricesSF(bool /*slippage*/)
     {
         // Implementation details depending on what you need to do when 'slippage' is true/false.
     }

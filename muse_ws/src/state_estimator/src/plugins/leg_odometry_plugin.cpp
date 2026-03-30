@@ -222,6 +222,8 @@ foot_vels.push_back(Eigen::Vector3d::Zero());
 continue;
 }
 
+// Use LOCAL_WORLD_ALIGNED so linear velocity is expressed in world-aligned axes at the foot frame.
+pinocchio::Motion foot_vel_base = pinocchio::getFrameVelocity(model_, data_, frame_id, pinocchio::LOCAL_WORLD_ALIGNED);
 // With a fixed-base model, WORLD quantities are expressed in the base frame.
 pinocchio::Motion foot_vel_base = pinocchio::getFrameVelocity(model_, data_, frame_id, pinocchio::LOCAL_WORLD_ALIGNED);
 Eigen::Vector3d foot_pos_base = data_.oMf[frame_id].translation();

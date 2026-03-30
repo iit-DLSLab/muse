@@ -33,6 +33,7 @@
 
   <export>
     <build_type>ament_cmake</build_type>
+    <pluginlib plugin="${prefix}/share/state_estimator/state_estimator_plugins.xml" />
   </export>
 
 

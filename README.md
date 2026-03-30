@@ -45,7 +45,7 @@ To install and run `muse` with Conda + ROS2:
 
 1. Clone and create the environment:
     ```sh
-    git clone https://github.com/iit-DLSLab/muse.git
+    git clone https://github.com/iit-DLSLab/muse.git -b unitree_sdk
     cd muse
     conda env create -f environment.yml
     conda activate muse-ros2

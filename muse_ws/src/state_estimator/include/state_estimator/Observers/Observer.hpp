@@ -17,6 +17,8 @@ public:
                 Estimator<T,N>::name_ = std::string("Observer");
 	}
 
+	virtual ~Observer() {}
+
 	virtual void predict(T t, const Eigen::Matrix<T,M,1> &u)=0;
 
 	virtual void update(T t, const Eigen::Matrix<T,O,1> &z)=0;
