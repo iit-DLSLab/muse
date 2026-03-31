@@ -26,5 +26,6 @@ dependencies:
   - ros-humble-tf2-ros
   - ros-humble-rosidl-default-generators
   - ros-humble-rosidl-default-runtime
+  - ros-humble-plotjuggler-ros
   - ros-humble-ament-index-cpp
   - colcon-common-extensions
