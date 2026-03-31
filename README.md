@@ -19,7 +19,7 @@ This version of the code provides a proprioceptive state estimator for quadruped
 - **joint states**
 - **force exerted on the feet**
 
-To simplify setup, we provide a ready-to-use Conda environment so you do not have to manually resolve dependencies.
+### To simplify setup, we provide a ready-to-use **Conda** environment so you do not have to manually resolve dependencies.
 
 
 ## :octocat: Suggestions
