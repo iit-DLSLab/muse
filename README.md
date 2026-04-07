@@ -12,7 +12,7 @@
 
 # :computer: Overview
 
-The `muse` package provides a ROS node and utilities for estimating the state of a quadruped robot using sensor data. It includes algorithms for state estimation, sensor fusion, and filtering.
+The `muse` package provides a ROS2 node and utilities for estimating the state of a quadruped robot using sensor data. It includes algorithms for state estimation, sensor fusion, and filtering.
 
 This version of the code provides a proprioceptive state estimator for quadruped robots. The necessary inputs are 
 - **imu measurements**
@@ -27,7 +27,7 @@ This version of the code provides a proprioceptive state estimator for quadruped
 If you want a running simulation, follow the instructions in [basic-locomotion-dls-isaaclab](https://github.com/iit-DLSLab/basic-locomotion-dls-isaaclab).
 
 ### Real world experiments
-To run this code with Unitree robots, you need to port the URDF of your robot in [this folder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/urdfs) and connect to the robot through [unitree_ros2_dls](https://github.com/iit-DLSLab/unitree_ros2_dls).
+To run this code with Unitree robots, you need to port the URDF of your robot to [this folder](https://github.com/iit-DLSLab/muse/tree/unitree_sdk/muse_ws/src/state_estimator/urdfs) and connect to the robot through [unitree_ros2_dls](https://github.com/iit-DLSLab/unitree_ros2_dls).
 
 For real-world experiments, we recommend the following repositories to control your robot:
 - [basic-locomotion-dls-isaaclab](https://github.com/iit-DLSLab/basic-locomotion-dls-isaaclab)
@@ -69,7 +69,7 @@ To visualize your data, you can use [PlotJuggler](https://github.com/facontidavi
 ros2 run plotjuggler plotjuggler
 ```
 
-:warning: In this repo we provide an example with the Go2 robot. If you want to test MUSE with another one, you need to add the URDF of your robot in [this folder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/urdfs), and (possibly) change the name of the legs in the [config files](https://github.com/iit-DLSLab/muse/blob/main/muse_ws/src/state_estimator/config):
+:warning: In this repo, we provide an example with the Go2 robot. If you want to test MUSE with another one, you need to add the URDF of your robot in [this folder](https://github.com/iit-DLSLab/muse/tree/unitree_sdk/muse_ws/src/state_estimator/urdfs), and (possibly) change the name of the legs in the [config files](https://github.com/iit-DLSLab/muse/tree/unitree_sdk/muse_ws/src/state_estimator/config):
 
 
 ## :scroll: TODO list
