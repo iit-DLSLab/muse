@@ -7,6 +7,8 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     package_share = Path(get_package_share_directory("state_estimator"))
+    urdf_path = package_share / "urdfs" / "go2.urdf"
+    robot_description = urdf_path.read_text()
 
     # The config/launch YAML files are in ROS1 plugin-owned format and are read
     # directly by the node via yaml-cpp -- they cannot be fed as ROS2 --params-file
@@ -25,6 +27,14 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
+            Node(
+                package="robot_state_publisher",
+                executable="robot_state_publisher",
+                name="robot_state_publisher",
+                output="screen",
+                arguments=["--ros-args", "--log-level", "warn"],
+                parameters=[{"robot_description": robot_description}],
+            ),
             Node(
                 package="state_estimator",
                 executable="state_estimator_node",

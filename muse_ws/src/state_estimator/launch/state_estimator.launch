@@ -11,7 +11,7 @@
 		<rosparam file="$(find state_estimator)/config/attitude_plugin.yaml" command="load" />
 		<rosparam file="$(find state_estimator)/config/contact_plugin.yaml" command="load" />
 		<rosparam file="$(find state_estimator)/config/leg_odometry.yaml" command="load"/>
-		<rosparam file="$(find state_estimator)/config/sensor_fusion.yaml" command="load" />
+		<rosparam file="$(find state_estimator)/config/proprioceptive_sensor_fusion.yaml" command="load" />
 
 
 		

@@ -7,19 +7,19 @@
 
 <h3 align="center"> 
     
-![muse_cropped](https://github.com/user-attachments/assets/b212edff-44a4-4e46-acb9-c48e160ae8cd)
+<!-- ![muse_cropped](https://github.com/user-attachments/assets/b212edff-44a4-4e46-acb9-c48e160ae8cd) -->
     
 
 # :computer: Overview
 
-The `muse` package provides a ROS2 node and utilities for estimating the state of a quadruped robot using sensor data. It includes algorithms for state estimation, sensor fusion, and filtering.
+The `muse` package provides a ROS node and utilities for estimating the state of a quadruped robot using sensor data. It includes algorithms for state estimation, sensor fusion, and filtering.
 
 This version of the code provides a proprioceptive state estimator for quadruped robots. The necessary inputs are 
 - **imu measurements**
 - **joint states**
 - **force exerted on the feet**
 
-### To simplify setup, we provide a ready-to-use **Conda** environment so you do not have to manually resolve dependencies.
+### To simplify setup, we provide a ready-to-use **Conda*r-attachments/assets/b212edff-44a4-4e46-acb9-c48e160ae8cd)* environment so you do not have to manually resolve dependencies.
 
 
 ## :octocat: Suggestions
@@ -27,7 +27,7 @@ This version of the code provides a proprioceptive state estimator for quadruped
 If you want a running simulation, follow the instructions in [basic-locomotion-dls-isaaclab](https://github.com/iit-DLSLab/basic-locomotion-dls-isaaclab).
 
 ### Real world experiments
-To run this code with Unitree robots, you need to port the URDF of your robot to [this folder](https://github.com/iit-DLSLab/muse/tree/unitree_sdk/muse_ws/src/state_estimator/urdfs) and connect to the robot through [unitree_ros2_dls](https://github.com/iit-DLSLab/unitree_ros2_dls).
+To run this code with Unitree robots, you need to port the URDF of your robot in [this folder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/urdfs) and connect to the robot through [unitree_ros2_dls](https://github.com/iit-DLSLab/unitree_ros2_dls).
 
 For real-world experiments, we recommend the following repositories to control your robot:
 - [basic-locomotion-dls-isaaclab](https://github.com/iit-DLSLab/basic-locomotion-dls-isaaclab)
@@ -37,6 +37,7 @@ For real-world experiments, we recommend the following repositories to control y
 * [Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
 * [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page)
 * [Pinocchio](https://github.com/stack-of-tasks/pinocchio/tree/master)
+* [vcstool](https://github.com/dirk-thomas/vcstool) — installed automatically via the Conda environment
 
 
 ## :hammer_and_wrench: Building and Running
@@ -51,29 +52,75 @@ To install and run `muse` with Conda + ROS2:
     conda activate muse-ros2
     ```
 
-2. Build with `colcon`:
+2. Fetch external dependencies (e.g. Point-LIO):
+    ```sh
+    cd muse_ws
+    vcs import src < muse.repos
+    ```
+
+3. Build with `colcon`:
     ```sh
     cd muse_ws
     colcon build --symlink-install
     source install/setup.bash
     ```
 
-3. Launch the state estimator package:
+4. Launch the state estimator package:
     ```sh
     ros2 launch state_estimator state_estimator.launch.py
     ```
-To change the name of the topics, check the [config foder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/config).
+
+    Or launch the full stack with Point-LIO (see [Point-LIO integration](#lidar-point-lio-integration)):
+    ```sh
+    ros2 launch muse_point_lio muse_with_point_lio.launch.py
+    ```
+
+To change the name of the topics, check the [config folder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/config).
 
 To visualize your data, you can use [PlotJuggler](https://github.com/facontidavide/PlotJuggler?tab=readme-ov-file):
 ```sh
 ros2 run plotjuggler plotjuggler
 ```
 
-:warning: In this repo, we provide an example with the Go2 robot. If you want to test MUSE with another one, you need to add the URDF of your robot in [this folder](https://github.com/iit-DLSLab/muse/tree/unitree_sdk/muse_ws/src/state_estimator/urdfs), and (possibly) change the name of the legs in the [config files](https://github.com/iit-DLSLab/muse/tree/unitree_sdk/muse_ws/src/state_estimator/config):
+---
+
+## :satellite: LiDAR / Point-LIO Integration
+
+MUSE includes a `muse_point_lio` wrapper package that integrates [Point-LIO ROS2](https://github.com/ylenianistico/point_lio_ros2/tree/muse-integration) as the exteroceptive odometry source for the `MultiSensorFusion` plugin.
+
+### Architecture
+```
+[Point-LIO node]  →  /point_lio/odometry
+        ↓
+[odom_bridge node]  →  /lidar_odometry     (normalised interface)
+        ↓
+[MultiSensorFusion plugin]  →  /muse/multi_sensor_fusion
+        ↓
+[TfStatePublisher plugin]  →  TF: world → base
+```
+
+### Go2-specific setup
+A ready-to-use Point-LIO config for the Go2 is provided at [`config/go2_muse.yaml`](https://github.com/ylenianistico/point_lio_ros2/blob/muse-integration/config/go2_muse.yaml) in the `muse-integration` branch of the forked Point-LIO repo. It sets:
+- Input topics: `/utlidar/cloud` and `/utlidar/imu` (Unitree SDK2 native driver)
+- Extrinsics derived from the Go2 URDF (`radar_joint` → `imu_joint`)
+- Frame IDs: `odom_header_frame_id: odom`, `odom_child_frame_id: imu`
+
+The Point-LIO fork is fetched automatically via `muse.repos` (see build instructions above).
+
+### Selecting a different LiDAR
+Pass `point_lio_launch_file` to switch to any other Point-LIO launch file:
+```sh
+ros2 launch muse_point_lio muse_with_point_lio.launch.py \
+  point_lio_launch_file:=mapping_velody16.launch.py
+```
+
+---
+
+:warning: In this repo we provide an example with the Go2 robot. If you want to test MUSE with another one, you need to add the URDF of your robot in [this folder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/urdfs), and (possibly) change the name of the legs in the [config files](https://github.com/iit-DLSLab/muse/blob/main/muse_ws/src/state_estimator/config)
 
 
 ## :scroll: TODO list
-- [ ] Extend the code to include exteroception
+- [x] Extend the code to include exteroception (Point-LIO integration via `muse_point_lio`)
 - [x] Conda-based environment
 - [x] Support for ROS2 (on going)
 

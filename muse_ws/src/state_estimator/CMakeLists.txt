@@ -36,7 +36,9 @@ endif()
 set(PLUGIN_SOURCES
   src/plugins/attitude_estimation_plugin.cpp
   src/plugins/contact_detection_plugin.cpp
-  src/plugins/sensor_fusion_plugin.cpp
+  src/plugins/proprioceptive_sensor_fusion_plugin.cpp
+  src/plugins/tf_state_publisher_plugin.cpp
+  src/plugins/multi_sensor_fusion_plugin.cpp
 )
 if(pinocchio_FOUND)
   list(APPEND PLUGIN_SOURCES src/plugins/leg_odometry_plugin.cpp)
@@ -58,6 +60,7 @@ ament_target_dependencies(state_estimator_plugins
   sensor_msgs
   geometry_msgs
   nav_msgs
+  tf2_ros
   state_estimator_msgs
   dls2_interface
   unitree_go

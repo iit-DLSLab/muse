@@ -12,8 +12,16 @@
 	<description>A plugin to calculate leg odometry</description>
     </class>
 
-    <class name="SensorFusion" type="state_estimator_plugins::SensorFusionPlugin" base_class_type="state_estimator_plugins::PluginBase">
+    <class name="ProprioceptiveSensorFusion" type="state_estimator_plugins::ProprioceptiveSensorFusionPlugin" base_class_type="state_estimator_plugins::PluginBase">
         <description>A plugin to fuse the estimated attitude and the leg odometry</description>
+    </class>
+
+    <class name="TfStatePublisher" type="state_estimator_plugins::TfStatePublisherPlugin" base_class_type="state_estimator_plugins::PluginBase">
+        <description>A plugin to publish TF and joint states from estimator outputs</description>
+    </class>
+
+    <class name="MultiSensorFusion" type="state_estimator_plugins::MultiSensorFusionPlugin" base_class_type="state_estimator_plugins::PluginBase">
+        <description>A plugin to fuse attitude, leg odometry, stance status and LiDAR odometry</description>
     </class>
 
 
