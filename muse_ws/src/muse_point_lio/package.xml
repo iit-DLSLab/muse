@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>muse_point_lio</name>
+  <version>0.0.1</version>
+  <description>Point-LIO integration wrapper for MUSE (launch + odometry bridge).</description>
+
+  <maintainer email="ylenia.nistico@iit.it">MUSE Team</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>state_estimator</exec_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

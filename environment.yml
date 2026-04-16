@@ -28,4 +28,6 @@ dependencies:
   - ros-humble-rosidl-default-runtime
   - ros-humble-plotjuggler-ros
   - ros-humble-ament-index-cpp
+  - ros-humble-pcl-ros
   - colcon-common-extensions
+  - vcstool

@@ -1,0 +1,10 @@
+point_lio_odom_bridge:
+  ros__parameters:
+    input_topic: "/point_lio/odometry"
+    output_topic: "/lidar_odometry"
+    use_input_stamp: true
+    # Keep frame_id / child_frame_id empty to pass through whatever Point-LIO publishes.
+    # Point-LIO is configured (in go2_muse.yaml) to already use "odom" / "imu" so no
+    # remapping is needed here. Override if your setup differs.
+    frame_id: ""
+    child_frame_id: ""
