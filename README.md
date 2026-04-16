@@ -37,7 +37,7 @@ For real-world experiments, we recommend the following repositories to control y
 * [Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
 * [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page)
 * [Pinocchio](https://github.com/stack-of-tasks/pinocchio/tree/master)
-* [vcstool](https://github.com/dirk-thomas/vcstool) — installed automatically via the Conda environment
+* [vcstool](https://github.com/dirk-thomas/vcstool)
 
 
 ## :hammer_and_wrench: Building and Running
