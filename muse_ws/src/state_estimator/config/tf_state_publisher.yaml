@@ -1,0 +1,33 @@
+tf_state_publisher_plugin:
+  plugin: "TfStatePublisherPlugin"
+
+  # Choose exactly one odometry source for world -> base TF.
+  # Use the fused estimate by default; switch back to
+  # "muse/proprioceptive_sensor_fusion" only if you want proprio-only TF.
+  odom_topic: "muse/multi_sensor_fusion"
+  low_state_topic: "/lowstate"
+  joint_states_topic: "joint_states"
+
+  world_frame_id: "world"
+  base_frame_id: "base"
+
+  lidar_frame_id: "radar"
+  lidar_imu_frame_id: "radar_imu"
+
+  publish_base_tf: true
+  publish_joint_states: true
+  publish_lidar_imu_tf: true
+
+  motor_joint_names:
+    - "FL_hip_joint"
+    - "FL_thigh_joint"
+    - "FL_calf_joint"
+    - "FR_hip_joint"
+    - "FR_thigh_joint"
+    - "FR_calf_joint"
+    - "RL_hip_joint"
+    - "RL_thigh_joint"
+    - "RL_calf_joint"
+    - "RR_hip_joint"
+    - "RR_thigh_joint"
+    - "RR_calf_joint"

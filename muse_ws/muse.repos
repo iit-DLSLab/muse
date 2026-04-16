@@ -1,0 +1,5 @@
+repositories:
+  src/point_lio_ros2:
+    type: git
+    url: https://github.com/ylenianistico/point_lio_ros2.git
+    version: muse-integration

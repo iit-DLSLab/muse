@@ -1,0 +1,42 @@
+multi_sensor_fusion_plugin:
+  plugin: "MultiSensorFusionPlugin"
+
+  attitude_topic: "muse/attitude"
+  leg_odometry_topic: "muse/leg_odometry"
+  stance_topic: "muse/contact_detection"
+  lidar_odometry_topic: "/lidar_odometry"
+
+  pub_topic: "muse/multi_sensor_fusion"
+  state_topic: "muse/multi_sensor_fusion_state"
+
+  world_frame_id: "world"
+  base_frame_id: "base"
+
+  # Initial state [px, py, pz, vx, vy, vz]
+  x0: [-0.017, 0.0, 0.383, 0.0, 0.0, 0.0]
+
+  # 6x6 row-major covariance matrices
+  P: [1.0e-3, 0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 1.0e-3, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 1.0e-3, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 1.0e-4, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 1.0e-4, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0, 1.0e-4]
+
+  Q: [1.0e-6, 0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 1.0e-6, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 1.0e-6, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 1.0e-5, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 1.0e-5, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0, 1.0e-5]
+
+  # 9x9 row-major measurement covariance for z=[v_leg_world, p_lidar, v_lidar]
+  R: [2.0e-3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 2.0e-3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 2.0e-3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 5.0e-3, 0.0, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 5.0e-3, 0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0, 5.0e-3, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.0e-3, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.0e-3, 0.0,
+      0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.0e-3]
