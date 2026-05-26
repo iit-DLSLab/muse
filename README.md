@@ -146,9 +146,11 @@ If you like this work and would like to cite it (thanks):
 
 ## Maintainer
 <p>
-  This repo is maintained by
-  <img src="https://github.com/ylenianistico.png?size=32" width="32" height="32" style="border-radius:50%; vertical-align:middle; margin:0 6px;" />
-  <a href="https://github.com/ylenianistico">Ylenia Nisticò</a>
+    This repo is maintained by
+    
+  | <img src="https://github.com/ylenianistico.png?size=32" width="32" height="32" style="border-radius:50%; vertical-align:middle; margin:0 6px;" /> | <a href="https://github.com/ylenianistico">Ylenia Nisticò</a> |
+  | -------| ----------- |
+  
 </p>
 
 
