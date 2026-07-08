@@ -1,0 +1,34 @@
+# Catkin build artifacts
+/build/
+/devel/
+/install/
+/logs/
+.catkin_tools/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# ROS generated/log files
+*.bag
+*.bag.active
+*.log
+.ros/
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

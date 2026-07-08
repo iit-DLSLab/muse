@@ -1,7 +1,0 @@
-[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:7:10:[m[K [01;31m[Kfatal error: [m[Kstate_estimator_msgs/anymal/AnymalState.h: No such file or directory
-    7 | #include [01;31m[K<state_estimator_msgs/anymal/AnymalState.h>[m[K
-      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
-compilation terminated.
-make[2]: *** [CMakeFiles/state_estimator_plugins.dir/build.make:93: CMakeFiles/state_estimator_plugins.dir/src/plugins/contact_detection_plugin.cpp.o] Error 1
-make[1]: *** [CMakeFiles/Makefile2:2124: CMakeFiles/state_estimator_plugins.dir/all] Error 2
-make: *** [Makefile:146: all] Error 2
