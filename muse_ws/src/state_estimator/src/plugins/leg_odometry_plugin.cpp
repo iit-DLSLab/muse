@@ -237,7 +237,7 @@ private:
 	}
 
 	static state_estimator::JointStateSnapshot jointSnapshotFromAnymalState(
-		const state_estimator_msgs::AnymalState& anymal_state)
+		const anymal_msgs::AnymalState& anymal_state)
 	{
 		state_estimator::JointStateSnapshot joints;
 		joints.name = anymal_state.joints.name;
