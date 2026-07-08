@@ -23,6 +23,7 @@
   <depend>message_filters</depend>
   <depend>iit_commons</depend>
   <depend>state_estimator_msgs</depend>
+  <depend>anymal_msgs</depend>
 
   <build_depend>pinocchio</build_depend>
   <exec_depend>pinocchio</exec_depend>
