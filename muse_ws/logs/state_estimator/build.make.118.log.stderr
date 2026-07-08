@@ -1,0 +1,15 @@
+In file included from [01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/boost/smart_ptr/detail/requires_cxx11.hpp:9[m[K,
+                 from [01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/boost/smart_ptr/shared_ptr.hpp:17[m[K,
+                 from [01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/boost/shared_ptr.hpp:17[m[K,
+                 from [01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/forwards.h:37[m[K,
+                 from [01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/common.h:37[m[K,
+                 from [01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/ros.h:43[m[K,
+                 from [01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/include/state_estimator/lib.hpp:5[m[K,
+                 from [01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/include/state_estimator/Estimator.hpp:4[m[K,
+                 from [01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/include/state_estimator/Observers/Observer.hpp:7[m[K,
+                 from [01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/include/state_estimator/Observers/EKF.hpp:6[m[K,
+                 from [01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/include/state_estimator/Models/sensor_fusion.hpp:4[m[K,
+                 from [01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/sensor_fusion_plugin.cpp:1[m[K:
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/boost/bind.hpp:36:1:[m[K [01;36m[Knote: [m[K'[01m[K#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.[m[K'
+   36 | [01;36m[KBOOST_PRAGMA_MESSAGE[m[K(
+      | [01;36m[K^~~~~~~~~~~~~~~~~~~~[m[K

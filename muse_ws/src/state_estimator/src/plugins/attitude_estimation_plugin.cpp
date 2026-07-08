@@ -56,7 +56,7 @@ namespace state_estimator_plugins
 			std::vector<double> P_vec, Q_vec, R_vec;
     		double ki_param, kp_param;
 
-    		nh_.param("attitude_estimation_plugin/imu_topic", imu_topic, std::string("/sensors/imu"));
+    		nh_.param("attitude_estimation_plugin/imu_topic", imu_topic, std::string("/anymal/imu"));
     		nh_.param("attitude_estimation_plugin/pub_topic", pub_topic, std::string("attitude"));
     		nh_.param("attitude_estimation_plugin/ki", ki_param, 0.02);
     		nh_.param("attitude_estimation_plugin/kp", kp_param, 10.0);

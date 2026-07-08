@@ -1,0 +1,19 @@
+[  0%] Built target std_msgs_generate_messages_py
+[  0%] Built target geometry_msgs_generate_messages_py
+[  0%] Built target geometry_msgs_generate_messages_cpp
+[  0%] Built target geometry_msgs_generate_messages_lisp
+[  0%] Built target std_msgs_generate_messages_lisp
+[  0%] Built target geometry_msgs_generate_messages_nodejs
+[  0%] Built target std_msgs_generate_messages_eus
+[  0%] Built target geometry_msgs_generate_messages_eus
+[  0%] Built target std_msgs_generate_messages_nodejs
+[  0%] Built target std_msgs_generate_messages_cpp
+[  0%] Built target _anymal_msgs_generate_messages_check_deps_ExtendedJointState
+[  0%] Built target _anymal_msgs_generate_messages_check_deps_AnymalState
+[  0%] Built target _anymal_msgs_generate_messages_check_deps_Contact
+[ 52%] Built target anymal_msgs_generate_messages_nodejs
+[ 64%] Built target anymal_msgs_generate_messages_py
+[ 64%] Built target anymal_msgs_generate_messages_eus
+[ 82%] Built target anymal_msgs_generate_messages_cpp
+[100%] Built target anymal_msgs_generate_messages_lisp
+[100%] Built target anymal_msgs_generate_messages

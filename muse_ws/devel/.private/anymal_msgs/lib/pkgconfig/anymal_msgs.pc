@@ -1,0 +1,8 @@
+prefix=/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/devel/.private/anymal_msgs
+
+Name: anymal_msgs
+Description: Description of anymal_msgs
+Version: 0.0.0
+Cflags: -I/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/devel/.private/anymal_msgs/include
+Libs: -L${prefix}/lib 
+Requires: geometry_msgs message_runtime std_msgs

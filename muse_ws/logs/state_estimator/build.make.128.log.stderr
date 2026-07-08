@@ -1,0 +1,179 @@
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:135:70:[m[K [01;31m[Kerror: [m[K'[01m[KAnymalState[m[K' in namespace '[01m[Kstate_estimator_msgs[m[K' does not name a type
+  135 |                 void anymalStateCallback(const state_estimator_msgs::[01;31m[KAnymalState[m[K::ConstPtr& anymal_state)
+      |                                                                      [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:135:91:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id before '[01m[K&[m[K' token
+  135 |                 void anymalStateCallback(const state_estimator_msgs::AnymalState::ConstPtr[01;31m[K&[m[K anymal_state)
+      |                                                                                           [01;31m[K^[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:135:91:[m[K [01;31m[Kerror: [m[Kexpected '[01m[K)[m[K' before '[01m[K&[m[K' token
+  135 |                 void anymalStateCallback[34m[K([m[Kconst state_estimator_msgs::AnymalState::ConstPtr[01;31m[K&[m[K anymal_state)
+      |                                         [34m[K~[m[K                                                 [01;31m[K^[m[K
+      |                                                                                           [32m[K)[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:135:91:[m[K [01;31m[Kerror: [m[Kexpected '[01m[K;[m[K' at end of member declaration
+  135 |                 void anymalStateCallback(const state_estimator_msgs::AnymalState::ConstPtr[01;31m[K&[m[K anymal_state)
+      |                                                                                           [01;31m[K^[m[K
+      |                                                                                            [32m[K;[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:135:93:[m[K [01;31m[Kerror: [m[K'[01m[Kanymal_state[m[K' does not name a type
+  135 |                 void anymalStateCallback(const state_estimator_msgs::AnymalState::ConstPtr& [01;31m[Kanymal_state[m[K)
+      |                                                                                             [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:171:83:[m[K [01;31m[Kerror: [m[K'[01m[KAnymalState[m[K' in namespace '[01m[Kstate_estimator_msgs[m[K' does not name a type
+  171 |                 static ros::Time stampFromAnymalState(const state_estimator_msgs::[01;31m[KAnymalState[m[K& anymal_state)
+      |                                                                                   [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:181:53:[m[K [01;31m[Kerror: [m[K'[01m[KAnymalState[m[K' in namespace '[01m[Kstate_estimator_msgs[m[K' does not name a type
+  181 |                         const state_estimator_msgs::[01;31m[KAnymalState[m[K& anymal_state)
+      |                                                     [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:[m[K In member function '[01m[Kvoid state_estimator_plugins::ContactDetectionPlugin::[01;32m[KinitializeAnymalStateInput[m[K()[m[K':
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:125:46:[m[K [01;31m[Kerror: [m[Kno matching function for call to '[01m[Kros::NodeHandle::subscribe(std::string&, int, void (state_estimator_plugins::ContactDetectionPlugin::*)(...) &, state_estimator_plugins::ContactDetectionPlugin*)[m[K'
+  125 |                                 [01;31m[Knh_.subscribe(anymal_state_topic, 250, &ContactDetectionPlugin::anymalStateCallback, this)[m[K
+      |                                 [01;31m[K~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/include/state_estimator/plugin.hpp:4[m[K,
+                 from [01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:3[m[K:
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:400:14:[m[K [01;36m[Knote: [m[Kcandidate: '[01m[Ktemplate<class M, class T> ros::Subscriber ros::NodeHandle::[01;32m[Ksubscribe[m[K(const std::string&, uint32_t, void (T::*)(M), T*, const ros::TransportHints&)[m[K'
+  400 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size, void(T::*fp)(M), T* obj,
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:400:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:125:46:[m[K [01;36m[Knote: [m[K  mismatched types '[01m[Kvoid (T::)(M)[m[K' and '[01m[Kvoid (state_estimator_plugins::ContactDetectionPlugin::)(...) &[m[K'
+  125 |                                 [01;36m[Knh_.subscribe(anymal_state_topic, 250, &ContactDetectionPlugin::anymalStateCallback, this)[m[K
+      |                                 [01;36m[K~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:411:14:[m[K [01;36m[Knote: [m[Kcandidate: '[01m[Ktemplate<class M, class T> ros::Subscriber ros::NodeHandle::[01;32m[Ksubscribe[m[K(const std::string&, uint32_t, void (T::*)(M) const, T*, const ros::TransportHints&)[m[K'
+  411 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size, void(T::*fp)(M) const, T* obj,
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:411:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:125:46:[m[K [01;36m[Knote: [m[K  types '[01m[Kvoid (T::)(M) const[m[K' and '[01m[Kvoid (state_estimator_plugins::ContactDetectionPlugin::)(...) &[m[K' have incompatible cv-qualifiers
+  125 |                                 [01;36m[Knh_.subscribe(anymal_state_topic, 250, &ContactDetectionPlugin::anymalStateCallback, this)[m[K
+      |                                 [01;36m[K~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:463:14:[m[K [01;36m[Knote: [m[Kcandidate: '[01m[Ktemplate<class M, class T> ros::Subscriber ros::NodeHandle::[01;32m[Ksubscribe[m[K(const std::string&, uint32_t, void (T::*)(const boost::shared_ptr<const M>&), T*, const ros::TransportHints&)[m[K'
+  463 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size,
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:463:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:125:46:[m[K [01;36m[Knote: [m[K  mismatched types '[01m[Kvoid (T::)(const boost::shared_ptr<const M>&)[m[K' and '[01m[Kvoid (state_estimator_plugins::ContactDetectionPlugin::)(...) &[m[K'
+  125 |                                 [01;36m[Knh_.subscribe(anymal_state_topic, 250, &ContactDetectionPlugin::anymalStateCallback, this)[m[K
+      |                                 [01;36m[K~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:473:14:[m[K [01;36m[Knote: [m[Kcandidate: '[01m[Ktemplate<class M, class T> ros::Subscriber ros::NodeHandle::[01;32m[Ksubscribe[m[K(const std::string&, uint32_t, void (T::*)(const boost::shared_ptr<const M>&) const, T*, const ros::TransportHints&)[m[K'
+  473 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size,
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:473:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:125:46:[m[K [01;36m[Knote: [m[K  types '[01m[Kvoid (T::)(const boost::shared_ptr<const M>&) const[m[K' and '[01m[Kvoid (state_estimator_plugins::ContactDetectionPlugin::)(...) &[m[K' have incompatible cv-qualifiers
+  125 |                                 [01;36m[Knh_.subscribe(anymal_state_topic, 250, &ContactDetectionPlugin::anymalStateCallback, this)[m[K
+      |                                 [01;36m[K~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:527:14:[m[K [01;36m[Knote: [m[Kcandidate: '[01m[Ktemplate<class M, class T> ros::Subscriber ros::NodeHandle::[01;32m[Ksubscribe[m[K(const std::string&, uint32_t, void (T::*)(M), const boost::shared_ptr<U>&, const ros::TransportHints&)[m[K'
+  527 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size, void(T::*fp)(M),
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:527:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:125:46:[m[K [01;36m[Knote: [m[K  mismatched types '[01m[Kvoid (T::)(M)[m[K' and '[01m[Kvoid (state_estimator_plugins::ContactDetectionPlugin::)(...) &[m[K'
+  125 |                                 [01;36m[Knh_.subscribe(anymal_state_topic, 250, &ContactDetectionPlugin::anymalStateCallback, this)[m[K
+      |                                 [01;36m[K~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:538:14:[m[K [01;36m[Knote: [m[Kcandidate: '[01m[Ktemplate<class M, class T> ros::Subscriber ros::NodeHandle::[01;32m[Ksubscribe[m[K(const std::string&, uint32_t, void (T::*)(M) const, const boost::shared_ptr<U>&, const ros::TransportHints&)[m[K'
+  538 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size, void(T::*fp)(M) const,
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:538:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:125:46:[m[K [01;36m[Knote: [m[K  types '[01m[Kvoid (T::)(M) const[m[K' and '[01m[Kvoid (state_estimator_plugins::ContactDetectionPlugin::)(...) &[m[K' have incompatible cv-qualifiers
+  125 |                                 [01;36m[Knh_.subscribe(anymal_state_topic, 250, &ContactDetectionPlugin::anymalStateCallback, this)[m[K
+      |                                 [01;36m[K~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:592:14:[m[K [01;36m[Knote: [m[Kcandidate: '[01m[Ktemplate<class M, class T> ros::Subscriber ros::NodeHandle::[01;32m[Ksubscribe[m[K(const std::string&, uint32_t, void (T::*)(const boost::shared_ptr<const M>&), const boost::shared_ptr<U>&, const ros::TransportHints&)[m[K'
+  592 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size,
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:592:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:125:46:[m[K [01;36m[Knote: [m[K  mismatched types '[01m[Kvoid (T::)(const boost::shared_ptr<const M>&)[m[K' and '[01m[Kvoid (state_estimator_plugins::ContactDetectionPlugin::)(...) &[m[K'
+  125 |                                 [01;36m[Knh_.subscribe(anymal_state_topic, 250, &ContactDetectionPlugin::anymalStateCallback, this)[m[K
+      |                                 [01;36m[K~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:603:14:[m[K [01;36m[Knote: [m[Kcandidate: '[01m[Ktemplate<class M, class T> ros::Subscriber ros::NodeHandle::[01;32m[Ksubscribe[m[K(const std::string&, uint32_t, void (T::*)(const boost::shared_ptr<const M>&) const, const boost::shared_ptr<U>&, const ros::TransportHints&)[m[K'
+  603 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size,
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:603:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:125:46:[m[K [01;36m[Knote: [m[K  types '[01m[Kvoid (T::)(const boost::shared_ptr<const M>&) const[m[K' and '[01m[Kvoid (state_estimator_plugins::ContactDetectionPlugin::)(...) &[m[K' have incompatible cv-qualifiers
+  125 |                                 [01;36m[Knh_.subscribe(anymal_state_topic, 250, &ContactDetectionPlugin::anymalStateCallback, this)[m[K
+      |                                 [01;36m[K~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:654:14:[m[K [01;36m[Knote: [m[Kcandidate: '[01m[Ktemplate<class M> ros::Subscriber ros::NodeHandle::[01;32m[Ksubscribe[m[K(const std::string&, uint32_t, void (*)(M), const ros::TransportHints&)[m[K'
+  654 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size, void(*fp)(M), const TransportHints& transport_hints = TransportHints())
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:654:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:125:46:[m[K [01;36m[Knote: [m[K  mismatched types '[01m[Kvoid (*)(M)[m[K' and '[01m[Kvoid (state_estimator_plugins::ContactDetectionPlugin::*)(...) &[m[K'
+  125 |                                 [01;36m[Knh_.subscribe(anymal_state_topic, 250, &ContactDetectionPlugin::anymalStateCallback, this)[m[K
+      |                                 [01;36m[K~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:702:14:[m[K [01;36m[Knote: [m[Kcandidate: '[01m[Ktemplate<class M> ros::Subscriber ros::NodeHandle::[01;32m[Ksubscribe[m[K(const std::string&, uint32_t, void (*)(const boost::shared_ptr<const M>&), const ros::TransportHints&)[m[K'
+  702 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size, void(*fp)(const boost::shared_ptr<M const>&), const TransportHints& transport_hints = TransportHints())
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:702:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:125:46:[m[K [01;36m[Knote: [m[K  mismatched types '[01m[Kvoid (*)(const boost::shared_ptr<const M>&)[m[K' and '[01m[Kvoid (state_estimator_plugins::ContactDetectionPlugin::*)(...) &[m[K'
+  125 |                                 [01;36m[Knh_.subscribe(anymal_state_topic, 250, &ContactDetectionPlugin::anymalStateCallback, this)[m[K
+      |                                 [01;36m[K~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:748:14:[m[K [01;36m[Knote: [m[Kcandidate: '[01m[Ktemplate<class M> ros::Subscriber ros::NodeHandle::[01;32m[Ksubscribe[m[K(const std::string&, uint32_t, const boost::function<void(const boost::shared_ptr<const M>&)>&, const ros::VoidConstPtr&, const ros::TransportHints&)[m[K'
+  748 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size, const boost::function<void (const boost::shared_ptr<M const>&)>& callback,
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:748:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:125:46:[m[K [01;36m[Knote: [m[K  mismatched types '[01m[Kconst boost::function<void(const boost::shared_ptr<const M>&)>[m[K' and '[01m[Kvoid (state_estimator_plugins::ContactDetectionPlugin::*)(...) &[m[K'
+  125 |                                 [01;36m[Knh_.subscribe(anymal_state_topic, 250, &ContactDetectionPlugin::anymalStateCallback, this)[m[K
+      |                                 [01;36m[K~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:797:14:[m[K [01;36m[Knote: [m[Kcandidate: '[01m[Ktemplate<class M, class C> ros::Subscriber ros::NodeHandle::[01;32m[Ksubscribe[m[K(const std::string&, uint32_t, const boost::function<void(C)>&, const ros::VoidConstPtr&, const ros::TransportHints&)[m[K'
+  797 |   Subscriber [01;36m[Ksubscribe[m[K(const std::string& topic, uint32_t queue_size, const boost::function<void (C)>& callback,
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:797:14:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:125:46:[m[K [01;36m[Knote: [m[K  mismatched types '[01m[Kconst boost::function<void(C)>[m[K' and '[01m[Kvoid (state_estimator_plugins::ContactDetectionPlugin::*)(...) &[m[K'
+  125 |                                 [01;36m[Knh_.subscribe(anymal_state_topic, 250, &ContactDetectionPlugin::anymalStateCallback, this)[m[K
+      |                                 [01;36m[K~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:834:14:[m[K [01;36m[Knote: [m[Kcandidate: '[01m[Kros::Subscriber ros::NodeHandle::[01;32m[Ksubscribe[m[K(ros::SubscribeOptions&)[m[K'
+  834 |   Subscriber [01;36m[Ksubscribe[m[K(SubscribeOptions& ops);
+      |              [01;36m[K^~~~~~~~~[m[K
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/ros/node_handle.h:834:14:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 4 provided
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:[m[K In static member function '[01m[Kstatic ros::Time state_estimator_plugins::ContactDetectionPlugin::[01;32m[KstampFromAnymalState[m[K(const int&)[m[K':
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:173:43:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kheader[m[K' in '[01m[Kanymal_state[m[K', which is of non-class type '[01m[Kconst int[m[K'
+  173 |                         if (!anymal_state.[01;31m[Kheader[m[K.stamp.isZero()) return anymal_state.header.stamp;
+      |                                           [01;31m[K^~~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:173:86:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kheader[m[K' in '[01m[Kanymal_state[m[K', which is of non-class type '[01m[Kconst int[m[K'
+  173 |                         if (!anymal_state.header.stamp.isZero()) return anymal_state.[01;31m[Kheader[m[K.stamp;
+      |                                                                                      [01;31m[K^~~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:174:43:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kjoints[m[K' in '[01m[Kanymal_state[m[K', which is of non-class type '[01m[Kconst int[m[K'
+  174 |                         if (!anymal_state.[01;31m[Kjoints[m[K.header.stamp.isZero()) return anymal_state.joints.header.stamp;
+      |                                           [01;31m[K^~~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:174:93:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kjoints[m[K' in '[01m[Kanymal_state[m[K', which is of non-class type '[01m[Kconst int[m[K'
+  174 |                         if (!anymal_state.joints.header.stamp.isZero()) return anymal_state.[01;31m[Kjoints[m[K.header.stamp;
+      |                                                                                             [01;31m[K^~~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:175:43:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kpose[m[K' in '[01m[Kanymal_state[m[K', which is of non-class type '[01m[Kconst int[m[K'
+  175 |                         if (!anymal_state.[01;31m[Kpose[m[K.header.stamp.isZero()) return anymal_state.pose.header.stamp;
+      |                                           [01;31m[K^~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:175:91:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kpose[m[K' in '[01m[Kanymal_state[m[K', which is of non-class type '[01m[Kconst int[m[K'
+  175 |                         if (!anymal_state.pose.header.stamp.isZero()) return anymal_state.[01;31m[Kpose[m[K.header.stamp;
+      |                                                                                           [01;31m[K^~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:176:43:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Ktwist[m[K' in '[01m[Kanymal_state[m[K', which is of non-class type '[01m[Kconst int[m[K'
+  176 |                         if (!anymal_state.[01;31m[Ktwist[m[K.header.stamp.isZero()) return anymal_state.twist.header.stamp;
+      |                                           [01;31m[K^~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:176:92:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Ktwist[m[K' in '[01m[Kanymal_state[m[K', which is of non-class type '[01m[Kconst int[m[K'
+  176 |                         if (!anymal_state.twist.header.stamp.isZero()) return anymal_state.[01;31m[Ktwist[m[K.header.stamp;
+      |                                                                                            [01;31m[K^~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:[m[K In static member function '[01m[Kstatic state_estimator::JointStateSnapshot state_estimator_plugins::ContactDetectionPlugin::[01;32m[KjointSnapshotFromAnymalState[m[K(const int&)[m[K':
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:184:52:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kjoints[m[K' in '[01m[Kanymal_state[m[K', which is of non-class type '[01m[Kconst int[m[K'
+  184 |                         joints.name = anymal_state.[01;31m[Kjoints[m[K.name;
+      |                                                    [01;31m[K^~~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:185:56:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kjoints[m[K' in '[01m[Kanymal_state[m[K', which is of non-class type '[01m[Kconst int[m[K'
+  185 |                         joints.position = anymal_state.[01;31m[Kjoints[m[K.position;
+      |                                                        [01;31m[K^~~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:186:56:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kjoints[m[K' in '[01m[Kanymal_state[m[K', which is of non-class type '[01m[Kconst int[m[K'
+  186 |                         joints.velocity = anymal_state.[01;31m[Kjoints[m[K.velocity;
+      |                                                        [01;31m[K^~~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:187:60:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kjoints[m[K' in '[01m[Kanymal_state[m[K', which is of non-class type '[01m[Kconst int[m[K'
+  187 |                         joints.acceleration = anymal_state.[01;31m[Kjoints[m[K.acceleration;
+      |                                                            [01;31m[K^~~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:188:54:[m[K [01;31m[Kerror: [m[Krequest for member '[01m[Kjoints[m[K' in '[01m[Kanymal_state[m[K', which is of non-class type '[01m[Kconst int[m[K'
+  188 |                         joints.effort = anymal_state.[01;31m[Kjoints[m[K.effort;
+      |                                                      [01;31m[K^~~~~~[m[K
+In file included from [01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/boost/smart_ptr/detail/requires_cxx11.hpp:9[m[K,
+                 from [01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/boost/smart_ptr/scoped_ptr.hpp:13[m[K,
+                 from [01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/boost/scoped_ptr.hpp:13[m[K,
+                 from [01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/boost/archive/detail/basic_oarchive.hpp:22[m[K,
+                 from [01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/boost/archive/detail/common_oarchive.hpp:21[m[K,
+                 from [01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/boost/archive/basic_text_oarchive.hpp:29[m[K,
+                 from [01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/boost/archive/text_oarchive.hpp:31[m[K,
+                 from [01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/pinocchio/serialization/archive.hpp:15[m[K,
+                 from [01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/pinocchio/serialization/serializable.hpp:8[m[K,
+                 from [01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/pinocchio/multibody/model.hpp:21[m[K,
+                 from [01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/pinocchio/algorithm/frames.hpp:8[m[K,
+                 from [01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/include/state_estimator/Models/grf_contact_estimator.hpp:4[m[K,
+                 from [01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/src/plugins/contact_detection_plugin.cpp:1[m[K:
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/boost/bind.hpp:[m[K At global scope:
+[01m[K/home/ynistico-iit.local/miniforge3/envs/muse/include/boost/bind.hpp:36:1:[m[K [01;36m[Knote: [m[K'[01m[K#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.[m[K'
+   36 | [01;36m[KBOOST_PRAGMA_MESSAGE[m[K(
+      | [01;36m[K^~~~~~~~~~~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/state_estimator_plugins.dir/build.make:93: CMakeFiles/state_estimator_plugins.dir/src/plugins/contact_detection_plugin.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:2124: CMakeFiles/state_estimator_plugins.dir/all] Error 2
+make: *** [Makefile:146: all] Error 2

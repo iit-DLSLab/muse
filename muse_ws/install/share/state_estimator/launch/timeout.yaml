@@ -1,0 +1,11 @@
+# Name is any text name to be displayed to user
+# Type  must be Master or any ROS topic (currently limited to Imu and JointState)
+# Topic to list to
+# Timeout is double in s
+# Order must be name,type,topic,timeout
+# 
+timeout_plugin:
+  - name: Master
+    type: Master
+    topic: Master
+    timeout: 1.0

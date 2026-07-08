@@ -1,0 +1,46 @@
+[  0%] Built target std_msgs_generate_messages_py
+[  0%] Built target sensor_msgs_generate_messages_py
+[  0%] Built target geometry_msgs_generate_messages_py
+Traceback (most recent call last):
+  File "/home/ynistico-iit.local/miniforge3/envs/muse/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py", line 54, in <module>
+    spec = load_msg_from_file(msg_context, msg_file, full_type_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ynistico-iit.local/miniforge3/envs/muse/lib/python3.11/site-packages/genmsg/msg_loader.py", line 284, in load_msg_from_file
+    with open(file_path, 'r') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator_msgs/msg/anymal/Contact.msg'
+Traceback (most recent call last):
+  File "/home/ynistico-iit.local/miniforge3/envs/muse/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py", line 54, in <module>
+    spec = load_msg_from_file(msg_context, msg_file, full_type_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ynistico-iit.local/miniforge3/envs/muse/lib/python3.11/site-packages/genmsg/msg_loader.py", line 284, in load_msg_from_file
+    with open(file_path, 'r') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator_msgs/msg/anymal/ExtendedJointState.msg'
+make[2]: *** [CMakeFiles/_state_estimator_msgs_generate_messages_check_deps_Contact.dir/build.make:70: CMakeFiles/_state_estimator_msgs_generate_messages_check_deps_Contact] Error 1
+Traceback (most recent call last):
+  File "/home/ynistico-iit.local/miniforge3/envs/muse/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py", line 54, in <module>
+    spec = load_msg_from_file(msg_context, msg_file, full_type_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ynistico-iit.local/miniforge3/envs/muse/lib/python3.11/site-packages/genmsg/msg_loader.py", line 284, in load_msg_from_file
+    with open(file_path, 'r') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator_msgs/msg/anymal/AnymalState.msg'
+make[1]: *** [CMakeFiles/Makefile2:1008: CMakeFiles/_state_estimator_msgs_generate_messages_check_deps_Contact.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+[  0%] Built target _state_estimator_msgs_generate_messages_check_deps_JointStateWithAcceleration
+make[2]: *** [CMakeFiles/_state_estimator_msgs_generate_messages_check_deps_ExtendedJointState.dir/build.make:70: CMakeFiles/_state_estimator_msgs_generate_messages_check_deps_ExtendedJointState] Error 1
+[  0%] Built target _state_estimator_msgs_generate_messages_check_deps_attitude
+make[1]: *** [CMakeFiles/Makefile2:1040: CMakeFiles/_state_estimator_msgs_generate_messages_check_deps_ExtendedJointState.dir/all] Error 2
+make[2]: *** [CMakeFiles/_state_estimator_msgs_generate_messages_check_deps_AnymalState.dir/build.make:70: CMakeFiles/_state_estimator_msgs_generate_messages_check_deps_AnymalState] Error 1
+make[1]: *** [CMakeFiles/Makefile2:976: CMakeFiles/_state_estimator_msgs_generate_messages_check_deps_AnymalState.dir/all] Error 2
+[  0%] Built target _state_estimator_msgs_generate_messages_check_deps_stopEstimator
+[  0%] Built target _state_estimator_msgs_generate_messages_check_deps_sensor_fusion
+[  0%] Built target _state_estimator_msgs_generate_messages_check_deps_getBlacklist
+[  0%] Built target _state_estimator_msgs_generate_messages_check_deps_getActiveEstimators
+[  0%] Built target _state_estimator_msgs_generate_messages_check_deps_ContactDetection
+[  0%] Built target _state_estimator_msgs_generate_messages_check_deps_listAllEstimators
+[  0%] Built target _state_estimator_msgs_generate_messages_check_deps_LegOdometry
+[  0%] Built target _state_estimator_msgs_generate_messages_check_deps_getWhitelist
+[  0%] Built target _state_estimator_msgs_generate_messages_check_deps_getEstimatorDescription
+make: *** [Makefile:146: all] Error 2

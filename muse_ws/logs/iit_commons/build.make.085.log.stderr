@@ -1,0 +1,40 @@
+In file included from [01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/planning/planning.h:7[m[K,
+                 from [01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/src/planning.cpp:2[m[K:
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/dog/leg_data_map.h:39:38:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.3.0/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   39 |             T& operator[](int index) [01;35m[Kthrow[m[K(std::runtime_error);
+      |                                      [01;35m[K^~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/dog/leg_data_map.h:41:50:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.3.0/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   41 |             const T& operator[](int index) const [01;35m[Kthrow[m[K(std::runtime_error);
+      |                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/dog/leg_data_map.h:80:41:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.3.0/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   80 | T& LegDataMap<T>::operator[](int index) [01;35m[Kthrow[m[K(std::runtime_error) {
+      |                                         [01;35m[K^~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/dog/leg_data_map.h:93:53:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.3.0/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   93 | const T& LegDataMap<T>::operator[](int index) const [01;35m[Kthrow[m[K(std::runtime_error) {
+      |                                                     [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/planning/planning.h:7[m[K,
+                 from [01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/control/VirtualModel.hpp:7[m[K,
+                 from [01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/src/control/VirtualModel.cpp:1[m[K:
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/dog/leg_data_map.h:39:38:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.3.0/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   39 |             T& operator[](int index) [01;35m[Kthrow[m[K(std::runtime_error);
+      |                                      [01;35m[K^~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/dog/leg_data_map.h:41:50:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.3.0/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   41 |             const T& operator[](int index) const [01;35m[Kthrow[m[K(std::runtime_error);
+      |                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/dog/leg_data_map.h:80:41:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.3.0/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   80 | T& LegDataMap<T>::operator[](int index) [01;35m[Kthrow[m[K(std::runtime_error) {
+      |                                         [01;35m[K^~~~~[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/dog/leg_data_map.h:93:53:[m[K [01;35m[Kwarning: [m[Kdynamic exception specifications are deprecated in C++11 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.3.0/gcc/Warning-Options.html#index-Wdeprecated-Wdeprecated]8;;[m[K]
+   93 | const T& LegDataMap<T>::operator[](int index) const [01;35m[Kthrow[m[K(std::runtime_error) {
+      |                                                     [01;35m[K^~~~~[m[K
+In file included from [01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/src/control/VirtualModel.cpp:3[m[K:
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/rbd/InertiaMatrix.h:[m[K In member function '[01m[Kiit::rbd::InertiaMatrixDense& iit::rbd::InertiaMatrixDense::[01;32m[Koperator=[m[K(const Eigen::MatrixBase<Derived>&)[m[K':
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/rbd/InertiaMatrix.h:253:28:[m[K [01;35m[Kwarning: [m[Kexpected '[01m[Ktemplate[m[K' keyword before dependent template name [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.3.0/gcc/Warning-Options.html#index-Wmissing-template-keyword-Wmissing-template-keyword]8;;[m[K]
+  253 |     block33(AX,AX) = other.[01;35m[Kblock[m[K<3,3>(AX,AX);
+      |                            [01;35m[K^~~~~[m[K
+      |                            [32m[Ktemplate[m[K
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/rbd/InertiaMatrix.h:[m[K In member function '[01m[Kiit::rbd::InertiaMatrixDense& iit::rbd::InertiaMatrixDense::[01;32m[Koperator+=[m[K(const Eigen::MatrixBase<Derived>&)[m[K':
+[01m[K/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/rbd/InertiaMatrix.h:265:29:[m[K [01;35m[Kwarning: [m[Kexpected '[01m[Ktemplate[m[K' keyword before dependent template name [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.3.0/gcc/Warning-Options.html#index-Wmissing-template-keyword-Wmissing-template-keyword]8;;[m[K]
+  265 |     block33(AX,AX) += other.[01;35m[Kblock[m[K<3,3>(AX,AX);
+      |                             [01;35m[K^~~~~[m[K
+      |                             [32m[Ktemplate[m[K

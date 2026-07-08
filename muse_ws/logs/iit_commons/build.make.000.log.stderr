@@ -1,0 +1,40 @@
+In file included from /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/planning/planning.h:7,
+                 from /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/control/VirtualModel.hpp:7,
+                 from /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/src/control/VirtualModel.cpp:1:
+/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/dog/leg_data_map.h:39:38: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   39 |             T& operator[](int index) throw(std::runtime_error);
+      |                                      ^~~~~
+/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/dog/leg_data_map.h:41:50: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   41 |             const T& operator[](int index) const throw(std::runtime_error);
+      |                                                  ^~~~~
+/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/dog/leg_data_map.h:80:41: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   80 | T& LegDataMap<T>::operator[](int index) throw(std::runtime_error) {
+      |                                         ^~~~~
+/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/dog/leg_data_map.h:93:53: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   93 | const T& LegDataMap<T>::operator[](int index) const throw(std::runtime_error) {
+      |                                                     ^~~~~
+In file included from /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/planning/planning.h:7,
+                 from /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/src/planning.cpp:2:
+/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/dog/leg_data_map.h:39:38: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   39 |             T& operator[](int index) throw(std::runtime_error);
+      |                                      ^~~~~
+/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/dog/leg_data_map.h:41:50: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   41 |             const T& operator[](int index) const throw(std::runtime_error);
+      |                                                  ^~~~~
+/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/dog/leg_data_map.h:80:41: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   80 | T& LegDataMap<T>::operator[](int index) throw(std::runtime_error) {
+      |                                         ^~~~~
+/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/commons/dog/leg_data_map.h:93:53: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   93 | const T& LegDataMap<T>::operator[](int index) const throw(std::runtime_error) {
+      |                                                     ^~~~~
+In file included from /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/src/control/VirtualModel.cpp:3:
+/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/rbd/InertiaMatrix.h: In member function 'iit::rbd::InertiaMatrixDense& iit::rbd::InertiaMatrixDense::operator=(const Eigen::MatrixBase<Derived>&)':
+/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/rbd/InertiaMatrix.h:253:28: warning: expected 'template' keyword before dependent template name [-Wmissing-template-keyword]
+  253 |     block33(AX,AX) = other.block<3,3>(AX,AX);
+      |                            ^~~~~
+      |                            template
+/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/rbd/InertiaMatrix.h: In member function 'iit::rbd::InertiaMatrixDense& iit::rbd::InertiaMatrixDense::operator+=(const Eigen::MatrixBase<Derived>&)':
+/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/iit_commons/include/iit/rbd/InertiaMatrix.h:265:29: warning: expected 'template' keyword before dependent template name [-Wmissing-template-keyword]
+  265 |     block33(AX,AX) += other.block<3,3>(AX,AX);
+      |                             ^~~~~
+      |                             template

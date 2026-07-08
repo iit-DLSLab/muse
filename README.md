@@ -1,94 +1,143 @@
 <h1 align="center"> MUSE: A Real-Time Multi-Sensor State Estimator for Quadruped Robots </h1>
-<h3 align="center">Ylenia Nisticò, João Carlos Virgolino Soares, Lorenzo Amatucci, Geoff Fink and Claudio Semini</h3>	
+<h3 align="center">Ylenia Nisticò, João Carlos Virgolino Soares, Lorenzo Amatucci, Geoff Fink and Claudio Semini</h3>
 
 <h4 align="center">This paper has been accepted to IEEE Robotics and Automation Letters, and it is available at https://arxiv.org/abs/2503.12101 </h4>
 
-<h3 align="center"> 
-    
-![muse_cropped](https://github.com/user-attachments/assets/b212edff-44a4-4e46-acb9-c48e160ae8cd)
-    
+# :computer: Overview
 
-# :computer: Code
+MUSE provides a ROS1 state-estimator node for quadruped robots. The node loads estimator modules with `pluginlib`, reads proprioceptive robot data, and publishes attitude, contact, leg odometry, fused odometry, and TF outputs.
 
-The `muse` package provides a ROS node and utilities for estimating the state of a quadruped robot using sensor data. It includes algorithms for state estimation, sensor fusion, and filtering.
+The current ROS1 implementation is proprioceptive. The necessary online inputs are:
 
-This first version of the code provides a proprioceptive state estimator for quadruped robots. The necessary inputs are 
-- **imu measurements**
-- **joint states**
-- **force exerted on the feet**
+- `sensor_msgs/Imu` IMU measurements
+- `series_elastic_actuator_msgs/SeActuatorReadings` actuator readings
 
-    
-Additional code to fuse exteroceptive measurements will be available soon!
-TODO list at the end of the page
-</h2>
+It also requires a robot URDF and matching foot/joint frame names in the configuration.
 
+Default configuration files are provided for ANYmal-style naming, with additional URDFs for `aliengo`, `anymal`, and `go1` in `muse_ws/src/state_estimator/urdfs`.
 
+## :t-rex: Prerequisites
 
-## :t-rex: Prerequisites (Don't worry! In this repo, we provide **Dockerization** to avoid dealing with the dependencies!)
-* [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page)
-* [Pinocchio](https://github.com/stack-of-tasks/pinocchio/tree/master)
-* [ROS Noetic](https://wiki.ros.org/noetic/Installation/Ubuntu)
+- Conda or Mamba
+- Dependencies from the provided `environment.yml`
 
-⚠️ ATTENTION: ROS1 is deprecated. This repo will move to ROS2. There is a  working ROS2 version that directly uses [`unitree sdk`](https://github.com/iit-DLSLab/muse/tree/unitree_sdk) to communicate with the unitree robots, and a "still-not-stable" ROS2 version on the [`ros2`](https://github.com/iit-DLSLab/muse/tree/ros2) branch, which will become the official one at a certain point. 
-The latest release with ROS1 is the [v1.0.0](https://github.com/iit-DLSLab/muse/releases/tag/v1.0.0).
+The conda environment is named `muse` and provides the ROS1 Noetic stack, `catkin_tools`, Eigen, Pinocchio, RViz, PlotJuggler, and the ROS packages used by the workspace.
 
+Create the environment with:
 
-
-## :hammer_and_wrench: Building and Running
-
-To install the `muse` package, follow these steps:
-
-1. Clone this repository and build the Docker image:
-    ```sh
-    git clone https://github.com/iit-DLSLab/muse.git
-    cd muse
-    docker build -t muse-docker .
-    ```
-
-2. Enter the docker and build using `catkin_make`:
-    ```sh
-    cd muse_ws
-    xhost +local:docker
-    docker run -it --rm --name muse -v "$(pwd)":/root/muse_ws -w  /root/muse_ws muse-docker
-    catkin_make -j$(proc) install
-    source devel/setup.bash  
-    ```
-3. To launch the state estimator node:
-   ```sh
-   roslaunch state_estimator state_estimator.launch
-   ```
-If you need to read the data from a rosbag, you need to mount the folder where you store your rosbags (`your_path_to_rosbags`), to make it visible inside the image, and then, you can attach a docker image in another terminal, for example:
 ```sh
-docker run -it --rm --name muse \
-  --net=host \
-  -e DISPLAY=$DISPLAY \
-  -v /tmp/.X11-unix:/tmp/.X11-unix \
-  -v your_path_to_rosbags:/root/rosbags \
-  -v "$(pwd)":/root/muse_ws \
-  -w /root/muse_ws \
-  muse-docker (terminal 1)
-docker exec -it muse bash (terminal 2)
-source devel/setup.bash
-cd ~/rosbags (terminal 2)
-rosbag play your_rosbag.bag (terminal 2)
+cd muse
+mamba env create -f environment.yml
 ```
-To change the name of the topics, check the [config foder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/config).
 
-To visualize your data, you can use [PlotJuggler](https://github.com/facontidavide/PlotJuggler?tab=readme-ov-file) which is already installed in the docker image:
+If the environment already exists, update it with:
+
+```sh
+mamba env update -n muse -f environment.yml --prune
+```
+
+## :hammer_and_wrench: Building
+
+Build the ROS1 workspace with `catkin build`:
+
+```sh
+cd muse/muse_ws
+conda activate muse
+catkin config --extend "$CONDA_PREFIX" --install
+catkin build
+source install/setup.bash
+```
+
+## :rocket: Running
+
+Launch the estimator:
+
+```sh
+roslaunch state_estimator state_estimator.launch
+```
+
+RViz is disabled by default:
+
+```sh
+roslaunch state_estimator state_estimator.launch rviz:=false
+```
+
+For rosbag playback, use simulated time and play the bag with `/clock`:
+
+```sh
+roslaunch state_estimator state_estimator.launch use_sim_time:=true
+rosbag play --clock your_rosbag.bag
+```
+
+## :electric_plug: ROS Interfaces
+
+Default input topics:
+
+- `/anymal/imu` (`sensor_msgs/Imu`)
+- `/anymal/state_estimator/anymal_state` (the definition of the anymal msgs is taken from the [holistic_fusion](https://github.com/leggedrobotics/holistic_fusion/tree/main/ros/graph_msf_anymal_msgs/msg) repo from ETH)
+
+Default estimator outputs are published in the private node namespace:
+
+- `/state_estimator/attitude` (`state_estimator_msgs/attitude`)
+- `/state_estimator/contact_detection` (`state_estimator_msgs/ContactDetection`)
+- `/state_estimator/leg_odometry` (`state_estimator_msgs/LegOdometry`)
+- `/state_estimator/sensor_fusion` (`nav_msgs/Odometry`)
+- TF from `world` to `base`, generated from `/state_estimator/sensor_fusion`
+
+The topics and frame IDs are configured in `muse_ws/src/state_estimator/config`.
+
+## :gear: Plugins
+
+The state-estimator node discovers plugins declared in `state_estimator_plugins.xml` and loads them according to `launch/pluginlist.yaml`.
+
+Implemented ROS1 plugins:
+
+- `AttitudeEstimation`: estimates attitude from IMU data.
+- `ContactDetection`: estimates foot contact from actuator readings and URDF-based GRF estimation.
+- `LegOdometry`: estimates base velocity from actuator readings, attitude, contact state, and Pinocchio kinematics.
+- `SensorFusion`: fuses IMU, attitude, and leg odometry into `nav_msgs/Odometry`.
+- `TfPublisher`: publishes TF from the fused odometry output.
+
+By default, both `plugin_whitelist` and `plugin_blacklist` are empty, so all declared plugins are loaded. To run only selected plugins, edit `muse_ws/src/state_estimator/launch/pluginlist.yaml`.
+
+### Visualization
+Run PlotJuggler with:
+
 ```sh
 rosrun plotjuggler plotjuggler
 ```
+A PlotJuggler layout is also provided at:
 
-:warning: In this repo we provide an example with the ANYmal B300 robot. If you want to test MUSE with another one, you only need to add the URDF of your robot in [this folder](https://github.com/iit-DLSLab/muse/tree/main/muse_ws/src/state_estimator/urdfs), and change the name of the legs in the [leg odometry plugin, line 249](https://github.com/iit-DLSLab/muse/blob/main/muse_ws/src/state_estimator/src/plugins/leg_odometry_plugin.cpp#L249):
-
-``` sh
-std::vector<std::string> feet_frame_names = {"LF_FOOT", "RF_FOOT", "LH_FOOT", "RH_FOOT"};   // Update with your actual link names
+```text
+muse_ws/src/plotjuggler_layout.xml
 ```
-For real-world experiments, we recommend using this very nice [MPC](https://github.com/iit-DLSLab/Quadruped-PyMPC) to control your robot!
+
+
+## :robot: Robot Configuration
+
+To use a different robot:
+
+1. Add the URDF to `muse_ws/src/state_estimator/urdfs`.
+2. Update `urdf_path` in `config/contact_plugin.yaml` and `config/leg_odometry.yaml`.
+3. Update `foot_frame_names` and the joint-name lists in the same config files.
+4. Update `base_R_imu` and input topic names for your robot.
+
+The default leg order is:
+
+```text
+LF, RF, LH, RH
+```
+
+Keep this order consistent across contact detection, leg odometry, messages, and downstream consumers.
+
+
 ## :scroll: TODO list
-- [ ] Extend the code to include exteroception
-- [x] Dockerization
-- [x] Support for ROS2 (on going)
+
+- [x] ROS1 proprioceptive state estimation
+- [x] GRF-based contact detection from actuator readings
+- [x] TF publishing from fused odometry
+- [ ] ROS2 support (on going)
+- [ ] Exteroceptive sensor fusion (on going)
 
 ## :hugs: Contributing
 
@@ -97,11 +146,12 @@ Contributions to this repository are welcome.
 ## Citing the paper
 
 If you like this work and would like to cite it (thanks):
-```
+
+```bibtex
 @ARTICLE{10933515,
   author={Nisticò, Ylenia and Soares, João Carlos Virgolino and Amatucci, Lorenzo and Fink, Geoff and Semini, Claudio},
-  journal={IEEE Robotics and Automation Letters}, 
-  title={MUSE: A Real-Time Multi-Sensor State Estimator for Quadruped Robots}, 
+  journal={IEEE Robotics and Automation Letters},
+  title={MUSE: A Real-Time Multi-Sensor State Estimator for Quadruped Robots},
   year={2025},
   volume={10},
   number={5},
@@ -109,8 +159,10 @@ If you like this work and would like to cite it (thanks):
   keywords={Robots;Sensors;Robot sensing systems;Legged locomotion;Odometry;Cameras;Laser radar;Robot vision systems;Robot kinematics;Quadrupedal robots;State estimation;localization;sensor fusion;quadruped robots},
   doi={10.1109/LRA.2025.3553047}}
 ```
-This repo is maintained by [Ylenia Nisticò](https://github.com/ylenianistico)
 
+## Maintainer
+This repo is maintained by
 
-
-
+| Avatar | Name |
+| ------- | ---- |
+| <img src="https://github.com/ylenianistico.png?size=32" width="32" height="32" style="border-radius:50%; vertical-align:middle; margin:0 6px;" /> | <a href="https://github.com/ylenianistico">Ylenia Nisticò</a> |

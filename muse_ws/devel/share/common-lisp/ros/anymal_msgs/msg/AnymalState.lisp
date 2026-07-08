@@ -1,0 +1,1 @@
+/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/devel/.private/anymal_msgs/share/common-lisp/ros/anymal_msgs/msg/AnymalState.lisp

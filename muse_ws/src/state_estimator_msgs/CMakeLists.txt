@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.10)
 project(state_estimator_msgs)
 
 find_package(catkin REQUIRED COMPONENTS geometry_msgs sensor_msgs std_msgs message_generation)
@@ -8,7 +8,7 @@ include_directories(include)
 add_message_files(
   DIRECTORY msg
   FILES
-	attitude.msg
+  	attitude.msg
 	ContactDetection.msg
 	LegOdometry.msg
 	sensor_fusion.msg

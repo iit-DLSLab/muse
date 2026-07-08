@@ -1,0 +1,8 @@
+prefix=/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/devel/.private/state_estimator
+
+Name: state_estimator
+Description: Description of state_estimator
+Version: 0.0.1
+Cflags: -I/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src/state_estimator/include
+Libs: -L${prefix}/lib -lstate_estimator_plugins
+Requires: roscpp roslib sensor_msgs geometry_msgs nav_msgs std_msgs tf2_ros pluginlib message_filters state_estimator_msgs iit_commons

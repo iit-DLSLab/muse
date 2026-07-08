@@ -1,0 +1,27 @@
+CMake Warning (dev) at /home/ynistico-iit.local/miniforge3/envs/muse/share/catkin/cmake/python.cmake:4 (find_package):
+  Policy CMP0148 is not set: The FindPythonInterp and FindPythonLibs modules
+  are removed.  Run "cmake --help-policy CMP0148" for policy details.  Use
+  the cmake_policy command to set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  /home/ynistico-iit.local/miniforge3/envs/muse/share/catkin/cmake/all.cmake:164 (include)
+  /home/ynistico-iit.local/miniforge3/envs/muse/share/catkin/cmake/catkinConfig.cmake:20 (include)
+  CMakeLists.txt:6 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Error at /home/ynistico-iit.local/miniforge3/envs/muse/share/catkin/cmake/catkinConfig.cmake:83 (find_package):
+  Could not find a package configuration file provided by
+  "graph_msf_anymal_msgs" with any of the following names:
+
+    graph_msf_anymal_msgsConfig.cmake
+    graph_msf_anymal_msgs-config.cmake
+
+  Add the installation prefix of "graph_msf_anymal_msgs" to CMAKE_PREFIX_PATH
+  or set "graph_msf_anymal_msgs_DIR" to a directory containing one of the
+  above files.  If "graph_msf_anymal_msgs" provides a separate development
+  package or SDK, be sure it has been installed.
+Call Stack (most recent call first):
+  CMakeLists.txt:6 (find_package)
+
+
+make: *** [Makefile:1325: cmake_check_build_system] Error 1

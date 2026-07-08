@@ -1,0 +1,11 @@
+[33mCMake Warning (dev) at /home/ynistico-iit.local/miniforge3/envs/muse/share/catkin/cmake/python.cmake:4 (find_package):
+  Policy CMP0148 is not set: The FindPythonInterp and FindPythonLibs modules
+  are removed.  Run "cmake --help-policy CMP0148" for policy details.  Use
+  the cmake_policy command to set the policy and suppress this warning.
+
+[36mCall Stack (most recent call first):[0m
+  /home/ynistico-iit.local/miniforge3/envs/muse/share/catkin/cmake/all.cmake:164 (include)
+  /home/ynistico-iit.local/miniforge3/envs/muse/share/catkin/cmake/catkinConfig.cmake:20 (include)
+  CMakeLists.txt:8 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+[0m

@@ -1,0 +1,15 @@
+(cl:defpackage state_estimator_msgs-msg
+  (:use )
+  (:export
+   "<CONTACTDETECTION>"
+   "CONTACTDETECTION"
+   "<JOINTSTATEWITHACCELERATION>"
+   "JOINTSTATEWITHACCELERATION"
+   "<LEGODOMETRY>"
+   "LEGODOMETRY"
+   "<ATTITUDE>"
+   "ATTITUDE"
+   "<SENSOR_FUSION>"
+   "SENSOR_FUSION"
+  ))
+

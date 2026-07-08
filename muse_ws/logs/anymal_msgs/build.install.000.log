@@ -1,0 +1,87 @@
+[  0%] Built target _anymal_msgs_generate_messages_check_deps_ExtendedJointState
+[  0%] Built target geometry_msgs_generate_messages_py
+[  0%] Built target std_msgs_generate_messages_py
+[  0%] Built target _anymal_msgs_generate_messages_check_deps_AnymalState
+[  0%] Built target _anymal_msgs_generate_messages_check_deps_Contact
+[ 23%] Built target anymal_msgs_generate_messages_py
+[ 23%] Built target geometry_msgs_generate_messages_cpp
+[ 23%] Built target std_msgs_generate_messages_cpp
+[ 41%] Built target anymal_msgs_generate_messages_cpp
+[ 41%] Built target geometry_msgs_generate_messages_eus
+[ 41%] Built target std_msgs_generate_messages_eus
+[ 64%] Built target anymal_msgs_generate_messages_eus
+[ 64%] Built target geometry_msgs_generate_messages_lisp
+[ 64%] Built target std_msgs_generate_messages_lisp
+[ 82%] Built target anymal_msgs_generate_messages_lisp
+[ 82%] Built target geometry_msgs_generate_messages_nodejs
+[ 82%] Built target std_msgs_generate_messages_nodejs
+[100%] Built target anymal_msgs_generate_messages_nodejs
+[100%] Built target anymal_msgs_generate_messages
+[36mInstall the project...[0m
+-- Install configuration: ""
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/_setup_util.py
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/env.sh
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/setup.bash
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/local_setup.bash
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/setup.sh
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/local_setup.sh
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/setup.zsh
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/local_setup.zsh
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/.rosinstall
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/anymal_msgs/msg/AnymalState.msg
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/anymal_msgs/msg/Contact.msg
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/anymal_msgs/msg/ExtendedJointState.msg
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/anymal_msgs/cmake/anymal_msgs-msg-paths.cmake
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/include/anymal_msgs
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/include/anymal_msgs/AnymalState.h
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/include/anymal_msgs/Contact.h
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/include/anymal_msgs/ExtendedJointState.h
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/roseus/ros/anymal_msgs
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/roseus/ros/anymal_msgs/msg
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/roseus/ros/anymal_msgs/msg/Contact.l
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/roseus/ros/anymal_msgs/msg/ExtendedJointState.l
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/roseus/ros/anymal_msgs/msg/AnymalState.l
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/roseus/ros/anymal_msgs/manifest.l
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/common-lisp/ros/anymal_msgs
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/common-lisp/ros/anymal_msgs/msg
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/common-lisp/ros/anymal_msgs/msg/ExtendedJointState.lisp
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/common-lisp/ros/anymal_msgs/msg/AnymalState.lisp
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/common-lisp/ros/anymal_msgs/msg/anymal_msgs-msg.asd
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/common-lisp/ros/anymal_msgs/msg/_package_AnymalState.lisp
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/common-lisp/ros/anymal_msgs/msg/Contact.lisp
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/common-lisp/ros/anymal_msgs/msg/_package.lisp
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/common-lisp/ros/anymal_msgs/msg/_package_ExtendedJointState.lisp
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/common-lisp/ros/anymal_msgs/msg/_package_Contact.lisp
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/gennodejs/ros/anymal_msgs
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/gennodejs/ros/anymal_msgs/_index.js
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/gennodejs/ros/anymal_msgs/msg
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/gennodejs/ros/anymal_msgs/msg/_index.js
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/gennodejs/ros/anymal_msgs/msg/Contact.js
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/gennodejs/ros/anymal_msgs/msg/ExtendedJointState.js
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/gennodejs/ros/anymal_msgs/msg/AnymalState.js
+Listing '/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/devel/.private/anymal_msgs/lib/python3.11/site-packages/anymal_msgs'...
+Compiling '/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/devel/.private/anymal_msgs/lib/python3.11/site-packages/anymal_msgs/__init__.py'...
+Listing '/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/devel/.private/anymal_msgs/lib/python3.11/site-packages/anymal_msgs/msg'...
+Compiling '/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/devel/.private/anymal_msgs/lib/python3.11/site-packages/anymal_msgs/msg/_AnymalState.py'...
+Compiling '/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/devel/.private/anymal_msgs/lib/python3.11/site-packages/anymal_msgs/msg/_Contact.py'...
+Compiling '/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/devel/.private/anymal_msgs/lib/python3.11/site-packages/anymal_msgs/msg/_ExtendedJointState.py'...
+Compiling '/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/devel/.private/anymal_msgs/lib/python3.11/site-packages/anymal_msgs/msg/__init__.py'...
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/lib/python3.11/site-packages/anymal_msgs
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/lib/python3.11/site-packages/anymal_msgs/__init__.py
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/lib/python3.11/site-packages/anymal_msgs/msg
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/lib/python3.11/site-packages/anymal_msgs/msg/_ExtendedJointState.py
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/lib/python3.11/site-packages/anymal_msgs/msg/__init__.py
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/lib/python3.11/site-packages/anymal_msgs/msg/__pycache__
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/lib/python3.11/site-packages/anymal_msgs/msg/__pycache__/__init__.cpython-311.pyc
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/lib/python3.11/site-packages/anymal_msgs/msg/__pycache__/_ExtendedJointState.cpython-311.pyc
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/lib/python3.11/site-packages/anymal_msgs/msg/__pycache__/_Contact.cpython-311.pyc
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/lib/python3.11/site-packages/anymal_msgs/msg/__pycache__/_AnymalState.cpython-311.pyc
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/lib/python3.11/site-packages/anymal_msgs/msg/_Contact.py
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/lib/python3.11/site-packages/anymal_msgs/msg/_AnymalState.py
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/lib/python3.11/site-packages/anymal_msgs/__pycache__
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/lib/python3.11/site-packages/anymal_msgs/__pycache__/__init__.cpython-311.pyc
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/lib/pkgconfig/anymal_msgs.pc
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/anymal_msgs/cmake/anymal_msgs-msg-extras.cmake
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/anymal_msgs/cmake/anymal_msgsConfig.cmake
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/anymal_msgs/cmake/anymal_msgsConfig-version.cmake
+-- Installing: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install/share/anymal_msgs/package.xml

@@ -1,0 +1,1 @@
+/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/devel/.private/anymal_msgs/share/roseus/ros/anymal_msgs/msg/Contact.l
