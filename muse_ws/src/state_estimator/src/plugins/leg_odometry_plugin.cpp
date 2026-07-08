@@ -10,7 +10,7 @@
 #include <ros/package.h>
 #include <ros/ros.h>
 #include <sensor_msgs/Imu.h>
-#include <state_estimator_msgs/AnymalState.h>
+#include <anymal_msgs/AnymalState.h>
 
 #include <Eigen/Dense>
 
