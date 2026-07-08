@@ -1,1 +1,0 @@
-/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/devel/.private/state_estimator_msgs/share/roseus/ros/state_estimator_msgs/srv/pauseEstimator.l

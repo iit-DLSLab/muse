@@ -1,6 +1,0 @@
-devel_space: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/devel
-install: true
-install_space: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install
-profile: default
-source_space: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws/src
-workspace: /home/ynistico-iit.local/dls_ws_home/muse/muse_ws

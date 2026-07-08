@@ -1,1 +1,0 @@
-/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/devel/.private/series_elastic_actuator_msgs/share/gennodejs/ros/series_elastic_actuator_msgs/msg/SeActuatorCommand.js

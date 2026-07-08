@@ -1,8 +1,0 @@
-prefix=/home/ynistico-iit.local/dls_ws_home/muse/muse_ws/install
-
-Name: series_elastic_actuator_msgs
-Description: Description of series_elastic_actuator_msgs
-Version: 0.0.1
-Cflags: -I${prefix}/include
-Libs: -L${prefix}/lib 
-Requires: message_runtime sensor_msgs std_msgs

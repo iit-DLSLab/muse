@@ -1,2 +1,0 @@
-set(state_estimator_msgs_MESSAGE_FILES "msg/attitude.msg;msg/ContactDetection.msg;msg/LegOdometry.msg;msg/sensor_fusion.msg;msg/JointStateWithAcceleration.msg")
-set(state_estimator_msgs_SERVICE_FILES "srv/getActiveEstimators.srv;srv/getBlacklist.srv;srv/getEstimatorDescription.srv;srv/getWhitelist.srv;srv/listAllEstimators.srv;srv/pauseEstimator.srv;srv/resetEstimator.srv;srv/restartEstimator.srv;srv/resumeEstimator.srv;srv/startEstimator.srv;srv/stopEstimator.srv")
