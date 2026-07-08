@@ -127,7 +127,7 @@ private:
 		has_imu_ = true;
 	}
 
-	void anymalStateCallback(const state_estimator_msgs::AnymalState::ConstPtr& anymal_state)
+	void anymalStateCallback(const anymal_msgs::AnymalState::ConstPtr& anymal_state)
 	{
 		latest_joint_state_ = jointSnapshotFromAnymalState(*anymal_state);
 		latest_joint_state_stamp_ = stampFromAnymalState(*anymal_state);
