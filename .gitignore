@@ -1,1 +1,4 @@
 .vscode/
+
+# External dependencies managed via muse_ws/muse.repos (vcstool)
+muse_ws/src/point_lio_ros2/

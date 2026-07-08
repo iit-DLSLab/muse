@@ -17,6 +17,7 @@ namespace state_estimator
 
         void predict(double t, const Eigen::Matrix<double,3,1> &u) override;
         void update(double t, const Eigen::Matrix<double,3,1> &z);
+        void updateZPosition(double t, double z, double measurement_variance);
         void setMatricesSF(bool slippage);
 
     protected:
@@ -102,6 +103,30 @@ namespace state_estimator
 
         this->xhat = this->xhat + xtilde;
         this->P = (this->I - K * H) * this->P;
+
+        this->fixP();
+    }
+
+    inline void KFSensorFusion::updateZPosition(double t, double z, double measurement_variance)
+    {
+        if (measurement_variance <= 0.0)
+        {
+            return;
+        }
+
+        Eigen::Matrix<double,1,6> H_z = Eigen::Matrix<double,1,6>::Zero();
+        H_z(2) = 1.0;
+
+        const double innovation = z - this->xhat(2);
+        const double S = (H_z * this->P * H_z.transpose())(0, 0) + measurement_variance;
+        if (S <= 0.0)
+        {
+            return;
+        }
+
+        const Eigen::Matrix<double,6,1> K_z = this->P * H_z.transpose() / S;
+        this->xhat = this->xhat + K_z * innovation;
+        this->P = (this->I - K_z * H_z) * this->P;
 
         this->fixP();
     }

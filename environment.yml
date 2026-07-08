@@ -1,0 +1,36 @@
+name: muse
+channels:
+  - robostack-noetic
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy=1.26
+  - compilers
+  - cmake
+  - make
+  - ninja
+  - pkg-config
+  - git
+  - eigen=3.4
+  - libboost-devel
+  - pinocchio
+  - ros-noetic-ros-base
+  - ros-noetic-catkin
+  - ros-noetic-roscpp
+  - ros-noetic-rosconsole
+  - ros-noetic-std-msgs
+  - ros-noetic-sensor-msgs
+  - ros-noetic-geometry-msgs
+  - ros-noetic-nav-msgs
+  - ros-noetic-tf2-ros
+  - ros-noetic-pluginlib
+  - ros-noetic-message-filters
+  - ros-noetic-message-generation
+  - ros-noetic-message-runtime
+  - ros-noetic-dynamic-reconfigure
+  - ros-noetic-rviz
+  - ros-noetic-plotjuggler-ros
+  - catkin_pkg
+  - catkin_tools
+  - rosdep
+  - rospkg

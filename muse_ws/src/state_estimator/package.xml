@@ -5,28 +5,31 @@
   <description>The state_estimator package</description>
 
   <maintainer email="ylenia.nistico@iit.it">Geoff Fink</maintainer>
-
+  <author email="ylenia.nistico@iit.it">Geoff Fink</author>
   <license>TODO</license>
 
-  <author email="ylenia.nistico@iit.it">Geoff Fink</author>
-
   <buildtool_depend>catkin</buildtool_depend>
-  <depend>dynamic_reconfigure</depend>
+
   <depend>roscpp</depend>
+  <depend>roslib</depend>
+  <depend>rosconsole</depend>
+  <depend>dynamic_reconfigure</depend>
   <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>std_msgs</depend>
   <depend>tf2_ros</depend>
   <depend>pluginlib</depend>
+  <depend>message_filters</depend>
   <depend>iit_commons</depend>
-  <depend>message_generation</depend>
   <depend>state_estimator_msgs</depend>
+  <depend>anymal_msgs</depend>
+
   <build_depend>pinocchio</build_depend>
   <exec_depend>pinocchio</exec_depend>
 
   <export>
     <state_estimator plugin="${prefix}/state_estimator_plugins.xml" />
-    <state_estimator plugin="${prefix}/state_estimator_tools.xml" />  
-</export>
-  
-
-
+    <state_estimator plugin="${prefix}/state_estimator_tools.xml" />
+  </export>
 </package>

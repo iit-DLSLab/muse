@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>anymal_msgs</name>
+  <version>0.0.0</version>
+  <description>ANYmal message definitions</description>
+
+  <maintainer email="ylenia.nistico@iit.it">ynistico</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+
+  <export>
+  </export>
+</package>

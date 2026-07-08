@@ -16,5 +16,9 @@
         <description>A plugin to fuse the estimated attitude and the leg odometry</description>
     </class>
 
+    <class name="TfPublisher" type="state_estimator_plugins::TfPublisherPlugin" base_class_type="state_estimator_plugins::PluginBase">
+        <description>A plugin to publish TF from the fused odometry output</description>
+    </class>
+
 
 </library>

@@ -1,5 +1,5 @@
 # Project configuration
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.10)
 project(iit_commons)
 
 find_package(PkgConfig)
@@ -96,4 +96,3 @@ if (CATKIN_ENABLE_TESTING)
 	target_link_libraries(rotation-test ${LIB_NAME} ${catkin_LIBRARIES} pthread)
 
 endif()
-
