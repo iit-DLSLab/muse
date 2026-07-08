@@ -16,6 +16,7 @@ find_package(catkin REQUIRED COMPONENTS
   pluginlib
   message_filters
   state_estimator_msgs
+  anymal_msgs
   iit_commons
 )
 
