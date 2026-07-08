@@ -43,8 +43,8 @@ Build the ROS1 workspace with `catkin build`:
 ```sh
 cd muse/muse_ws
 conda activate muse
-catkin config --extend "$CONDA_PREFIX" --install
-catkin build
+catkin init
+catkin config --source-space src --build-space build --devel-space devel --install-space installcatkin build
 source install/setup.bash
 ```
 
