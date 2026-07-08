@@ -1,7 +1,7 @@
 contact_detection_plugin:
   plugin: "ContactDetectionPlugin"
 
-  # Estimate foot GRFs from state_estimator_msgs/AnymalState.joints.
+  # Estimate foot GRFs from anymal_msgs/AnymalState.joints.
   anymal_state_topic: "/anymal/state_estimator/anymal_state"
   urdf_path: "$(find state_estimator)/urdfs/anymal.urdf"
 
