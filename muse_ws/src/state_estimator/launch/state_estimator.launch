@@ -2,7 +2,7 @@
 <launch>
 	<arg name="pluginlist_yaml" value="$(find state_estimator)/launch/pluginlist.yaml" />
 	<arg name="timeoutlist_yaml" value="$(find state_estimator)/launch/timeout.yaml" />
-	<arg name="rviz" default="true" />
+	<arg name="rviz" default="false" />
 	<arg name="rviz_config" default="$(find state_estimator)/rviz/state_estimator.rviz" />
 	<arg name="use_sim_time" default="false" />
 
