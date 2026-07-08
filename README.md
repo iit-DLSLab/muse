@@ -9,8 +9,8 @@ MUSE provides a ROS1 state-estimator node for quadruped robots. The node loads e
 
 The current ROS1 implementation is proprioceptive. The necessary online inputs are:
 
-- `sensor_msgs/Imu` IMU measurements
-- `series_elastic_actuator_msgs/SeActuatorReadings` actuator readings
+- IMU measurements
+- actuator readings
 
 It also requires a robot URDF and matching foot/joint frame names in the configuration.
 
