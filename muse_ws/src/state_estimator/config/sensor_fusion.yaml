@@ -6,7 +6,7 @@ sensor_fusion_plugin:
   pub_topic: "sensor_fusion"  
   frame_id: "world"
   child_frame_id: "base"
-  use_zupt: true
+  # use_zupt: true  # NOTE: currently unused by SensorFusionPlugin
   z_height_correction:
     enabled: true
     # false: contact-anchor correction, works without assuming a fixed ground z.
