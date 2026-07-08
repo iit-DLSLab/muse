@@ -227,7 +227,7 @@ private:
 		return ros::Time::now();
 	}
 
-	static ros::Time stampFromAnymalState(const state_estimator_msgs::AnymalState& anymal_state)
+	static ros::Time stampFromAnymalState(const anymal_msgs::AnymalState& anymal_state)
 	{
 		if (!anymal_state.header.stamp.isZero()) return anymal_state.header.stamp;
 		if (!anymal_state.joints.header.stamp.isZero()) return anymal_state.joints.header.stamp;
