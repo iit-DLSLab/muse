@@ -42,6 +42,7 @@ catkin_package(
     tf2_ros
     pluginlib
     message_filters
+    anymal_msgs
     state_estimator_msgs
     iit_commons
 )
