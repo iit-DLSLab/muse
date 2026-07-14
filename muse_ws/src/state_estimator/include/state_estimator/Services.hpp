@@ -1,15 +1,16 @@
-#ifndef SERVICES_HPP
-#define SERVICES_HPP
+#ifndef STATE_ESTIMATOR_SERVICES_HPP
+#define STATE_ESTIMATOR_SERVICES_HPP
 
-#include "state_estimator_msgs/getActiveEstimators.h"
-#include "state_estimator_msgs/getBlacklist.h"
-#include "state_estimator_msgs/getWhitelist.h"
-#include "state_estimator_msgs/listAllEstimators.h"
-#include "state_estimator_msgs/pauseEstimator.h"
-#include "state_estimator_msgs/resetEstimator.h"
-#include "state_estimator_msgs/restartEstimator.h"
-#include "state_estimator_msgs/startEstimator.h"
-#include "state_estimator_msgs/stopEstimator.h"
-
+#include <state_estimator_msgs/srv/get_active_estimators.hpp>
+#include <state_estimator_msgs/srv/get_blacklist.hpp>
+#include <state_estimator_msgs/srv/get_estimator_description.hpp>
+#include <state_estimator_msgs/srv/get_whitelist.hpp>
+#include <state_estimator_msgs/srv/list_all_estimators.hpp>
+#include <state_estimator_msgs/srv/pause_estimator.hpp>
+#include <state_estimator_msgs/srv/reset_estimator.hpp>
+#include <state_estimator_msgs/srv/restart_estimator.hpp>
+#include <state_estimator_msgs/srv/resume_estimator.hpp>
+#include <state_estimator_msgs/srv/start_estimator.hpp>
+#include <state_estimator_msgs/srv/stop_estimator.hpp>
 
 #endif

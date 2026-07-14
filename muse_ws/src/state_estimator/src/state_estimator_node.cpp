@@ -1,248 +1,244 @@
 #include "state_estimator/state_estimator_node.hpp"
 
-namespace state_estimator {
+#include <fnmatch.h>
 
-void state_estimator_node::shutdown() {
-	ROS_INFO("SE node: Shutting node down...");
-	for (auto const&plugin:loaded_plugins) {
-		ROS_INFO_STREAM("Shutting down " << plugin->getName() << "...");
-		plugin->shutdown();
-		ROS_INFO("Done");
-	}
-	ROS_INFO("State Estimator shut down.");
-}
+#include <algorithm>
+#include <functional>
+#include <utility>
 
-state_estimator_node::state_estimator_node(ros::NodeHandle& nh) : nh(nh), plugin_loader("state_estimator", "state_estimator_plugins::PluginBase") {
-   // robot = Anymal::create();
-
-	ros::V_string blacklist{}, whitelist{};
-
-	getBlacklist(blacklist);
-	getWhitelist(whitelist);
-
-	//Assume all plugins are blacklisted
-	if(blacklist.empty() and !whitelist.empty())
-		blacklist.emplace_back("*");
-
-	for (auto &name : plugin_loader.getDeclaredClasses()) {
-		add_plugin(name, blacklist, whitelist);
-	}
-
-  services.push_back(std::make_shared<ros::ServiceServer>(nh.advertiseService("getActiveEstimators",&state_estimator_node::getActiveEstimators,this)));
-  services.push_back(std::make_shared<ros::ServiceServer>(nh.advertiseService("getBlacklist",&state_estimator_node::getBlacklist,this)));
-  services.push_back(std::make_shared<ros::ServiceServer>(nh.advertiseService("getWhitelist",&state_estimator_node::getWhitelist,this)));
-  services.push_back(std::make_shared<ros::ServiceServer>(nh.advertiseService("listAllEstimators",&state_estimator_node::listAllEstimators,this)));
-  services.push_back(std::make_shared<ros::ServiceServer>(nh.advertiseService("pauseEstimator",&state_estimator_node::pauseEstimator,this)));
-  services.push_back(std::make_shared<ros::ServiceServer>(nh.advertiseService("resetEstimator",&state_estimator_node::resetEstimator,this)));
-  services.push_back(std::make_shared<ros::ServiceServer>(nh.advertiseService("restartEstimator",&state_estimator_node::restartEstimator,this)));
-  services.push_back(std::make_shared<ros::ServiceServer>(nh.advertiseService("startEstimator",&state_estimator_node::startEstimator,this)));
-  services.push_back(std::make_shared<ros::ServiceServer>(nh.advertiseService("stopEstimator",&state_estimator_node::stopEstimator,this)));
-}
-
-bool state_estimator_node::add_plugin(std::string &name) {
-    ros::V_string blacklist{}, whitelist{};
-    if (!getBlacklist(blacklist)) return false;
-    if (!getWhitelist(whitelist)) return false;
-
-    //Assume all plugins are blacklisted
-    if(blacklist.empty() and !whitelist.empty())
-	    blacklist.emplace_back("*");
-    
-    return add_plugin(name,blacklist,whitelist);
-}
-
-bool state_estimator_node::add_plugin(std::string &pl_name, ros::V_string &blacklist, ros::V_string &whitelist) {
-	if (is_blacklisted(pl_name,blacklist,whitelist)) {
-		ROS_INFO_STREAM("Plugin " << pl_name << " blacklisted");
-		return false;
-	}
-
-	try {
-		auto plugin = plugin_loader.createInstance(pl_name);
-		ROS_INFO_STREAM("Plugin " << pl_name << " loaded");
-		plugin->initialize(this->nh,nullptr);
-		ROS_INFO_STREAM("Plugin " << pl_name << " initialized");
-		loaded_plugins.push_back(plugin);
-		return true;
-	} catch (pluginlib::PluginlibException &ex) {
-		ROS_ERROR_STREAM("Plugin " << pl_name << " load exception: " << ex.what());
-	} catch (std::exception &ex) {
-		ROS_ERROR_STREAM("Plugin " << pl_name << " load exception: " << ex.what());
-	} catch (...) {
-		ROS_ERROR_STREAM("Plugin " << pl_name << " load exception.");
-	}
-	return false;
-}
-
-inline bool state_estimator_node::getBlacklist(ros::V_string &blacklist) {
-    if (nh.hasParam("plugin_blacklist")) { 
-	    nh.getParam("plugin_blacklist", blacklist);
-    } else {
-	    ROS_WARN("Blacklist parameter does not exist.");
-	    return false;
-    }       
-    return true;  
-}
-
-inline bool state_estimator_node::getWhitelist(ros::V_string &whitelist) {
-    if (nh.hasParam("plugin_whitelist")) { 
-	    nh.getParam("plugin_whitelist", whitelist);
-    } else {
-	    ROS_WARN("Whitelist parameter does not exist.");
-	    return false;
-    }    
-    return true;   
-}
-
-    /**
-    * @brief Checks that plugin blacklisted
-    *  1. if blacklist and whitelist is empty: load all
-    *  2. if blacklist is empty and whitelist non empty: assume blacklist is ["*"]
-    *  3. if blacklist non empty: usual blacklist behavior
-    *  4. if whitelist non empty: override blacklist
-    */
-bool state_estimator_node::is_blacklisted(std::string &pl_name, ros::V_string &blacklist, ros::V_string &whitelist)
+namespace state_estimator
 {
-    for (auto &bl_pattern : blacklist) {
-      if (pattern_match(bl_pattern, pl_name)) {
-        for (auto &wl_pattern : whitelist) {
-          if (pattern_match(wl_pattern, pl_name))
-            return false;
-        }
-        return true;
+
+StateEstimatorNode::StateEstimatorNode(rclcpp::Node::SharedPtr node)
+: node_(std::move(node)),
+  plugin_loader_("state_estimator", "state_estimator_plugins::PluginBase")
+{
+  if (!node_->has_parameter("plugin_blacklist")) {
+    node_->declare_parameter<std::vector<std::string>>(
+      "plugin_blacklist", std::vector<std::string>{});
+  }
+  if (!node_->has_parameter("plugin_whitelist")) {
+    node_->declare_parameter<std::vector<std::string>>(
+      "plugin_whitelist", std::vector<std::string>{});
+  }
+
+  setupServices();
+  loadConfiguredPlugins();
+}
+
+StateEstimatorNode::~StateEstimatorNode()
+{
+  shutdown();
+}
+
+void StateEstimatorNode::shutdown()
+{
+  if (shutdown_complete_) return;
+
+  RCLCPP_INFO(node_->get_logger(), "Shutting down state estimator plugins");
+  for (const auto& plugin : loaded_plugins_) {
+    try {
+      plugin->shutdown();
+    } catch (const std::exception& error) {
+      RCLCPP_ERROR(
+        node_->get_logger(), "Error shutting down %s: %s",
+        plugin->getName().c_str(), error.what());
+    }
+  }
+  loaded_plugins_.clear();
+  shutdown_complete_ = true;
+}
+
+void StateEstimatorNode::loadConfiguredPlugins()
+{
+  auto blacklist = node_->get_parameter("plugin_blacklist").as_string_array();
+  auto whitelist = node_->get_parameter("plugin_whitelist").as_string_array();
+  if (blacklist.empty() && !whitelist.empty()) blacklist.emplace_back("*");
+
+  for (const auto& class_name : plugin_loader_.getDeclaredClasses()) {
+    addPlugin(class_name, blacklist, whitelist);
+  }
+}
+
+bool StateEstimatorNode::addPlugin(const std::string& class_name)
+{
+  auto blacklist = node_->get_parameter("plugin_blacklist").as_string_array();
+  auto whitelist = node_->get_parameter("plugin_whitelist").as_string_array();
+  if (blacklist.empty() && !whitelist.empty()) blacklist.emplace_back("*");
+  return addPlugin(class_name, blacklist, whitelist);
+}
+
+bool StateEstimatorNode::addPlugin(
+  const std::string& class_name,
+  const std::vector<std::string>& blacklist,
+  const std::vector<std::string>& whitelist)
+{
+  if (findPlugin(class_name) != loaded_plugins_.end()) {
+    RCLCPP_WARN(node_->get_logger(), "Plugin %s is already loaded", class_name.c_str());
+    return false;
+  }
+  if (isBlacklisted(class_name, blacklist, whitelist)) {
+    RCLCPP_INFO(node_->get_logger(), "Plugin %s is blacklisted", class_name.c_str());
+    return false;
+  }
+
+  try {
+    auto plugin = plugin_loader_.createSharedInstance(class_name);
+    plugin->initialize(node_, robot_);
+    RCLCPP_INFO(node_->get_logger(), "Plugin %s initialized", class_name.c_str());
+    loaded_plugins_.push_back(std::move(plugin));
+    return true;
+  } catch (const pluginlib::PluginlibException& error) {
+    RCLCPP_ERROR(
+      node_->get_logger(), "Plugin %s load exception: %s",
+      class_name.c_str(), error.what());
+  } catch (const std::exception& error) {
+    RCLCPP_ERROR(
+      node_->get_logger(), "Plugin %s initialization exception: %s",
+      class_name.c_str(), error.what());
+  }
+  return false;
+}
+
+bool StateEstimatorNode::isBlacklisted(
+  const std::string& class_name,
+  const std::vector<std::string>& blacklist,
+  const std::vector<std::string>& whitelist) const
+{
+  for (const auto& pattern : blacklist) {
+    if (!patternMatches(pattern, class_name)) continue;
+    return std::none_of(
+      whitelist.begin(), whitelist.end(),
+      [this, &class_name](const std::string& allowed) {
+        return patternMatches(allowed, class_name);
+      });
+  }
+  return false;
+}
+
+bool StateEstimatorNode::patternMatches(
+  const std::string& pattern, const std::string& value) const
+{
+  const int result = fnmatch(pattern.c_str(), value.c_str(), FNM_CASEFOLD);
+  if (result == 0) return true;
+  if (result == FNM_NOMATCH) return false;
+  RCLCPP_ERROR(
+    node_->get_logger(), "fnmatch failed for '%s' and '%s'",
+    pattern.c_str(), value.c_str());
+  return false;
+}
+
+std::vector<std::shared_ptr<StateEstimatorNode::Plugin>>::iterator
+StateEstimatorNode::findPlugin(const std::string& name)
+{
+  return std::find_if(
+    loaded_plugins_.begin(), loaded_plugins_.end(),
+    [&name](const std::shared_ptr<Plugin>& plugin) {
+      return plugin->getName() == name;
+    });
+}
+
+void StateEstimatorNode::setupServices()
+{
+  using namespace std::placeholders;
+  namespace srv = state_estimator_msgs::srv;
+
+  services_.push_back(node_->create_service<srv::GetActiveEstimators>(
+    "~/get_active_estimators",
+    [this](const std::shared_ptr<srv::GetActiveEstimators::Request>,
+           std::shared_ptr<srv::GetActiveEstimators::Response> response) {
+      for (const auto& plugin : loaded_plugins_) response->names.push_back(plugin->getName());
+    }));
+
+  services_.push_back(node_->create_service<srv::GetBlacklist>(
+    "~/get_blacklist",
+    [this](const std::shared_ptr<srv::GetBlacklist::Request>,
+           std::shared_ptr<srv::GetBlacklist::Response> response) {
+      response->names = node_->get_parameter("plugin_blacklist").as_string_array();
+    }));
+
+  services_.push_back(node_->create_service<srv::GetWhitelist>(
+    "~/get_whitelist",
+    [this](const std::shared_ptr<srv::GetWhitelist::Request>,
+           std::shared_ptr<srv::GetWhitelist::Response> response) {
+      response->names = node_->get_parameter("plugin_whitelist").as_string_array();
+    }));
+
+  services_.push_back(node_->create_service<srv::ListAllEstimators>(
+    "~/list_all_estimators",
+    [this](const std::shared_ptr<srv::ListAllEstimators::Request>,
+           std::shared_ptr<srv::ListAllEstimators::Response> response) {
+      response->names = plugin_loader_.getDeclaredClasses();
+    }));
+
+  services_.push_back(node_->create_service<srv::GetEstimatorDescription>(
+    "~/get_estimator_description",
+    [this](const std::shared_ptr<srv::GetEstimatorDescription::Request> request,
+           std::shared_ptr<srv::GetEstimatorDescription::Response> response) {
+      const auto plugin = findPlugin(request->name);
+      response->success = plugin != loaded_plugins_.end();
+      if (response->success) response->description = (*plugin)->getDescription();
+    }));
+
+  services_.push_back(node_->create_service<srv::PauseEstimator>(
+    "~/pause_estimator",
+    [this](const std::shared_ptr<srv::PauseEstimator::Request> request,
+           std::shared_ptr<srv::PauseEstimator::Response> response) {
+      const auto plugin = findPlugin(request->name);
+      response->success = plugin != loaded_plugins_.end() && !(*plugin)->isPaused();
+      if (response->success) (*plugin)->pause();
+    }));
+
+  services_.push_back(node_->create_service<srv::ResumeEstimator>(
+    "~/resume_estimator",
+    [this](const std::shared_ptr<srv::ResumeEstimator::Request> request,
+           std::shared_ptr<srv::ResumeEstimator::Response> response) {
+      const auto plugin = findPlugin(request->name);
+      response->success = plugin != loaded_plugins_.end() && (*plugin)->isPaused();
+      if (response->success) (*plugin)->resume();
+    }));
+
+  services_.push_back(node_->create_service<srv::ResetEstimator>(
+    "~/reset_estimator",
+    [this](const std::shared_ptr<srv::ResetEstimator::Request> request,
+           std::shared_ptr<srv::ResetEstimator::Response> response) {
+      const auto plugin = findPlugin(request->name);
+      response->success = plugin != loaded_plugins_.end();
+      if (response->success) (*plugin)->reset();
+    }));
+
+  services_.push_back(node_->create_service<srv::StartEstimator>(
+    "~/start_estimator",
+    [this](const std::shared_ptr<srv::StartEstimator::Request> request,
+           std::shared_ptr<srv::StartEstimator::Response> response) {
+      response->success = addPlugin(request->name);
+    }));
+
+  services_.push_back(node_->create_service<srv::StopEstimator>(
+    "~/stop_estimator",
+    [this](const std::shared_ptr<srv::StopEstimator::Request> request,
+           std::shared_ptr<srv::StopEstimator::Response> response) {
+      const auto plugin = findPlugin(request->name);
+      response->success = plugin != loaded_plugins_.end();
+      if (response->success) {
+        (*plugin)->shutdown();
+        loaded_plugins_.erase(plugin);
       }
-    }
-    return false;
+    }));
+
+  services_.push_back(node_->create_service<srv::RestartEstimator>(
+    "~/restart_estimator",
+    [this](const std::shared_ptr<srv::RestartEstimator::Request> request,
+           std::shared_ptr<srv::RestartEstimator::Response> response) {
+      const auto plugin = findPlugin(request->name);
+      if (plugin == loaded_plugins_.end()) {
+        response->success = false;
+        return;
+      }
+      (*plugin)->shutdown();
+      loaded_plugins_.erase(plugin);
+      response->success = addPlugin(request->name);
+    }));
 }
 
-
-
-bool state_estimator_node::pattern_match(std::string &pattern, std::string &pl_name)
-{
-    int cmp = fnmatch(pattern.c_str(), pl_name.c_str(), FNM_CASEFOLD);
-    if (cmp == 0)
-      return true;
-    else if (cmp != FNM_NOMATCH) {
-      // never see that, i think that it is fatal error.
-      ROS_FATAL("Plugin list check error! fnmatch('%s', '%s', FNM_CASEFOLD) -> %d",
-          pattern.c_str(), pl_name.c_str(), cmp);
-      ros::shutdown();
-    }
-
-    return false;
-}
-
-
-//**************************************************
-//Services
-//**************************************************
-
-bool state_estimator_node::getActiveEstimators(state_estimator_msgs::getActiveEstimators::Request &req, state_estimator_msgs::getActiveEstimators::Response &res) {
-    for (auto const&plugin:loaded_plugins) {
-	res.names.push_back(plugin->getName());
-    }
-    return true;
-}
-
-bool state_estimator_node::getBlacklist(state_estimator_msgs::getBlacklist::Request &req, state_estimator_msgs::getBlacklist::Response &res) {
-    ros::V_string blacklist{};
-    if (!getBlacklist(blacklist)) return true;
-    for (auto const&plugin:blacklist) {
-	res.names.push_back(plugin);
-    }
-    return true;
-}
-
-bool state_estimator_node::getWhitelist(state_estimator_msgs::getWhitelist::Request &req, state_estimator_msgs::getWhitelist::Response &res) {
-    ros::V_string whitelist{};
-    if (!getWhitelist(whitelist)) return true;
-    for (auto const&plugin:whitelist) {
-	res.names.push_back(plugin);
-    }
-    return true;
-}
-
-bool state_estimator_node::listAllEstimators(state_estimator_msgs::listAllEstimators::Request &req, state_estimator_msgs::listAllEstimators::Response &res) {
-    for (auto &name : plugin_loader.getDeclaredClasses()) {
-	    res.names.push_back(name);
-    }
-    return true;
-}
-
-bool state_estimator_node::pauseEstimator(state_estimator_msgs::pauseEstimator::Request &req, state_estimator_msgs::pauseEstimator::Response &res) {
-    for (auto const&plugin:loaded_plugins) {
-	if(plugin->getName().compare(req.name)==0)  {
-	    if (plugin->isPaused()) {
-		ROS_INFO_STREAM("Plugin " << req.name << " already paused.");
-		res.success=false;
-		return true;	
-	    }
-	    ROS_INFO_STREAM("Pausing " << req.name << "...");
-	    plugin->pause();
-	    ROS_INFO_STREAM("Plugin " << req.name << " paused.");
-	    res.success = true;
-	    return true;
-	}
-    }
-    ROS_WARN_STREAM("Plugin " << req.name << " not loaded.");
-    res.success = false;
-    return true;
-}
-
-bool state_estimator_node::resetEstimator(state_estimator_msgs::resetEstimator::Request &req, state_estimator_msgs::resetEstimator::Response &res) {
-    for (auto const&plugin:loaded_plugins) {
-	if(plugin->getName().compare(req.name)==0)  {
-	    ROS_INFO_STREAM("Reseting " << req.name << "...");
-	    plugin->pause();
-	    ROS_INFO_STREAM("Plugin " << req.name << " reset.");
-	    res.success = true;
-	    return true;
-	}
-    }
-    ROS_WARN_STREAM("Plugin " << req.name << " not loaded.");
-    res.success = false;
-    return true;
-}
-
-bool state_estimator_node::restartEstimator(state_estimator_msgs::restartEstimator::Request &req, state_estimator_msgs::restartEstimator::Response &res) {
-    for (auto const&plugin:loaded_plugins) {
-	if(plugin->getName().compare(req.name)==0)  {
-	    ROS_INFO_STREAM("Shutting down " << req.name << "...");
-	    plugin->shutdown();
-	    ROS_INFO_STREAM("Plugin " << req.name << " shut down");
-	    res.success = add_plugin(req.name);
-	    return true;
-	}
-    }
-    ROS_WARN_STREAM("Plugin " << req.name << " not loaded.");
-    res.success = false;
-    return true;
-}
-
-bool state_estimator_node::startEstimator(state_estimator_msgs::startEstimator::Request &req, state_estimator_msgs::startEstimator::Response &res) {
-    res.success = add_plugin(req.name);
-    return true;
-}
-
-bool state_estimator_node::stopEstimator(state_estimator_msgs::stopEstimator::Request &req, state_estimator_msgs::stopEstimator::Response &res) {
-    for (auto const&plugin:loaded_plugins) {
-        if(plugin->getName().compare(req.name)==0)  {
-            if (!plugin->isRunning()) {
-            ROS_INFO_STREAM("Plugin " << req.name << " is not running.");
-            res.success=false;
-            return true;	
-            }
-            ROS_INFO_STREAM("Shutting down " << req.name << "...");
-            plugin->shutdown();
-            ROS_INFO_STREAM("Plugin " << req.name << " shut down");
-            res.success=true;
-            return true;
-        }
-    }
-    ROS_WARN_STREAM("Plugin " << req.name << " not loaded.");
-    res.success=false;
-    return true;
-}
-
-} //namespace state_estimator
-
+}  // namespace state_estimator

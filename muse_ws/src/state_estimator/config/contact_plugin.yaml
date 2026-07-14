@@ -1,31 +1,20 @@
-contact_detection_plugin:
-  plugin: "ContactDetectionPlugin"
-
-  # Estimate foot GRFs from anymal_msgs/AnymalState.joints.
-  anymal_state_topic: "/anymal/state_estimator/anymal_state"
-  urdf_path: "$(find state_estimator)/urdfs/anymal.urdf"
-
-  # LF: Left Front leg, RF: Right Front leg, LH: Left Hind leg, RH: Right Hind leg.
-  foot_frame_names: ["LF_FOOT", "RF_FOOT", "LH_FOOT", "RH_FOOT"]
-  lf_joint_names: ["LF_HAA", "LF_HFE", "LF_KFE"]
-  rf_joint_names: ["RF_HAA", "RF_HFE", "RF_KFE"]
-  lh_joint_names: ["LH_HAA", "LH_HFE", "LH_KFE"]
-  rh_joint_names: ["RH_HAA", "RH_HFE", "RH_KFE"]
-
-  # Use the estimated force component along contact_normal as the GRF metric.
-  # Set use_force_norm=true to threshold the total force norm instead.
-  contact_normal: [0.0, 0.0, 1.0]
-  use_force_norm: false
-  use_absolute_normal_force: true
-  use_inverse_dynamics_compensation: true
-  force_sign: -1.0
-
-  use_hysteresis: true
-  grf_threshold_low: 40.0
-  grf_threshold_high: 70.0
-
-  pub_topic: "contact_detection"
-
-  # Threshold for contact detection. The plugin publishes bools:
-  # false = no contact, true = contact.
-  grf_threshold: 40.0
+state_estimator:
+  ros__parameters:
+    contact_detection_plugin:
+      actuator_state_topic: "/actuator_state"
+      urdf_path: "urdfs/anymal.urdf"
+      foot_frame_names: ["LF_FOOT", "RF_FOOT", "LH_FOOT", "RH_FOOT"]
+      lf_joint_names: ["LF_HAA", "LF_HFE", "LF_KFE"]
+      rf_joint_names: ["RF_HAA", "RF_HFE", "RF_KFE"]
+      lh_joint_names: ["LH_HAA", "LH_HFE", "LH_KFE"]
+      rh_joint_names: ["RH_HAA", "RH_HFE", "RH_KFE"]
+      contact_normal: [0.0, 0.0, 1.0]
+      use_force_norm: false
+      use_absolute_normal_force: true
+      use_inverse_dynamics_compensation: true
+      force_sign: -1.0
+      use_hysteresis: true
+      grf_threshold: 40.0
+      grf_threshold_low: 40.0
+      grf_threshold_high: 70.0
+      pub_topic: "~/contact_detection"

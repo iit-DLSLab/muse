@@ -1,85 +1,95 @@
-#ifndef PLUGIN_HPP
-#define PLUGIN_HPP
+#ifndef STATE_ESTIMATOR_PLUGIN_HPP
+#define STATE_ESTIMATOR_PLUGIN_HPP
 
-#include "ros/ros.h"
-#include "Robot.hpp"
-#include <pluginlib/pluginlib_exceptions.h>
+#include "state_estimator/Robot.hpp"
+
+#include <rclcpp/rclcpp.hpp>
+
 #include <memory>
+#include <string>
 
-namespace state_estimator_plugins {
+namespace state_estimator_plugins
+{
 
-class PluginBase {
-private:
-	PluginBase(const PluginBase&) = delete;
-
+class PluginBase
+{
 public:
-	virtual ~PluginBase() {};
+  PluginBase() = default;
+  virtual ~PluginBase() = default;
+  PluginBase(const PluginBase&) = delete;
+  PluginBase& operator=(const PluginBase&) = delete;
 
+  void initialize(
+    const rclcpp::Node::SharedPtr& node,
+    const std::shared_ptr<state_estimator::Robot>& robot)
+  {
+    node_ = node;
+    robot_ = robot;
+    initialize_();
+    paused_ = false;
+    running_ = true;
+    initialized_ = true;
+  }
 
-        void initialize(ros::NodeHandle& nodehandle, std::shared_ptr<state_estimator::Robot> robot) {
-	    //if (initialized_) return; //TODO no ini
-            nh_ = nodehandle;
-            robot_ = robot;
-	    initialize_();
-            paused_ = false;
-	    running_ = true;
-	    initialized_ = true;
-        }
+  virtual std::string getName() const = 0;
+  virtual std::string getDescription() const = 0;
 
-        virtual std::string getName()=0;
-	virtual std::string getDescription()=0;
+  void pause()
+  {
+    if (!running_ || paused_) return;
+    pause_();
+    paused_ = true;
+  }
 
-	void pause() {
-	    if (paused_) return;
-	    pause_();
-	    paused_=true;
-	}
-	
-	void shutdown() {
-	    if (!running_) return;
-	    shutdown_();
-	    running_=false;
-	    paused_=false;
-	}
-	
-	void resume() {
-	    if(!paused_) return;
-	    resume_();
-	    paused_ = false;
-	}
-	
-	void reset() {
-	    if (!running_) return;
-	    reset_();
-	}
-	
+  void resume()
+  {
+    if (!running_ || !paused_) return;
+    resume_();
+    paused_ = false;
+  }
 
-	
-	bool isRunning() { return running_; }
-	bool isPaused() { return paused_; }
-	bool isInitialized() { return initialized_; }
+  void reset()
+  {
+    if (running_) reset_();
+  }
+
+  void shutdown()
+  {
+    if (!running_) return;
+    shutdown_();
+    running_ = false;
+    paused_ = false;
+  }
+
+  bool isRunning() const { return running_; }
+  bool isPaused() const { return paused_; }
+  bool isInitialized() const { return initialized_; }
 
 protected:
-	PluginBase() {}
-	ros::NodeHandle nh_;
-	std::shared_ptr<state_estimator::Robot> robot_;
-	virtual void pause_() = 0;
-	virtual void shutdown_()=0;
-	virtual void resume_()=0;
-        virtual void reset_()=0;
-	virtual void initialize_()=0;
+  template<typename T>
+  T parameter(const std::string& name, const T& default_value)
+  {
+    if (!node_->has_parameter(name)) {
+      return node_->declare_parameter<T>(name, default_value);
+    }
+    return node_->get_parameter(name).get_value<T>();
+  }
+
+  rclcpp::Node::SharedPtr node_;
+  std::shared_ptr<state_estimator::Robot> robot_;
+
+  virtual void initialize_() = 0;
+  virtual void pause_() = 0;
+  virtual void resume_() = 0;
+  virtual void reset_() = 0;
+  virtual void shutdown_() = 0;
 
 private:
-	bool paused_;
-	bool running_;
-	bool initialized_;
-	
+  bool paused_{false};
+  bool running_{false};
+  bool initialized_{false};
 };
 
-
-
-
-
-} //namespace state_estimator_plugins
+}  // namespace state_estimator_plugins
 
 #endif

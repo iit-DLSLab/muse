@@ -1,98 +1,74 @@
-# Project configuration
 cmake_minimum_required(VERSION 3.10)
 project(iit_commons)
 
-find_package(PkgConfig)
-pkg_check_modules(EIGEN3 eigen3 REQUIRED)
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 17)
+endif()
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(catkin QUIET)
+find_package(ament_cmake REQUIRED)
+find_package(Eigen3 REQUIRED)
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-
-set(BUILD_DOC false  CACHE BOOL "Build Doxygen documentation")
-
-if(${BUILD_DOC})
-    # check if Doxygen is installed
-    find_package(Doxygen QUIET)
-    if (DOXYGEN_FOUND)
-        # set input and output files
-        set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in)
-        set(DOXYGEN_OUT ${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile)
-
-        # request to configure the file
-        configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
-
-        # note the option ALL which allows to build the docs together with the application
-        add_custom_target( doc_doxygen ALL
-            COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            COMMENT "Generating API documentation with Doxygen"
-            VERBATIM )
-    else (DOXYGEN_FOUND)
-        message(WARNING "Doxygen need to be installed to generate the Doxygen documentation")
-    endif (DOXYGEN_FOUND)
+set(BUILD_DOC OFF CACHE BOOL "Build Doxygen documentation")
+if(BUILD_DOC)
+  find_package(Doxygen QUIET)
+  if(DOXYGEN_FOUND)
+    configure_file(doc/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+    add_custom_target(doc_doxygen ALL
+      COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+      COMMENT "Generating API documentation"
+      VERBATIM)
+  endif()
 endif()
 
 set(LIB_NAME iitcommons)
+set(LIB_INSTALL_ROOT lib)
+add_library(${LIB_NAME} SHARED
+  src/hydraulics.cpp
+  src/fbl/four_bar_linkage.cpp
+  src/control/VirtualModel.cpp
+  src/planning.cpp)
+target_include_directories(${LIB_NAME} PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
+target_link_libraries(${LIB_NAME} PUBLIC Eigen3::Eigen)
 
-catkin_package(
-   INCLUDE_DIRS include
-   CATKIN_DEPENDS
-   LIBRARIES ${LIB_NAME}
-   DEPENDS
-)
-
-set(SOURCES src/hydraulics.cpp 
-            src/fbl/four_bar_linkage.cpp
-            src/control/VirtualModel.cpp
-			src/planning.cpp)
-
-# Include directories
-include_directories(include ${EIGEN3_INCLUDE_DIRS})
-
-# Add library
-add_library(${LIB_NAME} SHARED ${SOURCES})
-
-# Sub-libraries
-#
-# The YAML C++ configuration facilities.
 include(yaml_config.cmake)
-
-# The Euler-angles transforms
 include(euler_angles.cmake)
 
-install(DIRECTORY include/
-  DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}
-  PATTERN ".svn" EXCLUDE
-)
-
+install(DIRECTORY include/ DESTINATION include PATTERN ".svn" EXCLUDE)
 install(TARGETS ${LIB_NAME}
-        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-        RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
+  EXPORT export_${LIB_NAME}
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin)
 
+ament_export_targets(export_${LIB_NAME} HAS_LIBRARY_TARGET)
+ament_export_dependencies(Eigen3)
 
-if (CATKIN_ENABLE_TESTING)
-	find_package(catkin REQUIRED COMPONENTS rostest)
-	include_directories(include ${catkin_INCLUDE_DIRS})
-
-	catkin_add_gtest(vm-test src/control/testVirtualModel.cpp)
-	target_link_libraries(vm-test ${LIB_NAME} ${catkin_LIBRARIES} pthread)
-
-	catkin_add_gtest(algebra-test src/algebra_test.cpp)
-	target_link_libraries(algebra-test ${catkin_LIBRARIES} pthread)
-
-	catkin_add_gtest(filt-test src/test-filters.cpp)
-	target_link_libraries(filt-test ${LIB_NAME} ${catkin_LIBRARIES})
-
-	catkin_add_gtest(legboolmap-test src/legboolmap_test.cpp)
-	target_link_libraries(legboolmap-test ${LIB_NAME} ${catkin_LIBRARIES})
-
-	catkin_add_gtest(planning-test src/planning_test.cpp)
-	target_link_libraries(planning-test ${LIB_NAME} ${catkin_LIBRARIES} pthread)
-
-	catkin_add_gtest(rotation-test src/rotation_test.cpp)
-	target_link_libraries(rotation-test ${LIB_NAME} ${catkin_LIBRARIES} pthread)
-
+if(BUILD_TESTING)
+  find_package(ament_cmake_gtest REQUIRED)
+  foreach(test_name IN ITEMS vm algebra filt legboolmap planning rotation)
+    if(test_name STREQUAL "vm")
+      set(test_source src/control/testVirtualModel.cpp)
+    elseif(test_name STREQUAL "algebra")
+      set(test_source src/algebra_test.cpp)
+    elseif(test_name STREQUAL "filt")
+      set(test_source src/test-filters.cpp)
+    elseif(test_name STREQUAL "legboolmap")
+      set(test_source src/legboolmap_test.cpp)
+    elseif(test_name STREQUAL "planning")
+      set(test_source src/planning_test.cpp)
+    else()
+      set(test_source src/rotation_test.cpp)
+    endif()
+    ament_add_gtest(${test_name}-test ${test_source})
+    if(TARGET ${test_name}-test)
+      target_link_libraries(${test_name}-test ${LIB_NAME} Eigen3::Eigen pthread)
+    endif()
+  endforeach()
 endif()
+
+ament_package()

@@ -1,223 +1,170 @@
-#include "state_estimator/plugin.hpp"
-#include "state_estimator/Models/attitude_bias_NLO.hpp"
 #include "state_estimator/Models/attitude_bias_XKF.hpp"
-#include "iit/commons/geometry/rotations.h"
+#include "state_estimator/plugin.hpp"
 
-#include "state_estimator_msgs/attitude.h"
-#include "state_estimator/lib.hpp"
+#include <iit/commons/geometry/rotations.h>
+#include <sensor_msgs/msg/imu.hpp>
+#include <state_estimator_msgs/msg/attitude.hpp>
 
-#include <message_filters/subscriber.h>
-#include <message_filters/time_synchronizer.h>
-#include <rosgraph_msgs/Clock.h>
-#include <sensor_msgs/Imu.h>						  	// read acceleration and angular velocity from imu
-#include <nav_msgs/Odometry.h>
-#include <message_filters/sync_policies/approximate_time.h>
+#include <pluginlib/class_list_macros.hpp>
+#include <rclcpp/rclcpp.hpp>
 
-#include <iostream>
-#include <ros/ros.h>
-#include <ros/time.h>
-#include <rosbag/bag.h>
-#include <rosbag/view.h>
-#include <std_msgs/Int32.h>
-#include <std_msgs/String.h>
+#include <cmath>
+#include <memory>
+#include <stdexcept>
+#include <string>
+#include <vector>
 
-
-namespace state_estimator_plugins 
+namespace state_estimator_plugins
 {
-	class AttitudeEstimationPlugin : public PluginBase 
-	{
-	public:
 
-		AttitudeEstimationPlugin():
-		attitude_(nullptr),
-		imu_sub_(nullptr),
-		pub_(nullptr)
-		{ } 	
+class AttitudeEstimationPlugin : public PluginBase
+{
+public:
+  std::string getName() const override { return "AttitudeEstimation"; }
+  std::string getDescription() const override { return "Attitude Estimation Plugin"; }
 
-		~AttitudeEstimationPlugin() 
-		{
-			if (attitude_!=nullptr) delete(attitude_);
-      		if (imu_sub_!=nullptr) delete(imu_sub_);
-			if (pub_!=nullptr) delete(pub_);
-		}
+private:
+  void initialize_() override
+  {
+    const auto imu_topic = parameter<std::string>(
+      "attitude_estimation_plugin.imu_topic", "/imu");
+    const auto pub_topic = parameter<std::string>(
+      "attitude_estimation_plugin.pub_topic", "~/attitude");
+    ki_ = parameter<double>("attitude_estimation_plugin.ki", 0.02);
+    kp_ = parameter<double>("attitude_estimation_plugin.kp", 10.0);
 
-		std::string getName() override { return std::string("AttitudeEstimation"); }
-		std::string getDescription() override { return std::string("Attitude Estimation Plugin"); }
+    const auto base_R_imu = parameter<std::vector<double>>(
+      "attitude_estimation_plugin.base_R_imu", {});
+    const auto north = parameter<std::vector<double>>(
+      "attitude_estimation_plugin.north_vector", {});
+    const auto gravity = parameter<std::vector<double>>(
+      "attitude_estimation_plugin.gravity_vector", {});
+    const auto P = parameter<std::vector<double>>("attitude_estimation_plugin.P", {});
+    const auto Q = parameter<std::vector<double>>("attitude_estimation_plugin.Q", {});
+    const auto R = parameter<std::vector<double>>("attitude_estimation_plugin.R", {});
 
-		void initialize_() override 
-		{
-    		t0 = 0.0;
-    		xhat_estimated << 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
-    		xhat_estimated.head(4) = xhat_estimated.head(4) / xhat_estimated.head(4).norm();
+    if (base_R_imu.size() == 9) {
+      base_R_imu_ = Eigen::Map<const Eigen::Matrix3d>(base_R_imu.data());
+    } else {
+      RCLCPP_WARN(node_->get_logger(), "Invalid base_R_imu; using identity");
+      base_R_imu_.setIdentity();
+    }
+    if (north.size() == 3) {
+      north_ = Eigen::Map<const Eigen::Vector3d>(north.data());
+    } else {
+      RCLCPP_WARN(node_->get_logger(), "Invalid north_vector; using default");
+      north_ << 1.0 / std::sqrt(3.0), 1.0 / std::sqrt(3.0), 1.0 / std::sqrt(3.0);
+    }
+    if (gravity.size() == 3) {
+      gravity_ = Eigen::Map<const Eigen::Vector3d>(gravity.data());
+    } else {
+      RCLCPP_WARN(node_->get_logger(), "Invalid gravity_vector; using default");
+      gravity_ << 0.0, 0.0, 9.81;
+    }
+    if (P.size() != 36 || Q.size() != 36 || R.size() != 36) {
+      throw std::runtime_error("attitude P, Q, and R parameters must each contain 36 values");
+    }
+    P_ = Eigen::Map<const Eigen::Matrix<double, 6, 6, Eigen::RowMajor>>(P.data());
+    Q_ = Eigen::Map<const Eigen::Matrix<double, 6, 6, Eigen::RowMajor>>(Q.data());
+    R_ = Eigen::Map<const Eigen::Matrix<double, 6, 6, Eigen::RowMajor>>(R.data());
+    resetFilter();
 
-    		// Load config parameters
-    		std::string imu_topic, pub_topic;
-    		std::vector<double> base_R_imu_vec, north_vec, gravity_vec;
-			std::vector<double> P_vec, Q_vec, R_vec;
-    		double ki_param, kp_param;
+    imu_sub_ = node_->create_subscription<sensor_msgs::msg::Imu>(
+      imu_topic, rclcpp::SensorDataQoS(),
+      [this](sensor_msgs::msg::Imu::ConstSharedPtr imu) { imuCallback(imu); });
+    pub_ = node_->create_publisher<state_estimator_msgs::msg::Attitude>(pub_topic, 1);
+    RCLCPP_INFO(
+      node_->get_logger(), "AttitudeEstimationPlugin reading %s", imu_topic.c_str());
+  }
 
-    		nh_.param("attitude_estimation_plugin/imu_topic", imu_topic, std::string("/anymal/imu"));
-    		nh_.param("attitude_estimation_plugin/pub_topic", pub_topic, std::string("attitude"));
-    		nh_.param("attitude_estimation_plugin/ki", ki_param, 0.02);
-    		nh_.param("attitude_estimation_plugin/kp", kp_param, 10.0);
-    		nh_.param("attitude_estimation_plugin/base_R_imu", base_R_imu_vec, std::vector<double>());
-    		nh_.param("attitude_estimation_plugin/north_vector", north_vec, std::vector<double>());
-			nh_.param("attitude_estimation_plugin/gravity_vector", gravity_vec, std::vector<double>());
-			nh_.param("attitude_estimation_plugin/P", P_vec, std::vector<double>());
-    		nh_.param("attitude_estimation_plugin/Q", Q_vec, std::vector<double>());
-    		nh_.param("attitude_estimation_plugin/R", R_vec, std::vector<double>());
+  void imuCallback(const sensor_msgs::msg::Imu::ConstSharedPtr& imu)
+  {
+    if (isPaused()) return;
 
-    		// Set gains
-    		ki = ki_param;
-    		kp = kp_param;
+    Eigen::Vector3d omega(
+      imu->angular_velocity.x, imu->angular_velocity.y, imu->angular_velocity.z);
+    Eigen::Vector3d acceleration(
+      imu->linear_acceleration.x, imu->linear_acceleration.y, imu->linear_acceleration.z);
+    computeAttitude(omega, acceleration);
+  }
 
-    		// Convert base_R_imu
-    		if (base_R_imu_vec.size() == 9) {
-    		    b_R_imu = Eigen::Map<Eigen::Matrix3d>(base_R_imu_vec.data());
-    		} else {
-    		    ROS_WARN("Invalid or missing base_R_imu config — using identity.");
-    		    b_R_imu.setIdentity();
-    		}
+  void computeAttitude(Eigen::Vector3d& omega, Eigen::Vector3d& acceleration)
+  {
+    const double now = node_->now().seconds();
+    if (begin_) {
+      time_begin_ = now;
+      begin_ = false;
+    }
+    const double time = now - time_begin_;
 
-    		// Convert north_vector
-    		if (north_vec.size() == 3) {
-    		    m_n = Eigen::Map<Eigen::Vector3d>(north_vec.data());
-    		} else {
-    		    ROS_WARN("Invalid or missing north_vector config — using default.");
-    		    m_n << 1.0 / sqrt(3), 1.0 / sqrt(3), 1.0 / sqrt(3);
-    		}
+    Eigen::Quaterniond quaternion;
+    quaternion.w() = state_(0);
+    quaternion.vec() << state_(1), state_(2), state_(3);
+    const Eigen::Vector3d force_base = base_R_imu_ * acceleration;
+    const Eigen::Vector3d magnetic_base = iit::commons::quatToRotMat(quaternion) * north_;
+    Eigen::Vector6d measurement;
+    measurement << force_base, magnetic_base;
 
-			// Convert gravity_vector
-    		if (north_vec.size() == 3) {
-    		    f_n = Eigen::Map<Eigen::Vector3d>(gravity_vec.data());
-    		} else {
-    		    ROS_WARN("Invalid or missing gravity_vector config — using default.");
-    		    f_n << 0.0, 0.0, 9.81;
-    		}
-    		
-			Eigen::Matrix6d P0 = Eigen::Map<Eigen::Matrix<double, 6, 6, Eigen::RowMajor>>(P_vec.data());
-			Eigen::Matrix6d Q = Eigen::Map<Eigen::Matrix<double, 6, 6, Eigen::RowMajor>>(Q_vec.data());
-    		Eigen::Matrix6d R = Eigen::Map<Eigen::Matrix<double, 6, 6, Eigen::RowMajor>>(R_vec.data());
+    attitude_->update(time, base_R_imu_ * omega, measurement);
+    state_ = attitude_->getX();
 
-    		attitude_ = new state_estimator::AttitudeBiasXKF(t0, xhat_estimated, P0, Q, R, f_n, m_n, ki, kp);
+    const Eigen::Vector7d derivative =
+      attitude_->calc_f(time, state_, base_R_imu_ * omega);
+    Eigen::Quaterniond quaternion_dot;
+    quaternion_dot.w() = derivative(0);
+    quaternion_dot.vec() << derivative(1), derivative(2), derivative(3);
+    const Eigen::Vector3d filtered_omega =
+      iit::commons::quatToOmega(quaternion, quaternion_dot);
+    const Eigen::Vector3d euler_degrees =
+      iit::commons::quatToRPY(quaternion) * (180.0 / M_PI);
 
-    		// Set up ROS interfaces
-    		imu_sub_ = new ros::Subscriber(nh_.subscribe(imu_topic, 250, &AttitudeEstimationPlugin::callback_imu, this));
-    		pub_ = new ros::Publisher(nh_.advertise<state_estimator_msgs::attitude>(pub_topic, 1));
+    state_estimator_msgs::msg::Attitude message;
+    message.header.stamp = node_->now();
+    message.quaternion = {{quaternion.w(), quaternion.x(), quaternion.y(), quaternion.z()}};
+    message.roll_deg = euler_degrees(0);
+    message.pitch_deg = euler_degrees(1);
+    message.yaw_deg = euler_degrees(2);
+    message.angular_velocity = {{filtered_omega(0), filtered_omega(1), filtered_omega(2)}};
+    pub_->publish(message);
+  }
 
-    		ROS_INFO_STREAM("AttitudeEstimationPlugin initialized with topic '" << imu_topic << "'");
-  				
-		}
+  void resetFilter()
+  {
+    state_ << 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+    attitude_ = std::make_unique<state_estimator::AttitudeBiasXKF>(
+      0.0, state_, P_, Q_, R_, gravity_, north_, ki_, kp_);
+    begin_ = true;
+    time_begin_ = 0.0;
+  }
 
+  void shutdown_() override
+  {
+    imu_sub_.reset();
+    pub_.reset();
+  }
+  void pause_() override {}
+  void resume_() override {}
+  void reset_() override { resetFilter(); }
 
-		void shutdown_() override { }
-		void pause_() override { }
-		void resume_() override { }
-		void reset_() override { }
+  std::unique_ptr<state_estimator::AttitudeBiasXKF> attitude_;
+  rclcpp::Subscription<sensor_msgs::msg::Imu>::SharedPtr imu_sub_;
+  rclcpp::Publisher<state_estimator_msgs::msg::Attitude>::SharedPtr pub_;
 
-		void callback_imu 
-		(
-			const sensor_msgs::Imu::ConstPtr& imu
-		)
-		{
-			Eigen::Vector3d omega(imu->angular_velocity.x, imu->angular_velocity.y, imu->angular_velocity.z);
-        	Eigen::Vector3d acc(imu->linear_acceleration.x, imu->linear_acceleration.y, imu->linear_acceleration.z);	
-			computeAttitude(omega,acc);		
-		}
+  Eigen::Vector7d state_;
+  Eigen::Matrix6d P_;
+  Eigen::Matrix6d Q_;
+  Eigen::Matrix6d R_;
+  Eigen::Vector3d gravity_;
+  Eigen::Vector3d north_;
+  Eigen::Matrix3d base_R_imu_;
+  double ki_{0.02};
+  double kp_{10.0};
+  bool begin_{true};
+  double time_begin_{0.0};
+};
 
-		void computeAttitude(Eigen::Vector3d &omega,Eigen::Vector3d &acc)
-		{
-			/* to take the time from a rosbag:
-			$ roscore
-			$ rosparam set use_sim_time true
-			$ rosbag play name_of_the_bag.bag --clock
-			*/
-	
-			if (begin)
-			{
-				time_begin_ = ros::Time::now().toSec();
-				begin = false;
-			}		
+}  // namespace state_estimator_plugins
 
-			time_ = ros::Time::now().toSec() - time_begin_;
-
-      		quat_est.w() = xhat_estimated(0);
-      		quat_est.vec() << xhat_estimated(1),xhat_estimated(2),xhat_estimated(3);
-
-      		f_b = b_R_imu*acc;
-      		m_b = iit::commons::quatToRotMat(quat_est)*m_n;
-
-      		z << f_b, m_b; 
-	
-			attitude_->update(time_,b_R_imu*omega, z);
-
-      		xhat_estimated = attitude_->getX();
-			
-			xdot = attitude_->calc_f(time_,xhat_estimated,b_R_imu*omega);
-			quat_dot.w() = xdot(0);
-			quat_dot.vec() << xdot(1),xdot(2),xdot(3);
-			omega_filt = iit::commons::quatToOmega(quat_est,quat_dot);
-
-			// // publishing
-			msg_.header.stamp = ros::Time::now();
-
-			msg_.quaternion[0] = quat_est.w();
-			msg_.quaternion[1] = quat_est.x();
-			msg_.quaternion[2] = quat_est.y();
-			msg_.quaternion[3] = quat_est.z();
-
-			euler_radians = iit::commons::quatToRPY(quat_est);
-      		euler_degrees = euler_radians * (180.0 / M_PI);
-
-			msg_.roll_deg  = euler_degrees(0);
-			msg_.pitch_deg = euler_degrees(1);
-			msg_.yaw_deg   = euler_degrees(2);
-
-			msg_.angular_velocity[0] = omega_filt(0);
-			msg_.angular_velocity[1] = omega_filt(1);
-			msg_.angular_velocity[2] = omega_filt(2);
-
-			pub_->publish(msg_);
-
-		} // end computeAttitude
-
-
-	private:
-
-		state_estimator::AttitudeBiasXKF *attitude_;
-		Eigen::Matrix<double,7,1> xhat_estimated;
-		Eigen::Matrix<double,6,6> P0;
-		Eigen::Matrix<double,6,6> Q;
-		Eigen::Matrix<double,6,6> R;
-		Eigen::Matrix<double,3,1> f_n; 
-		Eigen::Matrix<double,3,1> m_n; 
-    	Eigen::Matrix3d b_R_imu;
-		double ki; 
-		double kp; 
-		double t0; 
-	
-		ros::Subscriber *imu_sub_;
-		ros::Publisher *pub_;
-
-    	Eigen::Quaterniond quat_est;
-    	Eigen::Vector3d f_b;
-    	Eigen::Vector3d m_b; 
-    	Eigen::Vector6d z;
-    	Eigen::Vector7d xdot;
-    	Eigen::Quaterniond quat_dot;
-    	Eigen::Vector3d omega_filt;
-    	Eigen::Vector3d euler_radians;
-    	Eigen::Vector3d euler_degrees;
-
-		state_estimator_msgs::attitude msg_;
-	
-		double time_{};
-		bool begin{true};
-		double time_begin_;
-
-	}; // end class AttitudeEstimationPlugin
-
-} // end namespace state_estimator_plugins
-
-#include <pluginlib/class_list_macros.h>
-PLUGINLIB_EXPORT_CLASS(state_estimator_plugins::AttitudeEstimationPlugin, state_estimator_plugins::PluginBase)
+PLUGINLIB_EXPORT_CLASS(
+  state_estimator_plugins::AttitudeEstimationPlugin,
+  state_estimator_plugins::PluginBase)

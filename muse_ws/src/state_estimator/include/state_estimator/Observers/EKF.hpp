@@ -55,7 +55,6 @@ public:
 
 	virtual Eigen::Matrix<T,N6,N6> getP() const {
 
-        //ROS_ERROR_STREAM("sei dentro P");
         return this->P;
 
 	}

@@ -1,20 +1,18 @@
-leg_odometry_plugin:
-  plugin: "LegOdometryPlugin"
-  # urdf_path: "$(find state_estimator)/urdfs/anymal.urdf"
-  urdf_path: "$(find state_estimator)/urdfs/anymal.urdf"
-  
-  imu_topic: "/anymal/imu" # Unitree: "/trunk_imu" # ANYmal: "/sensors/imu"
-  anymal_state_topic: "/anymal/state_estimator/anymal_state"
-  base_R_imu: [-1.0, 0.0, 0.0,
-                0.0, 1.0, 0.0,
-                0.0, 0.0, -1.0]
-  base_frame_name: "base"
-  foot_frame_names: ["LF_FOOT", "RF_FOOT", "LH_FOOT", "RH_FOOT"]
-  joint_names:
-    ["LF_HAA", "LF_HFE", "LF_KFE",
-     "RF_HAA", "RF_HFE", "RF_KFE",
-     "LH_HAA", "LH_HFE", "LH_KFE",
-     "RH_HAA", "RH_HFE", "RH_KFE"]
-  contact_topic: "/state_estimator/contact_detection"
-  attitude_topic: "/state_estimator/attitude"
-  pub_topic: "leg_odometry"
+state_estimator:
+  ros__parameters:
+    leg_odometry_plugin:
+      urdf_path: "urdfs/anymal.urdf"
+      imu_topic: "/imu"
+      actuator_state_topic: "/actuator_state"
+      base_R_imu: [-1.0, 0.0, 0.0,
+                   0.0, 1.0, 0.0,
+                   0.0, 0.0, -1.0]
+      base_frame_name: "base"
+      foot_frame_names: ["LF_FOOT", "RF_FOOT", "LH_FOOT", "RH_FOOT"]
+      joint_names: ["LF_HAA", "LF_HFE", "LF_KFE",
+                    "RF_HAA", "RF_HFE", "RF_KFE",
+                    "LH_HAA", "LH_HFE", "LH_KFE",
+                    "RH_HAA", "RH_HFE", "RH_KFE"]
+      contact_topic: "~/contact_detection"
+      attitude_topic: "~/attitude"
+      pub_topic: "~/leg_odometry"

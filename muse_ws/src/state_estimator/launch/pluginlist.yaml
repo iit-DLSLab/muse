@@ -1,2 +1,9 @@
-plugin_whitelist: []
-plugin_blacklist: []
+plugin_whitelist_ =
+    this->declare_parameter<std::vector<std::string>>(
+        "plugin_whitelist",
+        std::vector<std::string>{});
+
+plugin_blacklist_ =
+    this->declare_parameter<std::vector<std::string>>(
+        "plugin_blacklist",
+        std::vector<std::string>{});

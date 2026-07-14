@@ -1,112 +1,84 @@
 cmake_minimum_required(VERSION 3.10)
 project(state_estimator)
 
-add_compile_options(-std=c++17)
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 17)
+endif()
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  roslib
-  rosconsole
-  dynamic_reconfigure
-  sensor_msgs
-  geometry_msgs
-  nav_msgs
-  std_msgs
-  tf2_ros
-  pluginlib
-  message_filters
-  state_estimator_msgs
-  anymal_msgs
-  iit_commons
-)
-
-find_package(Boost REQUIRED COMPONENTS
-  chrono
-  program_options
-  system
-  thread
-)
-find_package(Eigen3 REQUIRED NO_MODULE)
-find_package(PkgConfig REQUIRED)
+find_package(ament_cmake REQUIRED)
+find_package(ament_index_cpp REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(iit_commons REQUIRED)
+find_package(nav_msgs REQUIRED)
+find_package(pluginlib REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(state_estimator_msgs REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(Eigen3 REQUIRED)
 find_package(pinocchio REQUIRED)
 
-catkin_package(
-  INCLUDE_DIRS include
-  LIBRARIES ${PROJECT_NAME}_plugins
-  CATKIN_DEPENDS
-    roscpp
-    roslib
-    sensor_msgs
-    geometry_msgs
-    nav_msgs
-    std_msgs
-    tf2_ros
-    pluginlib
-    message_filters
-    anymal_msgs
-    state_estimator_msgs
-    iit_commons
-)
-
-include_directories(
-  include
-  ${catkin_INCLUDE_DIRS}
-  ${Boost_INCLUDE_DIRS}
-  ${EIGEN3_INCLUDE_DIR}
-  ${EIGEN3_INCLUDE_DIRS}
-  ${PINOCCHIO_INCLUDE_DIRS}
-)
-
-add_library(${PROJECT_NAME}_plugins
+add_library(${PROJECT_NAME}_plugins SHARED
   src/plugins/attitude_estimation_plugin.cpp
   src/plugins/contact_detection_plugin.cpp
   src/plugins/leg_odometry_plugin.cpp
   src/plugins/sensor_fusion_plugin.cpp
-  src/plugins/tf_publisher_plugin.cpp
-)
-add_dependencies(${PROJECT_NAME}_plugins
-  ${catkin_EXPORTED_TARGETS}
-)
-target_link_libraries(${PROJECT_NAME}_plugins
-  ${catkin_LIBRARIES}
-  ${Boost_LIBRARIES}
-  ${PINOCCHIO_LIBRARIES}
-  Eigen3::Eigen
-)
+  src/plugins/tf_publisher_plugin.cpp)
+target_include_directories(${PROJECT_NAME}_plugins PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
+ament_target_dependencies(${PROJECT_NAME}_plugins
+  ament_index_cpp geometry_msgs iit_commons nav_msgs pluginlib rclcpp
+  sensor_msgs state_estimator_msgs tf2_ros)
+target_link_libraries(${PROJECT_NAME}_plugins Eigen3::Eigen)
+if(TARGET pinocchio::pinocchio)
+  target_link_libraries(${PROJECT_NAME}_plugins pinocchio::pinocchio)
+else()
+  target_include_directories(${PROJECT_NAME}_plugins PRIVATE ${PINOCCHIO_INCLUDE_DIRS})
+  target_link_libraries(${PROJECT_NAME}_plugins ${PINOCCHIO_LIBRARIES})
+endif()
 
 add_executable(${PROJECT_NAME}_node
   src/state_estimator.cpp
-  src/state_estimator_node.cpp
-)
-set_target_properties(${PROJECT_NAME}_node PROPERTIES
-  OUTPUT_NAME node
-  PREFIX ""
-)
-add_dependencies(${PROJECT_NAME}_node
-  ${catkin_EXPORTED_TARGETS}
-)
-target_link_libraries(${PROJECT_NAME}_node
-  ${catkin_LIBRARIES}
-  ${Boost_LIBRARIES}
-)
+  src/state_estimator_node.cpp)
+target_include_directories(${PROJECT_NAME}_node PRIVATE include)
+ament_target_dependencies(${PROJECT_NAME}_node pluginlib rclcpp state_estimator_msgs)
+
+pluginlib_export_plugin_description_file(${PROJECT_NAME} state_estimator_plugins.xml)
 
 install(TARGETS ${PROJECT_NAME}_node ${PROJECT_NAME}_plugins
-  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION lib/${PROJECT_NAME})
+install(DIRECTORY include/ DESTINATION include)
+install(DIRECTORY config launch rviz urdfs DESTINATION share/${PROJECT_NAME})
 
-install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-  FILES_MATCHING PATTERN "*.hpp"
-)
+if(BUILD_TESTING)
+  find_package(ament_cmake_gtest REQUIRED)
 
-install(DIRECTORY config launch rviz urdfs
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
+  ament_add_gtest(model_validation_test test/model_validation_test.cpp)
+  if(TARGET model_validation_test)
+    target_include_directories(model_validation_test PRIVATE include)
+    target_compile_definitions(model_validation_test PRIVATE
+      TEST_URDF_PATH="${CMAKE_CURRENT_SOURCE_DIR}/urdfs/anymal.urdf")
+    target_link_libraries(model_validation_test Eigen3::Eigen)
+    if(TARGET pinocchio::pinocchio)
+      target_link_libraries(model_validation_test pinocchio::pinocchio)
+    else()
+      target_include_directories(model_validation_test PRIVATE ${PINOCCHIO_INCLUDE_DIRS})
+      target_link_libraries(model_validation_test ${PINOCCHIO_LIBRARIES})
+    endif()
+  endif()
 
-install(FILES
-  ${PROJECT_NAME}_plugins.xml
-  ${PROJECT_NAME}_tools.xml
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
+  ament_add_gtest(plugin_loading_test test/plugin_loading_test.cpp)
+  if(TARGET plugin_loading_test)
+    target_include_directories(plugin_loading_test PRIVATE include)
+    ament_target_dependencies(plugin_loading_test pluginlib rclcpp)
+  endif()
+endif()
+
+ament_export_include_directories(include)
+ament_export_dependencies(rclcpp)
+ament_package()

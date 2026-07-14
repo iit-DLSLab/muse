@@ -1,6 +1,7 @@
-tf_publisher_plugin:
-  plugin: "TfPublisherPlugin"
-  odom_topic: "/state_estimator/sensor_fusion"
-  parent_frame: "world"
-  child_frame: "base"
-  use_odom_frame_ids: false
+state_estimator:
+  ros__parameters:
+    tf_publisher_plugin:
+      odom_topic: "~/sensor_fusion"
+      parent_frame: "world"
+      child_frame: "base"
+      use_odom_frame_ids: false
