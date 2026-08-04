@@ -12,10 +12,29 @@ IEEE Robotics and Automation Letters paper
 >
 > However, the complete estimation pipeline has not yet been validated with real robot data or a ROS 2 bag, and numerical equivalence with the ROS 1 implementation on `main` has not yet been confirmed.
 
+## :t-rex: Prerequisites
 
-## Environment
+- Conda or Mamba
+- Dependencies from the provided `environment.yml`
 
-Create or update the RoboStack Humble environment:
+The conda environment is named `muse-ros2` and provides the ROS2 Humble stack, `catkin_tools`, `Eigen`, `Pinocchio`, `RViz`, `PlotJuggler`, and the `ROS2` packages used by the workspace.
+
+Create the environment with:
+
+```sh
+cd muse
+mamba env create -f environment.yml
+```
+
+If the environment already exists, update it with:
+
+```sh
+mamba env update -n muse-ros2 -f environment.yml --prune
+```
+
+## :earth_africa: Environment
+
+Create or update the Humble environment:
 
 ```bash
 mamba env create -f environment.yml
@@ -27,7 +46,7 @@ conda activate muse-ros2
 The environment contains ROS 2 Humble, Eigen, Pinocchio, colcon, RViz2,
 PlotJuggler, and rosbag2. MUSE does not require a robot vendor SDK.
 
-## Build
+## :hammer_and_wrench: Build
 
 ```bash
 conda activate muse-ros2
@@ -43,7 +62,7 @@ colcon test
 colcon test-result --verbose
 ``` -->
 
-## Launch
+## :rocket: Launch
 
 ```bash
 ros2 launch state_estimator state_estimator.launch.py
@@ -144,6 +163,8 @@ or bridged to `JointStateWithAcceleration`.
 - The former timeout configuration was inactive and is not part of the ROS 2 node.
 
 ## Citation
+
+If you like this work and would like to cite it (thanks):
 
 ```bibtex
 @ARTICLE{10933515,
