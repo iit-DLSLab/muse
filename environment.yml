@@ -1,36 +1,41 @@
-name: muse
+name: muse-ros2
 channels:
-  - robostack-noetic
+  - robostack-humble
   - conda-forge
 dependencies:
   - python=3.11
-  - numpy=1.26
   - compilers
   - cmake
+  - cxx-compiler
   - make
   - ninja
   - pkg-config
   - git
   - eigen=3.4
-  - libboost-devel
+  - yaml-cpp
   - pinocchio
-  - ros-noetic-ros-base
-  - ros-noetic-catkin
-  - ros-noetic-roscpp
-  - ros-noetic-rosconsole
-  - ros-noetic-std-msgs
-  - ros-noetic-sensor-msgs
-  - ros-noetic-geometry-msgs
-  - ros-noetic-nav-msgs
-  - ros-noetic-tf2-ros
-  - ros-noetic-pluginlib
-  - ros-noetic-message-filters
-  - ros-noetic-message-generation
-  - ros-noetic-message-runtime
-  - ros-noetic-dynamic-reconfigure
-  - ros-noetic-rviz
-  - ros-noetic-plotjuggler-ros
-  - catkin_pkg
-  - catkin_tools
-  - rosdep
-  - rospkg
+  - pip
+  - ros-humble-desktop
+  - ros-humble-ament-cmake
+  - ros-humble-ament-cmake-gtest
+  - ros-humble-rclcpp
+  - ros-humble-rclcpp-components
+  - ros-humble-pluginlib
+  - ros-humble-ament-index-cpp
+  - ros-humble-class-loader
+  - ros-humble-std-msgs
+  - ros-humble-sensor-msgs
+  - ros-humble-geometry-msgs
+  - ros-humble-nav-msgs
+  - ros-humble-tf2-ros
+  - ros-humble-tf2-tools
+  - ros-humble-rosidl-default-generators
+  - ros-humble-rosidl-default-runtime
+  - ros-humble-launch
+  - ros-humble-launch-ros
+  - ros-humble-rosbag2
+  - ros-humble-rviz2
+  - ros-humble-plotjuggler-ros
+  - ros-humble-pcl-ros
+  - colcon-common-extensions
+  - vcstool  

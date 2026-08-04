@@ -1,151 +1,149 @@
-<h1 align="center"> MUSE: A Real-Time Multi-Sensor State Estimator for Quadruped Robots </h1>
-<h3 align="center">Ylenia Nisticò, João Carlos Virgolino Soares, Lorenzo Amatucci, Geoff Fink and Claudio Semini</h3>
+# MUSE: Multi-Sensor State Estimator
 
-<h4 align="center">This paper has been accepted to IEEE Robotics and Automation Letters, and it is available at https://arxiv.org/abs/2503.12101 </h4>
+MUSE is a ROS 2 Humble proprioceptive state estimator for quadruped robots. It
+loads estimator modules with `pluginlib` and publishes attitude, contact state,
+leg odometry, fused odometry, and TF. The estimator is described in the 2025
+IEEE Robotics and Automation Letters paper
+[MUSE: A Real-Time Multi-Sensor State Estimator for Quadruped Robots](https://arxiv.org/abs/2503.12101).
 
-# :computer: Overview
+> **Validation status**
+>
+> This ROS 2 port has been successfully built and launched on ROS 2 Humble. The estimator node, plugins, parameters, topics, and services have been checked at startup.
+>
+> However, the complete estimation pipeline has not yet been validated with real robot data or a ROS 2 bag, and numerical equivalence with the ROS 1 implementation on `main` has not yet been confirmed.
 
-MUSE provides a ROS1 state-estimator node for quadruped robots. The node loads estimator modules with `pluginlib`, reads proprioceptive robot data, and publishes attitude, contact, leg odometry, fused odometry, and TF outputs.
 
-The current ROS1 implementation is proprioceptive. The necessary online inputs are:
+## Environment
 
-- IMU measurements
-- actuator readings
+Create or update the RoboStack Humble environment:
 
-It also requires a robot URDF and matching foot/joint frame names in the configuration.
-
-Default configuration files are provided for ANYmal-style naming, with additional URDFs for `aliengo`, `anymal`, and `go1` in `muse_ws/src/state_estimator/urdfs`.
-
-## :t-rex: Prerequisites
-
-- Conda or Mamba
-- Dependencies from the provided `environment.yml`
-
-The conda environment is named `muse` and provides the ROS1 Noetic stack, `catkin_tools`, Eigen, Pinocchio, RViz, PlotJuggler, and the ROS packages used by the workspace.
-
-Create the environment with:
-
-```sh
-cd muse
+```bash
 mamba env create -f environment.yml
+# For an existing environment:
+mamba env update -n muse-ros2 -f environment.yml --prune
+conda activate muse-ros2
 ```
 
-If the environment already exists, update it with:
+The environment contains ROS 2 Humble, Eigen, Pinocchio, colcon, RViz2,
+PlotJuggler, and rosbag2. MUSE does not require a robot vendor SDK.
 
-```sh
-mamba env update -n muse -f environment.yml --prune
-```
+## Build
 
-## :hammer_and_wrench: Building
-
-Build the ROS1 workspace with `catkin build`:
-
-```sh
-cd muse/muse_ws
-conda activate muse
-catkin init
-catkin config --source-space src --build-space build --devel-space devel --install-space installcatkin build
+```bash
+conda activate muse-ros2
+cd muse_ws
+colcon build --symlink-install
 source install/setup.bash
 ```
 
-## :rocket: Running
+<!-- Run automated tests with:
 
-Launch the estimator:
+```bash
+colcon test
+colcon test-result --verbose
+``` -->
 
-```sh
-roslaunch state_estimator state_estimator.launch
+## Launch
+
+```bash
+ros2 launch state_estimator state_estimator.launch.py
 ```
 
-RViz is disabled by default:
+Optional launch arguments are:
 
-```sh
-roslaunch state_estimator state_estimator.launch rviz:=false
+```bash
+ros2 launch state_estimator state_estimator.launch.py use_sim_time:=true rviz:=true
 ```
 
-For rosbag playback, use simulated time and play the bag with `/clock`:
+The node remains active while inputs are unavailable and reports missing input
+conditions with throttled warnings.
 
-```sh
-roslaunch state_estimator state_estimator.launch use_sim_time:=true
-rosbag play --clock your_rosbag.bag
+## Inputs and outputs
+
+Default inputs are:
+
+- `/imu` (`sensor_msgs/msg/Imu`)
+- `/actuator_state` (`state_estimator_msgs/msg/JointStateWithAcceleration`)
+
+The actuator message contains a header plus joint names, positions, velocities,
+accelerations, and efforts. Joint names are mapped to the configured URDF joints;
+the estimator does not depend on array ordering when names are present.
+
+Default outputs are:
+
+- `/state_estimator/attitude` (`state_estimator_msgs/msg/Attitude`)
+- `/state_estimator/contact_detection` (`state_estimator_msgs/msg/ContactDetection`)
+- `/state_estimator/leg_odometry` (`state_estimator_msgs/msg/LegOdometry`)
+- `/state_estimator/sensor_fusion` (`nav_msgs/msg/Odometry`)
+- `/tf`, normally publishing `world` to `base`
+
+Topics are parameters and may be remapped or changed in the files under
+`state_estimator/config`.
+
+## Plugins and services
+
+The node loads the five classes declared in `state_estimator_plugins.xml`:
+
+- `AttitudeEstimation`
+- `ContactDetection`
+- `LegOdometry`
+- `SensorFusion`
+- `TfPublisher`
+
+`launch/pluginlist.yaml` provides glob-style `plugin_whitelist` and
+`plugin_blacklist` parameters. Empty lists load every plugin. A non-empty
+whitelist with an empty blacklist loads only matching whitelist entries.
+
+Private ROS 2 services under `/state_estimator` list and describe plugins and
+perform start, stop, pause, resume, restart, and reset operations. For example:
+
+```bash
+ros2 service call /state_estimator/list_all_estimators \
+  state_estimator_msgs/srv/ListAllEstimators '{}'
+ros2 service call /state_estimator/pause_estimator \
+  state_estimator_msgs/srv/PauseEstimator '{name: AttitudeEstimation}'
 ```
 
-## :electric_plug: ROS Interfaces
+## Robot configuration
 
-Default input topics:
+Contact detection and leg odometry use Pinocchio models loaded from a URDF.
+Relative `urdf_path` values are resolved from the installed `state_estimator`
+package share directory, so installed launches do not depend on the source tree.
+Absolute paths are also accepted.
 
-- `/anymal/imu` (`sensor_msgs/Imu`)
-- `/anymal/state_estimator/anymal_state` (the definition of the anymal msgs is taken from the [holistic_fusion](https://github.com/leggedrobotics/holistic_fusion/tree/main/ros/graph_msf_anymal_msgs/msg) repo from ETH)
+To configure another robot:
 
-Default estimator outputs are published in the private node namespace:
+1. Install its URDF with the package or set an absolute `urdf_path`.
+2. Set four foot frame names in LF, RF, LH, RH order.
+3. Set the corresponding twelve joint names.
+4. Set the base frame and IMU-to-base rotation.
+5. Tune GRF thresholds and contact options for the actuator effort convention.
 
-- `/state_estimator/attitude` (`state_estimator_msgs/attitude`)
-- `/state_estimator/contact_detection` (`state_estimator_msgs/ContactDetection`)
-- `/state_estimator/leg_odometry` (`state_estimator_msgs/LegOdometry`)
-- `/state_estimator/sensor_fusion` (`nav_msgs/Odometry`)
-- TF from `world` to `base`, generated from `/state_estimator/sensor_fusion`
+Example URDFs for Aliengo, ANYmal, and Go1 naming are retained as configuration
+examples only. No vendor messages or SDKs are used.
 
-The topics and frame IDs are configured in `muse_ws/src/state_estimator/config`.
+## rosbag2 playback
 
-## :gear: Plugins
+Record or replay the generic input topics with rosbag2:
 
-The state-estimator node discovers plugins declared in `state_estimator_plugins.xml` and loads them according to `launch/pluginlist.yaml`.
-
-Implemented ROS1 plugins:
-
-- `AttitudeEstimation`: estimates attitude from IMU data.
-- `ContactDetection`: estimates foot contact from actuator readings and URDF-based GRF estimation.
-- `LegOdometry`: estimates base velocity from actuator readings, attitude, contact state, and Pinocchio kinematics.
-- `SensorFusion`: fuses IMU, attitude, and leg odometry into `nav_msgs/Odometry`.
-- `TfPublisher`: publishes TF from the fused odometry output.
-
-By default, both `plugin_whitelist` and `plugin_blacklist` are empty, so all declared plugins are loaded. To run only selected plugins, edit `muse_ws/src/state_estimator/launch/pluginlist.yaml`.
-
-### Visualization
-Run PlotJuggler with:
-
-```sh
-rosrun plotjuggler plotjuggler
-```
-A PlotJuggler layout is also provided at:
-
-```text
-muse_ws/src/plotjuggler_layout.xml
+```bash
+ros2 launch state_estimator state_estimator.launch.py use_sim_time:=true
+ros2 bag play --clock your_bag
 ```
 
+Older bags containing vendor-specific actuator messages must first be converted
+or bridged to `JointStateWithAcceleration`.
 
-## :robot: Robot Configuration
+## Known limitations
 
-To use a different robot:
+- The estimator is proprioceptive; it does not fuse exteroceptive odometry.
+- A valid URDF and matching joint/frame configuration are required for contact
+  detection and leg odometry.
+- The compatibility `SensorFusion` message is generated, but fused runtime output
+  uses the standard `nav_msgs/msg/Odometry` interface.
+- The former timeout configuration was inactive and is not part of the ROS 2 node.
 
-1. Add the URDF to `muse_ws/src/state_estimator/urdfs`.
-2. Update `urdf_path` in `config/contact_plugin.yaml` and `config/leg_odometry.yaml`.
-3. Update `foot_frame_names` and the joint-name lists in the same config files.
-4. Update `base_R_imu` and input topic names for your robot.
-
-The default leg order is:
-
-```text
-LF, RF, LH, RH
-```
-
-Keep this order consistent across contact detection, leg odometry, messages, and downstream consumers.
-
-
-## :scroll: TODO list
-
-- [x] ROS1 proprioceptive state estimation
-- [x] GRF-based contact detection from actuator readings
-- [x] TF publishing from fused odometry
-- [ ] ROS2 support (on going)
-- [ ] Exteroceptive sensor fusion (on going)
-
-## :hugs: Contributing
-
-Contributions to this repository are welcome.
-
-## Citing the paper
-
-If you like this work and would like to cite it (thanks):
+## Citation
 
 ```bibtex
 @ARTICLE{10933515,
@@ -156,13 +154,5 @@ If you like this work and would like to cite it (thanks):
   volume={10},
   number={5},
   pages={4620-4627},
-  keywords={Robots;Sensors;Robot sensing systems;Legged locomotion;Odometry;Cameras;Laser radar;Robot vision systems;Robot kinematics;Quadrupedal robots;State estimation;localization;sensor fusion;quadruped robots},
   doi={10.1109/LRA.2025.3553047}}
 ```
-
-## Maintainer
-This repo is maintained by
-
-| Avatar | Name |
-| ------- | ---- |
-| <img src="https://github.com/ylenianistico.png?size=32" width="32" height="32" style="border-radius:50%; vertical-align:middle; margin:0 6px;" /> | <a href="https://github.com/ylenianistico">Ylenia Nisticò</a> |
