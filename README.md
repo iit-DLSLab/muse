@@ -155,11 +155,7 @@ or bridged to `JointStateWithAcceleration`.
 
 ## Known limitations
 
-- The estimator is proprioceptive; it does not fuse exteroceptive odometry.
-- A valid URDF and matching joint/frame configuration are required for contact
-  detection and leg odometry.
-- The compatibility `SensorFusion` message is generated, but fused runtime output
-  uses the standard `nav_msgs/msg/Odometry` interface.
+- The current estimator is proprioceptive; it does not fuse exteroceptive odometry.
 - The former timeout configuration was inactive and is not part of the ROS 2 node.
 
 ## Citation
