@@ -77,7 +77,7 @@ ros2 run plotjuggler plotjuggler
 
 
 ## :scroll: TODO list
-- [] Extend the code to include exteroception 
+- [ ] Extend the code to include exteroception 
 - [x] Conda-based environment
 - [x] Full Support for ROS2 (on going)
 
