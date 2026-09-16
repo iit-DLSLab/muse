@@ -1,5 +1,6 @@
 tf_state_publisher_plugin:
   plugin: "TfStatePublisherPlugin"
+  robot_type: "go2"
 
   # Choose exactly one odometry source for world -> base TF.
   # Use the fused estimate by default; switch back to
@@ -31,3 +32,17 @@ tf_state_publisher_plugin:
     - "RR_hip_joint"
     - "RR_thigh_joint"
     - "RR_calf_joint"
+
+  motor_indices:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11

@@ -1,18 +1,16 @@
+#include "state_estimator/Models/unitree_low_state_adapter.hpp"
 #include "state_estimator/plugin.hpp"
 
 #include <rclcpp/rclcpp.hpp>
 
 #include <yaml-cpp/yaml.h>
 
+#include <geometry_msgs/msg/transform_stamped.hpp>
 #include <nav_msgs/msg/odometry.hpp>
 #include <sensor_msgs/msg/joint_state.hpp>
-#include <unitree_go/msg/low_state.hpp>
-
-#include <geometry_msgs/msg/transform_stamped.hpp>
-#include <tf2_ros/transform_broadcaster.h>
 #include <tf2_ros/static_transform_broadcaster.h>
+#include <tf2_ros/transform_broadcaster.h>
 
-#include <algorithm>
 #include <string>
 #include <vector>
 
@@ -27,6 +25,7 @@ public:
 
   void initialize_() override
   {
+    robot_type_ = "go2";
     odom_topic_ = "muse/proprioceptive_sensor_fusion";
     low_state_topic_ = "/lowstate";
     joint_states_topic_ = "joint_states";
@@ -37,17 +36,13 @@ public:
     publish_base_tf_ = true;
     publish_joint_states_ = true;
     publish_lidar_imu_tf_ = true;
-
-    motor_joint_names_ = {
-      "FL_hip_joint", "FL_thigh_joint", "FL_calf_joint",
-      "FR_hip_joint", "FR_thigh_joint", "FR_calf_joint",
-      "RL_hip_joint", "RL_thigh_joint", "RL_calf_joint",
-      "RR_hip_joint", "RR_thigh_joint", "RR_calf_joint"
-    };
+    motor_joint_names_ = defaultMotorJointNames();
+    motor_indices_ = state_estimator::defaultMotorIndices(motor_joint_names_.size());
 
     if (!config_dir_.empty()) {
       try {
         YAML::Node cfg = YAML::LoadFile(config_dir_ + "/tf_state_publisher.yaml")["tf_state_publisher_plugin"];
+        if (cfg["robot_type"]) robot_type_ = cfg["robot_type"].as<std::string>();
         if (cfg["odom_topic"]) odom_topic_ = cfg["odom_topic"].as<std::string>();
         if (cfg["low_state_topic"]) low_state_topic_ = cfg["low_state_topic"].as<std::string>();
         if (cfg["joint_states_topic"]) joint_states_topic_ = cfg["joint_states_topic"].as<std::string>();
@@ -59,9 +54,17 @@ public:
         if (cfg["publish_joint_states"]) publish_joint_states_ = cfg["publish_joint_states"].as<bool>();
         if (cfg["publish_lidar_imu_tf"]) publish_lidar_imu_tf_ = cfg["publish_lidar_imu_tf"].as<bool>();
         if (cfg["motor_joint_names"]) motor_joint_names_ = cfg["motor_joint_names"].as<std::vector<std::string>>();
+        if (cfg["motor_indices"]) motor_indices_ = toSizeTVector(cfg["motor_indices"].as<std::vector<int>>());
       } catch (const std::exception& e) {
         RCLCPP_WARN(node_->get_logger(), "Could not load tf_state_publisher config: %s", e.what());
       }
+    }
+
+    if (motor_joint_names_.size() != 12) {
+      motor_joint_names_ = defaultMotorJointNames();
+    }
+    if (motor_indices_.size() != motor_joint_names_.size()) {
+      motor_indices_ = state_estimator::defaultMotorIndices(motor_joint_names_.size());
     }
 
     joint_state_pub_ = node_->create_publisher<sensor_msgs::msg::JointState>(joint_states_topic_, 250);
@@ -72,26 +75,20 @@ public:
       odom_topic_, 250,
       std::bind(&TfStatePublisherPlugin::callback_odometry, this, std::placeholders::_1));
 
-    low_state_sub_ = node_->create_subscription<unitree_go::msg::LowState>(
-      low_state_topic_, 250,
-      std::bind(&TfStatePublisherPlugin::callback_lowstate, this, std::placeholders::_1));
+    createLowStateSubscription();
 
     if (publish_lidar_imu_tf_) {
       geometry_msgs::msg::TransformStamped lidar_imu_tf;
       lidar_imu_tf.header.stamp = node_->now();
       lidar_imu_tf.header.frame_id = lidar_frame_id_;
       lidar_imu_tf.child_frame_id = lidar_imu_frame_id_;
-      lidar_imu_tf.transform.translation.x = 0.0;
-      lidar_imu_tf.transform.translation.y = 0.0;
-      lidar_imu_tf.transform.translation.z = 0.0;
-      lidar_imu_tf.transform.rotation.x = 0.0;
-      lidar_imu_tf.transform.rotation.y = 0.0;
-      lidar_imu_tf.transform.rotation.z = 0.0;
       lidar_imu_tf.transform.rotation.w = 1.0;
       static_tf_broadcaster_->sendTransform(lidar_imu_tf);
     }
 
-    RCLCPP_INFO(node_->get_logger(), "TfStatePublisherPlugin initialized (odom: %s, lowstate: %s)", odom_topic_.c_str(), low_state_topic_.c_str());
+    RCLCPP_INFO(node_->get_logger(),
+      "TfStatePublisherPlugin initialized (odom: %s, lowstate: %s, robot_type: %s)",
+      odom_topic_.c_str(), low_state_topic_.c_str(), robot_type_.c_str());
   }
 
   void shutdown_() override {}
@@ -100,6 +97,21 @@ public:
   void reset_() override {}
 
 private:
+  void createLowStateSubscription()
+  {
+    const auto family = state_estimator::messageFamilyForRobotType(robot_type_);
+    if (family == state_estimator::UnitreeMessageFamily::Go) {
+      go_low_state_sub_ = node_->create_subscription<unitree_go::msg::LowState>(
+        low_state_topic_, 250,
+        std::bind(&TfStatePublisherPlugin::callbackGo, this, std::placeholders::_1));
+      return;
+    }
+
+    hg_low_state_sub_ = node_->create_subscription<unitree_hg::msg::LowState>(
+      low_state_topic_, 250,
+      std::bind(&TfStatePublisherPlugin::callbackHg, this, std::placeholders::_1));
+  }
+
   void callback_odometry(const nav_msgs::msg::Odometry::SharedPtr odom)
   {
     if (!publish_base_tf_) return;
@@ -115,7 +127,29 @@ private:
     tf_broadcaster_->sendTransform(base_tf);
   }
 
-  void callback_lowstate(const unitree_go::msg::LowState::SharedPtr low_state)
+  void callbackGo(const unitree_go::msg::LowState::SharedPtr low_state)
+  {
+    std::string error;
+    if (!state_estimator::fromRos(*low_state, normalized_low_state_, &error)) {
+      RCLCPP_WARN_THROTTLE(node_->get_logger(), *node_->get_clock(), 2000,
+        "TfStatePublisherPlugin: failed to adapt unitree_go LowState: %s", error.c_str());
+      return;
+    }
+    processLowState(normalized_low_state_);
+  }
+
+  void callbackHg(const unitree_hg::msg::LowState::SharedPtr low_state)
+  {
+    std::string error;
+    if (!state_estimator::fromRos(*low_state, normalized_low_state_, &error)) {
+      RCLCPP_WARN_THROTTLE(node_->get_logger(), *node_->get_clock(), 2000,
+        "TfStatePublisherPlugin: failed to adapt unitree_hg LowState: %s", error.c_str());
+      return;
+    }
+    processLowState(normalized_low_state_);
+  }
+
+  void processLowState(const state_estimator::UnitreeLowState& low_state)
   {
     if (!publish_joint_states_) return;
 
@@ -126,23 +160,52 @@ private:
     joint_state_msg.velocity.resize(motor_joint_names_.size(), 0.0);
     joint_state_msg.effort.resize(motor_joint_names_.size(), 0.0);
 
-    const size_t n_motors = std::min(motor_joint_names_.size(), low_state->motor_state.size());
-    for (size_t i = 0; i < n_motors; ++i) {
-      joint_state_msg.position[i] = static_cast<double>(low_state->motor_state[i].q);
-      joint_state_msg.velocity[i] = static_cast<double>(low_state->motor_state[i].dq);
-      joint_state_msg.effort[i] = static_cast<double>(low_state->motor_state[i].tau_est);
+    for (std::size_t i = 0; i < motor_joint_names_.size(); ++i) {
+      const std::size_t motor_index = motor_indices_[i];
+      if (motor_index >= low_state.motors.size()) {
+        RCLCPP_WARN_THROTTLE(node_->get_logger(), *node_->get_clock(), 2000,
+          "TfStatePublisherPlugin: configured motor index %zu is outside LowState motor size %zu",
+          motor_index, low_state.motors.size());
+        return;
+      }
+      joint_state_msg.position[i] = low_state.motors[motor_index].q;
+      joint_state_msg.velocity[i] = low_state.motors[motor_index].dq;
+      joint_state_msg.effort[i] = low_state.motors[motor_index].tau_est;
     }
 
     joint_state_pub_->publish(joint_state_msg);
   }
 
+  static std::vector<std::string> defaultMotorJointNames()
+  {
+    return {
+      "FL_hip_joint", "FL_thigh_joint", "FL_calf_joint",
+      "FR_hip_joint", "FR_thigh_joint", "FR_calf_joint",
+      "RL_hip_joint", "RL_thigh_joint", "RL_calf_joint",
+      "RR_hip_joint", "RR_thigh_joint", "RR_calf_joint"
+    };
+  }
+
+  static std::vector<std::size_t> toSizeTVector(const std::vector<int>& values)
+  {
+    std::vector<std::size_t> converted;
+    converted.reserve(values.size());
+    for (const int value : values) {
+      if (value >= 0) converted.push_back(static_cast<std::size_t>(value));
+    }
+    return converted;
+  }
+
   std::shared_ptr<rclcpp::Subscription<nav_msgs::msg::Odometry>> odom_sub_;
-  std::shared_ptr<rclcpp::Subscription<unitree_go::msg::LowState>> low_state_sub_;
+  rclcpp::Subscription<unitree_go::msg::LowState>::SharedPtr go_low_state_sub_;
+  rclcpp::Subscription<unitree_hg::msg::LowState>::SharedPtr hg_low_state_sub_;
   std::shared_ptr<rclcpp::Publisher<sensor_msgs::msg::JointState>> joint_state_pub_;
 
   std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
   std::shared_ptr<tf2_ros::StaticTransformBroadcaster> static_tf_broadcaster_;
 
+  state_estimator::UnitreeLowState normalized_low_state_;
+  std::string robot_type_;
   std::string odom_topic_;
   std::string low_state_topic_;
   std::string joint_states_topic_;
@@ -153,8 +216,8 @@ private:
   bool publish_base_tf_{true};
   bool publish_joint_states_{true};
   bool publish_lidar_imu_tf_{true};
-
   std::vector<std::string> motor_joint_names_;
+  std::vector<std::size_t> motor_indices_;
 };
 
 } // namespace state_estimator_plugins

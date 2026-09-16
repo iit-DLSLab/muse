@@ -20,11 +20,12 @@ find_package(tf2_ros REQUIRED)
 find_package(state_estimator_msgs REQUIRED)
 find_package(dls2_interface REQUIRED)
 find_package(unitree_go REQUIRED)
+find_package(unitree_hg REQUIRED)
 find_package(iit_commons REQUIRED)
 find_package(ament_index_cpp REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(PkgConfig REQUIRED)
-find_package(pinocchio QUIET)
+find_package(pinocchio REQUIRED)
 find_package(yaml-cpp REQUIRED)
 
 include_directories(include)
@@ -37,8 +38,6 @@ set(PLUGIN_SOURCES
   src/plugins/attitude_estimation_plugin.cpp
   src/plugins/contact_detection_plugin.cpp
   src/plugins/proprioceptive_sensor_fusion_plugin.cpp
-  src/plugins/tf_state_publisher_plugin.cpp
-  src/plugins/multi_sensor_fusion_plugin.cpp
 )
 if(pinocchio_FOUND)
   list(APPEND PLUGIN_SOURCES src/plugins/leg_odometry_plugin.cpp)
@@ -64,6 +63,7 @@ ament_target_dependencies(state_estimator_plugins
   state_estimator_msgs
   dls2_interface
   unitree_go
+  unitree_hg
   iit_commons
   ament_index_cpp
 )
@@ -94,6 +94,7 @@ ament_target_dependencies(state_estimator_node
   state_estimator_msgs
   dls2_interface
   unitree_go
+  unitree_hg
   iit_commons
   ament_index_cpp
 )

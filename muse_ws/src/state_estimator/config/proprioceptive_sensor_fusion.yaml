@@ -1,11 +1,12 @@
 proprioceptive_sensor_fusion_plugin:
   plugin: "ProprioceptiveSensorFusionPlugin"
+  robot_type: "a2"
   low_state_topic: "/lowstate"
   attitude_topic: "/muse/attitude"
   leg_odometry_topic: "/muse/leg_odometry"
   pub_topic: "muse/proprioceptive_sensor_fusion"
   base_state_topic: "/base_state"
-  robot_name: "go2"
+  robot_name: "a2"
 
   P: [1.0e-3, 0.0, 0.0, 0.0, 0.0, 0.0,
        0.0, 1.0e-3, 0.0, 0.0, 0.0, 0.0,

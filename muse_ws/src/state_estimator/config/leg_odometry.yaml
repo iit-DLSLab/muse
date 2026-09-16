@@ -1,16 +1,24 @@
 leg_odometry_plugin:
   plugin: "LegOdometryPlugin"
+  robot_type: "a2"
   # urdf_path: "$(find state_estimator)/urdfs/anymal.urdf"
-  urdf_path: "$(find state_estimator)/urdfs/go2.urdf"
+  urdf_path: "$(find state_estimator)/urdfs/a2.urdf"
 
   low_state_topic: "/lowstate"   # Unitree LowState topic
   attitude_topic: "/muse/attitude"
   pub_topic: "muse/leg_odometry"
 
-  # Force threshold (int16 raw) above which a foot is considered in stance
-  contact_force_threshold: 15.0
+  grf_threshold: 30.0
+  grf_threshold_low: 20.0
+  grf_threshold_high: 50.0
+  use_grf_hysteresis: true
+  contact_normal: [0.0, 0.0, 1.0]
+  use_force_norm: false
+  use_absolute_normal_force: true
+  force_sign: -1.0
+  use_inverse_dynamics_compensation: true
 
-  # Motor indices → joint names (Go2 order: FL hip/thigh/calf, FR, RL, RR)
+  # Motor indices to joint names (Go2 order: FL hip/thigh/calf, FR, RL, RR)
   motor_joint_names:
     - "FL_hip_joint"
     - "FL_thigh_joint"
@@ -25,7 +33,21 @@ leg_odometry_plugin:
     - "RR_thigh_joint"
     - "RR_calf_joint"
 
-  # Foot frame names in the URDF, in LF/FR/LH/RH order
+  motor_indices:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+
+  # Foot frame names in the URDF, in FL/FR/RL/RR order
   feet_frame_names:
     - "FL_foot"
     - "FR_foot"

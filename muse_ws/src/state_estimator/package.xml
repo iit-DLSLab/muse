@@ -21,6 +21,7 @@
   <depend>iit_commons</depend>
   <depend>state_estimator_msgs</depend>
   <depend>unitree_go</depend>
+  <depend>unitree_hg</depend>
   <depend>dls2_interface</depend>
   <depend>ament_index_cpp</depend>
   <depend>yaml-cpp</depend>

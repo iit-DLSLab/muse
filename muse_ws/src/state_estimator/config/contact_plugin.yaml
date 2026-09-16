@@ -1,10 +1,51 @@
 contact_detection_plugin:
   plugin: "ContactDetectionPlugin"
-  # LowState topic from the Unitree SDK
+  robot_type: "a2"
   low_state_topic: "/lowstate"
-
   pub_topic: "muse/contact_detection"
 
-  # Threshold on foot_force scalar (int16) from LowState
-  # LF=foot_force[0], RF=foot_force[1], RL=foot_force[2], RR=foot_force[3]
-  contact_force_threshold: 10.0
+  urdf_path: "$(find state_estimator)/urdfs/a2.urdf"
+
+  grf_threshold: 30.0
+  grf_threshold_low: 20.0
+  grf_threshold_high: 50.0
+  use_grf_hysteresis: true
+  contact_normal: [0.0, 0.0, 1.0]
+  use_force_norm: false
+  use_absolute_normal_force: true
+  force_sign: -1.0
+  use_inverse_dynamics_compensation: true
+
+  motor_joint_names:
+    - "FL_hip_joint"
+    - "FL_thigh_joint"
+    - "FL_calf_joint"
+    - "FR_hip_joint"
+    - "FR_thigh_joint"
+    - "FR_calf_joint"
+    - "RL_hip_joint"
+    - "RL_thigh_joint"
+    - "RL_calf_joint"
+    - "RR_hip_joint"
+    - "RR_thigh_joint"
+    - "RR_calf_joint"
+
+  motor_indices:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+
+  feet_frame_names:
+    - "FL_foot"
+    - "FR_foot"
+    - "RL_foot"
+    - "RR_foot"

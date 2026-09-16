@@ -1,5 +1,6 @@
 attitude_estimation_plugin:
   plugin: "AttitudeEstimationPlugin"
+  robot_type: "a2"
   # Subscriber and Publisher topic names
   imu_topic: "/lowstate" # Unitree: "/trunk_imu" # ANYmal: "/sensors/imu"
   pub_topic: "muse/attitude"
