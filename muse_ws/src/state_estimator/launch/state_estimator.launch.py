@@ -3,11 +3,34 @@ from pathlib import Path
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node
+import yaml
+
+
+def resolve_package_path(value):
+    path = str(value)
+    prefix = "$(find "
+    start = path.find(prefix)
+    if start < 0:
+        return Path(path)
+    package_start = start + len(prefix)
+    package_end = path.find(")", package_start)
+    if package_end < 0:
+        return Path(path)
+    package = path[package_start:package_end]
+    package_share = get_package_share_directory(package)
+    return Path(path[:start] + package_share + path[package_end + 1 :])
 
 
 def generate_launch_description():
     package_share = Path(get_package_share_directory("state_estimator"))
-    urdf_path = package_share / "urdfs" / "a2.urdf"
+    robot_config = yaml.safe_load((package_share / "config" / "robot.yaml").read_text())["robot"]
+    robot_type = str(robot_config["type"]).lower()
+    configured_urdf = robot_config.get("urdf_path")
+    urdf_path = (
+        resolve_package_path(configured_urdf)
+        if configured_urdf
+        else package_share / "urdfs" / f"{robot_type}.urdf"
+    )
     robot_description = urdf_path.read_text()
 
     # The config/launch YAML files are in ROS1 plugin-owned format and are read

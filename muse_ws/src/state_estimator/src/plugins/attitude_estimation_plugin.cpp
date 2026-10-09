@@ -1,5 +1,6 @@
 #include "state_estimator/Models/attitude_bias_NLO.hpp"
 #include "state_estimator/Models/attitude_bias_XKF.hpp"
+#include "state_estimator/Models/robot_config.hpp"
 #include "state_estimator/Models/unitree_low_state_adapter.hpp"
 #include "state_estimator/lib.hpp"
 #include "state_estimator/plugin.hpp"
@@ -13,6 +14,7 @@
 
 #include <cmath>
 #include <exception>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
@@ -34,8 +36,12 @@ public:
 		xhat_estimated << 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
 		xhat_estimated.head(4).normalize();
 
-		std::string robot_type = "go2";
-		std::string imu_topic = "/lowstate";
+		state_estimator::RobotConfig robot_config;
+		std::string config_error;
+		if (!state_estimator::loadRobotConfig(config_dir_, robot_config, config_error)) {
+			throw std::runtime_error("AttitudeEstimationPlugin: " + config_error);
+		}
+
 		std::string pub_topic = "attitude";
 		double ki_param = 0.02, kp_param = 10.0;
 		std::vector<double> base_R_imu_vec, north_vec, gravity_vec, P_vec, Q_vec, R_vec;
@@ -43,8 +49,6 @@ public:
 		if (!config_dir_.empty()) {
 			try {
 				YAML::Node cfg = YAML::LoadFile(config_dir_ + "/attitude_plugin.yaml")["attitude_estimation_plugin"];
-				if (cfg["robot_type"]) robot_type = cfg["robot_type"].as<std::string>();
-				if (cfg["imu_topic"]) imu_topic = cfg["imu_topic"].as<std::string>();
 				if (cfg["pub_topic"]) pub_topic = cfg["pub_topic"].as<std::string>();
 				if (cfg["ki"]) ki_param = cfg["ki"].as<double>();
 				if (cfg["kp"]) kp_param = cfg["kp"].as<double>();
@@ -93,10 +97,10 @@ public:
 		}
 
 		pub_ = node_->create_publisher<state_estimator_msgs::msg::Attitude>(pub_topic, 1);
-		createLowStateSubscription(robot_type, imu_topic);
+		createLowStateSubscription(robot_config.robot_type, robot_config.low_state_topic);
 		RCLCPP_INFO(node_->get_logger(),
 			"AttitudeEstimationPlugin initialized on topic '%s' for robot_type '%s'",
-			imu_topic.c_str(), robot_type.c_str());
+			robot_config.low_state_topic.c_str(), robot_config.robot_type.c_str());
 	}
 
 	void shutdown_() override {}

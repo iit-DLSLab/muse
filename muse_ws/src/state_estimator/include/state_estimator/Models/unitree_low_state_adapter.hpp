@@ -7,6 +7,7 @@
 #include <Eigen/Dense>
 
 #include <algorithm>
+#include <array>
 #include <cctype>
 #include <cmath>
 #include <cstddef>
@@ -43,6 +44,8 @@ struct UnitreeLowState
 {
 	UnitreeImuState imu;
 	std::vector<UnitreeMotorState> motors;
+	std::array<double, 4> foot_force{{0.0, 0.0, 0.0, 0.0}};
+	bool has_foot_force{false};
 };
 
 inline std::string normalizeRobotType(std::string robot_type)
@@ -97,6 +100,8 @@ inline bool isFinite(const Eigen::Quaterniond& value)
 template <typename RosLowState>
 bool fromRosLowState(const RosLowState& msg, UnitreeLowState& low_state, std::string* error = nullptr)
 {
+	low_state.foot_force.fill(0.0);
+	low_state.has_foot_force = false;
 	Eigen::Quaterniond orientation(
 		static_cast<double>(msg.imu_state.quaternion[0]),
 		static_cast<double>(msg.imu_state.quaternion[1]),
@@ -162,7 +167,14 @@ inline bool fromRos(
 	UnitreeLowState& low_state,
 	std::string* error = nullptr)
 {
-	return fromRosLowState(msg, low_state, error);
+	if (!fromRosLowState(msg, low_state, error)) {
+		return false;
+	}
+	for (std::size_t foot = 0; foot < low_state.foot_force.size(); ++foot) {
+		low_state.foot_force[foot] = static_cast<double>(msg.foot_force[foot]);
+	}
+	low_state.has_foot_force = true;
+	return true;
 }
 
 inline bool fromRos(

@@ -1,3 +1,4 @@
+#include "state_estimator/Models/robot_config.hpp"
 #include "state_estimator/Models/unitree_low_state_adapter.hpp"
 #include "state_estimator/plugin.hpp"
 
@@ -12,6 +13,7 @@
 #include <tf2_ros/transform_broadcaster.h>
 
 #include <string>
+#include <stdexcept>
 #include <vector>
 
 namespace state_estimator_plugins
@@ -25,9 +27,15 @@ public:
 
   void initialize_() override
   {
-    robot_type_ = "go2";
+    state_estimator::RobotConfig robot_config;
+    std::string config_error;
+    if (!state_estimator::loadRobotConfig(config_dir_, robot_config, config_error)) {
+      throw std::runtime_error("TfStatePublisherPlugin: " + config_error);
+    }
+
+    robot_type_ = robot_config.robot_type;
     odom_topic_ = "muse/proprioceptive_sensor_fusion";
-    low_state_topic_ = "/lowstate";
+    low_state_topic_ = robot_config.low_state_topic;
     joint_states_topic_ = "joint_states";
     world_frame_id_ = "world";
     base_frame_id_ = "base";
@@ -36,15 +44,13 @@ public:
     publish_base_tf_ = true;
     publish_joint_states_ = true;
     publish_lidar_imu_tf_ = true;
-    motor_joint_names_ = defaultMotorJointNames();
-    motor_indices_ = state_estimator::defaultMotorIndices(motor_joint_names_.size());
+    motor_joint_names_ = robot_config.motor_joint_names;
+    motor_indices_ = robot_config.motor_indices;
 
     if (!config_dir_.empty()) {
       try {
         YAML::Node cfg = YAML::LoadFile(config_dir_ + "/tf_state_publisher.yaml")["tf_state_publisher_plugin"];
-        if (cfg["robot_type"]) robot_type_ = cfg["robot_type"].as<std::string>();
         if (cfg["odom_topic"]) odom_topic_ = cfg["odom_topic"].as<std::string>();
-        if (cfg["low_state_topic"]) low_state_topic_ = cfg["low_state_topic"].as<std::string>();
         if (cfg["joint_states_topic"]) joint_states_topic_ = cfg["joint_states_topic"].as<std::string>();
         if (cfg["world_frame_id"]) world_frame_id_ = cfg["world_frame_id"].as<std::string>();
         if (cfg["base_frame_id"]) base_frame_id_ = cfg["base_frame_id"].as<std::string>();
@@ -53,18 +59,9 @@ public:
         if (cfg["publish_base_tf"]) publish_base_tf_ = cfg["publish_base_tf"].as<bool>();
         if (cfg["publish_joint_states"]) publish_joint_states_ = cfg["publish_joint_states"].as<bool>();
         if (cfg["publish_lidar_imu_tf"]) publish_lidar_imu_tf_ = cfg["publish_lidar_imu_tf"].as<bool>();
-        if (cfg["motor_joint_names"]) motor_joint_names_ = cfg["motor_joint_names"].as<std::vector<std::string>>();
-        if (cfg["motor_indices"]) motor_indices_ = toSizeTVector(cfg["motor_indices"].as<std::vector<int>>());
       } catch (const std::exception& e) {
         RCLCPP_WARN(node_->get_logger(), "Could not load tf_state_publisher config: %s", e.what());
       }
-    }
-
-    if (motor_joint_names_.size() != 12) {
-      motor_joint_names_ = defaultMotorJointNames();
-    }
-    if (motor_indices_.size() != motor_joint_names_.size()) {
-      motor_indices_ = state_estimator::defaultMotorIndices(motor_joint_names_.size());
     }
 
     joint_state_pub_ = node_->create_publisher<sensor_msgs::msg::JointState>(joint_states_topic_, 250);
@@ -174,26 +171,6 @@ private:
     }
 
     joint_state_pub_->publish(joint_state_msg);
-  }
-
-  static std::vector<std::string> defaultMotorJointNames()
-  {
-    return {
-      "FL_hip_joint", "FL_thigh_joint", "FL_calf_joint",
-      "FR_hip_joint", "FR_thigh_joint", "FR_calf_joint",
-      "RL_hip_joint", "RL_thigh_joint", "RL_calf_joint",
-      "RR_hip_joint", "RR_thigh_joint", "RR_calf_joint"
-    };
-  }
-
-  static std::vector<std::size_t> toSizeTVector(const std::vector<int>& values)
-  {
-    std::vector<std::size_t> converted;
-    converted.reserve(values.size());
-    for (const int value : values) {
-      if (value >= 0) converted.push_back(static_cast<std::size_t>(value));
-    }
-    return converted;
   }
 
   std::shared_ptr<rclcpp::Subscription<nav_msgs::msg::Odometry>> odom_sub_;

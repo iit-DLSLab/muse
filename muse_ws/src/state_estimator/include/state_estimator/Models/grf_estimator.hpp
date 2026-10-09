@@ -377,6 +377,16 @@ public:
 		return valid_count > 0;
 	}
 
+	void reset()
+	{
+		input_filter_initialized_ = false;
+		force_filter_initialized_.fill(false);
+		for (auto& filtered_force : filtered_force_) {
+			filtered_force.setZero();
+		}
+		last_error_.clear();
+	}
+
 	const std::string& lastError() const
 	{
 		return last_error_;

@@ -1,6 +1,7 @@
 #include "state_estimator/Models/attitude_bias_XKF.hpp"
-#include "state_estimator/Models/grf_estimator.hpp"
+#include "state_estimator/Models/contact_estimator.hpp"
 #include "state_estimator/Models/proprioceptive_sensor_fusion.hpp"
+#include "state_estimator/Models/robot_config.hpp"
 #include "state_estimator/Models/unitree_low_state_adapter.hpp"
 #include "state_estimator/lib.hpp"
 #include "state_estimator/plugin.hpp"
@@ -13,7 +14,6 @@
 #include <iit/commons/geometry/rotations.h>
 
 #include <rclcpp/rclcpp.hpp>
-#include <ament_index_cpp/get_package_share_directory.hpp>
 
 #include "dls2_interface/msg/base_state.hpp"
 #include <nav_msgs/msg/odometry.hpp>
@@ -23,6 +23,7 @@
 #include <array>
 #include <cmath>
 #include <exception>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
@@ -49,43 +50,29 @@ public:
 		xhat_att_ << 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
 		xhat_att_.head(4).normalize();
 
-		std::string robot_type = "a2";
-		std::string low_state_topic = "/lowstate";
+		state_estimator::RobotConfig robot_config;
+		std::string config_error;
+		if (!state_estimator::loadRobotConfig(config_dir_, robot_config, config_error)) {
+			throw std::runtime_error("ProprioceptiveSensorFusion: " + config_error);
+		}
+
+		motor_joint_names_ = robot_config.motor_joint_names;
+		motor_indices_ = robot_config.motor_indices;
+		feet_frame_names_ = robot_config.feet_frame_names;
 		std::string pub_topic = "proprioceptive_sensor_fusion";
 		std::string base_state_topic = "/base_state";
-		std::string robot_name = "a2";
-		std::string urdf_path_param = "$(find state_estimator)/urdfs/a2.urdf";
 		std::vector<double> P_vec(36, 0.0), Q_vec(36, 0.0), R_vec(9, 0.0);
 		std::vector<double> base_R_imu_vec(9, 0.0);
 		std::vector<double> att_P_vec, att_Q_vec, att_R_vec;
-		std::vector<double> contact_normal_vec{0.0, 0.0, 1.0};
 		double ki_param = 0.02, kp_param = 10.0;
-		double force_sign = -1.0;
-		bool use_inverse_dynamics_compensation = true;
-		bool use_joint_acceleration = false;
-		double grf_solve_damping = 1e-4;
-		double grf_min_singular_value = 1e-6;
-		double grf_max_condition_number = 1e4;
-		double grf_input_filter_alpha = 1.0;
-		double grf_force_filter_alpha = 1.0;
-		bool motor_indices_configured = false;
-		contact_threshold_ = 15.0;
-		contact_threshold_low_ = contact_threshold_;
-		contact_threshold_high_ = contact_threshold_;
 		world_frame_id_ = "world";
 		base_frame_id_ = "base";
-		motor_joint_names_ = defaultMotorJointNames();
-		motor_indices_ = state_estimator::defaultMotorIndices(motor_joint_names_.size());
-		feet_frame_names_ = defaultFeetFrameNames();
 
 		if (!config_dir_.empty()) {
 			try {
 				YAML::Node sf_cfg = YAML::LoadFile(config_dir_ + "/proprioceptive_sensor_fusion.yaml")["proprioceptive_sensor_fusion_plugin"];
-				if (sf_cfg["robot_type"]) robot_type = sf_cfg["robot_type"].as<std::string>();
-				if (sf_cfg["low_state_topic"]) low_state_topic = sf_cfg["low_state_topic"].as<std::string>();
 				if (sf_cfg["pub_topic"]) pub_topic = sf_cfg["pub_topic"].as<std::string>();
 				if (sf_cfg["base_state_topic"]) base_state_topic = sf_cfg["base_state_topic"].as<std::string>();
-				if (sf_cfg["robot_name"]) robot_name = sf_cfg["robot_name"].as<std::string>();
 				if (sf_cfg["world_frame_id"]) world_frame_id_ = sf_cfg["world_frame_id"].as<std::string>();
 				if (sf_cfg["base_frame_id"]) base_frame_id_ = sf_cfg["base_frame_id"].as<std::string>();
 				if (sf_cfg["P"]) P_vec = sf_cfg["P"].as<std::vector<double>>();
@@ -101,56 +88,10 @@ public:
 				if (att_cfg["R"]) att_R_vec = att_cfg["R"].as<std::vector<double>>();
 				if (att_cfg["gravity_vector"]) gravity_vec_ = att_cfg["gravity_vector"].as<std::vector<double>>();
 				if (att_cfg["north_vector"]) north_vec_ = att_cfg["north_vector"].as<std::vector<double>>();
-
-				YAML::Node lo_cfg = YAML::LoadFile(config_dir_ + "/leg_odometry.yaml")["leg_odometry_plugin"];
-				if (lo_cfg["robot_type"]) robot_type = lo_cfg["robot_type"].as<std::string>();
-				if (lo_cfg["urdf_path"]) urdf_path_param = lo_cfg["urdf_path"].as<std::string>();
-				if (lo_cfg["contact_force_threshold"]) contact_threshold_ = lo_cfg["contact_force_threshold"].as<double>();
-				if (lo_cfg["grf_threshold"]) contact_threshold_ = lo_cfg["grf_threshold"].as<double>();
-				contact_threshold_low_ = contact_threshold_;
-				contact_threshold_high_ = contact_threshold_;
-				if (lo_cfg["threshold_low"]) contact_threshold_low_ = lo_cfg["threshold_low"].as<double>();
-				if (lo_cfg["threshold_high"]) contact_threshold_high_ = lo_cfg["threshold_high"].as<double>();
-				if (lo_cfg["contact_force_threshold_low"]) {
-					contact_threshold_low_ = lo_cfg["contact_force_threshold_low"].as<double>();
-				}
-				if (lo_cfg["contact_force_threshold_high"]) {
-					contact_threshold_high_ = lo_cfg["contact_force_threshold_high"].as<double>();
-				}
-				if (lo_cfg["grf_threshold_low"]) contact_threshold_low_ = lo_cfg["grf_threshold_low"].as<double>();
-				if (lo_cfg["grf_threshold_high"]) contact_threshold_high_ = lo_cfg["grf_threshold_high"].as<double>();
-				if (lo_cfg["use_hysteresis"]) use_grf_hysteresis_ = lo_cfg["use_hysteresis"].as<bool>();
-				if (lo_cfg["use_grf_hysteresis"]) use_grf_hysteresis_ = lo_cfg["use_grf_hysteresis"].as<bool>();
-				if (lo_cfg["motor_joint_names"]) motor_joint_names_ = lo_cfg["motor_joint_names"].as<std::vector<std::string>>();
-				if (lo_cfg["motor_indices"]) {
-					motor_indices_ = toSizeTVector(lo_cfg["motor_indices"].as<std::vector<int>>());
-					motor_indices_configured = true;
-				}
-				if (lo_cfg["feet_frame_names"]) feet_frame_names_ = lo_cfg["feet_frame_names"].as<std::vector<std::string>>();
-				if (lo_cfg["contact_normal"]) contact_normal_vec = lo_cfg["contact_normal"].as<std::vector<double>>();
-				if (lo_cfg["use_force_norm"]) use_force_norm_ = lo_cfg["use_force_norm"].as<bool>();
-				if (lo_cfg["use_absolute_normal_force"]) use_absolute_normal_force_ = lo_cfg["use_absolute_normal_force"].as<bool>();
-				if (lo_cfg["force_sign"]) force_sign = lo_cfg["force_sign"].as<double>();
-				if (lo_cfg["use_inverse_dynamics_compensation"]) {
-					use_inverse_dynamics_compensation = lo_cfg["use_inverse_dynamics_compensation"].as<bool>();
-				}
-				if (lo_cfg["use_joint_acceleration"]) use_joint_acceleration = lo_cfg["use_joint_acceleration"].as<bool>();
-				if (lo_cfg["grf_solve_damping"]) grf_solve_damping = lo_cfg["grf_solve_damping"].as<double>();
-				if (lo_cfg["grf_min_singular_value"]) grf_min_singular_value = lo_cfg["grf_min_singular_value"].as<double>();
-				if (lo_cfg["grf_max_condition_number"]) grf_max_condition_number = lo_cfg["grf_max_condition_number"].as<double>();
-				if (lo_cfg["grf_input_filter_alpha"]) grf_input_filter_alpha = lo_cfg["grf_input_filter_alpha"].as<double>();
-				if (lo_cfg["grf_force_filter_alpha"]) grf_force_filter_alpha = lo_cfg["grf_force_filter_alpha"].as<double>();
 			} catch (const std::exception& e) {
-				RCLCPP_WARN(node_->get_logger(), "Could not load sensor fusion/leg odometry config: %s", e.what());
+				RCLCPP_WARN(node_->get_logger(), "Could not load sensor fusion config: %s", e.what());
 			}
 		}
-		if (!motor_indices_configured) {
-			motor_indices_ = state_estimator::defaultMotorIndicesForRobotType(
-				robot_type, motor_joint_names_.size());
-		}
-
-		validateConfiguredNamesAndIndices("ProprioceptiveSensorFusion", robot_type);
-		urdf_path_param = resolvePackagePath(urdf_path_param);
 
 		if (P_vec.size() != 36 || Q_vec.size() != 36 || R_vec.size() != 9) {
 			RCLCPP_WARN(node_->get_logger(), "P/Q/R have wrong size - using zeros.");
@@ -195,54 +136,38 @@ public:
 				f_n_, m_n_, ki_param, kp_param);
 		}
 
-		RCLCPP_INFO(node_->get_logger(), "Loading URDF from: %s", urdf_path_param.c_str());
+		RCLCPP_INFO(node_->get_logger(), "Loading URDF from: %s", robot_config.urdf_path.c_str());
 		try {
-			pinocchio::urdf::buildModel(urdf_path_param, model_);
+			pinocchio::urdf::buildModel(robot_config.urdf_path, model_);
 			data_ = pinocchio::Data(model_);
 			RCLCPP_INFO(node_->get_logger(), "URDF loaded for leg odometry computation.");
 		} catch (const std::exception& e) {
-			RCLCPP_ERROR(node_->get_logger(), "Failed to load URDF: %s", e.what());
+			throw std::runtime_error(
+				std::string("ProprioceptiveSensorFusion: failed to load URDF: ") + e.what());
 		}
 
-		contact_normal_ = vector3FromConfig(contact_normal_vec, Eigen::Vector3d::UnitZ());
-		state_estimator::GrfEstimatorOptions grf_options;
-		grf_options.urdf_path = urdf_path_param;
-		grf_options.motor_joint_names = motor_joint_names_;
-		grf_options.motor_indices = motor_indices_;
-		grf_options.feet_frame_names = feet_frame_names_;
-		grf_options.force_sign = force_sign;
-		grf_options.use_inverse_dynamics_compensation = use_inverse_dynamics_compensation;
-		grf_options.use_joint_acceleration = use_joint_acceleration;
-		grf_options.solve_damping = grf_solve_damping;
-		grf_options.min_singular_value = grf_min_singular_value;
-		grf_options.max_condition_number = grf_max_condition_number;
-		grf_options.input_filter_alpha = grf_input_filter_alpha;
-		grf_options.force_filter_alpha = grf_force_filter_alpha;
-		grf_estimator_configured_ = grf_estimator_.configure(grf_options);
-		if (!grf_estimator_configured_) {
-			RCLCPP_ERROR(node_->get_logger(),
-				"ProprioceptiveSensorFusion: failed to configure GRF estimator: %s",
-				grf_estimator_.lastError().c_str());
+		if (!contact_estimator_.configure(robot_config)) {
+			throw std::runtime_error(
+				"ProprioceptiveSensorFusion: " + contact_estimator_.lastError());
 		}
 
 		pub_ = node_->create_publisher<nav_msgs::msg::Odometry>(pub_topic, 250);
 		base_state_pub_ = node_->create_publisher<dls2_interface::msg::BaseState>(base_state_topic, 250);
-		base_state_msg_.robot_name = robot_name;
+		base_state_msg_.robot_name = robot_config.robot_type;
 		base_state_msg_.stance_status.resize(4, false);
-		createLowStateSubscription(robot_type, low_state_topic);
+		createLowStateSubscription(robot_config.robot_type, robot_config.low_state_topic);
 
 		RCLCPP_INFO(node_->get_logger(),
-			"ProprioceptiveSensorFusionPlugin initialized on topic '%s' for robot_type '%s' with GRF threshold %.2f, hysteresis=%s [low=%.2f high=%.2f], filters[input=%.3f force=%.3f]",
-			low_state_topic.c_str(), robot_type.c_str(), contact_threshold_,
-			use_grf_hysteresis_ ? "true" : "false",
-			contact_threshold_low_, contact_threshold_high_,
-			grf_input_filter_alpha, grf_force_filter_alpha);
+			"ProprioceptiveSensorFusionPlugin: robot=%s, source=%s, threshold=%.2f",
+			robot_config.robot_type.c_str(),
+			contact_estimator_.usesRawFootForce() ? "LowState.foot_force" : "filtered Pinocchio GRF",
+			robot_config.contact.threshold);
 	}
 
 	void shutdown_() override {}
 	void pause_() override {}
 	void resume_() override {}
-	void reset_() override {}
+	void reset_() override { contact_estimator_.reset(); }
 
 private:
 	void createLowStateSubscription(const std::string& robot_type, const std::string& low_state_topic)
@@ -352,7 +277,7 @@ private:
 					"ProprioceptiveSensorFusion: failed to fill Pinocchio joint state: %s",
 					joint_state_error.c_str());
 			} else {
-				stance = estimateStanceFromGrf(low_state);
+				stance = estimateStance(low_state);
 				pinocchio::forwardKinematics(model_, data_, q, v);
 				pinocchio::updateFramePlacements(model_, data_);
 
@@ -401,7 +326,7 @@ private:
 			proprioceptive_sensor_fusion_->update(time_, v_b);
 		} else {
 			RCLCPP_WARN_THROTTLE(node_->get_logger(), *node_->get_clock(), 2000,
-				"ProprioceptiveSensorFusion: no valid GRF stance leg odometry; skipping KF velocity update");
+				"ProprioceptiveSensorFusion: no valid stance leg odometry; skipping KF velocity update");
 		}
 
 		Eigen::Matrix<double,6,1> xhat_new = proprioceptive_sensor_fusion_->getX();
@@ -410,55 +335,27 @@ private:
 		publishState(quat_est, omega_b, u_SF, stance);
 	}
 
-	std::array<bool, 4> estimateStanceFromGrf(const state_estimator::UnitreeLowState& low_state)
+	std::array<bool, 4> estimateStance(const state_estimator::UnitreeLowState& low_state)
 	{
-		std::array<bool, 4> stance{{false, false, false, false}};
-		std::array<double, 4> metrics{{0.0, 0.0, 0.0, 0.0}};
-		if (!grf_estimator_configured_) {
+		state_estimator::ContactEstimate estimate;
+		if (!contact_estimator_.update(low_state, estimate)) {
 			RCLCPP_WARN_THROTTLE(node_->get_logger(), *node_->get_clock(), 2000,
-				"ProprioceptiveSensorFusion: GRF estimator is not configured; using no-contact stance");
-			resetStanceState();
-			return stance;
+				"ProprioceptiveSensorFusion: contact update failed: %s",
+				contact_estimator_.lastError().c_str());
+			return estimate.stance;
 		}
 
-		state_estimator::GrfEstimate estimate;
-		if (!grf_estimator_.updateFromLowState(low_state, estimate)) {
+		if (!contact_estimator_.lastError().empty()) {
 			RCLCPP_WARN_THROTTLE(node_->get_logger(), *node_->get_clock(), 2000,
-				"ProprioceptiveSensorFusion: GRF estimator update failed: %s",
-				grf_estimator_.lastError().c_str());
-			resetStanceState();
-			return stance;
-		}
-
-		for (std::size_t i = 0; i < stance.size(); ++i) {
-			if (!estimate.valid[i]) {
-				stance_state_[i] = false;
-				continue;
-			}
-			metrics[i] = state_estimator::grfContactMetric(
-				estimate.force[i], contact_normal_, use_force_norm_, use_absolute_normal_force_);
-			stance[i] = contactFromMetric(i, metrics[i]);
-			stance_state_[i] = stance[i];
+				"ProprioceptiveSensorFusion: partial contact estimate: %s",
+				contact_estimator_.lastError().c_str());
 		}
 		RCLCPP_DEBUG_THROTTLE(node_->get_logger(), *node_->get_clock(), 1000,
-			"ProprioceptiveSensorFusion filtered GRF metrics [FL FR RL RR]: %.3f %.3f %.3f %.3f; condition: %.2f %.2f %.2f %.2f",
-			metrics[0], metrics[1], metrics[2], metrics[3],
+			"ProprioceptiveSensorFusion contact metrics [FL FR RL RR]: %.3f %.3f %.3f %.3f; condition: %.2f %.2f %.2f %.2f",
+			estimate.metric[0], estimate.metric[1], estimate.metric[2], estimate.metric[3],
 			estimate.condition_number[0], estimate.condition_number[1],
 			estimate.condition_number[2], estimate.condition_number[3]);
-		return stance;
-	}
-
-	bool contactFromMetric(std::size_t foot_index, double metric) const
-	{
-		if (use_grf_hysteresis_) {
-			return stance_state_[foot_index] ? metric > contact_threshold_low_ : metric > contact_threshold_high_;
-		}
-		return metric > contact_threshold_;
-	}
-
-	void resetStanceState()
-	{
-		stance_state_.fill(false);
+		return estimate.stance;
 	}
 
 	void publishState(
@@ -523,86 +420,6 @@ private:
 		base_state_pub_->publish(base_state_msg_);
 	}
 
-	void validateConfiguredNamesAndIndices(
-		const std::string& label,
-		const std::string& robot_type)
-	{
-		if (motor_joint_names_.size() != 12) {
-			RCLCPP_WARN(node_->get_logger(), "%s: motor_joint_names must contain 12 entries; using quadruped defaults", label.c_str());
-			motor_joint_names_ = defaultMotorJointNames();
-			motor_indices_ = state_estimator::defaultMotorIndicesForRobotType(
-				robot_type, motor_joint_names_.size());
-		}
-		if (motor_indices_.size() != motor_joint_names_.size()) {
-			RCLCPP_WARN(node_->get_logger(), "%s: motor_indices must match motor_joint_names; using robot defaults", label.c_str());
-			motor_indices_ = state_estimator::defaultMotorIndicesForRobotType(
-				robot_type, motor_joint_names_.size());
-		}
-		if (feet_frame_names_.size() != 4) {
-			RCLCPP_WARN(node_->get_logger(), "%s: feet_frame_names must contain 4 entries; using quadruped defaults", label.c_str());
-			feet_frame_names_ = defaultFeetFrameNames();
-		}
-	}
-
-	static std::vector<std::string> defaultMotorJointNames()
-	{
-		return {
-			"FL_hip_joint", "FL_thigh_joint", "FL_calf_joint",
-			"FR_hip_joint", "FR_thigh_joint", "FR_calf_joint",
-			"RL_hip_joint", "RL_thigh_joint", "RL_calf_joint",
-			"RR_hip_joint", "RR_thigh_joint", "RR_calf_joint"
-		};
-	}
-
-	static std::vector<std::string> defaultFeetFrameNames()
-	{
-		return {"FL_foot", "FR_foot", "RL_foot", "RR_foot"};
-	}
-
-	static std::vector<std::size_t> toSizeTVector(const std::vector<int>& values)
-	{
-		std::vector<std::size_t> converted;
-		converted.reserve(values.size());
-		for (const int value : values) {
-			if (value >= 0) {
-				converted.push_back(static_cast<std::size_t>(value));
-			}
-		}
-		return converted;
-	}
-
-	static Eigen::Vector3d vector3FromConfig(const std::vector<double>& values, const Eigen::Vector3d& fallback)
-	{
-		if (values.size() != 3) {
-			return fallback;
-		}
-		const Eigen::Vector3d vector(values[0], values[1], values[2]);
-		return (!vector.allFinite() || vector.norm() < 1e-9) ? fallback : vector.normalized();
-	}
-
-	static std::string resolvePackagePath(const std::string& input)
-	{
-		std::string resolved = input;
-		const std::string find_token = "$(find ";
-		const std::size_t token_pos = resolved.find(find_token);
-		if (token_pos == std::string::npos) {
-			return resolved;
-		}
-		const std::size_t package_start = token_pos + find_token.length();
-		const std::size_t package_end = resolved.find(")", package_start);
-		if (package_end == std::string::npos) {
-			return resolved;
-		}
-		const std::string package_name = resolved.substr(package_start, package_end - package_start);
-		try {
-			const std::string package_path = ament_index_cpp::get_package_share_directory(package_name);
-			resolved.replace(token_pos, package_end - token_pos + 1, package_path);
-		} catch (const std::exception&) {
-			return input;
-		}
-		return resolved;
-	}
-
 	rclcpp::Subscription<unitree_go::msg::LowState>::SharedPtr go_low_state_sub_;
 	rclcpp::Subscription<unitree_hg::msg::LowState>::SharedPtr hg_low_state_sub_;
 	std::shared_ptr<rclcpp::Publisher<nav_msgs::msg::Odometry>> pub_;
@@ -613,7 +430,7 @@ private:
 	state_estimator::UnitreeLowState normalized_low_state_;
 	state_estimator::AttitudeBiasXKF* attitude_{nullptr};
 	state_estimator::KFProprioceptiveSensorFusion* proprioceptive_sensor_fusion_{nullptr};
-	state_estimator::GrfEstimator grf_estimator_;
+	state_estimator::ContactEstimator contact_estimator_;
 
 	Eigen::Vector7d xhat_att_;
 	Eigen::Matrix<double,6,1> xhat_estimated;
@@ -625,15 +442,6 @@ private:
 	std::vector<std::string> motor_joint_names_;
 	std::vector<std::size_t> motor_indices_;
 	std::vector<std::string> feet_frame_names_;
-	double contact_threshold_{30.0};
-	double contact_threshold_low_{30.0};
-	double contact_threshold_high_{30.0};
-	bool use_grf_hysteresis_{false};
-	std::array<bool, 4> stance_state_{{false, false, false, false}};
-	bool grf_estimator_configured_{false};
-	Eigen::Vector3d contact_normal_{Eigen::Vector3d::UnitZ()};
-	bool use_force_norm_{false};
-	bool use_absolute_normal_force_{false};
 
 	double t0_{0.0};
 	double time_{0.0};

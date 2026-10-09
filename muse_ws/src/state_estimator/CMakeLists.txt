@@ -141,10 +141,11 @@ if(BUILD_TESTING)
     ${EIGEN3_INCLUDE_DIR}
     ${PINOCCHIO_INCLUDE_DIRS}
   )
-  ament_target_dependencies(test_grf_estimator unitree_go unitree_hg)
-  target_link_libraries(test_grf_estimator Eigen3::Eigen ${PINOCCHIO_LIBRARIES})
+  ament_target_dependencies(test_grf_estimator unitree_go unitree_hg ament_index_cpp)
+  target_link_libraries(test_grf_estimator Eigen3::Eigen yaml-cpp ${PINOCCHIO_LIBRARIES})
   target_compile_definitions(test_grf_estimator PRIVATE
     A2_URDF_PATH="${CMAKE_CURRENT_SOURCE_DIR}/urdfs/a2.urdf"
+    STATE_ESTIMATOR_CONFIG_DIR="${CMAKE_CURRENT_SOURCE_DIR}/config"
   )
 endif()
 
