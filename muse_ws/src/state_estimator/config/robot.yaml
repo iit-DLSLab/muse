@@ -1,0 +1,31 @@
+# Change the robot and all contact settings here.
+robot:
+  # go2: threshold the four measured LowState.foot_force values.
+  # a2 and other robots: estimate GRFs from joint state/torque with Pinocchio.
+  type: "go2"
+  low_state_topic: "/lowstate"
+
+  contact:
+    threshold: 20.0
+    use_hysteresis: false
+    threshold_low: 0.0
+    threshold_high: 20.0
+    normal: [0.0, 0.0, 1.0]
+    use_force_norm: false
+    use_absolute_normal_force: false
+
+  # Used only when type is not go2.
+  grf:
+    force_sign: -1.0
+    use_inverse_dynamics_compensation: true
+    # Enable only after validating that LowState.ddq is a real joint acceleration.
+    use_joint_acceleration: false
+    # EMA: filtered = previous + alpha * (sample - previous).
+    input_filter_alpha: 0.20
+    force_filter_alpha: 0.20
+    solve_damping: 1.0e-4
+    min_singular_value: 1.0e-6
+    max_condition_number: 1.0e4
+
+  # urdf_path, motor_joint_names, motor_indices, and feet_frame_names may be
+  # added here for a new robot. Go2 and A2 use built-in defaults.
