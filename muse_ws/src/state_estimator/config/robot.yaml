@@ -2,14 +2,14 @@
 robot:
   # go2: threshold the four measured LowState.foot_force values.
   # a2 and other robots: estimate GRFs from joint state/torque with Pinocchio.
-  type: "go2"
+  type: "a2"
   low_state_topic: "/lowstate"
 
   contact:
-    threshold: 20.0
+    threshold: 30.0
     use_hysteresis: false
     threshold_low: 0.0
-    threshold_high: 20.0
+    threshold_high: 30.0
     normal: [0.0, 0.0, 1.0]
     use_force_norm: false
     use_absolute_normal_force: false

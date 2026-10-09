@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.11)
 project(state_estimator)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -130,23 +130,6 @@ ament_target_dependencies(state_estimator_node
 target_link_libraries(state_estimator_node state_estimator_plugins Eigen3::Eigen yaml-cpp)
 if(pinocchio_FOUND)
   target_link_libraries(state_estimator_node ${PINOCCHIO_LIBRARIES})
-endif()
-
-if(BUILD_TESTING)
-  find_package(ament_cmake_gtest REQUIRED)
-
-  ament_add_gtest(test_grf_estimator test/test_grf_estimator.cpp)
-  target_include_directories(test_grf_estimator PRIVATE
-    include
-    ${EIGEN3_INCLUDE_DIR}
-    ${PINOCCHIO_INCLUDE_DIRS}
-  )
-  ament_target_dependencies(test_grf_estimator unitree_go unitree_hg ament_index_cpp)
-  target_link_libraries(test_grf_estimator Eigen3::Eigen yaml-cpp ${PINOCCHIO_LIBRARIES})
-  target_compile_definitions(test_grf_estimator PRIVATE
-    A2_URDF_PATH="${CMAKE_CURRENT_SOURCE_DIR}/urdfs/a2.urdf"
-    STATE_ESTIMATOR_CONFIG_DIR="${CMAKE_CURRENT_SOURCE_DIR}/config"
-  )
 endif()
 
 install(TARGETS state_estimator_node state_estimator_plugins

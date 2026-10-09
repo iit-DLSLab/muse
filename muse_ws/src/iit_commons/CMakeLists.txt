@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.11)
 project(iit_commons)
 
 find_package(ament_cmake REQUIRED)
