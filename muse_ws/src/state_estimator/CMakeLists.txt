@@ -25,7 +25,36 @@ find_package(iit_commons REQUIRED)
 find_package(ament_index_cpp REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(PkgConfig REQUIRED)
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
+execute_process(
+  COMMAND "${Python3_EXECUTABLE}" -I -c "import numpy; print(numpy.get_include())"
+  RESULT_VARIABLE NUMPY_QUERY_RESULT
+  OUTPUT_VARIABLE DETECTED_NUMPY_INCLUDE_DIR
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+if(NOT NUMPY_QUERY_RESULT EQUAL 0 OR NOT DETECTED_NUMPY_INCLUDE_DIR)
+  message(FATAL_ERROR "Could not query NumPy include path from ${Python3_EXECUTABLE}")
+endif()
+
+# Pinocchio/EigenPy still consumes the legacy all-caps variables, while newer
+# rosidl code consumes the FindPython variables. Keep both on the same Conda
+# interpreter so dependency discovery cannot mix environments.
+set(PYTHON_EXECUTABLE ${Python3_EXECUTABLE})
+set(PYTHON_INCLUDE_DIRS ${Python3_INCLUDE_DIRS})
+set(NUMPY_INCLUDE_DIRS ${DETECTED_NUMPY_INCLUDE_DIR})
+set(Python_EXECUTABLE ${Python3_EXECUTABLE})
+set(Python_INCLUDE_DIRS ${Python3_INCLUDE_DIRS})
+set(Python_LIBRARIES ${Python3_LIBRARIES})
+set(Python_NumPy_INCLUDE_DIR ${DETECTED_NUMPY_INCLUDE_DIR})
+set(Python_NumPy_INCLUDE_DIRS ${DETECTED_NUMPY_INCLUDE_DIR})
+
+# Some sourced ROS underlays prepend Python 3.12 packages even when CMake has
+# selected the Conda Python 3.11 executable. Isolate EigenPy's import probe so
+# it sees packages belonging to the selected interpreter.
+set(SAVED_PYTHONPATH "$ENV{PYTHONPATH}")
+set(ENV{PYTHONPATH} "")
 find_package(pinocchio REQUIRED)
+set(ENV{PYTHONPATH} "${SAVED_PYTHONPATH}")
 find_package(yaml-cpp REQUIRED)
 
 include_directories(include)
@@ -101,6 +130,22 @@ ament_target_dependencies(state_estimator_node
 target_link_libraries(state_estimator_node state_estimator_plugins Eigen3::Eigen yaml-cpp)
 if(pinocchio_FOUND)
   target_link_libraries(state_estimator_node ${PINOCCHIO_LIBRARIES})
+endif()
+
+if(BUILD_TESTING)
+  find_package(ament_cmake_gtest REQUIRED)
+
+  ament_add_gtest(test_grf_estimator test/test_grf_estimator.cpp)
+  target_include_directories(test_grf_estimator PRIVATE
+    include
+    ${EIGEN3_INCLUDE_DIR}
+    ${PINOCCHIO_INCLUDE_DIRS}
+  )
+  ament_target_dependencies(test_grf_estimator unitree_go unitree_hg)
+  target_link_libraries(test_grf_estimator Eigen3::Eigen ${PINOCCHIO_LIBRARIES})
+  target_compile_definitions(test_grf_estimator PRIVATE
+    A2_URDF_PATH="${CMAKE_CURRENT_SOURCE_DIR}/urdfs/a2.urdf"
+  )
 endif()
 
 install(TARGETS state_estimator_node state_estimator_plugins

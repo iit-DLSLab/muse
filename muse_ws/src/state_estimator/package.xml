@@ -33,6 +33,8 @@
   <exec_depend>ament_index_python</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>
 
+  <test_depend>ament_cmake_gtest</test_depend>
+
   <export>
     <build_type>ament_cmake</build_type>
     <pluginlib plugin="${prefix}/share/state_estimator/state_estimator_plugins.xml" />

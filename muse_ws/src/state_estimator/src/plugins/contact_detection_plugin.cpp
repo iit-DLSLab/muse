@@ -41,6 +41,13 @@ public:
 		grf_threshold_high_ = grf_threshold_;
 		double force_sign = -1.0;
 		bool use_inverse_dynamics_compensation = true;
+		bool use_joint_acceleration = false;
+		double grf_solve_damping = 1e-4;
+		double grf_min_singular_value = 1e-6;
+		double grf_max_condition_number = 1e4;
+		double grf_input_filter_alpha = 1.0;
+		double grf_force_filter_alpha = 1.0;
+		bool motor_indices_configured = false;
 
 		if (!config_dir_.empty()) {
 			try {
@@ -66,7 +73,10 @@ public:
 				if (cfg["use_grf_hysteresis"]) use_grf_hysteresis_ = cfg["use_grf_hysteresis"].as<bool>();
 				if (cfg["urdf_path"]) urdf_path = cfg["urdf_path"].as<std::string>();
 				if (cfg["motor_joint_names"]) motor_joint_names = cfg["motor_joint_names"].as<std::vector<std::string>>();
-				if (cfg["motor_indices"]) motor_indices = toSizeTVector(cfg["motor_indices"].as<std::vector<int>>());
+				if (cfg["motor_indices"]) {
+					motor_indices = toSizeTVector(cfg["motor_indices"].as<std::vector<int>>());
+					motor_indices_configured = true;
+				}
 				if (cfg["feet_frame_names"]) feet_frame_names = cfg["feet_frame_names"].as<std::vector<std::string>>();
 				if (cfg["contact_normal"]) contact_normal_vec = cfg["contact_normal"].as<std::vector<double>>();
 				if (cfg["use_force_norm"]) use_force_norm_ = cfg["use_force_norm"].as<bool>();
@@ -77,24 +87,37 @@ public:
 				if (cfg["use_inverse_dynamics_compensation"]) {
 					use_inverse_dynamics_compensation = cfg["use_inverse_dynamics_compensation"].as<bool>();
 				}
+				if (cfg["use_joint_acceleration"]) use_joint_acceleration = cfg["use_joint_acceleration"].as<bool>();
+				if (cfg["grf_solve_damping"]) grf_solve_damping = cfg["grf_solve_damping"].as<double>();
+				if (cfg["grf_min_singular_value"]) grf_min_singular_value = cfg["grf_min_singular_value"].as<double>();
+				if (cfg["grf_max_condition_number"]) grf_max_condition_number = cfg["grf_max_condition_number"].as<double>();
+				if (cfg["grf_input_filter_alpha"]) grf_input_filter_alpha = cfg["grf_input_filter_alpha"].as<double>();
+				if (cfg["grf_force_filter_alpha"]) grf_force_filter_alpha = cfg["grf_force_filter_alpha"].as<double>();
 			} catch (const std::exception& e) {
 				RCLCPP_WARN(node_->get_logger(), "Could not load contact config: %s", e.what());
 			}
 		}
+		if (!motor_indices_configured) {
+			motor_indices = state_estimator::defaultMotorIndicesForRobotType(
+				robot_type, motor_joint_names.size());
+		}
 
 		if (motor_joint_names.size() != 12) {
 			RCLCPP_WARN(node_->get_logger(),
-				"ContactDetectionPlugin: motor_joint_names must contain 12 entries; using Go2 defaults");
+				"ContactDetectionPlugin: motor_joint_names must contain 12 entries; using quadruped defaults");
 			motor_joint_names = defaultMotorJointNames();
+			motor_indices = state_estimator::defaultMotorIndicesForRobotType(
+				robot_type, motor_joint_names.size());
 		}
 		if (motor_indices.size() != motor_joint_names.size()) {
 			RCLCPP_WARN(node_->get_logger(),
-				"ContactDetectionPlugin: motor_indices must match motor_joint_names; using sequential defaults");
-			motor_indices = state_estimator::defaultMotorIndices(motor_joint_names.size());
+				"ContactDetectionPlugin: motor_indices must match motor_joint_names; using robot defaults");
+			motor_indices = state_estimator::defaultMotorIndicesForRobotType(
+				robot_type, motor_joint_names.size());
 		}
 		if (feet_frame_names.size() != 4) {
 			RCLCPP_WARN(node_->get_logger(),
-				"ContactDetectionPlugin: feet_frame_names must contain 4 entries; using Go2 defaults");
+				"ContactDetectionPlugin: feet_frame_names must contain 4 entries; using quadruped defaults");
 			feet_frame_names = defaultFeetFrameNames();
 		}
 
@@ -107,6 +130,12 @@ public:
 		grf_options.feet_frame_names = feet_frame_names;
 		grf_options.force_sign = force_sign;
 		grf_options.use_inverse_dynamics_compensation = use_inverse_dynamics_compensation;
+		grf_options.use_joint_acceleration = use_joint_acceleration;
+		grf_options.solve_damping = grf_solve_damping;
+		grf_options.min_singular_value = grf_min_singular_value;
+		grf_options.max_condition_number = grf_max_condition_number;
+		grf_options.input_filter_alpha = grf_input_filter_alpha;
+		grf_options.force_filter_alpha = grf_force_filter_alpha;
 
 		grf_estimator_configured_ = grf_estimator_.configure(grf_options);
 		if (!grf_estimator_configured_) {
@@ -119,10 +148,11 @@ public:
 		createLowStateSubscription(robot_type, low_state_topic);
 
 		RCLCPP_INFO(node_->get_logger(),
-			"ContactDetectionPlugin: robot_type=%s, GRF threshold=%.2f, hysteresis=%s [low=%.2f high=%.2f], URDF=%s",
+			"ContactDetectionPlugin: robot_type=%s, GRF threshold=%.2f, hysteresis=%s [low=%.2f high=%.2f], filters[input=%.3f force=%.3f], URDF=%s",
 			robot_type.c_str(), grf_threshold_,
 			use_grf_hysteresis_ ? "true" : "false",
 			grf_threshold_low_, grf_threshold_high_,
+			grf_input_filter_alpha, grf_force_filter_alpha,
 			grf_options.urdf_path.c_str());
 	}
 
@@ -215,8 +245,10 @@ private:
 				grf_estimator_.lastError().c_str());
 		}
 		RCLCPP_DEBUG_THROTTLE(node_->get_logger(), *node_->get_clock(), 1000,
-			"ContactDetectionPlugin GRF metrics [FL FR RL RR]: %.3f %.3f %.3f %.3f",
-			metrics[0], metrics[1], metrics[2], metrics[3]);
+			"ContactDetectionPlugin filtered GRF metrics [FL FR RL RR]: %.3f %.3f %.3f %.3f; condition: %.2f %.2f %.2f %.2f",
+			metrics[0], metrics[1], metrics[2], metrics[3],
+			estimate.condition_number[0], estimate.condition_number[1],
+			estimate.condition_number[2], estimate.condition_number[3]);
 
 		publishContact(stance);
 	}
@@ -327,7 +359,7 @@ private:
 	std::array<bool, 4> stance_state_{{false, false, false, false}};
 	Eigen::Vector3d contact_normal_{Eigen::Vector3d::UnitZ()};
 	bool use_force_norm_{false};
-	bool use_absolute_normal_force_{true};
+	bool use_absolute_normal_force_{false};
 };
 
 } // namespace state_estimator_plugins

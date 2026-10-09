@@ -9,16 +9,25 @@ leg_odometry_plugin:
   pub_topic: "muse/leg_odometry"
 
   grf_threshold: 30.0
-  grf_threshold_low: 20.0
-  grf_threshold_high: 50.0
-  use_grf_hysteresis: true
+  grf_threshold_low: 0.0
+  grf_threshold_high: 30.0
+  use_grf_hysteresis: false
   contact_normal: [0.0, 0.0, 1.0]
   use_force_norm: false
-  use_absolute_normal_force: true
+  # Contact is compressive only. Keeping the sign exposes force-sign mistakes.
+  use_absolute_normal_force: false
   force_sign: -1.0
   use_inverse_dynamics_compensation: true
+  # A2 ddq must be validated before enabling it in inverse dynamics.
+  use_joint_acceleration: false
+  # EMA: filtered = previous + alpha * (sample - previous).
+  grf_input_filter_alpha: 0.20
+  grf_force_filter_alpha: 0.20
+  grf_solve_damping: 1.0e-4
+  grf_min_singular_value: 1.0e-6
+  grf_max_condition_number: 1.0e4
 
-  # Motor indices to joint names (Go2 order: FL hip/thigh/calf, FR, RL, RR)
+  # Model order is FL/FR/RL/RR; A2 DDS order is FR/FL/RR/RL.
   motor_joint_names:
     - "FL_hip_joint"
     - "FL_thigh_joint"
@@ -34,18 +43,18 @@ leg_odometry_plugin:
     - "RR_calf_joint"
 
   motor_indices:
-    - 0
-    - 1
-    - 2
     - 3
     - 4
     - 5
-    - 6
-    - 7
-    - 8
+    - 0
+    - 1
+    - 2
     - 9
     - 10
     - 11
+    - 6
+    - 7
+    - 8
 
   # Foot frame names in the URDF, in FL/FR/RL/RR order
   feet_frame_names:

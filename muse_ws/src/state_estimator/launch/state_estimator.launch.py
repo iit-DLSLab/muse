@@ -7,7 +7,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     package_share = Path(get_package_share_directory("state_estimator"))
-    urdf_path = package_share / "urdfs" / "go2.urdf"
+    urdf_path = package_share / "urdfs" / "a2.urdf"
     robot_description = urdf_path.read_text()
 
     # The config/launch YAML files are in ROS1 plugin-owned format and are read

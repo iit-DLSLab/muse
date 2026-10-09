@@ -69,6 +69,18 @@ inline std::vector<std::size_t> defaultMotorIndices(std::size_t count)
 	return indices;
 }
 
+inline std::vector<std::size_t> defaultMotorIndicesForRobotType(
+	const std::string& robot_type,
+	std::size_t count)
+{
+	const std::string normalized = normalizeRobotType(robot_type);
+	if (normalized == "a2" && count == 12) {
+		// A2 model order: FL, FR, RL, RR. DDS motor order: FR, FL, RR, RL.
+		return {3, 4, 5, 0, 1, 2, 9, 10, 11, 6, 7, 8};
+	}
+	return defaultMotorIndices(count);
+}
+
 inline bool isFinite(const Eigen::Vector3d& value)
 {
 	return value.allFinite();
@@ -126,12 +138,12 @@ bool fromRosLowState(const RosLowState& msg, UnitreeLowState& low_state, std::st
 		normalized_motor.ddq = static_cast<double>(motor.ddq);
 		normalized_motor.tau_est = static_cast<double>(motor.tau_est);
 
+		// q and dq are required by every consumer. ddq and tau_est are checked by
+		// the GRF estimator only when that estimator actually uses them.
 		if (!std::isfinite(normalized_motor.q) ||
-			!std::isfinite(normalized_motor.dq) ||
-			!std::isfinite(normalized_motor.ddq) ||
-			!std::isfinite(normalized_motor.tau_est)) {
+			!std::isfinite(normalized_motor.dq)) {
 			if (error) {
-				*error = "non-finite motor field in Unitree LowState";
+				*error = "non-finite motor position/velocity in Unitree LowState";
 			}
 			return false;
 		}

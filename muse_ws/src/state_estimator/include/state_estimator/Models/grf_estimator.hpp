@@ -18,6 +18,7 @@
 #include <array>
 #include <cmath>
 #include <cstddef>
+#include <limits>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -33,6 +34,12 @@ struct GrfEstimatorOptions
 	std::vector<std::string> feet_frame_names;
 	double force_sign{-1.0};
 	bool use_inverse_dynamics_compensation{true};
+	bool use_joint_acceleration{false};
+	double solve_damping{1e-4};
+	double min_singular_value{1e-6};
+	double max_condition_number{1e4};
+	double input_filter_alpha{1.0};
+	double force_filter_alpha{1.0};
 };
 
 struct GrfEstimate
@@ -44,6 +51,12 @@ struct GrfEstimate
 		Eigen::Vector3d::Zero()
 	}};
 	std::array<bool, 4> valid{{false, false, false, false}};
+	std::array<double, 4> condition_number{{
+		std::numeric_limits<double>::infinity(),
+		std::numeric_limits<double>::infinity(),
+		std::numeric_limits<double>::infinity(),
+		std::numeric_limits<double>::infinity()
+	}};
 
 	void reset()
 	{
@@ -51,6 +64,7 @@ struct GrfEstimate
 			estimated_force.setZero();
 		}
 		valid.fill(false);
+		condition_number.fill(std::numeric_limits<double>::infinity());
 	}
 };
 
@@ -197,6 +211,17 @@ public:
 		feet_frame_names_ = options.feet_frame_names;
 		force_sign_ = options.force_sign;
 		use_inverse_dynamics_compensation_ = options.use_inverse_dynamics_compensation;
+		use_joint_acceleration_ = options.use_joint_acceleration;
+		solve_damping_ = std::max(0.0, options.solve_damping);
+		min_singular_value_ = std::max(0.0, options.min_singular_value);
+		max_condition_number_ = std::max(1.0, options.max_condition_number);
+		input_filter_alpha_ = std::clamp(options.input_filter_alpha, 1e-6, 1.0);
+		force_filter_alpha_ = std::clamp(options.force_filter_alpha, 1e-6, 1.0);
+		input_filter_initialized_ = false;
+		force_filter_initialized_.fill(false);
+		for (auto& filtered_force : filtered_force_) {
+			filtered_force.setZero();
+		}
 
 		if (motor_indices_.size() != motor_joint_names_.size()) {
 			std::ostringstream stream;
@@ -254,10 +279,10 @@ public:
 			return false;
 		}
 
-		q_ = pinocchio::neutral(model_);
-		v_.setZero();
-		a_.setZero();
-		tau_.setZero();
+		Eigen::VectorXd q_sample = pinocchio::neutral(model_);
+		Eigen::VectorXd v_sample = Eigen::VectorXd::Zero(model_.nv);
+		Eigen::VectorXd a_sample = Eigen::VectorXd::Zero(model_.nv);
+		Eigen::VectorXd tau_sample = Eigen::VectorXd::Zero(model_.nv);
 
 		for (std::size_t i = 0; i < motor_joint_names_.size(); ++i) {
 			const std::size_t low_state_motor_index = motor_indices_[i];
@@ -278,16 +303,29 @@ public:
 
 			if (!std::isfinite(joint_position) ||
 				!std::isfinite(joint_velocity) ||
-				!std::isfinite(joint_acceleration) ||
-				!std::isfinite(joint_torque)) {
+				!std::isfinite(joint_torque) ||
+				(use_joint_acceleration_ && !std::isfinite(joint_acceleration))) {
 				last_error_ = "non-finite motor state for '" + motor_joint_names_[i] + "'";
 				return false;
 			}
 
-			q_[q_indices_[i]] = joint_position;
-			v_[v_indices_[i]] = joint_velocity;
-			a_[v_indices_[i]] = joint_acceleration;
-			tau_[v_indices_[i]] = joint_torque;
+			q_sample[q_indices_[i]] = joint_position;
+			v_sample[v_indices_[i]] = joint_velocity;
+			a_sample[v_indices_[i]] = use_joint_acceleration_ ? joint_acceleration : 0.0;
+			tau_sample[v_indices_[i]] = joint_torque;
+		}
+
+		if (!input_filter_initialized_) {
+			q_ = q_sample;
+			v_ = v_sample;
+			a_ = a_sample;
+			tau_ = tau_sample;
+			input_filter_initialized_ = true;
+		} else {
+			q_ += input_filter_alpha_ * (q_sample - q_);
+			v_ += input_filter_alpha_ * (v_sample - v_);
+			a_ += input_filter_alpha_ * (a_sample - a_);
+			tau_ += input_filter_alpha_ * (tau_sample - tau_);
 		}
 
 		try {
@@ -309,10 +347,20 @@ public:
 		std::size_t valid_count = 0;
 		for (std::size_t leg = 0; leg < kFootCount; ++leg) {
 			std::string leg_error;
-			if (estimateFootForce(leg, estimate.force[leg], leg_error)) {
+			if (estimateFootForce(
+				leg, estimate.force[leg], estimate.condition_number[leg], leg_error)) {
+				if (!force_filter_initialized_[leg]) {
+					filtered_force_[leg] = estimate.force[leg];
+					force_filter_initialized_[leg] = true;
+				} else {
+					filtered_force_[leg] += force_filter_alpha_ *
+						(estimate.force[leg] - filtered_force_[leg]);
+				}
+				estimate.force[leg] = filtered_force_[leg];
 				estimate.valid[leg] = true;
 				++valid_count;
 			} else {
+				force_filter_initialized_[leg] = false;
 				if (partial_errors.tellp() > 0) {
 					partial_errors << "; ";
 				}
@@ -340,7 +388,11 @@ public:
 	}
 
 private:
-	bool estimateFootForce(std::size_t leg, Eigen::Vector3d& force, std::string& error)
+	bool estimateFootForce(
+		std::size_t leg,
+		Eigen::Vector3d& force,
+		double& condition_number,
+		std::string& error)
 	{
 		Eigen::Matrix<double, 6, Eigen::Dynamic> frame_jacobian(6, model_.nv);
 		frame_jacobian.setZero();
@@ -356,6 +408,7 @@ private:
 		} catch (const std::exception& e) {
 			error = e.what();
 			force.setZero();
+			condition_number = std::numeric_limits<double>::infinity();
 			return false;
 		}
 
@@ -366,6 +419,7 @@ private:
 			if (v_index < 0 || v_index >= frame_jacobian.cols() || v_index >= tau_residual_.size()) {
 				error = "invalid leg Jacobian index";
 				force.setZero();
+				condition_number = std::numeric_limits<double>::infinity();
 				return false;
 			}
 			linear_jacobian.col(static_cast<int>(i)) = frame_jacobian.topRows<3>().col(v_index);
@@ -375,24 +429,36 @@ private:
 		if (!linear_jacobian.allFinite() || !joint_torque.allFinite()) {
 			error = "non-finite Jacobian or torque residual";
 			force.setZero();
+			condition_number = std::numeric_limits<double>::infinity();
 			return false;
 		}
 
-		const Eigen::JacobiSVD<Eigen::Matrix3d> svd(linear_jacobian);
+		const Eigen::Matrix3d torque_map = linear_jacobian.transpose();
+		const Eigen::JacobiSVD<Eigen::Matrix3d> svd(
+			torque_map, Eigen::ComputeFullU | Eigen::ComputeFullV);
 		const auto singular_values = svd.singularValues();
 		const double max_singular = singular_values.maxCoeff();
 		const double min_singular = singular_values.minCoeff();
+		condition_number = min_singular > 0.0
+			? max_singular / min_singular
+			: std::numeric_limits<double>::infinity();
 		if (!std::isfinite(max_singular) ||
 			!std::isfinite(min_singular) ||
-			min_singular < kMinSingularValue ||
-			max_singular / min_singular > kMaxConditionNumber) {
+			min_singular < min_singular_value_ ||
+			condition_number > max_condition_number_) {
 			error = "ill-conditioned foot Jacobian";
 			force.setZero();
 			return false;
 		}
 
-		force = force_sign_ *
-			linear_jacobian.transpose().completeOrthogonalDecomposition().solve(joint_torque);
+		Eigen::Vector3d inverse_singular_values;
+		for (Eigen::Index i = 0; i < singular_values.size(); ++i) {
+			const double singular_value = singular_values[i];
+			inverse_singular_values[i] = singular_value /
+				(singular_value * singular_value + solve_damping_ * solve_damping_);
+		}
+		force = force_sign_ * svd.matrixV() * inverse_singular_values.asDiagonal() *
+			svd.matrixU().transpose() * joint_torque;
 		if (!force.allFinite()) {
 			error = "non-finite estimated force";
 			force.setZero();
@@ -406,9 +472,6 @@ private:
 	static constexpr std::size_t kFootCount = 4;
 	static constexpr std::size_t kJointsPerLeg = 3;
 	static constexpr std::size_t kMotorJointCount = kFootCount * kJointsPerLeg;
-	static constexpr double kMinSingularValue = 1e-8;
-	static constexpr double kMaxConditionNumber = 1e8;
-
 	pinocchio::Model model_;
 	pinocchio::Data data_;
 	Eigen::VectorXd q_;
@@ -426,6 +489,20 @@ private:
 
 	double force_sign_{-1.0};
 	bool use_inverse_dynamics_compensation_{true};
+	bool use_joint_acceleration_{false};
+	double solve_damping_{1e-4};
+	double min_singular_value_{1e-6};
+	double max_condition_number_{1e4};
+	double input_filter_alpha_{1.0};
+	double force_filter_alpha_{1.0};
+	bool input_filter_initialized_{false};
+	std::array<Eigen::Vector3d, kFootCount> filtered_force_{{
+		Eigen::Vector3d::Zero(),
+		Eigen::Vector3d::Zero(),
+		Eigen::Vector3d::Zero(),
+		Eigen::Vector3d::Zero()
+	}};
+	std::array<bool, kFootCount> force_filter_initialized_{{false, false, false, false}};
 	bool configured_{false};
 	std::string last_error_;
 };
