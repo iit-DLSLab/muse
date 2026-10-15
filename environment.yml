@@ -4,8 +4,10 @@ channels:
   - conda-forge
 dependencies:
   - python=3.11
-  - cmake
-  - cxx-compiler
+  - empy<4
+  - cmake=3.26.*
+  - c-compiler=1.11.*
+  - cxx-compiler=1.11.*
   - make
   - pkg-config
   - eigen

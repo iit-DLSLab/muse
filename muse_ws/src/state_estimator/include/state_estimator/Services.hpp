@@ -1,6 +1,8 @@
 #ifndef SERVICES_HPP
 #define SERVICES_HPP
 
+#include <cstdint>
+
 #include "state_estimator_msgs/srv/get_active_estimators.hpp"
 #include "state_estimator_msgs/srv/get_blacklist.hpp"
 #include "state_estimator_msgs/srv/get_whitelist.hpp"

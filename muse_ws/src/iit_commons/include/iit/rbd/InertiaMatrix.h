@@ -250,7 +250,7 @@ inline InertiaMatrixDense& InertiaMatrixDense::operator=
     // of matrix expressions. We also do not want to perform any check, for
     // performance reasons (remember this library is meant primarily to support
     // code generation, not to be a robust API for user applications).
-    block33(AX,AX) = other.block<3,3>(AX,AX);
+    block33(AX,AX) = other.template block<3,3>(AX,AX);
     data(AX,LY) = data(LY,AX) = - ( data(AY,LX) = data(LX,AY) = other(LX,AY) );
     data(AZ,LX) = data(LX,AZ) = - ( data(AX,LZ) = data(LZ,AX) = other(LZ,AX) );
     data(AY,LZ) = data(LZ,AY) = - ( data(AZ,LY) = data(LY,AZ) = other(LY,AZ) );
@@ -262,7 +262,7 @@ template<typename OtherDerived>
 inline InertiaMatrixDense& InertiaMatrixDense::operator+=
         (const MatrixBase<OtherDerived>& other)
 {
-    block33(AX,AX) += other.block<3,3>(AX,AX);
+    block33(AX,AX) += other.template block<3,3>(AX,AX);
     data(AX,LY) = data(LY,AX) = - ( data(AY,LX) = (data(LX,AY) += other(LX,AY)) );
     data(AZ,LX) = data(LX,AZ) = - ( data(AX,LZ) = (data(LZ,AX) += other(LZ,AX)) );
     data(AY,LZ) = data(LZ,AY) = - ( data(AZ,LY) = (data(LY,AZ) += other(LY,AZ)) );

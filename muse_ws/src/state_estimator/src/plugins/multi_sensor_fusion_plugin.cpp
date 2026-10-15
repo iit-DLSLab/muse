@@ -1,3 +1,5 @@
+#include <cstdint>
+
 #include "state_estimator/plugin.hpp"
 #include "state_estimator/Models/multi_sensor_fusion.hpp"
 

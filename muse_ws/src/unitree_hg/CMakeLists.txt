@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 3.11)
 project(unitree_hg)
 
+get_property(IS_MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
+if(NOT IS_MULTI_CONFIG AND NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
+  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS Debug Release RelWithDebInfo MinSizeRel)
+  message(STATUS "${PROJECT_NAME}: CMAKE_BUILD_TYPE not set; defaulting to Release")
+endif()
+
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
   set(CMAKE_C_STANDARD 99)
@@ -25,13 +32,13 @@ find_package(geometry_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
 execute_process(
-	COMMAND "${Python3_EXECUTABLE}" -I -c "import numpy; print(numpy.get_include())"
-	RESULT_VARIABLE NUMPY_QUERY_RESULT
-	OUTPUT_VARIABLE DETECTED_NUMPY_INCLUDE_DIR
-	OUTPUT_STRIP_TRAILING_WHITESPACE
+  COMMAND "${Python3_EXECUTABLE}" -I -c "import numpy; print(numpy.get_include())"
+  RESULT_VARIABLE NUMPY_QUERY_RESULT
+  OUTPUT_VARIABLE DETECTED_NUMPY_INCLUDE_DIR
+  OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 if(NOT NUMPY_QUERY_RESULT EQUAL 0 OR NOT DETECTED_NUMPY_INCLUDE_DIR)
-	message(FATAL_ERROR "Could not query NumPy include path from ${Python3_EXECUTABLE}")
+  message(FATAL_ERROR "Could not query NumPy include path from ${Python3_EXECUTABLE}")
 endif()
 
 # rosidl_generator_py still requests the legacy FindPython variables. Reuse the
@@ -43,17 +50,17 @@ set(Python_NumPy_INCLUDE_DIR ${DETECTED_NUMPY_INCLUDE_DIR} CACHE PATH "" FORCE)
 set(Python_NumPy_INCLUDE_DIRS ${DETECTED_NUMPY_INCLUDE_DIR} CACHE STRING "" FORCE)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-	"msg/BmsCmd.msg"
-	"msg/BmsState.msg"
-	"msg/HandCmd.msg"
-	"msg/HandState.msg"
-	"msg/IMUState.msg"
-	"msg/LowCmd.msg"
-	"msg/LowState.msg"
-	"msg/MainBoardState.msg"
-	"msg/MotorCmd.msg"
-	"msg/MotorState.msg"
-	"msg/PressSensorState.msg"
+  "msg/BmsCmd.msg"
+  "msg/BmsState.msg"
+  "msg/HandCmd.msg"
+  "msg/HandState.msg"
+  "msg/IMUState.msg"
+  "msg/LowCmd.msg"
+  "msg/LowState.msg"
+  "msg/MainBoardState.msg"
+  "msg/MotorCmd.msg"
+  "msg/MotorState.msg"
+  "msg/PressSensorState.msg"
   DEPENDENCIES geometry_msgs
 )
 

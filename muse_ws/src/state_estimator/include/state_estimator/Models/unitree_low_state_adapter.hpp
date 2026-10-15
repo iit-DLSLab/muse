@@ -1,6 +1,8 @@
 #ifndef STATE_ESTIMATOR_MODELS_UNITREE_LOW_STATE_ADAPTER_HPP
 #define STATE_ESTIMATOR_MODELS_UNITREE_LOW_STATE_ADAPTER_HPP
 
+#include <cstdint>
+
 #include "unitree_go/msg/low_state.hpp"
 #include "unitree_hg/msg/low_state.hpp"
 

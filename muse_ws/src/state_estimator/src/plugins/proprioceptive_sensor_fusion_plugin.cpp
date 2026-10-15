@@ -1,3 +1,5 @@
+#include <cstdint>
+
 #include "state_estimator/Models/attitude_bias_XKF.hpp"
 #include "state_estimator/Models/contact_estimator.hpp"
 #include "state_estimator/Models/proprioceptive_sensor_fusion.hpp"
@@ -22,6 +24,7 @@
 
 #include <array>
 #include <cmath>
+#include <cstddef>
 #include <exception>
 #include <stdexcept>
 #include <string>

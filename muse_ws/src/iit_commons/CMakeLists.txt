@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 3.11)
 project(iit_commons)
 
+get_property(IS_MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
+if(NOT IS_MULTI_CONFIG AND NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
+  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS Debug Release RelWithDebInfo MinSizeRel)
+  message(STATUS "${PROJECT_NAME}: CMAKE_BUILD_TYPE not set; defaulting to Release")
+endif()
+
 find_package(ament_cmake REQUIRED)
 # find_package(ament_cmake_gtest QUIET)
 
@@ -76,37 +83,4 @@ install(TARGETS ${LIB_NAME}
 ament_export_include_directories(include)
 ament_export_libraries(${LIB_NAME})
 
-# if (BUILD_TESTING AND ament_cmake_gtest_FOUND)
-#     ament_add_gtest(vm-test src/control/testVirtualModel.cpp)
-#     if(TARGET vm-test)
-#         target_link_libraries(vm-test ${LIB_NAME} pthread)
-#     endif()
-
-#     ament_add_gtest(algebra-test src/algebra_test.cpp)
-#     if(TARGET algebra-test)
-#         target_link_libraries(algebra-test pthread)
-#     endif()
-
-#     ament_add_gtest(filt-test src/test-filters.cpp)
-#     if(TARGET filt-test)
-#         target_link_libraries(filt-test ${LIB_NAME})
-#     endif()
-
-#     ament_add_gtest(legboolmap-test src/legboolmap_test.cpp)
-#     if(TARGET legboolmap-test)
-#         target_link_libraries(legboolmap-test ${LIB_NAME})
-#     endif()
-
-#     ament_add_gtest(planning-test src/planning_test.cpp)
-#     if(TARGET planning-test)
-#         target_link_libraries(planning-test ${LIB_NAME} pthread)
-#     endif()
-
-#     ament_add_gtest(rotation-test src/rotation_test.cpp)
-#     if(TARGET rotation-test)
-#         target_link_libraries(rotation-test ${LIB_NAME} pthread)
-#     endif()
-# endif()
-
 ament_package()
-

@@ -2,6 +2,7 @@
 #define _IIT_COMMONS_ALGEBRA_H_
 
 #include <Eigen/Dense>
+#include <cmath>
 #include <iostream>
 
 typedef Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> MatrixXR;
@@ -270,7 +271,7 @@ inline void computeQR(const MatrixXR & A,
                       MatrixXR & R,
                       const double& tolerance)
 {
-    // FIXME why tolerance is not used??
+    (void)tolerance;
 
     //compute the QR decomposition of the Jacobian
     //Q = U ; R = EPS*V^T

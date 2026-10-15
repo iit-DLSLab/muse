@@ -1,3 +1,5 @@
+#include <cstdint>
+
 #include "state_estimator/Models/contact_estimator.hpp"
 #include "state_estimator/Models/robot_config.hpp"
 #include "state_estimator/Models/unitree_low_state_adapter.hpp"

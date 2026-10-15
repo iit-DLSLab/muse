@@ -1,0 +1,44 @@
+[workspace]
+name = "muse"
+version = "0.1.0"
+description = "MUSE ROS 2 Humble workspace"
+channels = ["robostack-humble", "conda-forge"]
+platforms = ["linux-64"]
+
+[dependencies]
+python = "3.11.*"
+numpy = "*"
+empy = "<4"
+cmake = "3.26.*"
+c-compiler = "1.11.*"
+cxx-compiler = "1.11.*"
+make = "*"
+pkg-config = "*"
+eigen = "*"
+yaml-cpp = "*"
+pinocchio = "*"
+pip = "*"
+ros-humble-desktop = "*"
+ros-humble-ament-cmake = "*"
+ros-humble-ament-cmake-gtest = "*"
+ros-humble-rclcpp = "*"
+ros-humble-rclcpp-components = "*"
+ros-humble-pluginlib = "*"
+ros-humble-class-loader = "*"
+ros-humble-geometry-msgs = "*"
+ros-humble-nav-msgs = "*"
+ros-humble-sensor-msgs = "*"
+ros-humble-std-msgs = "*"
+ros-humble-tf2-ros = "*"
+ros-humble-rosidl-default-generators = "*"
+ros-humble-rosidl-default-runtime = "*"
+ros-humble-plotjuggler-ros = "*"
+ros-humble-ament-index-cpp = "*"
+ros-humble-pcl-ros = "*"
+colcon-common-extensions = "*"
+vcstool = "*"
+
+[tasks]
+build = { cwd = "muse_ws", cmd = "bash -lc 'source \"$CONDA_PREFIX/setup.bash\" && colcon build --symlink-install \"$@\"' pixi-build" }
+clean = { cwd = "muse_ws", cmd = "rm -rf build install log" }
+launch = { cwd = "muse_ws", cmd = "bash -lc 'source \"$CONDA_PREFIX/setup.bash\" && source install/setup.bash && ros2 launch state_estimator state_estimator.launch.py'" }

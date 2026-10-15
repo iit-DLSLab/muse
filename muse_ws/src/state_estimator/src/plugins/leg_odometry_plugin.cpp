@@ -1,3 +1,5 @@
+#include <cstdint>
+
 #include <pinocchio/parsers/urdf.hpp>
 #include <pinocchio/multibody/data.hpp>
 #include <pinocchio/algorithm/kinematics.hpp>
@@ -19,6 +21,8 @@
 #include <yaml-cpp/yaml.h>
 
 #include <array>
+#include <cmath>
+#include <cstddef>
 #include <exception>
 #include <stdexcept>
 #include <string>

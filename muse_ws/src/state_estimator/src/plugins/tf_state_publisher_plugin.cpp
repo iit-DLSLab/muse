@@ -1,3 +1,5 @@
+#include <cstdint>
+
 #include "state_estimator/Models/robot_config.hpp"
 #include "state_estimator/Models/unitree_low_state_adapter.hpp"
 #include "state_estimator/plugin.hpp"
@@ -12,8 +14,9 @@
 #include <tf2_ros/static_transform_broadcaster.h>
 #include <tf2_ros/transform_broadcaster.h>
 
-#include <string>
+#include <cstddef>
 #include <stdexcept>
+#include <string>
 #include <vector>
 
 namespace state_estimator_plugins

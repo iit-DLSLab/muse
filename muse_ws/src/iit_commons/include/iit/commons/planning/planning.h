@@ -6,6 +6,7 @@
 #include <iit/commons/geometry/rotations.h>
 #include <iit/commons/dog/leg_data_map.h>
 
+#include <cmath>
 #include <iostream>
 
 namespace iit {

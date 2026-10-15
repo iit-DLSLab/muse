@@ -1,3 +1,5 @@
+#include <cstdint>
+
 #include "state_estimator/Models/attitude_bias_NLO.hpp"
 #include "state_estimator/Models/attitude_bias_XKF.hpp"
 #include "state_estimator/Models/robot_config.hpp"
