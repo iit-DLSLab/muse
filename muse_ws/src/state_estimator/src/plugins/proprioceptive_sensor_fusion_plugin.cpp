@@ -269,7 +269,6 @@ private:
 
 		Eigen::Vector3d v_b = Eigen::Vector3d::Zero();
 		std::array<bool, 4> stance{{false, false, false, false}};
-		bool leg_odometry_valid = false;
 
 		if (model_.nq > 0) {
 			Eigen::VectorXd q(model_.nq), v(model_.nv);
@@ -307,8 +306,7 @@ private:
 
 				if (stance_count > 0.5) {
 					v_b = w_R_b * (stance_vel_sum / stance_count);
-					leg_odometry_valid = finite3(v_b);
-					if (!leg_odometry_valid) {
+					if (!finite3(v_b)) {
 						v_b.setZero();
 					}
 				}
@@ -325,12 +323,7 @@ private:
 		}
 
 		proprioceptive_sensor_fusion_->predict(time_, u_SF);
-		if (leg_odometry_valid) {
-			proprioceptive_sensor_fusion_->update(time_, v_b);
-		} else {
-			RCLCPP_WARN_THROTTLE(node_->get_logger(), *node_->get_clock(), 2000,
-				"ProprioceptiveSensorFusion: no valid stance leg odometry; skipping KF velocity update");
-		}
+		proprioceptive_sensor_fusion_->update(time_, v_b);
 
 		Eigen::Matrix<double,6,1> xhat_new = proprioceptive_sensor_fusion_->getX();
 		xhat_estimated = finite6(xhat_new) ? xhat_new : Eigen::Matrix<double,6,1>::Zero();

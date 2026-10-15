@@ -38,6 +38,9 @@ ros-humble-pcl-ros = "*"
 colcon-common-extensions = "*"
 vcstool = "*"
 
+[activation.env]
+RMW_IMPLEMENTATION = "rmw_cyclonedds_cpp"
+
 [tasks]
 build = { cwd = "muse_ws", cmd = "bash -lc 'source \"$CONDA_PREFIX/setup.bash\" && colcon build --symlink-install \"$@\"' pixi-build" }
 clean = { cwd = "muse_ws", cmd = "rm -rf build install log" }
